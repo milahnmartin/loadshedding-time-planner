@@ -11,7 +11,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      headings: "Oswald",
+      rajad: ["Rajdhani", "sans-serif"],
     },
   },
   plugins: [],

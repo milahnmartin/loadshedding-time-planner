@@ -1,9 +1,19 @@
+import Image from "next/image";
+import Logo from "../pages/assets/Light-bulb.png";
 function Navbar() {
   return (
     <div className='h-[5rem] flex place-items-center'>
-      <h1 className='font-extralight text-white text-3xl tracking-widest ml-5'>
-        Eskom Gaming Calc
-      </h1>
+      <div className='h-auto w-[50%] flex items-center justify-start'>
+        <Image height={30} width={30} src={Logo} alt='Image of Lightbulb' />
+        <h1 className='font-light text-white text-3xl tracking-wide ml-2'>
+          Loadshedding Game Planner
+        </h1>
+      </div>
+      <div className='h-auto w-[50%] flex items-center justify-end pr-5'>
+        <h1 className='font-light text-white text-3xl tracking-wide ml-5'>
+          Right Side
+        </h1>
+      </div>
     </div>
   );
 }

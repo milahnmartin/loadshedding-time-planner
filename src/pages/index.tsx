@@ -10,7 +10,11 @@ const Home: NextPage = () => {
       <Head>
         <title>Eskom time Calc</title>
         <meta name='description' content='this is Eskom Thingy' />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/Light-bulb.png' />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500&display=swap'
+          rel='stylesheet'
+        />
       </Head>
       <Navbar />
       <IndexMain />

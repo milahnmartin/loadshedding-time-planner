@@ -1,16 +1,16 @@
+import Link from "next/link";
 function IndexMain() {
   return (
-    <div className='border-[5px] border-solid border-red-900 h-full flex justify-center items-center flex-col'>
-      <h1 className='text-white font-mono text-4xl'>
-        Struggling to Plan Gaming Sessions Around{" "}
-        <span className='animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-black'>
-          Loadshedding
-        </span>{" "}
-        ?
+    <div className='border-solid border-red-900 h-full flex justify-start items-center flex-col space-y-9 mt-[8rem]'>
+      <h1 className='text-white font-bold text-7xl text-center'>
+        STRUGGLING TO PLAN YOUR GAMING
       </h1>
-      <h2 className='text-gray-300 font-mono font-bold'>That stops today !</h2>
+      <h1 className='text-white font-bold text-7xl text-center'>SESSIONS AROUND </h1>
+      <h1 className='font-extrabold text-8xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-black py-4'>
+        LOADSHEDDING ?
+      </h1>
       <button className='py-4 px-10 font-mono text-white bg-gradient-to-r from-primary to-secondary rounded-lg'>
-        CONTINUE
+        <Link href='/game/create'>START PLANNING</Link>
       </button>
     </div>
   );

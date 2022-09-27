@@ -1,7 +1,7 @@
 function Navbar() {
   return (
-    <div className='relative w-full h-10 flex place-items-center'>
-      <h1 className='font-mono font-extrabold text-white text-2xl tracking-widest'>
+    <div className='h-[5rem] flex place-items-center'>
+      <h1 className='font-extralight text-white text-3xl tracking-widest ml-5'>
         Eskom Gaming Calc
       </h1>
     </div>

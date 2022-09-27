@@ -10,6 +10,9 @@ module.exports = {
         quaternary: "#8FE3CF",
       },
     },
+    fontFamily: {
+      headings: "Oswald",
+    },
   },
   plugins: [],
 };

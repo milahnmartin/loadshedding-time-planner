@@ -6,7 +6,7 @@ function Navbar() {
     <div className='h-[5rem] flex place-items-center'>
       <div className='h-auto w-[50%] flex items-center justify-start pl-5'>
         <Image height={30} width={30} src={Logo} alt='Image of Lightbulb' />
-        <h1 className='font-rajad text-white text-3xl tracking-wide ml-2'>
+        <h1 className='hidden font-rajad text-white text-3xl tracking-wide ml-2 md:inline'>
           LS GAME PLANNER
         </h1>
       </div>

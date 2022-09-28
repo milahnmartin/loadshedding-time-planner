@@ -11,7 +11,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      rajad: ["Rajdhani", "sans-serif"],
+      roboto: ["Roboto", "sans-serif"],
     },
   },
   plugins: [],

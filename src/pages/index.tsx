@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div className='h-screen w-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 max-h-screen overflow-scroll'>
       <Head>
-        <title>LS Time Calc / Home</title>
+        <title>LS Time Planner / Home</title>
         <meta name='description' content='this is Eskom Thingy' />
         <link rel='icon' href='/Light-bulb.png' />
         <link

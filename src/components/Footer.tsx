@@ -9,13 +9,13 @@ function Footer() {
           <h1 className='font-light'>LinkedIn</h1>
         </div>
         <div className='flex flex-col items-center w-[75%] space-y-5'>
-          <h1 className='font-rajad font-bold'>SOCIAL MEDIA</h1>
+          <h1 className='font-rajad font-bold'>INSTRUCTIONS</h1>
           <h1 className='font-light'>Twitter</h1>
           <h1 className='font-light'>Instagram</h1>
           <h1 className='font-light'>LinkedIn</h1>
         </div>
         <div className='flex flex-col items-center w-[75%] space-y-5'>
-          <h1 className='font-rajad font-bold'>SOCIAL MEDIA</h1>
+          <h1 className='font-rajad font-bold'>DOCS</h1>
           <h1 className='font-light'>Twitter</h1>
           <h1 className='font-light'>Instagram</h1>
           <h1 className='font-light'>LinkedIn</h1>

@@ -16,3 +16,8 @@ export interface IUserStateData {
   gamerTag: string;
   loadsheddingInfo: ILoadsheddingInfo;
 }
+
+export interface IStartEndTimes {
+  startTime: String | null;
+  endTime: String | null;
+}

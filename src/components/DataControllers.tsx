@@ -40,9 +40,8 @@ function DataControllers() {
     return sortedTimes;
   };
 
-  const removeTime = (id: number) => {
-    const specificTime = users.findIndex((item) => item == id);
-    const newUsers = users.filter((item) => item !== users[id]);
+  const removeTime = (pIndex: number) => {
+    const newUsers = users.filter((item, index) => index !== Number(pIndex));
     setUsers(newUsers);
   };
 
@@ -69,10 +68,14 @@ function DataControllers() {
     console.log(`MiniMumLoadsheddingTime: ${MiniMumLoadsheddingTime.getTime()}`);
     console.log(`MiniMumRefTime: ${MiniMumRefTime.getTime()}`);
     let diff = (MiniMumLoadsheddingTime.getTime() - MiniMumRefTime.getTime()) / 1000;
+    let pStart = (diff /= 60);
     return (
-      <GreenLabel
-        data={`@ ${MinLoadsheddingTime} - ${Math.abs((diff /= 60)) + " Min"}`}
-      />
+      pStart > 0 && (
+        <GreenLabel
+          pKey={1}
+          data={`@ ${MinLoadsheddingTime} - ${pStart + " Min"}`}
+        />
+      )
     );
   };
 
@@ -164,7 +167,7 @@ function DataControllers() {
       <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
         {users.length > 0 &&
           calcMemoTimes().map((item, index) => (
-            <RedLabel data={item} pKey={index} RemoveData={removeTime} />
+            <RedLabel data={item} key={index} pKey={index} RemoveData={removeTime} />
           ))}
       </div>
       <h1 className='text-lime-200 underline font-roboto font-extrabold text-2xl'>

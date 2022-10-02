@@ -106,7 +106,7 @@ function DataControllers() {
     const name = inputRef.current?.value;
     if (!name) return;
     const parsedNames = name.split(",");
-    setUsers((prev: string[]) => {
+    setUsers((prev): any => {
       if (!prev.length) return [...parsedNames];
       return [...prev, ...parsedNames];
     });

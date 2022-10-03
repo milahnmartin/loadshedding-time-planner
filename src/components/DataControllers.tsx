@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { IStartEndTimes } from "../types/types";
+import type { IStartEndTimes } from "../types/types";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -40,8 +40,8 @@ function DataControllers() {
     return sortedTimes;
   };
 
-  const removeTime = (pIndex: number) => {
-    const newUsers = users.filter((item, index) => index !== Number(pIndex));
+  const removeTime = (pValue: string) => {
+    const newUsers = users.filter((item: string, index: number) => item !== pValue);
     setUsers(newUsers);
   };
 
@@ -167,7 +167,12 @@ function DataControllers() {
       <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
         {users.length > 0 &&
           calcMemoTimes().map((item, index) => (
-            <RedLabel data={item} key={index} pKey={index} RemoveData={removeTime} />
+            <RedLabel
+              data={item}
+              key={item.toString()}
+              pKey={index}
+              onClick={removeTime}
+            />
           ))}
       </div>
       <h1 className='text-lime-200 underline font-roboto font-extrabold text-2xl'>

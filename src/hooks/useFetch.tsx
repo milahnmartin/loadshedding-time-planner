@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IuseFetch } from "../types/types";
+import type { IuseFetch } from "../types/types";
 function useFetch({ endpoint }: { endpoint: string }): IuseFetch {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

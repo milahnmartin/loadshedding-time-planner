@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import type { IStartEndTimes } from "../types/types";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
@@ -24,15 +25,15 @@ function DataControllers() {
   //     },
   //   },
   // ]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<Array<string>>([]);
   const [time, setTime] = useState<IStartEndTimes>({
-    startTime: null,
-    endTime: null,
+    startTime: "10:00",
+    endTime: "00:00",
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const startTimeRef = useRef<HTMLInputElement>(null);
-  const endTimeRef = useRef<HTMLInputElement>(null);
+  // const startTimeRef = useRef<HTMLInputElement>(null);
+  // const endTimeRef = useRef<HTMLInputElement>(null);
 
   const calcUnavailibleTimes = (): string[] => {
     const unsortedTimes = Array.from(new Set(users));
@@ -40,15 +41,10 @@ function DataControllers() {
     return sortedTimes;
   };
 
-  const removeTime = (pValue: string) => {
-    const newUsers = users.filter((item: string, index: number) => item !== pValue);
-    setUsers(newUsers);
-  };
-
   const calcAvailibleTimes = () => {
     let MinLoadsheddingTime: string | undefined = calcUnavailibleTimes()[0];
-    const MinRefTime = startTimeRef.current?.value;
-    if (!MinRefTime || !MinLoadsheddingTime) return;
+    const MinRefTime = time.startTime;
+    if (!MinLoadsheddingTime) return;
     MinLoadsheddingTime = MinLoadsheddingTime.split("-")[0];
     const MiniMumLoadsheddingTime = new Date(
       2022,
@@ -65,42 +61,15 @@ function DataControllers() {
       Number(MinRefTime?.split(":")[1])
     );
 
-    console.log(`MiniMumLoadsheddingTime: ${MiniMumLoadsheddingTime.getTime()}`);
-    console.log(`MiniMumRefTime: ${MiniMumRefTime.getTime()}`);
     let diff = (MiniMumLoadsheddingTime.getTime() - MiniMumRefTime.getTime()) / 1000;
     let pStart = (diff /= 60);
     return (
-      pStart > 0 && (
-        <GreenLabel
-          pKey={1}
-          data={`@ ${MinLoadsheddingTime} - ${pStart + " Min"}`}
-        />
-      )
+      pStart > 0 && <GreenLabel data={`@ ${MinRefTime} - ${pStart + " min "}`} />
     );
   };
 
   const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);
-  const calcAvailibleMemoTimes = useMemo(() => calcAvailibleTimes, [users]);
-
-  const checkTimeRangeChange = () => {
-    const startTime = startTimeRef.current?.value;
-    const endTime = endTimeRef.current?.value;
-
-    if (startTime) {
-      setTime(({ endTime }) => {
-        return { startTime, endTime };
-      });
-    }
-    if (endTime) {
-      setTime(({ startTime }) => {
-        return { startTime, endTime };
-      });
-    }
-
-    if (startTime && endTime) {
-      setTime({ startTime, endTime });
-    }
-  };
+  const calcAvailibleMemoTimes = useMemo(() => calcAvailibleTimes, [users, time]);
 
   const handleAddPlayer = () => {
     const name = inputRef.current?.value;
@@ -129,19 +98,20 @@ function DataControllers() {
         Start Time
       </label>
       <input
-        onInput={checkTimeRangeChange}
-        ref={startTimeRef}
-        className='py-2 px-4 outline-none focus:ring-2 focus:ring-primary rounded-md'
+        onInput={(e) => setTime({ ...time, startTime: e.currentTarget.value })}
+        className='py-2 px-4 outline-none focus:ring-4 focus:ring-lime-500 rounded-xl bg-white w-52 font-robot font-bold'
         type='time'
+        value={time.startTime}
+        required
       />
       <label className='text-2xl text-white font-roboto font-extralight'>
         End Time
       </label>
       <input
-        onInput={checkTimeRangeChange}
-        ref={endTimeRef}
-        className='py-2 px-4 outline-none focus:ring-2 focus:ring-primary rounded-md'
+        onInput={(e) => setTime({ ...time, endTime: e.currentTarget.value })}
+        className='py-2 px-4 outline-none focus:ring-4 focus:ring-lime-500 rounded-xl bg-white w-52 font-robot font-bold'
         type='time'
+        value={time.endTime}
       />
       <input
         placeholder='Enter Loadshedding Schedule eg. 13:00-15:00, 17:00-19:00'
@@ -152,9 +122,7 @@ function DataControllers() {
         ref={inputRef}
         required
       />
-      <label className='text-white font-roboto text-2xl'>
-        Please Enter Day's Loadshedding Seperated By A Comma'
-      </label>
+
       <button
         onClick={handleAddPlayer}
         className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
@@ -162,23 +130,26 @@ function DataControllers() {
         Add Player Time
       </button>
       <h1 className='text-red-600 underline font-roboto font-extrabold text-2xl'>
-        Unavalible Times:
+        Loadshedding Times:
       </h1>
-      <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
+      <div
+        id='bubbled-red-label-container'
+        className='flex flex-wrap justify-center items-center space-x-6 py-5'
+      >
         {users.length > 0 &&
           calcMemoTimes().map((item, index) => (
             <RedLabel
               data={item}
-              key={item.toString()}
+              key={uuidv4()}
               pKey={index}
-              onClick={removeTime}
+              state={{ users, setUsers }}
             />
           ))}
       </div>
-      <h1 className='text-lime-200 underline font-roboto font-extrabold text-2xl'>
-        Possible Availible Times:
+      <h1 className='text-lime-600 underline font-roboto font-extrabold text-2xl'>
+        Possible Play Times:
       </h1>
-      {calcAvailibleTimes()}
+      {calcAvailibleMemoTimes()}
     </div>
   );
 }

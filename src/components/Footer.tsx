@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Footer() {
   return (
     <div className='w-full h-full flex flex-col justify-end items-center text-white space-y-14 mb-14'>
@@ -9,10 +11,16 @@ function Footer() {
           <h1 className='font-light'>LinkedIn</h1>
         </div>
         <div className='flex flex-col items-center w-[75%] space-y-5'>
-          <h1 className='font-extrabold'>INSTRUCTIONS</h1>
-          <h1 className='font-light'>Twitter</h1>
-          <h1 className='font-light'>Instagram</h1>
-          <h1 className='font-light'>LinkedIn</h1>
+          <h1 className='font-extrabold'>NAVIGATE</h1>
+          <h1 className='font-light hover:font-bold hover:animate-pulse'>
+            <Link href='/'>Home</Link>
+          </h1>
+          <h1 className='font-light hover:font-bold hover:animate-pulse'>
+            <Link href='/game/create'>Create New Plan</Link>
+          </h1>
+          <h1 className='font-light hover:font-bold hover:animate-pulse'>
+            <Link href='/docs'>Docs</Link>
+          </h1>
         </div>
         <div className='flex flex-col items-center w-[75%] space-y-5'>
           <h1 className='font-extrabold'>DOCS</h1>

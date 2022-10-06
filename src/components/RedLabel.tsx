@@ -1,23 +1,13 @@
 import Image from "next/image";
-import { useEffect } from "react";
 import close from "../pages/assets/close.png";
 function RedLabel(props: any) {
-  const handleRemoveTime = (pValue: string) => {
-    props.onClick(pValue);
+  const removeTime = (e: any) => {
+    const newUsers = props?.state?.users.filter(
+      (item: string, index: number) => index !== Number(e.target.id)
+    );
+    props?.state?.setUsers(newUsers);
+    console.log(props?.state?.users);
   };
-
-  useEffect(() => {
-    const labelContainer = document.getElementById("bubbled-red-label-container");
-    labelContainer?.addEventListener("click", (e: any) => {
-      console.log(e.target);
-      handleRemoveTime(e.currentTarget?.innerText);
-    });
-    return () => {
-      labelContainer?.removeEventListener("click", (e) => {
-        console.log("REMOVED LISTENER");
-      });
-    };
-  }, []);
 
   return (
     <div
@@ -26,6 +16,7 @@ function RedLabel(props: any) {
     >
       <h1 className='mx-2'>{props.data}</h1>
       <Image
+        onClick={removeTime}
         id={props.pKey}
         className='cursor-pointer '
         src={close}

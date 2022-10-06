@@ -7,8 +7,8 @@ export interface IuseFetch {
 
 export interface ILoadsheddingInfo {
   group: Number;
-  location: String;
-  time: String[];
+  location: string;
+  time: string[];
 }
 
 export interface IUserStateData {
@@ -18,6 +18,6 @@ export interface IUserStateData {
 }
 
 export interface IStartEndTimes {
-  startTime: String | null;
-  endTime: String | null;
+  startTime: string;
+  endTime: string;
 }

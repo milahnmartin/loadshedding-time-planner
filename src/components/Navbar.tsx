@@ -12,10 +12,10 @@ function Navbar() {
       </div>
       <div className='h-auto w-[50%] flex items-center justify-end pr-5'>
         <h1 className='font-bold text-white text-1xl tracking-wide ml-5'>
-          <Link href='#'>DOCS</Link>
+          <Link href='/docs'>DOCS</Link>
         </h1>
         <h1 className='font-bold text-white text-1xl tracking-wide ml-5'>
-          <Link href='#'>INSTRUCTION</Link>
+          <Link href='/instructions'>INSTRUCTION</Link>
         </h1>
       </div>
     </div>

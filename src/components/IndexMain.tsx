@@ -11,9 +11,11 @@ function IndexMain() {
       <h1 className='font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>
-      <button className='py-4 px-10 font-bold text-white bg-gradient-to-r from-primary to-secondary rounded-lg hover:from-secondary hover:to-primary'>
-        <Link href='/game/create'>START PLANNING</Link>
-      </button>
+      <Link href='/game/create'>
+        <button className='py-4 px-10 font-bold text-white bg-gradient-to-r from-primary to-secondary rounded-lg hover:from-secondary hover:to-primary'>
+          START PLANNING
+        </button>
+      </Link>
     </div>
   );
 }

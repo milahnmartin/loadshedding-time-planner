@@ -6,7 +6,6 @@ function RedLabel(props: any) {
       (item: string, index: number) => index !== Number(e.target.id)
     );
     props?.state?.setUsers(newUsers);
-    console.log(props?.state?.users);
   };
 
   return (

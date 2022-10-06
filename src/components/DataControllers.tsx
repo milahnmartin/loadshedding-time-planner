@@ -142,7 +142,7 @@ function DataControllers() {
 
   return (
     <div className='w-full flex items-center pt-16'>
-      <div className='flex flex-col space-y-8 items-center justify-center w-[50%] p-2'>
+      <div className='flex flex-col space-y-8 items-center align-center justify-center w-[50%] p-2'>
         <h1 className='text-white text-2xl tracking-widest font-roboto font-bold'>
           LS Times Added:{" "}
           <span className='text-transparent animate-pulse bg-clip-text bg-gradient-to-r from-red-700 via-purple-700 to-primary text-2xl font-extrabold underline'>
@@ -154,7 +154,7 @@ function DataControllers() {
         </label>
         <input
           onInput={(e) => setTime({ ...time, startTime: e.currentTarget.value })}
-          className='text-center py-2 px-4 outline-none focus:ring-4 focus:ring-lime-500 rounded-xl bg-white w-fit font-robot font-bold'
+          className='text-center py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.startTime}
           required
@@ -164,7 +164,7 @@ function DataControllers() {
         </label>
         <input
           onInput={(e) => setTime({ ...time, endTime: e.currentTarget.value })}
-          className='py-2 px-4 outline-none focus:ring-4 focus:ring-lime-500 rounded-xl bg-white w-fit font-robot font-bold'
+          className='py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.endTime}
           required
@@ -174,13 +174,13 @@ function DataControllers() {
         </label>
         <input
           onInput={(e) => setGameTimeRef(Number(e.currentTarget.value))}
-          className='py-2 px-4 rounded-md font-roboto font-bold text-center'
+          className='py-2 px-4 rounded-md font-roboto font-bold text-center outline-none focus:ring-4 focus:ring-primary'
           type='number'
           value={minGameTimeRef}
         />
         <input
           placeholder='Enter Loadshedding Schedule eg. 13:00-15:00, 17:00-19:00'
-          className='text-black font-roboto rounded px-2 py-1 w-[60%] outline-none focus:ring-4 focus:ring-red-700'
+          className='text-black font-roboto rounded px-2 py-1 w-[60%] outline-none focus:ring-4 focus:ring-tersier'
           type='text'
           id='loadsheddingdata'
           name='loadsheddingdata'

@@ -1,16 +1,31 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  TwitterAuthProvider,
+} from "firebase/auth";
 import Head from "next/head";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
+import { SiTwitter } from "react-icons/Si";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { auth } from "../../utils/firebase-config";
 
 function login() {
   const googleProvider = new GoogleAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
+      Router.push("/");
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  const handleTwitterLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, twitterProvider);
       Router.push("/");
     } catch {
       console.log("Error");
@@ -24,13 +39,25 @@ function login() {
         <link rel='icon' href='/Light-bulb.png' />
       </Head>
       <Navbar />
-      <div className='h-full w-full flex items-center justify-center'>
-        <button
-          onClick={handleGoogleLogin}
-          className='shadow-xl shadow-black bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-fit  rounded-md outline-none border-none hover:bg-gray-500 hover:text-white'
-        >
-          <FcGoogle className='mr-2 h-5 w-5' /> GOOGLE
-        </button>
+
+      <div className='h-full w-full flex items-center justify-start flex-col space-y-11 p-6'>
+        <h1 className='font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 py-4 md:text-8xl'>
+          Let's Get Started !
+        </h1>
+        <div className='h-auto w-full flex items-center justify-center space-x-5'>
+          <button
+            onClick={handleGoogleLogin}
+            className='bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none hover:bg-gray-300 hover:text-black'
+          >
+            <FcGoogle className='mr-2 h-5 w-5' /> GOOGLE
+          </button>
+          <button
+            onClick={handleTwitterLogin}
+            className='bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32  rounded-md outline-none border-none hover:bg-gray-300 hover:text-black'
+          >
+            <SiTwitter className='mr-2 h-5 w-5' /> Twitter
+          </button>
+        </div>
       </div>
       <Footer />
     </div>

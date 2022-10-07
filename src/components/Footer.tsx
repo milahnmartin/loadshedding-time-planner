@@ -29,7 +29,7 @@ function Footer() {
           <h1 className='font-light'>LinkedIn</h1>
         </div>
       </div>
-      <hr className='text-white bg-white w-[75%]' />
+      <hr className=' bg-white w-[75%]' />
       <h1 className='font-roboto font-extrabold text-1xl tracking-wide text-center md:text-4xl'>
         LOADSHEDDING GAMING PLANNER
       </h1>

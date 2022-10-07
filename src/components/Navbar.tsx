@@ -1,13 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Logo from "../pages/assets/Light-bulb.png";
 import { auth } from "../utils/firebase-config";
 import UserProfile from "./UserProfile";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
-  useEffect(() => {}, []);
+  const [loginState, setLoginState] = useState<string>("CHECKING");
+  useEffect(() => {
+    if (user && !loading) return setLoginState("LOGOUT");
+    if (!user && !loading) return setLoginState("LOGIN");
+  }, [user, loading]);
   return (
     <div className='h-[5rem] flex place-items-center'>
       <div className='h-auto w-[50%] flex items-center justify-start pl-5'>
@@ -23,12 +27,12 @@ function Navbar() {
         <h1 className='font-bold text-white text-1xl tracking-wide ml-5'>
           <Link href='/instructions'>INSTRUCTION</Link>
         </h1>
-        {user ? (
+        {user && !loading ? (
           <UserProfile src={user.photoURL} />
         ) : (
           <Link href='/auth/login'>
             <button className='px-4 py-1 bg-primary text-white font-bold rounded-lg text-center ml-5'>
-              LOGIN
+              {loginState}
             </button>
           </Link>
         )}

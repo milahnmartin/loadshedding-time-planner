@@ -109,10 +109,7 @@ function DataControllers() {
       let pStart = (diff /= 60);
       pStart >= minGameTimeRef && times.push(`@ ${startTime} - ${pStart + " min "}`);
     }
-    return (
-      times.length >= 0 &&
-      times.map((time) => <GreenLabel data={time} key={uuidv4()} />)
-    );
+    return times.map((time) => <GreenLabel data={time} key={uuidv4()} />);
   };
 
   const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);

@@ -52,7 +52,7 @@ function login() {
             <FcGoogle className='mr-2 h-5 w-5' /> GOOGLE
           </button>
           <button
-            onClick={handleTwitterLogin()}
+            onClick={handleTwitterLogin}
             className='bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32  rounded-md outline-none border-none hover:bg-gray-300 hover:text-black'
           >
             <SiTwitter className='mr-2 h-5 w-5' /> Twitter

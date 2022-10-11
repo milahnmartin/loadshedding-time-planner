@@ -7,6 +7,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
+import { toast } from "react-toastify";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { auth } from "../../utils/firebase-config";
@@ -19,7 +20,7 @@ function login() {
       const result = await signInWithPopup(auth, googleProvider);
       Router.push("/");
     } catch {
-      console.log("Error");
+      toast.error("Login failed");
     }
   };
 

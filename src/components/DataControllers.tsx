@@ -67,7 +67,6 @@ function DataControllers() {
     let LastLoadSheddingTime: string | undefined =
       calcUnavailibleTimes()[calcUnavailibleTimes().length - 1];
     const MaxRefTime = time.endTime;
-    console.log(`SORTED ARR ${LastLoadSheddingTime}, REF TIME - ${MaxRefTime}`);
     if (!LastLoadSheddingTime) return;
     LastLoadSheddingTime = LastLoadSheddingTime.split("-")[1];
     const MaximumLoadsheddingTime = new Date(
@@ -89,7 +88,6 @@ function DataControllers() {
 
     let diff = (HighestRefTime.getTime() - MaximumLoadsheddingTime.getTime()) / 1000;
     let pStart = (diff /= 60);
-    console.log(pStart);
     return (
       pStart >= minGameTimeRef && (
         <GreenLabel data={`@ ${LastLoadSheddingTime} - ${pStart + " min "}`} />

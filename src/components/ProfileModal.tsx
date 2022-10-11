@@ -14,7 +14,7 @@ function ProfileModal() {
   return (
     <div
       id='profile-modal'
-      className='h-[6rem] w-[8rem] text-black text-roboto absolute bg-white -left-[5rem] top-12 rounded-md flex items-center justify-start flex-col text-center'
+      className='h-[8rem] w-[8rem] text-black text-roboto absolute bg-white -left-[5rem] top-12 rounded-md flex items-center justify-start flex-col text-center'
     >
       <Link href='#'>
         <div className='h-[50%] w-full hover:bg-gray-300 cursor-pointer py-2 px-1 rounded-t-md outline-none border-none flex items-center justify-center'>
@@ -22,6 +22,11 @@ function ProfileModal() {
         </div>
       </Link>
 
+      <Link href='#'>
+        <div className='h-[50%] w-full hover:bg-gray-300 cursor-pointer py-2 px-1 rounded-b-md outline-none border-none flex items-center justify-center text-center'>
+          <h1 className='w-full font-roboto tracking-wide'>MATCHES</h1>
+        </div>
+      </Link>
       <div
         onClick={handleSignOut}
         className='h-[50%] w-full hover:bg-gray-300 cursor-pointer py-2 px-1 rounded-b-md outline-none border-none flex items-center justify-center text-center'

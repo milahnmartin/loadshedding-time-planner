@@ -1,8 +1,21 @@
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useMemo, useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import type { IStartEndTimes } from "../types/types";
+import { auth, db } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
+
+export async function getServerSideProps() {
+  const collectionRef = collection(db, "games");
+  return {
+    props: {
+      // props for your component
+    },
+  };
+}
 
 function DataControllers() {
   const [users, setUsers] = useState<Array<string>>([]);
@@ -10,6 +23,7 @@ function DataControllers() {
     startTime: "10:00",
     endTime: "00:00",
   });
+  const [currentUser, loading] = useAuthState(auth);
   const [minGameTimeRef, setGameTimeRef] = useState<number>(40);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -126,7 +140,7 @@ function DataControllers() {
     [users, time, minGameTimeRef]
   );
 
-  const handleAddPlayer = () => {
+  const handleAddPlayer = async () => {
     const name = inputRef.current?.value;
     if (!name) return;
     const parsedNames = name.split(",");
@@ -135,6 +149,28 @@ function DataControllers() {
       return [...prev, ...parsedNames];
     });
     inputRef.current!.value = "";
+    const toastStatus = toast.loading("Adding player...", { autoClose: 1000 });
+    try {
+      const collectionRef = collection(db, `games/${currentUser?.uid}/matches`);
+      await addDoc(collectionRef, {
+        test: "This is Test",
+        time: serverTimestamp(),
+        userEmail: currentUser?.email,
+      });
+      toast.update(toastStatus, {
+        render: "Player added",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    } catch {
+      toast.update(toastStatus, {
+        render: "Error adding player",
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
+    }
   };
 
   return (

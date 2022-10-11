@@ -6,7 +6,7 @@ import {
 import Head from "next/head";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
-import { SiTwitter } from "react-icons/Si";
+import { SiTwitter } from "react-icons/si";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { auth } from "../../utils/firebase-config";

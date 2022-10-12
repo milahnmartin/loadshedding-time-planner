@@ -1,23 +1,17 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useMemo, useRef, useState } from "react";
+import { doc, onSnapshot, serverTimestamp, setDoc } from "firebase/firestore";
+import Router from "next/router";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth, db } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
-export async function getServerSideProps() {
-  const collectionRef = collection(db, "games");
-  return {
-    props: {
-      // props for your component
-    },
-  };
-}
-
 function DataControllers() {
+  const IdContext = useContext(GameidContext);
   const [users, setUsers] = useState<Array<string>>([]);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: "10:00",
@@ -95,7 +89,7 @@ function DataControllers() {
     );
   };
 
-  const calcInbetweenTimes = () => {
+  const calcInbetweenTimes = (): JSX.Element[] | undefined => {
     let times: string[] = [];
     const sortedTimes = calcUnavailibleTimes();
     if (sortedTimes.length < 2) return;
@@ -124,6 +118,33 @@ function DataControllers() {
     return times.map((time) => <GreenLabel data={time} key={uuidv4()} />);
   };
 
+  const handleCloudSave = async (): Promise<void> => {
+    const toastStatus = toast.loading("Adding player...");
+    try {
+      const collectionRef = doc(db, `games/${currentUser?.uid}`);
+      await setDoc(collectionRef, {
+        timeEdited: serverTimestamp(),
+        lsTimes: users,
+        usersAuthorized: [currentUser?.uid],
+        initiatedUser: currentUser?.uid,
+      });
+      toast.update(toastStatus, {
+        render: "Saved to Cloud",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.update(toastStatus, {
+        render: "Error Saving to Cloud",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  };
+
   const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);
   const calcBeginMemoTimes = useMemo(
     () => calcBeginTimes,
@@ -147,29 +168,26 @@ function DataControllers() {
       return [...prev, ...parsedNames];
     });
     inputRef.current!.value = "";
-    const toastStatus = toast.loading("Adding player...", { autoClose: 1000 });
-    try {
-      const collectionRef = collection(db, `games/${currentUser?.uid}/matches`);
-      await addDoc(collectionRef, {
-        test: "This is Test",
-        time: serverTimestamp(),
-        userEmail: currentUser?.email,
-      });
-      toast.update(toastStatus, {
-        render: "Player added",
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-    } catch {
-      toast.update(toastStatus, {
-        render: "Error adding player",
-        type: "error",
-        isLoading: false,
-        autoClose: 4000,
-      });
-    }
   };
+  useEffect(() => {
+    if (IdContext !== "create") {
+      try {
+        const ref = doc(db, `games/${currentUser?.uid}`);
+        const unsubscribe = onSnapshot(ref, (doc) => {
+          if (doc.exists()) {
+            const data = doc.data();
+            console.log(data);
+            setUsers(data?.lsTimes);
+          }
+        });
+      } catch {
+        toast.error("Error loading game", { autoClose: 2000 });
+        setTimeout(() => {
+          Router.push("/game/create");
+        }, 4000);
+      }
+    }
+  }, [loading]);
 
   return (
     <div className='w-full flex items-center pt-16'>
@@ -255,6 +273,12 @@ function DataControllers() {
             {calcInbetweenTimesMemo()}
             {calcEndtimesMemo()}
           </div>
+          <button
+            onClick={handleCloudSave}
+            className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
+          >
+            SAVE TO CLOUD
+          </button>
         </div>
       </div>
     </div>

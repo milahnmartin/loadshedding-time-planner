@@ -11,7 +11,7 @@ function IndexMain() {
       <h1 className='font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>
-      <div className='flex w-full h-auto items-center justify-center space-y-5 flex-col md:flex-row md:space-x-5 md:space-y-0'>
+      <div className='flex w-full h-auto items-center justify-center pt-10 space-y-5 flex-col md:flex-row md:space-x-5 md:space-y-0'>
         <Link href='/game/create'>
           <button className='py-4 px-10 w-[15rem] h-[3.5rem] font-bold text-white bg-primary rounded-lg transition-all duration-700 ease-in-out hover:bg-sky-700'>
             NEW PLAN

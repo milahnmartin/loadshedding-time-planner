@@ -1,6 +1,5 @@
-import { doc, onSnapshot, serverTimestamp, setDoc } from "firebase/firestore";
-import Router from "next/router";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useContext, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -121,12 +120,13 @@ function DataControllers() {
   const handleCloudSave = async (): Promise<void> => {
     const toastStatus = toast.loading("Adding player...");
     try {
-      const collectionRef = doc(db, `games/${currentUser?.uid}`);
-      await setDoc(collectionRef, {
+      const collectionRef = collection(db, `plans/games/${currentUser?.uid}`);
+      await addDoc(collectionRef, {
         timeEdited: serverTimestamp(),
         lsTimes: users,
         usersAuthorized: [currentUser?.uid],
         initiatedUser: currentUser?.uid,
+        uuidv4: uuidv4(),
       });
       toast.update(toastStatus, {
         render: "Saved to Cloud",
@@ -169,25 +169,25 @@ function DataControllers() {
     });
     inputRef.current!.value = "";
   };
-  useEffect(() => {
-    if (IdContext !== "create") {
-      try {
-        const ref = doc(db, `games/${currentUser?.uid}`);
-        const unsubscribe = onSnapshot(ref, (doc) => {
-          if (doc.exists()) {
-            const data = doc.data();
-            console.log(data);
-            setUsers(data?.lsTimes);
-          }
-        });
-      } catch {
-        toast.error("Error loading game", { autoClose: 2000 });
-        setTimeout(() => {
-          Router.push("/game/create");
-        }, 4000);
-      }
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (IdContext !== "create") {
+  //     try {
+  //       const ref = collection(db, `games/${currentUser?.uid}`);
+  //       const unsubscribe = onSnapshot(ref, (doc) => {
+  //         if (doc.exists()) {
+  //           const data = doc.data();
+  //           console.log(data);
+  //           setUsers(data?.lsTimes);
+  //         }
+  //       });
+  //     } catch {
+  //       toast.error("Error loading game", { autoClose: 2000 });
+  //       setTimeout(() => {
+  //         Router.push("/game/create");
+  //       }, 4000);
+  //     }
+  //   }
+  // }, [loading]);
 
   return (
     <div className='w-full flex items-center pt-16'>

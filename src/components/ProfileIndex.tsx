@@ -32,9 +32,11 @@ const ProfileIndex = () => {
             <h1>
               <span className='font-extrabold'>UserName:</span> {user?.displayName}
             </h1>
-            <h1>
-              <span className='font-extrabold'>Email:</span> {user?.email}
-            </h1>
+            {user?.email && (
+              <h1>
+                <span className='font-extrabold'>Email:</span> {user?.email}
+              </h1>
+            )}
           </div>
         </div>
       </div>

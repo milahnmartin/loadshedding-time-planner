@@ -46,7 +46,7 @@ const plans: NextPage = () => {
             onClick={() => setCurrentPage("team")}
             className='font-roboto text-white font-bold cursor-pointer'
           >
-            <h1 className='tracking-wide'>TEAM SETTINGS</h1>
+            <h1 className='tracking-wide font-main'>TEAM SETTINGS</h1>
           </div>
         </div>
         <div className='w-2/3 h-full border-2 border-solid border-sky-700 flex'>

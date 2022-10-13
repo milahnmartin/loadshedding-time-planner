@@ -192,7 +192,7 @@ function DataControllers() {
   return (
     <div className='w-full flex items-center pt-16'>
       <div className='flex flex-col space-y-8 items-center align-center justify-center w-[50%] p-2'>
-        <h1 className='text-white text-2xl tracking-widest font-roboto font-bold'>
+        <h1 className='text-white text-2xl tracking-widest font-roboto'>
           LS Times Added:{" "}
           <span className='text-transparent animate-pulse bg-clip-text bg-gradient-to-r from-red-700 via-purple-700 to-primary text-2xl font-extrabold underline'>
             {users.length}

@@ -37,7 +37,6 @@ function login() {
       <Head>
         <title>LS Game Planner | Login</title>
         <meta name='description' content='Login to LS Game Planner' />
-        <link rel='icon' href='/Light-bulb.png' />
       </Head>
       <Navbar />
 

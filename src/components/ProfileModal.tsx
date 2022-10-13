@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Router from "next/router";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase-config";
@@ -10,6 +11,7 @@ function ProfileModal() {
     setSignOutStatus(true);
     auth.signOut();
     setSignOutStatus(false);
+    Router.push("/");
   };
   return (
     <div

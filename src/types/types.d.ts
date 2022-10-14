@@ -21,3 +21,10 @@ export interface IStartEndTimes {
   startTime: string;
   endTime: string;
 }
+
+export interface IPlan {
+  lsTimes: string[];
+  iniatedUser: string;
+  customuuid: string;
+  authorizedUser: string[];
+}

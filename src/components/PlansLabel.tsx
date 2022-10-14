@@ -3,7 +3,6 @@ import Router from "next/router";
 import { useRef } from "react";
 const PlansLabel = ({ data }: any) => {
   const currentRefGame = useRef(null);
-  console.log(data);
   return (
     <div className='flex flex-col cursor-pointer text-black font-bold items-center jusfify-center p-2 w-[25%] h-[30%] rounded-xl bg-gray-300 transition-all duration-20 overflow-scroll'>
       <div className='flex w-full h-full items-start justify-center flex-col space-y-4'>

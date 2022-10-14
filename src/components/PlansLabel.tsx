@@ -11,9 +11,8 @@ const PlansLabel = ({ data }: any) => {
         <h1>GameID: {data?.gameuuid}</h1>
         <h1>
           CurrentTimes:{" "}
-          {data?.lsTimes.map((item: any) => (
-            <h2 key={uuidv4()}>{item}</h2>
-          ))}
+          {data?.lsTimes &&
+            data?.lsTimes.map((item: any) => <h2 key={uuidv4()}>{item}</h2>)}
         </h1>
       </div>
       <div className='mt-10 h-[5%] w-full flex items-center justify-center pb-5'>

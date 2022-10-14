@@ -20,7 +20,8 @@ const plans: NextPage = () => {
           onValue(ref(db), (snapshot) => {
             const data = snapshot.val();
             if (data) {
-              return setPlans(data[user?.uid]);
+              setPlans(data[user?.uid]);
+              return;
             }
           });
         }
@@ -39,8 +40,7 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='flex w-full h-full p-4 space-x-5'>
-        {user &&
-          plans &&
+        {plans &&
           Object.entries(plans).map(([key, val]: any) => (
             <PlansLabel key={uuidv4()} gamekey={key} data={val} />
           ))}

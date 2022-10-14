@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import Router from "next/router";
 import { useRef } from "react";
 const PlansLabel = ({ data }: any) => {
@@ -11,7 +10,9 @@ const PlansLabel = ({ data }: any) => {
         <h1>
           CurrentTimes:{" "}
           {data?.lsTimes &&
-            data?.lsTimes.map((item: any) => <h2 key={uuidv4()}>{item}</h2>)}
+            data?.lsTimes.map((item: any) => {
+              return item;
+            })}
         </h1>
       </div>
       <div className='mt-10 h-[5%] w-full flex items-center justify-center pb-5'>

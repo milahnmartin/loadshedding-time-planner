@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { createContext } from "react";
+import DataControllers from "../../components/DataControllers";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 export const getServerSideProps = async (context: any) => {
@@ -21,7 +22,7 @@ const IdPage: NextPage = ({ id }: any) => {
           <h1 className='font-extrabold text-center pb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 md:text-7xl'>
             Start Adding New Players !
           </h1>
-          {/* <DataControllers /> */}
+          <DataControllers />
         </div>
       </GameidContext.Provider>
       <Footer />

@@ -118,11 +118,11 @@ function DataControllers() {
     return times.map((time) => <GreenLabel data={time} key={uuidv4()} />);
   };
 
-  const handleCloudSaveCreate = () => {
+  const handleCloudSaveCreate = async () => {
     const toastStatus = toast.loading("Saving...");
     const gameRefUUID = uuidv4();
     try {
-      set(ref(db, `/${currentUser?.uid}/${gameRefUUID}`), {
+      await set(ref(db, `/${currentUser?.uid}/${gameRefUUID}`), {
         createdBy: currentUser?.email
           ? currentUser?.email
           : currentUser?.displayName,
@@ -231,7 +231,9 @@ function DataControllers() {
           Start Time
         </label>
         <input
-          onChange={(e) => setTime({ ...time, startTime: e.currentTarget.value })}
+          onChange={(e) =>
+            setTime({ endTime: time.endTime, startTime: e.currentTarget.value })
+          }
           className='text-center py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.startTime}
@@ -241,7 +243,9 @@ function DataControllers() {
           End Time
         </label>
         <input
-          onChange={(e) => setTime({ ...time, endTime: e.currentTarget.value })}
+          onChange={(e) =>
+            setTime({ startTime: time.startTime, endTime: e.currentTarget.value })
+          }
           className='py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.endTime}

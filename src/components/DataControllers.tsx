@@ -216,7 +216,7 @@ function DataControllers() {
         }, 4000);
       }
     }
-  }, [loading, IdContext, currentUser]);
+  }, [loading, IdContext]);
 
   return (
     <div className='w-full flex items-center pt-16'>

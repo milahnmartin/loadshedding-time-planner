@@ -22,7 +22,7 @@ function Navbar() {
       </div>
       <div className='h-fit w-[50%] flex items-center justify-end pr-5'>
         <h1 className='font-bold text-white text-1xl tracking-wide ml-5'>
-          <Link href='/'>MAIN</Link>
+          <Link href='/'>HOME</Link>
         </h1>
         <h1 className='font-bold text-white text-1xl tracking-wide ml-5'>
           <Link href='/docs'>DOCS</Link>

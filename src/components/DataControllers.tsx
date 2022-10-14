@@ -1,5 +1,6 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useContext, useMemo, useRef, useState } from "react";
+import { onValue, ref, set, update } from "firebase/database";
+import Router from "next/router";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -117,16 +118,40 @@ function DataControllers() {
     return times.map((time) => <GreenLabel data={time} key={uuidv4()} />);
   };
 
-  const handleCloudSave = async (): Promise<void> => {
-    const toastStatus = toast.loading("Adding player...");
+  const handleCloudSaveCreate = () => {
+    const toastStatus = toast.loading("Saving...");
+    const gameRefUUID = uuidv4();
     try {
-      const collectionRef = collection(db, `plans/games/${currentUser?.uid}`);
-      await addDoc(collectionRef, {
-        timeEdited: serverTimestamp(),
+      set(ref(db, `/${currentUser?.uid}/${gameRefUUID}`), {
+        createdBy: currentUser?.email
+          ? currentUser?.email
+          : currentUser?.displayName,
+        gameuuid: gameRefUUID,
         lsTimes: users,
-        usersAuthorized: [currentUser?.uid],
-        initiatedUser: currentUser?.uid,
-        uuidv4: uuidv4(),
+      });
+      toast.update(toastStatus, {
+        render: "Saved to Cloud",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.update(toastStatus, {
+        render: "Error Saving to Cloud",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  };
+  const handleCloudSaveRef = () => {
+    const toastStatus = toast.loading("Saving...");
+    const gameRefUUID = uuidv4();
+    try {
+      update(ref(db, `/${currentUser?.uid}/${IdContext}`), {
+        gameuuid: IdContext,
+        lsTimes: users,
       });
       toast.update(toastStatus, {
         render: "Saved to Cloud",
@@ -169,25 +194,29 @@ function DataControllers() {
     });
     inputRef.current!.value = "";
   };
-  // useEffect(() => {
-  //   if (IdContext !== "create") {
-  //     try {
-  //       const ref = collection(db, `games/${currentUser?.uid}`);
-  //       const unsubscribe = onSnapshot(ref, (doc) => {
-  //         if (doc.exists()) {
-  //           const data = doc.data();
-  //           console.log(data);
-  //           setUsers(data?.lsTimes);
-  //         }
-  //       });
-  //     } catch {
-  //       toast.error("Error loading game", { autoClose: 2000 });
-  //       setTimeout(() => {
-  //         Router.push("/game/create");
-  //       }, 4000);
-  //     }
-  //   }
-  // }, [loading]);
+  useEffect(() => {
+    if (IdContext !== "create" && currentUser && !loading) {
+      try {
+        onValue(ref(db), (snapshot) => {
+          const data = snapshot.val();
+          const gameData = data[currentUser?.uid][IdContext];
+          if (gameData) {
+            if (gameData?.lsTimes) {
+              setUsers(gameData?.lsTimes);
+            }
+            return;
+          }
+          toast.error("Game not found, Redirecting to plans");
+          Router.push("/plans");
+        });
+      } catch {
+        toast.error("Error loading game", { autoClose: 2000 });
+        setTimeout(() => {
+          Router.push("/game/create");
+        }, 4000);
+      }
+    }
+  }, [loading, IdContext, currentUser]);
 
   return (
     <div className='w-full flex items-center pt-16'>
@@ -274,7 +303,9 @@ function DataControllers() {
             {calcEndtimesMemo()}
           </div>
           <button
-            onClick={handleCloudSave}
+            onClick={
+              IdContext === "create" ? handleCloudSaveCreate : handleCloudSaveRef
+            }
             className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
           >
             SAVE TO CLOUD

@@ -1,5 +1,5 @@
 import { uuidv4 } from "@firebase/util";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { onValue, ref } from "firebase/database";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -8,28 +8,27 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import PlansLabel from "../components/PlansLabel";
 import { auth, db } from "../utils/firebase-config";
+
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
-  const [plans, setPlans] = useState<any>([]);
+  const [plans, setPlans] = useState<any>(null);
 
   useEffect(() => {
-    const handleGetGames = () => {
-      const collectionRef = collection(db, `plans/games/${user?.uid}`);
-      const q = query(
-        collectionRef,
-        where("games", "==", "742ff5cd-cf8d-4ea8-be3b-f1e84bd3610e")
-      );
-      onSnapshot(collectionRef, (querySnapshot) => {
-        let plans = [] as any[];
-        querySnapshot.forEach((doc) => {
-          plans.push(doc.data());
-        });
-        console.log(plans);
-        setPlans(plans);
-      });
+    const loadPlans = () => {
+      try {
+        if (user && !loading) {
+          onValue(ref(db), (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+              return setPlans(data[user?.uid]);
+            }
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     };
-
-    handleGetGames();
+    loadPlans();
   }, [loading]);
 
   return (
@@ -39,10 +38,12 @@ const plans: NextPage = () => {
         <link rel='icon' href='/Light-bulb.png' />
       </Head>
       <Navbar />
-      <div className='p-2 w-full h-full flex space-x-5'>
-        {plans.map((plan: any) => (
-          <PlansLabel key={uuidv4()} data={plan} />
-        ))}
+      <div className='flex w-full h-full p-4 space-x-5'>
+        {user &&
+          plans &&
+          Object.entries(plans).map(([key, val]: any) => (
+            <PlansLabel key={uuidv4()} gamekey={key} data={val} />
+          ))}
       </div>
       <Footer />
     </div>

@@ -18,8 +18,8 @@ const firebaseConfig = {
   projectId: "loadshedding-time-compiler",
   storageBucket: "loadshedding-time-compiler.appspot.com",
   messagingSenderId: "1020497186395",
-  appId: "1:1020497186395:web:f5af8c2d33a6a42a81f97e",
-  measurementId: "G-BQ23X25E8X",
+  appId: "1:1020497186395:web:b76e3866515d969781f97e",
+  measurementId: "G-J2DQETML1V",
 };
 
 const app = initializeApp(firebaseConfig);

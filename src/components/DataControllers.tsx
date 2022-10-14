@@ -145,11 +145,10 @@ function DataControllers() {
       });
     }
   };
-  const handleCloudSaveRef = () => {
+  const handleCloudSaveRef = async () => {
     const toastStatus = toast.loading("Saving...");
-    const gameRefUUID = uuidv4();
     try {
-      update(ref(db, `/${currentUser?.uid}/${IdContext}`), {
+      await update(ref(db, `/${currentUser?.uid}/${IdContext}`), {
         gameuuid: IdContext,
         lsTimes: users,
       });
@@ -195,27 +194,32 @@ function DataControllers() {
     inputRef.current!.value = "";
   };
   useEffect(() => {
-    if (IdContext !== "create" && currentUser && !loading) {
-      try {
-        onValue(ref(db), (snapshot) => {
-          const data = snapshot.val();
-          const gameData = data[currentUser?.uid][IdContext];
-          if (gameData) {
-            if (gameData?.lsTimes) {
-              setUsers(gameData?.lsTimes);
+    const gatherData = async () => {
+      if (IdContext !== "create" && currentUser && !loading) {
+        try {
+          await onValue(ref(db), (snapshot) => {
+            const data = snapshot.val();
+            if (!data) return;
+            const gameData = data[currentUser?.uid][IdContext];
+            if (gameData) {
+              if (gameData?.lsTimes) {
+                setUsers(gameData?.lsTimes);
+              }
+              return;
             }
-            return;
-          }
-          toast.error("Game not found, Redirecting to plans");
-          Router.push("/plans");
-        });
-      } catch {
-        toast.error("Error loading game", { autoClose: 2000 });
-        setTimeout(() => {
-          Router.push("/game/create");
-        }, 4000);
+            toast.error("Game not found, Redirecting to plans");
+            Router.push("/plans");
+          });
+        } catch {
+          toast.error("Error loading game", { autoClose: 2000 });
+          setTimeout(() => {
+            Router.push("/game/create");
+          }, 4000);
+        }
       }
-    }
+    };
+
+    gatherData();
   }, [loading]);
 
   return (

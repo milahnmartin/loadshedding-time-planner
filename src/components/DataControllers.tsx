@@ -1,6 +1,6 @@
 import { onValue, ref, set, update } from "firebase/database";
 import Router from "next/router";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -58,8 +58,8 @@ function DataControllers() {
   };
 
   const calcEndTimes = () => {
-    let LastLoadSheddingTime: string | undefined =
-      calcUnavailibleTimes()[calcUnavailibleTimes().length - 1];
+    let LastLoadSheddingTime: string[] | string | undefined = calcUnavailibleTimes();
+    LastLoadSheddingTime = LastLoadSheddingTime[LastLoadSheddingTime.length - 1];
     const MaxRefTime = time.endTime;
     if (!LastLoadSheddingTime) return;
     LastLoadSheddingTime = LastLoadSheddingTime.split("-")[1];
@@ -169,19 +169,19 @@ function DataControllers() {
     }
   };
 
-  const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);
-  const calcBeginMemoTimes = useMemo(
-    () => calcBeginTimes,
-    [users, time, minGameTimeRef]
-  );
-  const calcInbetweenTimesMemo = useMemo(
-    () => calcInbetweenTimes,
-    [users, time, minGameTimeRef]
-  );
-  const calcEndtimesMemo = useMemo(
-    () => calcEndTimes,
-    [users, time, minGameTimeRef]
-  );
+  // const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);
+  // const calcBeginMemoTimes = useMemo(
+  //   () => calcBeginTimes,
+  //   [users, time, minGameTimeRef]
+  // );
+  // const calcInbetweenTimesMemo = useMemo(
+  //   () => calcInbetweenTimes,
+  //   [users, time, minGameTimeRef]
+  // );
+  // const calcEndtimesMemo = useMemo(
+  //   () => calcEndTimes,
+  //   [users, time, minGameTimeRef]
+  // );
 
   const handleAddPlayer = async () => {
     const name = inputRef.current?.value;
@@ -291,7 +291,7 @@ function DataControllers() {
             className='flex flex-wrap justify-center items-center space-x-6 py-5'
           >
             {users.length > 0 &&
-              calcMemoTimes().map((item, index) => (
+              calcUnavailibleTimes().map((item, index) => (
                 <RedLabel
                   data={item}
                   key={uuidv4()}
@@ -306,9 +306,9 @@ function DataControllers() {
             AVAILIBLE TIMES
           </h1>
           <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
-            {calcBeginMemoTimes()}
-            {calcInbetweenTimesMemo()}
-            {calcEndtimesMemo()}
+            {calcBeginTimes()}
+            {calcInbetweenTimes()}
+            {calcBeginTimes()}
           </div>
           <button
             onClick={

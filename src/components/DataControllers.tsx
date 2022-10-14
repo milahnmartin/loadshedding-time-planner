@@ -216,7 +216,7 @@ function DataControllers() {
         }, 4000);
       }
     }
-  }, [loading, IdContext]);
+  }, [loading]);
 
   return (
     <div className='w-full flex items-center pt-16'>
@@ -231,7 +231,7 @@ function DataControllers() {
           Start Time
         </label>
         <input
-          onInput={(e) => setTime({ ...time, startTime: e.currentTarget.value })}
+          onChange={(e) => setTime({ ...time, startTime: e.currentTarget.value })}
           className='text-center py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.startTime}
@@ -241,7 +241,7 @@ function DataControllers() {
           End Time
         </label>
         <input
-          onInput={(e) => setTime({ ...time, endTime: e.currentTarget.value })}
+          onChange={(e) => setTime({ ...time, endTime: e.currentTarget.value })}
           className='py-2 px-4 outline-none focus:ring-4 focus:ring-primary rounded-sm bg-white w-fit font-robot font-bold'
           type='time'
           value={time.endTime}
@@ -251,7 +251,7 @@ function DataControllers() {
           Min Game Time (min)
         </label>
         <input
-          onInput={(e) => setGameTimeRef(Number(e.currentTarget.value))}
+          onChange={(e) => setGameTimeRef(Number(e.currentTarget.value))}
           className='py-2 px-4 rounded-md font-roboto font-bold text-center outline-none focus:ring-4 focus:ring-primary'
           type='number'
           value={minGameTimeRef}

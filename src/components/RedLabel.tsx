@@ -1,13 +1,6 @@
 import Image from "next/image";
 import close from "../pages/assets/close.png";
 function RedLabel(props: any) {
-  const removeTime = (e: any) => {
-    const newUsers = props?.state?.users.filter(
-      (item: string, index: number) => index !== Number(e.target.id)
-    );
-    props?.state?.setUsers(newUsers);
-  };
-
   return (
     <div
       id='bubbled-red-label-container'
@@ -15,9 +8,8 @@ function RedLabel(props: any) {
     >
       <h1 className='mx-2'>{props.data}</h1>
       <Image
-        onClick={removeTime}
-        id={props.pKey}
-        className='cursor-pointer '
+        onClick={() => props.cb(props.data)}
+        className='cursor-pointer'
         src={close}
         width={20}
         height={20}

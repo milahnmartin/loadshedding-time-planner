@@ -148,9 +148,10 @@ function DataControllers() {
   const handleCloudSaveRef = async () => {
     const toastStatus = toast.loading("Saving...");
     try {
+      console.log(users);
       await update(ref(db, `/${currentUser?.uid}/${IdContext}`), {
         gameuuid: IdContext,
-        lsTimes: users,
+        lsTimes: [...users],
       });
       toast.update(toastStatus, {
         render: "Saved to Cloud",
@@ -169,21 +170,7 @@ function DataControllers() {
     }
   };
 
-  // const calcMemoTimes = useMemo(() => calcUnavailibleTimes, [users]);
-  // const calcBeginMemoTimes = useMemo(
-  //   () => calcBeginTimes,
-  //   [users, time, minGameTimeRef]
-  // );
-  // const calcInbetweenTimesMemo = useMemo(
-  //   () => calcInbetweenTimes,
-  //   [users, time, minGameTimeRef]
-  // );
-  // const calcEndtimesMemo = useMemo(
-  //   () => calcEndTimes,
-  //   [users, time, minGameTimeRef]
-  // );
-
-  const handleAddPlayer = async () => {
+  const handleAddPlayer = () => {
     const name = inputRef.current?.value;
     if (!name) return;
     const parsedNames = name.split(",");
@@ -221,7 +208,10 @@ function DataControllers() {
 
     gatherData();
   }, [loading]);
-
+  const handleRemovePlayer = (val: string) => {
+    const newUsers = users.filter((user, i) => user !== val);
+    setUsers(newUsers);
+  };
   return (
     <div className='w-full flex items-center pt-16'>
       <div className='flex flex-col space-y-8 items-center align-center justify-center w-[50%] p-2'>
@@ -292,12 +282,7 @@ function DataControllers() {
           >
             {users.length > 0 &&
               calcUnavailibleTimes().map((item, index) => (
-                <RedLabel
-                  data={item}
-                  key={uuidv4()}
-                  pKey={index}
-                  state={{ users, setUsers }}
-                />
+                <RedLabel data={item} key={uuidv4()} cb={handleRemovePlayer} />
               ))}
           </div>
         </div>

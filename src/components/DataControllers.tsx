@@ -1,6 +1,5 @@
-import { onValue, ref, set, update } from "firebase/database";
-import Router from "next/router";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { ref, set, update } from "firebase/database";
+import { useContext, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -194,29 +193,29 @@ function DataControllers() {
     });
     inputRef.current!.value = "";
   };
-  useEffect(() => {
-    if (IdContext !== "create" && currentUser && !loading) {
-      try {
-        onValue(ref(db), (snapshot) => {
-          const data = snapshot.val();
-          const gameData = data[currentUser?.uid][IdContext];
-          if (gameData) {
-            if (gameData?.lsTimes) {
-              setUsers(gameData?.lsTimes);
-            }
-            return;
-          }
-          toast.error("Game not found, Redirecting to plans");
-          Router.push("/plans");
-        });
-      } catch {
-        toast.error("Error loading game", { autoClose: 2000 });
-        setTimeout(() => {
-          Router.push("/game/create");
-        }, 4000);
-      }
-    }
-  }, [loading, IdContext]);
+  // useEffect(() => {
+  //   if (IdContext !== "create" && currentUser && !loading) {
+  //     try {
+  //       onValue(ref(db), (snapshot) => {
+  //         const data = snapshot.val();
+  //         const gameData = data[currentUser?.uid][IdContext];
+  //         if (gameData) {
+  //           if (gameData?.lsTimes) {
+  //             setUsers(gameData?.lsTimes);
+  //           }
+  //           return;
+  //         }
+  //         toast.error("Game not found, Redirecting to plans");
+  //         Router.push("/plans");
+  //       });
+  //     } catch {
+  //       toast.error("Error loading game", { autoClose: 2000 });
+  //       setTimeout(() => {
+  //         Router.push("/game/create");
+  //       }, 4000);
+  //     }
+  //   }
+  // }, [loading, IdContext]);
 
   return (
     <div className='w-full flex items-center pt-16'>

@@ -1,4 +1,4 @@
-import { onValue, ref } from "firebase/database";
+// import { onValue, ref } from "firebase/database";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
-import { auth, db } from "../utils/firebase-config";
+import { auth } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -37,21 +37,21 @@ function DataControllers() {
     minGameTimeRef
   );
 
-  const fetchGameData = () => {
-    if (!currentUser) return;
-    onValue(ref(db), (snapshot) => {
-      if (!snapshot.exists()) return;
-      let data = snapshot.val();
-      let plans = data?.plans;
-      let plan = plans[currentUser?.uid];
-      if (!plan) return handleInvalidGame();
-      plan = plan[IdContext];
-      if (!plan) return handleInvalidGame();
-      if (plan?.lsTimes) {
-        setUsers(plan?.lsTimes);
-      }
-    });
-  };
+  // const fetchGameData = () => {
+  //   if (!currentUser) return;
+  //   onValue(ref(db), (snapshot) => {
+  //     if (!snapshot.exists()) return;
+  //     let data = snapshot.val();
+  //     let plans = data?.plans;
+  //     let plan = plans[currentUser?.uid];
+  //     if (!plan) return handleInvalidGame();
+  //     plan = plan[IdContext];
+  //     if (!plan) return handleInvalidGame();
+  //     if (plan?.lsTimes) {
+  //       setUsers(plan?.lsTimes);
+  //     }
+  //   });
+  // };
 
   const handleInvalidGame = () => {
     toast.error("Game ID is invalid or not Authorized");
@@ -119,8 +119,9 @@ function DataControllers() {
   //   inputRef.current!.value = "";
   // };
   useEffect(() => {
-    if (currentUser) {
-      fetchGameData();
+    if (currentUser && IdContext !== "create") {
+      console.log("FETCHING DATA");
+      // fetchGameData();
     }
   }, [loading]);
 

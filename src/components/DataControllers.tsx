@@ -4,9 +4,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth, db } from "../utils/firebase-config";
+import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
 function DataControllers() {
@@ -19,103 +21,15 @@ function DataControllers() {
     startTime: "10:00",
     endTime: "00:00",
   });
-
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const calcUnavailibleTimes = (): string[] => {
-    const unsortedTimes = Array.from(new Set(users));
-    return unsortedTimes.sort();
-  };
-
-  // const calcBeginTimes = () => {
-  //   let MinLoadsheddingTime: string | undefined = calcUnavailibleTimes()[0];
-  //   const MinRefTime = time.startTime;
-  //   if (!MinLoadsheddingTime) return;
-  //   MinLoadsheddingTime = MinLoadsheddingTime.split("-")[0];
-  //   const MiniMumLoadsheddingTime = new Date(
-  //     2022,
-  //     new Date().getMonth(),
-  //     1,
-  //     Number(MinLoadsheddingTime?.split(":")[0]),
-  //     Number(MinLoadsheddingTime?.split(":")[1])
-  //   );
-  //   const MiniMumRefTime = new Date(
-  //     2022,
-  //     new Date().getMonth(),
-  //     1,
-  //     Number(MinRefTime?.split(":")[0]),
-  //     Number(MinRefTime?.split(":")[1])
-  //   );
-
-  //   let diff = (MiniMumLoadsheddingTime.getTime() - MiniMumRefTime.getTime()) / 1000;
-  //   let pStart = (diff /= 60);
-  //   return (
-  //     pStart >= minGameTimeRef && (
-  //       <GreenLabel data={`@ ${MinRefTime} - ${pStart + " min "}`} />
-  //     )
-  //   );
-  // };
-
-  // const calcEndTimes = () => {
-  //   let LastLoadSheddingTime: string[] | string | undefined = calcUnavailibleTimes();
-  //   LastLoadSheddingTime = LastLoadSheddingTime[LastLoadSheddingTime.length - 1];
-  //   const MaxRefTime = time.endTime;
-  //   if (!LastLoadSheddingTime) return;
-  //   LastLoadSheddingTime = LastLoadSheddingTime.split("-")[1];
-  //   const MaximumLoadsheddingTime = new Date(
-  //     new Date().getFullYear(),
-  //     new Date().getMonth(),
-  //     new Date().getDate(),
-  //     Number(LastLoadSheddingTime?.split(":")[0]),
-  //     Number(LastLoadSheddingTime?.split(":")[1])
-  //   );
-  //   const HighestRefTime = new Date(
-  //     new Date().getFullYear(),
-  //     new Date().getMonth(),
-  //     Number(MaxRefTime?.split(":").join()) < 2359
-  //       ? new Date().getDate()
-  //       : new Date().getDate() + 1,
-  //     Number(MaxRefTime?.split(":")[0]),
-  //     Number(MaxRefTime?.split(":")[1])
-  //   );
-
-  //   let diff = (HighestRefTime.getTime() - MaximumLoadsheddingTime.getTime()) / 1000;
-  //   let pStart = (diff /= 60);
-  //   return (
-  //     pStart >= minGameTimeRef && (
-  //       <GreenLabel data={`@ ${LastLoadSheddingTime} - ${pStart + " min "}`} />
-  //     )
-  //   );
-  // };
-
-  // const calcInbetweenTimes = (): JSX.Element[] | undefined => {
-  //   let times: string[] = [];
-  //   const sortedTimes = calcUnavailibleTimes();
-  //   if (sortedTimes.length < 2) return;
-  //   for (let i = 0; i < sortedTimes.length; i++) {
-  //     const startTime = sortedTimes[i]?.split("-")[1];
-  //     const endTime = sortedTimes[i + 1]?.split("-")[0];
-  //     if (!endTime) break;
-  //     const start = new Date(
-  //       2022,
-  //       new Date().getMonth(),
-  //       1,
-  //       Number(startTime?.split(":")[0]),
-  //       Number(startTime?.split(":")[1])
-  //     );
-  //     const end = new Date(
-  //       2022,
-  //       new Date().getMonth(),
-  //       1,
-  //       Number(endTime?.split(":")[0]),
-  //       Number(endTime?.split(":")[1])
-  //     );
-  //     let diff = (end.getTime() - start.getTime()) / 1000;
-  //     let pStart = (diff /= 60);
-  //     pStart >= minGameTimeRef && times.push(`@ ${startTime} - ${pStart + " min "}`);
-  //   }
-  //   return times.map((time) => <GreenLabel data={time} key={uuidv4()} />);
-  // };
+  const StartTimeCalc = TimeCalculations.getInitialStartTime(
+    users,
+    time?.startTime,
+    minGameTimeRef
+  );
+  const InbetweenTimeCalc = TimeCalculations.getInbetweenTimes(users);
+  const EndTimesCalc = TimeCalculations.getInitialEndTimes(users, time?.endTime);
 
   const handleCloudSaveCreate = async () => {
     const toastStatus = toast.loading("Saving...");
@@ -284,7 +198,7 @@ function DataControllers() {
             className='flex flex-wrap justify-center items-center space-x-6 py-5'
           >
             {users.length > 0 &&
-              calcUnavailibleTimes().map((item, index) => (
+              TimeCalculations.sortLoadSheddingTime(users).map((item, index) => (
                 <RedLabel data={item} key={uuidv4()} cb={handleRemovePlayer} />
               ))}
           </div>
@@ -294,7 +208,12 @@ function DataControllers() {
             AVAILIBLE TIMES
           </h1>
           <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
-            <h1>YEPCOCK</h1>
+            {users.length > 0 && <GreenLabel data={StartTimeCalc} />}
+            {users.length > 0 &&
+              InbetweenTimeCalc.map((item) => {
+                return <GreenLabel key={uuidv4()} data={item} />;
+              })}
+            {users.length > 0 && <GreenLabel data={EndTimesCalc} />}
           </div>
           <button
             onClick={

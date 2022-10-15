@@ -34,7 +34,11 @@ class TimeCalculations {
       : undefined;
   };
 
-  static getInitialEndTimes = (LoadSheddingTimes: string[], UserEndTime: string) => {
+  static getInitialEndTimes = (
+    LoadSheddingTimes: string[],
+    UserEndTime: string,
+    MaxGameTime: number
+  ) => {
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
     const LatestLSTime: string | undefined = SortedLSTimes[SortedLSTimes.length - 1];
     if (!LatestLSTime) return;
@@ -56,10 +60,15 @@ class TimeCalculations {
     let TimeDifference =
       (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
-    return ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} min`;
+    return MaxGameTime <= CalcTimeDifference
+      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} min`
+      : undefined;
   };
 
-  static getInbetweenTimes = (LoadSheddingTimes: string[]): string[] => {
+  static getInbetweenTimes = (
+    LoadSheddingTimes: string[],
+    MaxGameTime: number
+  ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
     if (SortedLSTimes.length < 2) return [];
@@ -83,6 +92,7 @@ class TimeCalculations {
       );
       let diff = (end.getTime() - start.getTime()) / 1000;
       let pStart = (diff /= 60);
+      if (MaxGameTime > pStart) continue;
       LSTimes.push(`Start Time: ${startTime} - ${pStart} min`);
     }
     return LSTimes;

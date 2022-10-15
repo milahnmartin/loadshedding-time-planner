@@ -13,14 +13,14 @@ import RedLabel from "./RedLabel";
 
 function DataControllers() {
   const [currentUser, loading] = useAuthState(auth);
-
-  const IdContext = useContext(GameidContext);
   const [minGameTimeRef, setGameTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: "10:00",
     endTime: "00:00",
   });
+
+  const IdContext = useContext(GameidContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const StartTimeCalc = TimeCalculations.getInitialStartTime(
@@ -28,8 +28,15 @@ function DataControllers() {
     time?.startTime,
     minGameTimeRef
   );
-  const InbetweenTimeCalc = TimeCalculations.getInbetweenTimes(users);
-  const EndTimesCalc = TimeCalculations.getInitialEndTimes(users, time?.endTime);
+  const InbetweenTimeCalc = TimeCalculations.getInbetweenTimes(
+    users,
+    minGameTimeRef
+  );
+  const EndTimesCalc = TimeCalculations.getInitialEndTimes(
+    users,
+    time?.endTime,
+    minGameTimeRef
+  );
 
   const handleCloudSaveCreate = async () => {
     const toastStatus = toast.loading("Saving...");
@@ -208,12 +215,14 @@ function DataControllers() {
             AVAILIBLE TIMES
           </h1>
           <div className='flex flex-wrap justify-center items-center space-x-6 py-5'>
-            {users.length > 0 && <GreenLabel data={StartTimeCalc} />}
+            {users.length > 0 && StartTimeCalc && (
+              <GreenLabel data={StartTimeCalc} />
+            )}
             {users.length > 0 &&
               InbetweenTimeCalc.map((item) => {
                 return <GreenLabel key={uuidv4()} data={item} />;
               })}
-            {users.length > 0 && <GreenLabel data={EndTimesCalc} />}
+            {users.length > 0 && EndTimesCalc && <GreenLabel data={EndTimesCalc} />}
           </div>
           <button
             onClick={

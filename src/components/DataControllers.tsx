@@ -1,10 +1,13 @@
-import { useContext, useRef, useState } from "react";
+import { onValue, ref } from "firebase/database";
+import Router from "next/router";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
-import { auth } from "../utils/firebase-config";
+import { auth, db } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -96,39 +99,39 @@ function DataControllers() {
   //   });
   //   inputRef.current!.value = "";
   // };
-  // useEffect(() => {
-  //   const gatherData = async () => {
-  //     if (!currentUser) return;
-  //     if (!IdContext || IdContext === "create") return;
+  useEffect(() => {
+    const gatherData = async () => {
+      if (!currentUser) return;
+      if (!IdContext || IdContext === "create") return;
 
-  //     try {
-  //       await onValue(ref(db), (snapshot) => {
-  //         if (!snapshot.exists()) return;
-  //         let data = snapshot.val();
-  //         let plans = data?.plans;
-  //         if (plans) {
-  //           let plan = plans[currentUser?.uid][IdContext];
-  //           if (plan) {
-  //             if (plan?.lsTimes) {
-  //               setUsers(plan.lsTimes);
-  //             }
-  //           } else {
-  //             toast.error("Plan not found, redirecting to your plans");
-  //             setTimeout(() => {
-  //               Router.push("/plans");
-  //             }, 4000);
-  //           }
-  //         }
-  //       });
-  //     } catch {
-  //       toast.error("Error loading game", { autoClose: 2000 });
-  //       setTimeout(() => {
-  //         Router.push("/game/create");
-  //       }, 4000);
-  //     }
-  //   };
-  //   gatherData();
-  // }, [loading]);
+      try {
+        await onValue(ref(db), (snapshot) => {
+          if (!snapshot.exists()) return;
+          let data = snapshot.val();
+          let plans = data?.plans;
+          if (plans) {
+            let plan = plans[currentUser?.uid][IdContext];
+            if (plan) {
+              if (plan?.lsTimes) {
+                setUsers(plan.lsTimes);
+              }
+            } else {
+              toast.error("Plan not found, redirecting to your plans");
+              setTimeout(() => {
+                Router.push("/plans");
+              }, 4000);
+            }
+          }
+        });
+      } catch {
+        toast.error("Error loading game", { autoClose: 2000 });
+        setTimeout(() => {
+          Router.push("/game/create");
+        }, 4000);
+      }
+    };
+    gatherData();
+  }, [loading]);
   const handleRemovePlayer = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);

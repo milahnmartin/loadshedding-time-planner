@@ -14,19 +14,17 @@ const plans: NextPage = () => {
   const [plans, setPlans] = useState<any>(null);
 
   useEffect(() => {
-    const loadPlans = () => {
+    const loadPlans = async () => {
+      if (!user || loading) return;
       try {
-        if (user && !loading) {
-          onValue(ref(db), (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-              setPlans(data[user?.uid]);
-              return;
-            }
-          });
-        }
-      } catch (err) {
-        console.log(err);
+        await onValue(ref(db), (snapshot) => {
+          if (!snapshot.exists()) return;
+          let plans = snapshot.val()?.plans;
+          let myPlans = plans[user?.uid];
+          setPlans(myPlans);
+        });
+      } catch (error) {
+        console.log(error);
       }
     };
     loadPlans();

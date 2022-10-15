@@ -1,4 +1,4 @@
-import { onValue, ref, set, update } from "firebase/database";
+import { onValue, ref, update } from "firebase/database";
 import Router from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -122,12 +122,12 @@ function DataControllers() {
     const toastStatus = toast.loading("Saving...");
     const gameRefUUID = uuidv4();
     try {
-      await set(ref(db, `/${currentUser?.uid}/${gameRefUUID}`), {
+      await update(ref(db, `plans/${currentUser?.uid}/${gameRefUUID}`), {
         createdBy: currentUser?.email
           ? currentUser?.email
           : currentUser?.displayName,
         gameuuid: gameRefUUID,
-        lsTimes: users,
+        lsTimes: [...users],
       });
       toast.update(toastStatus, {
         render: "Saved to Cloud",
@@ -148,8 +148,7 @@ function DataControllers() {
   const handleCloudSaveRef = async () => {
     const toastStatus = toast.loading("Saving...");
     try {
-      console.log(users);
-      await update(ref(db, `/${currentUser?.uid}/${IdContext}`), {
+      await update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
         gameuuid: IdContext,
         lsTimes: [...users],
       });
@@ -182,30 +181,35 @@ function DataControllers() {
   };
   useEffect(() => {
     const gatherData = async () => {
-      if (IdContext !== "create" && currentUser && !loading) {
-        try {
-          await onValue(ref(db), (snapshot) => {
-            const data = snapshot.val();
-            if (!data) return;
-            const gameData = data[currentUser?.uid][IdContext];
-            if (gameData) {
-              if (gameData?.lsTimes) {
-                setUsers(gameData?.lsTimes);
+      if (!currentUser) return;
+      if (!IdContext || IdContext === "create") return;
+
+      try {
+        await onValue(ref(db), (snapshot) => {
+          if (!snapshot.exists()) return;
+          let data = snapshot.val();
+          let plans = data?.plans;
+          if (plans) {
+            let plan = plans[currentUser?.uid][IdContext];
+            if (plan) {
+              if (plan?.lsTimes) {
+                setUsers(plan.lsTimes);
               }
-              return;
+            } else {
+              toast.error("Plan not found, redirecting to your plans");
+              setTimeout(() => {
+                Router.push("/plans");
+              }, 4000);
             }
-            toast.error("Game not found, Redirecting to plans");
-            Router.push("/plans");
-          });
-        } catch {
-          toast.error("Error loading game", { autoClose: 2000 });
-          setTimeout(() => {
-            Router.push("/game/create");
-          }, 4000);
-        }
+          }
+        });
+      } catch {
+        toast.error("Error loading game", { autoClose: 2000 });
+        setTimeout(() => {
+          Router.push("/game/create");
+        }, 4000);
       }
     };
-
     gatherData();
   }, [loading]);
   const handleRemovePlayer = (val: string) => {

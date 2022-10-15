@@ -1,13 +1,10 @@
-import { onValue, ref, update } from "firebase/database";
-import Router from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
-import { auth, db } from "../utils/firebase-config";
+import { auth } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -38,100 +35,100 @@ function DataControllers() {
     minGameTimeRef
   );
 
-  const handleCloudSaveCreate = async () => {
-    const toastStatus = toast.loading("Saving...");
-    const gameRefUUID = uuidv4();
-    try {
-      await update(ref(db, `plans/${currentUser?.uid}/${gameRefUUID}`), {
-        createdBy: currentUser?.email
-          ? currentUser?.email
-          : currentUser?.displayName,
-        gameuuid: gameRefUUID,
-        lsTimes: [...users],
-      });
-      toast.update(toastStatus, {
-        render: "Saved to Cloud",
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-    } catch (error) {
-      console.log(error);
-      toast.update(toastStatus, {
-        render: "Error Saving to Cloud",
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
-    }
-  };
-  const handleCloudSaveRef = async () => {
-    const toastStatus = toast.loading("Saving...");
-    try {
-      await update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
-        gameuuid: IdContext,
-        lsTimes: [...users],
-      });
-      toast.update(toastStatus, {
-        render: "Saved to Cloud",
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-      });
-    } catch (error) {
-      console.log(error);
-      toast.update(toastStatus, {
-        render: "Error Saving to Cloud",
-        type: "error",
-        isLoading: false,
-        autoClose: 2000,
-      });
-    }
-  };
+  // const handleCloudSaveCreate = async () => {
+  //   const toastStatus = toast.loading("Saving...");
+  //   const gameRefUUID = uuidv4();
+  //   try {
+  //     await update(ref(db, `plans/${currentUser?.uid}/${gameRefUUID}`), {
+  //       createdBy: currentUser?.email
+  //         ? currentUser?.email
+  //         : currentUser?.displayName,
+  //       gameuuid: gameRefUUID,
+  //       lsTimes: [...users],
+  //     });
+  //     toast.update(toastStatus, {
+  //       render: "Saved to Cloud",
+  //       type: "success",
+  //       isLoading: false,
+  //       autoClose: 2000,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.update(toastStatus, {
+  //       render: "Error Saving to Cloud",
+  //       type: "error",
+  //       isLoading: false,
+  //       autoClose: 2000,
+  //     });
+  //   }
+  // };
+  // const handleCloudSaveRef = async () => {
+  //   const toastStatus = toast.loading("Saving...");
+  //   try {
+  //     await update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
+  //       gameuuid: IdContext,
+  //       lsTimes: [...users],
+  //     });
+  //     toast.update(toastStatus, {
+  //       render: "Saved to Cloud",
+  //       type: "success",
+  //       isLoading: false,
+  //       autoClose: 2000,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.update(toastStatus, {
+  //       render: "Error Saving to Cloud",
+  //       type: "error",
+  //       isLoading: false,
+  //       autoClose: 2000,
+  //     });
+  //   }
+  // };
 
-  const handleAddPlayer = () => {
-    const name = inputRef.current?.value;
-    if (!name) return;
-    const parsedNames = name.split(",");
-    setUsers((prev): any => {
-      if (!prev.length) return [...parsedNames];
-      return [...prev, ...parsedNames];
-    });
-    inputRef.current!.value = "";
-  };
-  useEffect(() => {
-    const gatherData = async () => {
-      if (!currentUser) return;
-      if (!IdContext || IdContext === "create") return;
+  // const handleAddPlayer = () => {
+  //   const name = inputRef.current?.value;
+  //   if (!name) return;
+  //   const parsedNames = name.split(",");
+  //   setUsers((prev): any => {
+  //     if (!prev.length) return [...parsedNames];
+  //     return [...prev, ...parsedNames];
+  //   });
+  //   inputRef.current!.value = "";
+  // };
+  // useEffect(() => {
+  //   const gatherData = async () => {
+  //     if (!currentUser) return;
+  //     if (!IdContext || IdContext === "create") return;
 
-      try {
-        await onValue(ref(db), (snapshot) => {
-          if (!snapshot.exists()) return;
-          let data = snapshot.val();
-          let plans = data?.plans;
-          if (plans) {
-            let plan = plans[currentUser?.uid][IdContext];
-            if (plan) {
-              if (plan?.lsTimes) {
-                setUsers(plan.lsTimes);
-              }
-            } else {
-              toast.error("Plan not found, redirecting to your plans");
-              setTimeout(() => {
-                Router.push("/plans");
-              }, 4000);
-            }
-          }
-        });
-      } catch {
-        toast.error("Error loading game", { autoClose: 2000 });
-        setTimeout(() => {
-          Router.push("/game/create");
-        }, 4000);
-      }
-    };
-    gatherData();
-  }, [loading]);
+  //     try {
+  //       await onValue(ref(db), (snapshot) => {
+  //         if (!snapshot.exists()) return;
+  //         let data = snapshot.val();
+  //         let plans = data?.plans;
+  //         if (plans) {
+  //           let plan = plans[currentUser?.uid][IdContext];
+  //           if (plan) {
+  //             if (plan?.lsTimes) {
+  //               setUsers(plan.lsTimes);
+  //             }
+  //           } else {
+  //             toast.error("Plan not found, redirecting to your plans");
+  //             setTimeout(() => {
+  //               Router.push("/plans");
+  //             }, 4000);
+  //           }
+  //         }
+  //       });
+  //     } catch {
+  //       toast.error("Error loading game", { autoClose: 2000 });
+  //       setTimeout(() => {
+  //         Router.push("/game/create");
+  //       }, 4000);
+  //     }
+  //   };
+  //   gatherData();
+  // }, [loading]);
   const handleRemovePlayer = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
@@ -189,7 +186,7 @@ function DataControllers() {
         />
 
         <button
-          onClick={handleAddPlayer}
+          onClick={() => console.log("WE HANDLED IT")}
           className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
         >
           Add Player Time
@@ -226,7 +223,8 @@ function DataControllers() {
           </div>
           <button
             onClick={
-              IdContext === "create" ? handleCloudSaveCreate : handleCloudSaveRef
+              () => console.log("WE SAVED IT IT")
+              // IdContext === "create" ? handleCloudSaveCreate : handleCloudSaveRef
             }
             className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
           >

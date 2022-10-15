@@ -1,5 +1,4 @@
 import { onValue, ref } from "firebase/database";
-import Router from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -37,6 +36,26 @@ function DataControllers() {
     time?.endTime,
     minGameTimeRef
   );
+
+  const fetchGameData = () => {
+    if (!currentUser) return;
+    onValue(ref(db), (snapshot) => {
+      if (!snapshot.exists()) return;
+      let data = snapshot.val();
+      let plans = data?.plans;
+      let plan = plans[currentUser?.uid];
+      if (!plan) return handleInvalidGame();
+      plan = plan[IdContext];
+      if (!plan) return handleInvalidGame();
+      if (plan?.lsTimes) {
+        setUsers(plan?.lsTimes);
+      }
+    });
+  };
+
+  const handleInvalidGame = () => {
+    toast.error("Game ID is invalid or not Authorized");
+  };
 
   // const handleCloudSaveCreate = async () => {
   //   const toastStatus = toast.loading("Saving...");
@@ -100,38 +119,11 @@ function DataControllers() {
   //   inputRef.current!.value = "";
   // };
   useEffect(() => {
-    const gatherData = async () => {
-      if (!currentUser) return;
-      if (!IdContext || IdContext === "create") return;
-
-      try {
-        await onValue(ref(db), (snapshot) => {
-          if (!snapshot.exists()) return;
-          let data = snapshot.val();
-          let plans = data?.plans;
-          if (plans) {
-            let plan = plans[currentUser?.uid][IdContext];
-            if (plan) {
-              if (plan?.lsTimes) {
-                setUsers(plan.lsTimes);
-              }
-            } else {
-              toast.error("Plan not found, redirecting to your plans");
-              setTimeout(() => {
-                Router.push("/plans");
-              }, 4000);
-            }
-          }
-        });
-      } catch {
-        toast.error("Error loading game", { autoClose: 2000 });
-        setTimeout(() => {
-          Router.push("/game/create");
-        }, 4000);
-      }
-    };
-    gatherData();
+    if (currentUser) {
+      fetchGameData();
+    }
   }, [loading]);
+
   const handleRemovePlayer = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);

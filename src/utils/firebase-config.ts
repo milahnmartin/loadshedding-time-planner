@@ -11,15 +11,22 @@ import { getDatabase } from "firebase/database";
 //   measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID,
 // };
 const firebaseConfig = {
-  apiKey: "AIzaSyAGgTq1meOy3hNRBJAj6zcnKc4z_cWGFWU",
-  authDomain: "loadshedding-time-compiler.firebaseapp.com",
+  apiKey: "AIzaSyCza7Oe_qxUqsi8PcmOdrhiV8vmkeby3bM",
+
+  authDomain: "loadheddint-time-calc.firebaseapp.com",
+
   databaseURL:
-    "https://loadshedding-time-compiler-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "loadshedding-time-compiler",
-  storageBucket: "loadshedding-time-compiler.appspot.com",
-  messagingSenderId: "1020497186395",
-  appId: "1:1020497186395:web:b76e3866515d969781f97e",
-  measurementId: "G-J2DQETML1V",
+    "https://loadheddint-time-calc-default-rtdb.europe-west1.firebasedatabase.app",
+
+  projectId: "loadheddint-time-calc",
+
+  storageBucket: "loadheddint-time-calc.appspot.com",
+
+  messagingSenderId: "932828162476",
+
+  appId: "1:932828162476:web:aa25fefb524f4e7132f209",
+
+  measurementId: "G-QBJCDY4QZB",
 };
 
 const app = initializeApp(firebaseConfig);

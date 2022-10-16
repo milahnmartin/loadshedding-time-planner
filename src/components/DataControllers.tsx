@@ -1,4 +1,4 @@
-// import { onValue, ref } from "firebase/database";
+import { onValue, ref, set, update } from "firebase/database";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
-import { auth } from "../utils/firebase-config";
+import { auth, db } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -37,98 +37,74 @@ function DataControllers() {
     minGameTimeRef
   );
 
-  // const fetchGameData = () => {
-  //   if (!currentUser) return;
-  //   onValue(ref(db), (snapshot) => {
-  //     if (!snapshot.exists()) return;
-  //     let data = snapshot.val();
-  //     let plans = data?.plans;
-  //     let plan = plans[currentUser?.uid];
-  //     if (!plan) return handleInvalidGame();
-  //     plan = plan[IdContext];
-  //     if (!plan) return handleInvalidGame();
-  //     if (plan?.lsTimes) {
-  //       setUsers(plan?.lsTimes);
-  //     }
-  //   });
-  // };
+  const fetchGameData = () => {
+    const currentUserRef = ref(db, `plans/${currentUser?.uid}/${IdContext}`);
+    onValue(currentUserRef, (snapshot) => {
+      if (!snapshot.exists()) {
+        toast.error("Game not found");
+        return;
+      }
+      const data = snapshot.val();
+      if (!data?.lsTimes) return;
+      setUsers(data?.lsTimes);
+    });
+  };
 
   const handleInvalidGame = () => {
     toast.error("Game ID is invalid or not Authorized");
   };
 
-  // const handleCloudSaveCreate = async () => {
-  //   const toastStatus = toast.loading("Saving...");
-  //   const gameRefUUID = uuidv4();
-  //   try {
-  //     await update(ref(db, `plans/${currentUser?.uid}/${gameRefUUID}`), {
-  //       createdBy: currentUser?.email
-  //         ? currentUser?.email
-  //         : currentUser?.displayName,
-  //       gameuuid: gameRefUUID,
-  //       lsTimes: [...users],
-  //     });
-  //     toast.update(toastStatus, {
-  //       render: "Saved to Cloud",
-  //       type: "success",
-  //       isLoading: false,
-  //       autoClose: 2000,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.update(toastStatus, {
-  //       render: "Error Saving to Cloud",
-  //       type: "error",
-  //       isLoading: false,
-  //       autoClose: 2000,
-  //     });
-  //   }
-  // };
-  // const handleCloudSaveRef = async () => {
-  //   const toastStatus = toast.loading("Saving...");
-  //   try {
-  //     await update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
-  //       gameuuid: IdContext,
-  //       lsTimes: [...users],
-  //     });
-  //     toast.update(toastStatus, {
-  //       render: "Saved to Cloud",
-  //       type: "success",
-  //       isLoading: false,
-  //       autoClose: 2000,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.update(toastStatus, {
-  //       render: "Error Saving to Cloud",
-  //       type: "error",
-  //       isLoading: false,
-  //       autoClose: 2000,
-  //     });
-  //   }
-  // };
-
-  // const handleAddPlayer = () => {
-  //   const name = inputRef.current?.value;
-  //   if (!name) return;
-  //   const parsedNames = name.split(",");
-  //   setUsers((prev): any => {
-  //     if (!prev.length) return [...parsedNames];
-  //     return [...prev, ...parsedNames];
-  //   });
-  //   inputRef.current!.value = "";
-  // };
-  useEffect(() => {
-    if (currentUser && IdContext !== "create") {
-      console.log("FETCHING DATA");
-      // fetchGameData();
+  const saveToDatabase = () => {
+    if (!IdContext) return;
+    if (!currentUser) {
+      toast.warning("You need to be logged in to save your game");
+      return;
     }
-  }, [loading]);
+    if (IdContext === "create") {
+      const generatedUUIGame = uuidv4();
+      set(ref(db, `plans/${currentUser?.uid}/${generatedUUIGame}`), {
+        gameId: generatedUUIGame,
+        lsTimes: users,
+        authUsers: [currentUser?.email],
+      })
+        .then(() => {
+          toast.success("Game Created");
+        })
+        .catch((err) => {
+          toast.error(err);
+        });
+    } else {
+      update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
+        lsTimes: users,
+      })
+        .then(() => {
+          toast.success("Game Updated");
+        })
+        .catch((err) => {
+          toast.error(err);
+        });
+    }
+  };
+
+  const handleAddPlayer = () => {
+    const name = inputRef.current?.value;
+    if (!name) return;
+    const parsedNames = name.split(",");
+    setUsers((prev): any => {
+      if (!prev.length) return [...parsedNames];
+      return [...prev, ...parsedNames];
+    });
+    inputRef.current!.value = "";
+  };
 
   const handleRemovePlayer = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
   };
+  useEffect(() => {
+    if (IdContext === "create") return;
+    if (currentUser && !loading) fetchGameData();
+  }, [loading]);
   return (
     <div className='w-full flex items-center pt-16'>
       <div className='flex flex-col space-y-8 items-center align-center justify-center w-[50%] p-2'>
@@ -182,7 +158,7 @@ function DataControllers() {
         />
 
         <button
-          onClick={() => console.log("WE HANDLED IT")}
+          onClick={handleAddPlayer}
           className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
         >
           Add Player Time
@@ -218,10 +194,7 @@ function DataControllers() {
             {users.length > 0 && EndTimesCalc && <GreenLabel data={EndTimesCalc} />}
           </div>
           <button
-            onClick={
-              () => console.log("WE SAVED IT IT")
-              // IdContext === "create" ? handleCloudSaveCreate : handleCloudSaveRef
-            }
+            onClick={saveToDatabase}
             className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
           >
             SAVE TO CLOUD

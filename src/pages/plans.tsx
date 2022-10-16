@@ -1,15 +1,17 @@
+import { uuidv4 } from "@firebase/util";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import PlansLabel from "../components/PlansLabel";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
-  const [plans, setPlans] = useState<any>(null);
+  const [plans, setPlans] = useState<any>([]);
 
   const fetchPlans = async () => {
     if (!user) return;
@@ -33,11 +35,8 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='flex w-full h-full p-4 space-x-5'>
-        {JSON.stringify(plans)}
-        {/* {plans &&
-          Object.entries(plans).map(([key, val]: any) => (
-            <PlansLabel key={uuidv4()} gamekey={key} data={val} />
-          ))} */}
+        {plans &&
+          plans.map((data: any) => <PlansLabel key={uuidv4()} data={data} />)}
       </div>
       <Footer />
     </div>

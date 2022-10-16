@@ -1,34 +1,38 @@
-import { uuidv4 } from "@firebase/util";
-import { onValue, ref } from "firebase/database";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import PlansLabel from "../components/PlansLabel";
-import { auth, db } from "../utils/firebase-config";
+import { auth } from "../utils/firebase-config";
 
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
   const [plans, setPlans] = useState<any>(null);
 
   const fetchPlans = () => {
-    if (!user) {
-      toast.error("You are not logged in");
-      return;
-    }
+    fetch("https://dog.ceo/api/breeds/image/random", {
+      method: "GET",
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      });
 
-    const planRef = ref(db, `plans/${user?.uid}`);
-    onValue(planRef, (snapshot) => {
-      if (!snapshot.exists()) {
-        toast.warning("No plans found");
-        return;
-      }
-      const data = snapshot.val();
-      setPlans(data);
-    });
+    // if (!user) {
+    //   toast.error("You are not logged in");
+    //   return;
+    // }
+
+    // const planRef = ref(db, `plans/${user?.uid}`);
+    // onValue(planRef, (snapshot) => {
+    //   if (!snapshot.exists()) {
+    //     toast.warning("No plans found");
+    //     return;
+    //   }
+    //   const data = snapshot.val();
+    //   setPlans(data);
+    // });
   };
 
   useEffect(() => {
@@ -42,10 +46,10 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='flex w-full h-full p-4 space-x-5'>
-        {plans &&
+        {/* {plans &&
           Object.entries(plans).map(([key, val]: any) => (
             <PlansLabel key={uuidv4()} gamekey={key} data={val} />
-          ))}
+          ))} */}
       </div>
       <Footer />
     </div>

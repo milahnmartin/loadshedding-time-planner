@@ -1,4 +1,4 @@
-import { onValue, ref, set, update } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth, db } from "../utils/firebase-config";
+import supabase from "../utils/supabase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -54,36 +55,26 @@ function DataControllers() {
     toast.error("Game ID is invalid or not Authorized");
   };
 
-  const saveToDatabase = () => {
+  const saveToDatabase = async () => {
     if (!IdContext) return;
     if (!currentUser) {
       toast.warning("You need to be logged in to save your game");
       return;
     }
-    if (IdContext === "create") {
-      const generatedUUIGame = uuidv4();
-      set(ref(db, `plans/${currentUser?.uid}/${generatedUUIGame}`), {
-        gameId: generatedUUIGame,
-        lsTimes: users,
-        authUsers: [currentUser?.email],
+    const { data, error } = await supabase
+      .from("plans")
+      .insert({
+        id: uuidv4(),
+        lsTimes: JSON.stringify(users),
       })
-        .then(() => {
-          toast.success("Game Created");
-        })
-        .catch((err) => {
-          toast.error(err);
-        });
-    } else {
-      update(ref(db, `plans/${currentUser?.uid}/${IdContext}`), {
-        lsTimes: users,
-      })
-        .then(() => {
-          toast.success("Game Updated");
-        })
-        .catch((err) => {
-          toast.error(err);
-        });
+      .select();
+    if (error) {
+      console.log(error);
+      toast.error("Error occured when inserting");
+      return;
     }
+    console.log(data);
+    toast.success("Game Saved");
   };
 
   const handleAddPlayer = () => {

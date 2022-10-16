@@ -1,4 +1,3 @@
-import { onValue, ref } from "firebase/database";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -6,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
 import { GameidContext } from "../pages/game/[id]";
 import type { IStartEndTimes } from "../types/types";
-import { auth, db } from "../utils/firebase-config";
+import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
@@ -37,44 +36,108 @@ function DataControllers() {
     time?.endTime,
     minGameTimeRef
   );
+  const fetchUserInfo = async () => {
+    const { data, error } = await supabase.from("user_info").select();
 
-  const fetchGameData = () => {
-    const currentUserRef = ref(db, `plans/${currentUser?.uid}/${IdContext}`);
-    onValue(currentUserRef, (snapshot) => {
-      if (!snapshot.exists()) {
-        toast.error("Game not found");
-        return;
-      }
-      const data = snapshot.val();
-      if (!data?.lsTimes) return;
-      setUsers(data?.lsTimes);
-    });
+    if (error) {
+      toast.error("Something Serious Went Wrong :() sorry ...");
+      return [];
+    }
+    if (data) {
+      return data;
+    }
   };
+
+  const fetchGameData = () => {};
 
   const handleInvalidGame = () => {
     toast.error("Game ID is invalid or not Authorized");
   };
 
-  const saveToDatabase = async () => {
+  const saveToDatabaseRef = async () => {
+    let userData: any = await fetchUserInfo();
+
+    if (!userData && IdContext == "create") {
+      const { data, error } = await supabase
+        .from("user_info")
+        .insert({
+          user_id: currentUser?.uid,
+          user_plans: JSON.stringify([IdContext]),
+          user_teams: JSON.stringify([]),
+        })
+        .select();
+      if (error) {
+        toast.error("Error saving game");
+        return;
+      }
+
+      toast.success("Saved Game To Database");
+    }
+  };
+
+  const saveToDatabaseCreate = async () => {
+    let userExist = false;
     if (!IdContext) return;
+
     if (!currentUser) {
       toast.warning("You need to be logged in to save your game");
       return;
     }
-    const { data, error } = await supabase
-      .from("plans")
-      .insert({
-        id: uuidv4(),
-        lsTimes: JSON.stringify(users),
-      })
-      .select();
-    if (error) {
-      console.log(error);
-      toast.error("Error occured when inserting");
-      return;
+
+    let userData: any = await fetchUserInfo();
+
+    if (userData) {
+      for (let i of userData) {
+        if (i.user_id === currentUser.uid) {
+          userData = i;
+          userExist = true;
+          break;
+        }
+      }
     }
-    console.log(data);
-    toast.success("Game Saved");
+
+    if (userExist) {
+      let currentUserPlans: string[] = JSON.parse(userData?.user_plans);
+      const newPlanUUID = uuidv4();
+      const { error } = await supabase
+        .from("user_info")
+        .update({
+          user_plans: JSON.stringify([...currentUserPlans, newPlanUUID]),
+        })
+        .eq("user_id", currentUser.uid);
+
+      const { error: plansInsertError } = await supabase.from("user_plans").insert({
+        plan_id: newPlanUUID,
+        plan_lsTimes: JSON.stringify(users),
+        plan_authorizedUsers: JSON.stringify([]),
+      });
+
+      if (error || plansInsertError) {
+        toast.error("Error saving game");
+      }
+      toast.success("Saved Game To Database");
+    }
+
+    if (!userExist) {
+      let newGameUUID = uuidv4();
+      const { error } = await supabase.from("user_info").insert({
+        user_id: currentUser?.uid,
+        user_teams: JSON.stringify([]),
+        user_plans: JSON.stringify([newGameUUID]),
+      });
+
+      const { error: plansInsertError } = await supabase.from("user_plans").insert({
+        plan_id: newGameUUID,
+        plan_lsTimes: JSON.stringify(users),
+        plan_authorizedUsers: JSON.stringify([]),
+      });
+
+      if (error || plansInsertError) {
+        toast.error("Error Saving Game");
+        return;
+      }
+      toast.success("Saved Game To Database");
+    }
   };
 
   const handleAddPlayer = () => {
@@ -185,7 +248,9 @@ function DataControllers() {
             {users.length > 0 && EndTimesCalc && <GreenLabel data={EndTimesCalc} />}
           </div>
           <button
-            onClick={saveToDatabase}
+            onClick={
+              IdContext == "create" ? saveToDatabaseCreate : saveToDatabaseRef
+            }
             className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
           >
             SAVE TO CLOUD

@@ -1,9 +1,10 @@
+import Router from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import TimeCalculations from "../helpers/TimeCalculations.module";
-import { GameidContext } from "../pages/game/[id]";
+import { GameidContext } from "../pages/plan/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
@@ -37,107 +38,120 @@ function DataControllers() {
     minGameTimeRef
   );
   const fetchUserInfo = async () => {
-    const { data, error } = await supabase.from("user_info").select();
+    const { data: userData, error: UserError } = await supabase
+      .from("user_info")
+      .select()
+      .eq("user_id", currentUser?.uid);
 
-    if (error) {
-      toast.error("Something Serious Went Wrong :() sorry ...");
+    if (UserError) {
+      toast.error("Something Went Wrong..");
       return [];
     }
-    if (data) {
-      return data;
-    }
+    return userData;
   };
-
-  const fetchGameData = () => {};
 
   const handleInvalidGame = () => {
     toast.error("Game ID is invalid or not Authorized");
   };
 
-  const saveToDatabaseRef = async () => {
-    let userData: any = await fetchUserInfo();
+  const fetchPlanData = async () => {
+    const { data: planData, error: planError } = await supabase
+      .from("user_plans")
+      .select(
+        `plan_id,plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams`
+      )
+      .eq("plan_id", IdContext);
 
-    if (!userData && IdContext == "create") {
-      const { data, error } = await supabase
-        .from("user_info")
-        .insert({
-          user_id: currentUser?.uid,
-          user_plans: JSON.stringify([IdContext]),
-          user_teams: JSON.stringify([]),
-        })
-        .select();
-      if (error) {
-        toast.error("Error saving game");
-        return;
-      }
-
-      toast.success("Saved Game To Database");
-    }
-  };
-
-  const saveToDatabaseCreate = async () => {
-    let userExist = false;
-    if (!IdContext) return;
-
-    if (!currentUser) {
-      toast.warning("You need to be logged in to save your game");
+    if (planError) {
+      console.log(planError);
       return;
     }
 
-    let userData: any = await fetchUserInfo();
+    if (planData.length == 0) {
+      toast.error("Plan Doesn't Exist, Create a new one");
+      Router.push("/plan/create");
+      return;
+    }
+    let {
+      plan_id,
+      plan_lsTimes,
+      plan_authorizedUsers,
+      user_id,
+      plan_authorizedTeams,
+    }: any = planData[0];
 
-    if (userData) {
-      for (let i of userData) {
-        if (i.user_id === currentUser.uid) {
-          userData = i;
-          userExist = true;
-          break;
-        }
-      }
+    plan_lsTimes = JSON.parse(plan_lsTimes);
+    plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
+    plan_authorizedTeams = JSON.parse(plan_authorizedTeams);
+
+    if (user_id == currentUser?.uid) {
+      setUsers(plan_lsTimes);
+      return;
+    }
+    if (!plan_authorizedUsers) {
+      toast.error("You are not authorized to view this plan");
+      Router.push("/plans");
+      return;
     }
 
-    if (userExist) {
-      let currentUserPlans: string[] = JSON.parse(userData?.user_plans);
-      const newPlanUUID = uuidv4();
-      const { error } = await supabase
-        .from("user_info")
-        .update({
-          user_plans: JSON.stringify([...currentUserPlans, newPlanUUID]),
-        })
-        .eq("user_id", currentUser.uid);
-
-      const { error: plansInsertError } = await supabase.from("user_plans").insert({
-        plan_id: newPlanUUID,
-        plan_lsTimes: JSON.stringify(users),
-        plan_authorizedUsers: JSON.stringify([]),
-      });
-
-      if (error || plansInsertError) {
-        toast.error("Error saving game");
-      }
-      toast.success("Saved Game To Database");
-    }
-
-    if (!userExist) {
-      let newGameUUID = uuidv4();
-      const { error } = await supabase.from("user_info").insert({
-        user_id: currentUser?.uid,
-        user_teams: JSON.stringify([]),
-        user_plans: JSON.stringify([newGameUUID]),
-      });
-
-      const { error: plansInsertError } = await supabase.from("user_plans").insert({
-        plan_id: newGameUUID,
-        plan_lsTimes: JSON.stringify(users),
-        plan_authorizedUsers: JSON.stringify([]),
-      });
-
-      if (error || plansInsertError) {
-        toast.error("Error Saving Game");
+    if (plan_authorizedUsers) {
+      if (plan_authorizedUsers.contains(currentUser?.uid)) {
+        setUsers(plan_lsTimes);
         return;
       }
-      toast.success("Saved Game To Database");
     }
+  };
+
+  const saveToDatabaseRef = async () => {
+    if (!currentUser || loading) {
+      toast.error("You need to be logged in to save a game");
+      Router.push("/auth/login");
+      return;
+    }
+    const { data: PlanData, error: PlanError } = await supabase
+      .from("user_plans")
+      .select()
+      .eq("plan_id", IdContext);
+
+    const currentlsTimes = PlanData;
+    console.log(currentlsTimes);
+  };
+
+  const saveToDatabaseCreate = async () => {
+    if (!currentUser || loading) {
+      toast.error("You need to be logged in to save a game");
+      Router.push("/auth/login");
+      return;
+    }
+
+    const userData = await fetchUserInfo();
+
+    if (userData!.length === 0) {
+      const { error: AccountCreateError } = await supabase
+        .from("user_info")
+        .insert({ user_id: currentUser?.uid, user_email: currentUser?.email })
+        .select("user_id");
+      if (AccountCreateError) {
+        toast.error("User Info didn't Save Correctly");
+        return;
+      }
+    }
+    if (users.length == 0) {
+      toast.warning("You need to add at least one time slot");
+      return;
+    }
+    const { error: PlanInserterror } = await supabase.from("user_plans").insert({
+      plan_id: uuidv4(),
+      user_id: currentUser?.uid,
+      plan_lsTimes: JSON.stringify([...users]),
+    });
+
+    if (PlanInserterror) {
+      toast.error("Plan Failed to Save Correctly...");
+      return;
+    }
+
+    toast.success("Plan Saved Successfully");
   };
 
   const handleAddPlayer = () => {
@@ -156,9 +170,11 @@ function DataControllers() {
     setUsers(newUsers);
   };
   useEffect(() => {
-    if (IdContext === "create") return;
-    if (currentUser && !loading) fetchGameData();
+    if (!IdContext || IdContext == "create") return;
+    if (!currentUser || loading) return;
+    fetchPlanData();
   }, [loading]);
+
   return (
     <div className='w-full flex items-center pt-16'>
       <div className='flex flex-col space-y-8 items-center align-center justify-center w-[50%] p-2'>

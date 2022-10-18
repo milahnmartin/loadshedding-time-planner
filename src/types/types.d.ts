@@ -1,5 +1,3 @@
-export interface IGameData {}
-
 export interface IuseFetch {
   data: IGameData | null;
   loading: boolean;
@@ -23,8 +21,9 @@ export interface IStartEndTimes {
 }
 
 export interface IPlan {
-  lsTimes: string[];
-  iniatedUser: string;
-  customuuid: string;
-  authorizedUser: string[];
+  plan_id: string;
+  plan_lsTimes: string | string[];
+  plan_authorizedUsers: string | string[];
+  plan_authorizedTeams: string | string[];
+  user_id: string;
 }

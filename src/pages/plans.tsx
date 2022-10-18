@@ -1,6 +1,6 @@
-import { uuidv4 } from "@firebase/util";
 import { NextPage } from "next";
 import Head from "next/head";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -12,37 +12,25 @@ import supabase from "../utils/supabase-config";
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
   const [plans, setPlans] = useState<any>([]);
+  const [loadingPlans, setLoadingPlans] = useState<boolean>(true);
 
   const fetchPlans = async () => {
-    let userGameIds = null;
-    if (!user) return;
-    const { data, error } = await supabase.from("user_info").select();
-
-    if (error) {
-      toast.error("Unable To Fetch Data ...");
+    if (!user) {
+      toast.error("Login to view your plans", {
+        autoClose: 4000,
+      });
+      Router.push("auth/login");
       return;
     }
+    const { data: UserDataInfo, error } = await supabase
+      .from("user_info")
+      .select()
+      .eq("user_id", user.uid);
 
-    for (let i of data) {
-      if (i.user_id == user.uid) {
-        userGameIds = JSON.parse(i.user_plans);
-        break;
-      }
+    if (!UserDataInfo) {
+      toast.error("No plans found");
+      return;
     }
-    if (!userGameIds) return;
-    let gameData: any[] = [];
-    for (let plan of userGameIds) {
-      const { data: forData, error } = await supabase
-        .from("user_plans")
-        .select()
-        .eq("plan_id", plan);
-
-      if (!forData) {
-        continue;
-      }
-      gameData.push(forData);
-    }
-    setPlans(gameData);
   };
 
   useEffect(() => {
@@ -55,10 +43,35 @@ const plans: NextPage = () => {
         <title>LS Time Planner / Plans</title>
       </Head>
       <Navbar />
-      <div className='flex w-full h-full p-4 space-x-5'>
-        {plans.map((data: string[]) => {
-          return <PlansLabel key={uuidv4()} data={data[0]} />;
-        })}
+      <div className='flex flex-wrap w-full h-full p-2'>
+        <div className='w-1/2 flex flex-col p-2'>
+          <div className='w-full h-fit flex items-center justify-center'>
+            <h1 className='text-2xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
+              MY PLANS
+            </h1>
+          </div>
+          <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+          </div>
+        </div>
+        <div className='w-1/2 flex flex-col p-2'>
+          <div className='w-full h-fit flex items-center justify-center'>
+            <h1 className='text-2xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
+              INVITED PLANS
+            </h1>
+          </div>
+          <div className='h-full w-full content-start items-start gap-2 justify-start p-3 flex overflow-y-scroll flex-wrap'>
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+            <PlansLabel />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

@@ -28,7 +28,7 @@ function IndexMain() {
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 space-y-5 flex-col md:flex-row md:space-x-5 md:space-y-0'>
-        <Link href='/game/create'>
+        <Link href='/plan/create'>
           <button className='flex items-center justify-center py-4 px-10 w-[15rem] h-[3.5rem] font-bold text-white bg-primary rounded-lg transition-all duration-700 ease-in-out hover:bg-sky-700'>
             <div className='mr-5'>NEW PLAN</div>
             <div className='relative top-[1px]'>{arrowIcon}</div>

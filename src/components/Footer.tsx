@@ -17,7 +17,7 @@ function Footer() {
             <Link href='/'>Home</Link>
           </h1>
           <h1 className='font-light hover:font-bold hover:animate-pulse'>
-            <Link href='/game/create'>Create New Plan</Link>
+            <Link href='/plan/create'>Create New Plan</Link>
           </h1>
           <h1 className='font-light hover:font-bold hover:animate-pulse'>
             <Link href='/docs'>Docs</Link>

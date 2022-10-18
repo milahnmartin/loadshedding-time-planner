@@ -14,8 +14,8 @@ const PlansLabel = ({ plan }: any) => {
   plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
 
   return (
-    <div className='flex flex-col bg-slate-900 w-[40%] min-h-fit rounded-lg text-white font-sans text-center'>
-      <div className='h-full w-full flex flex-col items-center justify-evenly p-2 text-md font-black'>
+    <div className='flex flex-col bg-slate-900 w-[40%] h-[45%] rounded-lg text-white font-sans text-center'>
+      <div className='h-[85%] w-full flex flex-col items-center justify-evenly p-2 text-md font-black'>
         <h1>Plan ID: {plan_id}</h1>
         <h1>
           Loadshedding Times:{" "}
@@ -43,7 +43,7 @@ const PlansLabel = ({ plan }: any) => {
       </div>
       <div className='h-[15%] flex w-full justify-center'>
         <Link href={`/plan/${plan_id}`}>
-          <button className='w-full p-2 text-white font-bold bg-sky-500 rounded-sm border-none tracking-wide transition-color duration-300 hover:bg-primary'>
+          <button className='w-full h-full p-2 text-white font-bold bg-sky-500 rounded-sm border-none tracking-wide transition-color duration-300 hover:bg-primary'>
             VIEW PLAN
           </button>
         </Link>

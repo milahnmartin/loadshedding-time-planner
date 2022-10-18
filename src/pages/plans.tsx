@@ -55,14 +55,14 @@ const plans: NextPage = () => {
       <div className='flex flex-wrap w-full h-full p-2'>
         <div className='w-1/2 flex flex-col p-2'>
           <div className='w-full h-fit flex items-center justify-center'>
-            <h1 className='text-2xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
+            <h1 className='text-6xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
               MY PLANS
             </h1>
           </div>
           {loadingPlans ? (
             <ThreeDots />
           ) : (
-            <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
+            <div className='h-full w-full content-start items-start gap-2 justify-start p-4 flex flex-wrap overflow-y-scroll'>
               {myplans.length > 0 &&
                 myplans.map((data: any) => {
                   return <PlansLabel key={uuidv4()} plan={data} />;
@@ -72,11 +72,11 @@ const plans: NextPage = () => {
         </div>
         <div className='w-1/2 flex flex-col p-2'>
           <div className='w-full h-fit flex items-center justify-center'>
-            <h1 className='text-2xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
+            <h1 className='text-6xl bg-clip-text bg-gradient-to-br from-sky-600 via-purple-700 to-primary text-transparent animate-pulse tracking-widest font-bold text-center'>
               INVITED PLANS
             </h1>
           </div>
-          <div className='h-full w-full content-start items-start gap-2 justify-start p-3 flex overflow-y-scroll flex-wrap'>
+          <div className='h-full w-full content-start items-start gap-2 justify-start p-4 flex overflow-y-scroll flex-wrap'>
             {/* THIS IS WHERE INVITED PLANS WILL GO */}
             {loadingPlans ? (
               <ThreeDots />

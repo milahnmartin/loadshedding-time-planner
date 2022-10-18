@@ -1,8 +1,10 @@
+import { uuidv4 } from "@firebase/util";
 import { NextPage } from "next";
 import Head from "next/head";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -11,10 +13,10 @@ import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
-  const [plans, setPlans] = useState<any>([]);
+  const [myplans, setMyPlans] = useState<any>([]);
   const [loadingPlans, setLoadingPlans] = useState<boolean>(true);
 
-  const fetchPlans = async () => {
+  const fetchUserPlans = async () => {
     if (!user) {
       toast.error("Login to view your plans", {
         autoClose: 4000,
@@ -23,18 +25,25 @@ const plans: NextPage = () => {
       return;
     }
     const { data: UserDataInfo, error } = await supabase
-      .from("user_info")
-      .select()
-      .eq("user_id", user.uid);
+      .from("user_plans")
+      .select(
+        `
+      plan_id,plan_lsTimes,plan_authorizedUsers,plan_authorizedTeams,plan_created
+      `
+      )
+      .eq("user_id", user?.uid);
 
-    if (!UserDataInfo) {
+    if (UserDataInfo?.length == 0) {
       toast.error("No plans found");
       return;
     }
+    setMyPlans(UserDataInfo);
+    setLoadingPlans(false);
   };
 
   useEffect(() => {
-    if (!loading) fetchPlans();
+    if (loading || !user) return;
+    fetchUserPlans();
   }, [loading]);
 
   return (
@@ -50,13 +59,16 @@ const plans: NextPage = () => {
               MY PLANS
             </h1>
           </div>
-          <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
-          </div>
+          {loadingPlans ? (
+            <ThreeDots />
+          ) : (
+            <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
+              {myplans.length > 0 &&
+                myplans.map((data: any) => {
+                  return <PlansLabel key={uuidv4()} plan={data} />;
+                })}
+            </div>
+          )}
         </div>
         <div className='w-1/2 flex flex-col p-2'>
           <div className='w-full h-fit flex items-center justify-center'>
@@ -65,11 +77,17 @@ const plans: NextPage = () => {
             </h1>
           </div>
           <div className='h-full w-full content-start items-start gap-2 justify-start p-3 flex overflow-y-scroll flex-wrap'>
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
-            <PlansLabel />
+            {/* THIS IS WHERE INVITED PLANS WILL GO */}
+            {loadingPlans ? (
+              <ThreeDots />
+            ) : (
+              <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
+                {myplans.length > 0 &&
+                  myplans.map((data: any) => {
+                    return <PlansLabel key={uuidv4()} plan={data} />;
+                  })}
+              </div>
+            )}
           </div>
         </div>
       </div>

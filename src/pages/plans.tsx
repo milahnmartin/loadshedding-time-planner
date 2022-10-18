@@ -21,9 +21,10 @@ const plans: NextPage = () => {
       toast.error("Login to view your plans", {
         autoClose: 4000,
       });
-      Router.push("auth/login");
+      Router.push("/auth/login");
       return;
     }
+    console.log(user);
     const { data: UserDataInfo, error } = await supabase
       .from("user_plans")
       .select(
@@ -42,7 +43,7 @@ const plans: NextPage = () => {
   };
 
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading) return;
     fetchUserPlans();
   }, [loading]);
 

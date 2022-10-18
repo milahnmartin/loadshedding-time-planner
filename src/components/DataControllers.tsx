@@ -111,11 +111,24 @@ function DataControllers() {
     }
     const { data: PlanData, error: PlanError } = await supabase
       .from("user_plans")
-      .select()
+      .select(
+        `
+      plan_id,
+      plan_lsTimes
+      `
+      )
       .eq("plan_id", IdContext);
 
-    const currentlsTimes = PlanData;
-    console.log(currentlsTimes);
+    let { plan_id, plan_lsTimes }: any = PlanData![0];
+
+    const { data: UpdatedData, error: UpdatedError } = await supabase
+      .from("user_plans")
+      .update({ plan_lsTimes: JSON.stringify([...users]) })
+      .eq("plan_id", plan_id);
+
+    if (!UpdatedError) {
+      toast.success("Updated Plan Succesfully");
+    }
   };
 
   const saveToDatabaseCreate = async () => {

@@ -14,8 +14,8 @@ const PlansLabel = ({ plan }: any) => {
   plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
 
   return (
-    <div className='flex flex-col bg-slate-400 w-[30%] min-h-[30%] rounded-sm text-white font-sans text-center'>
-      <div className='h-[85%] w-full flex flex-col items-center justify-evenly border-2'>
+    <div className='flex flex-col bg-slate-400 w-[30%] min-h-fit rounded-sm text-white font-sans text-center'>
+      <div className='h-full w-full flex flex-col items-center justify-evenly border-2 p-2 text-md font-bold font-roboto'>
         <h1>Plan ID: {plan_id}</h1>
         <h1>
           Loadshedding Times:{" "}

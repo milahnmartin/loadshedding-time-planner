@@ -211,11 +211,7 @@ function DataControllers() {
 
     if (plan_authorizedUsers) {
       if (plan_authorizedUsers.includes(inviteRef?.current?.value)) {
-        toast.warning(
-          `User ${
-            currentUser?.email || currentUser?.displayName
-          } is already authorized`
-        );
+        toast.warning(`User ${inviteRef.current?.value} is already authorized`);
         return;
       }
 
@@ -228,6 +224,7 @@ function DataControllers() {
           ]),
         })
         .eq("plan_id", IdContext);
+
       if (PlanInviteError) {
         toast.error("Something went wrong while inviting user");
         return;

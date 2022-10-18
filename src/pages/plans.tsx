@@ -81,12 +81,7 @@ const plans: NextPage = () => {
             {loadingPlans ? (
               <ThreeDots />
             ) : (
-              <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'>
-                {myplans.length > 0 &&
-                  myplans.map((data: any) => {
-                    return <PlansLabel key={uuidv4()} plan={data} />;
-                  })}
-              </div>
+              <div className='h-full w-full content-start items-start gap-2 justify-start p-2 flex flex-wrap overflow-y-scroll'></div>
             )}
           </div>
         </div>

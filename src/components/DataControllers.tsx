@@ -22,6 +22,7 @@ function DataControllers() {
 
   const IdContext = useContext(GameidContext);
   const inputRef = useRef<HTMLInputElement>(null);
+  const inviteRef = useRef<HTMLInputElement>(null);
 
   const StartTimeCalc = TimeCalculations.getInitialStartTime(
     users,
@@ -94,12 +95,12 @@ function DataControllers() {
       return;
     }
 
-    if (plan_authorizedUsers) {
-      if (plan_authorizedUsers.contains(currentUser?.uid)) {
-        setUsers(plan_lsTimes);
-        return;
-      }
+    if (plan_authorizedUsers.includes(currentUser?.email)) {
+      setUsers(plan_lsTimes);
+      return;
     }
+    toast.error("You are not authorized to view this plan");
+    Router.push("/plans");
   };
 
   const saveToDatabaseRef = async () => {
@@ -129,7 +130,12 @@ function DataControllers() {
     if (userData!.length === 0) {
       const { error: AccountCreateError } = await supabase
         .from("user_info")
-        .insert({ user_id: currentUser?.uid, user_email: currentUser?.email })
+        .insert({
+          user_id: currentUser?.uid,
+          user_email: currentUser?.email
+            ? currentUser?.email
+            : currentUser?.displayName,
+        })
         .select("user_id");
       if (AccountCreateError) {
         toast.error("User Info didn't Save Correctly");
@@ -163,6 +169,71 @@ function DataControllers() {
       return [...prev, ...parsedNames];
     });
     inputRef.current!.value = "";
+  };
+
+  const inviteUserToPlan = async () => {
+    if (!currentUser || loading) {
+      toast.error("You need to be logged in to add users to plans");
+      Router.push("/auth/login");
+      return;
+    }
+
+    const { data: PlanData, error: PlanError } = await supabase
+      .from("user_plans")
+      .select(
+        `
+        plan_authorizedUsers,plan_authorizedTeams
+      `
+      )
+      .eq("plan_id", IdContext);
+
+    let { plan_authorizedUsers, plan_authorizedTeams }: any = PlanData![0];
+    plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
+    plan_authorizedTeams = JSON.parse(plan_authorizedTeams);
+
+    if (inviteRef?.current?.value == "") {
+      toast.warning("You need to enter a user to invite");
+      return;
+    }
+
+    if (plan_authorizedUsers) {
+      if (plan_authorizedUsers.includes(inviteRef?.current?.value)) {
+        toast.warning(
+          `User ${
+            currentUser?.email || currentUser?.displayName
+          } is already authorized`
+        );
+        return;
+      }
+
+      const { error: PlanInviteError } = await supabase
+        .from("user_plans")
+        .update({
+          plan_authorizedUsers: JSON.stringify([
+            ...plan_authorizedUsers,
+            inviteRef?.current?.value,
+          ]),
+        })
+        .eq("plan_id", IdContext);
+      if (PlanInviteError) {
+        toast.error("Something went wrong while inviting user");
+        return;
+      }
+      return;
+    }
+
+    const { error: PlanInviteError } = await supabase
+      .from("user_plans")
+      .update({
+        plan_authorizedUsers: JSON.stringify([inviteRef?.current?.value]),
+      })
+      .eq("plan_id", IdContext);
+    if (PlanInviteError) {
+      toast.error("Something went wrong while inviting user");
+      return;
+    }
+
+    toast.success("User Invited Successfully");
   };
 
   const handleRemovePlayer = (val: string) => {
@@ -270,6 +341,19 @@ function DataControllers() {
             className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700'
           >
             SAVE TO CLOUD
+          </button>
+          <input
+            ref={inviteRef}
+            type='text'
+            placeholder='Enter Invite Email'
+            className='text-black font-roboto rounded px-2 py-1 w-[60%] outline-none focus:ring-4 focus:ring-tersier mt-10'
+          />
+          <button
+            disabled={IdContext == "create"}
+            onClick={inviteUserToPlan}
+            className='px-5 py-3 text-white bg-gradient-to-r from-purple-700 to-red-700 rounded hover:from-red-700 hover:to-purple-700 mt-5'
+          >
+            invite User
           </button>
         </div>
       </div>

@@ -18,8 +18,16 @@ const ProfileIndex = () => {
             Profile Information
           </h1>
         </div>
-        <div className='flex items-center justify-center w-full h-full space-x-5'>
-          {user && (
+        
+{/* Testing profile Card */}
+        <div className="flex h-screen w-full items-center justify-center">
+
+
+  <div className="max-w-md rounded-xl bg-white shadow-lg">
+    
+    
+    <div className="flex items-center justify-center w-full h-full space-x-5 pt-8 pb-0 -mb-4">
+    {user && (
             <Image
               className='rounded-full'
               height={90}
@@ -28,23 +36,18 @@ const ProfileIndex = () => {
               alt='Image of Lightbulb'
             />
           )}
-          <div className='p-2 text-white tracking-wide font-roboto'>
-            <h1>
-              <span className='font-extrabold'>UserName:</span> {user?.displayName}
-            </h1>
-            {user?.email && (
-              <h1>
-                <span className='font-extrabold'>Email:</span> {user?.email}
-              </h1>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className='flex h-2/3 w-full'>
-        <div className='flex'></div>
-      </div>
     </div>
-  );
-};
+
+    <div className="flex flex-row items-center gap-6 p-8">
+      <h3 className="text-2xl font-bold text-slate-800">Username:</h3>
+      <p className="text-2xl font-bold text-slate-600">{user?.displayName}</p>
+
+      
+    </div>
+  </div>
+</div>
+</div>
+</div>
+)};
 
 export default ProfileIndex;

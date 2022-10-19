@@ -21,7 +21,7 @@ const ProfileIndex = () => {
         <div className='p-5 flex items-center flex-col borde-solid w-full h-full'>
           {/* Testing profile Card */}
           <div className='flex h-screen w-full items-center justify-center'>
-            <div className='max-w-md rounded-xl bg-white shadow-lg'>
+            <div className='max-w-md rounded-xl shadow-lg backdrop-blur-2xl bg-white/10'>
               <div className='flex items-center justify-center w-full h-full space-x-5 pt-8 pb-0 -mb-4'>
                 {user && (
                   <Image

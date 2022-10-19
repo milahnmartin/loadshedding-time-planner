@@ -30,7 +30,7 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='w-full h-full flex'>
-        <div className='w-1/3 h-full border-2 border-solid border-black flex flex-col items-center justify-start space-y-8 p-5'>
+        <div className='w-1/3 h-full flex flex-col items-center justify-start space-y-8 p-5'>
           <div
             id='profile'
             onClick={() => setCurrentPage("profile")}
@@ -53,9 +53,7 @@ const plans: NextPage = () => {
             <h1 className='tracking-wide font-main'>Team Settings</h1>
           </div>
         </div>
-        <div className='w-2/3 h-full border-2 border-solid border-sky-700 flex'>
-          {handlePageRender(currentPage)}
-        </div>
+        <div className='w-2/3 h-full flex'>{handlePageRender(currentPage)}</div>
       </div>
       <Footer />
     </div>

@@ -5,7 +5,7 @@ import { auth } from "../utils/firebase-config";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
   return (
-    <div className='p-5 flex items-center flex-col border-2 borde-solid border-white w-full h-full relative'>
+    <div className='p-5 flex items-center flex-col w-full h-full relative'>
       <Image
         className='opacity-5 absolute'
         layout='fill'
@@ -18,36 +18,34 @@ const ProfileIndex = () => {
             Profile Information
           </h1>
         </div>
-        
-{/* Testing profile Card */}
-        <div className="flex h-screen w-full items-center justify-center">
+        <div className='p-5 flex items-center flex-col border-2 borde-solid border-white w-full h-full'>
+          {/* Testing profile Card */}
+          <div className='flex h-screen w-full items-center justify-center'>
+            <div className='max-w-md rounded-xl bg-white shadow-lg'>
+              <div className='flex items-center justify-center w-full h-full space-x-5 pt-8 pb-0 -mb-4'>
+                {user && (
+                  <Image
+                    className='rounded-full'
+                    height={90}
+                    width={90}
+                    src={user?.photoURL as string}
+                    alt='Image of Lightbulb'
+                  />
+                )}
+              </div>
 
-
-  <div className="max-w-md rounded-xl bg-white shadow-lg">
-    
-    
-    <div className="flex items-center justify-center w-full h-full space-x-5 pt-8 pb-0 -mb-4">
-    {user && (
-            <Image
-              className='rounded-full'
-              height={90}
-              width={90}
-              src={user?.photoURL as string}
-              alt='Image of Lightbulb'
-            />
-          )}
+              <div className='flex flex-row items-center gap-6 p-8'>
+                <h3 className='text-2xl font-bold text-slate-800'>Username:</h3>
+                <p className='text-2xl font-bold text-slate-600'>
+                  {user?.displayName}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div className="flex flex-row items-center gap-6 p-8">
-      <h3 className="text-2xl font-bold text-slate-800">Username:</h3>
-      <p className="text-2xl font-bold text-slate-600">{user?.displayName}</p>
-
-      
-    </div>
-  </div>
-</div>
-</div>
-</div>
-)};
+  );
+};
 
 export default ProfileIndex;

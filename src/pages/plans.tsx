@@ -24,7 +24,6 @@ const plans: NextPage = () => {
       Router.push("/auth/login");
       return;
     }
-    console.log(user);
     const { data: UserDataInfo, error } = await supabase
       .from("user_plans")
       .select(

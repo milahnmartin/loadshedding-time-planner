@@ -56,6 +56,11 @@ function DataControllers() {
   };
 
   const fetchPlanData = async () => {
+    if (!currentUser) {
+      toast.error("You need to be logged in to view current plan");
+      Router.push("/auth/login");
+      return;
+    }
     const { data: planData, error: planError } = await supabase
       .from("user_plans")
       .select(
@@ -68,18 +73,19 @@ function DataControllers() {
       return;
     }
 
-    if (planData.length == 0) {
+    if (planData!.length == 0) {
       toast.error("Plan Doesn't Exist, Create a new one");
       Router.push("/plan/create");
       return;
     }
+
     let {
       plan_id,
       plan_lsTimes,
       plan_authorizedUsers,
       user_id,
       plan_authorizedTeams,
-    }: any = planData[0];
+    }: any = planData![0];
 
     plan_lsTimes = JSON.parse(plan_lsTimes);
     plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
@@ -191,6 +197,19 @@ function DataControllers() {
       return;
     }
 
+    if (inviteRef?.current?.value == "") {
+      toast.warning("You need to enter a user to invite");
+      return;
+    }
+
+    if (
+      inviteRef?.current?.value == currentUser?.email ||
+      inviteRef?.current?.value == currentUser?.displayName
+    ) {
+      toast.warning("You can't invite yourself to a plan");
+      return;
+    }
+
     const { data: PlanData, error: PlanError } = await supabase
       .from("user_plans")
       .select(
@@ -203,11 +222,6 @@ function DataControllers() {
     let { plan_authorizedUsers, plan_authorizedTeams }: any = PlanData![0];
     plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
     plan_authorizedTeams = JSON.parse(plan_authorizedTeams);
-
-    if (inviteRef?.current?.value == "") {
-      toast.warning("You need to enter a user to invite");
-      return;
-    }
 
     if (plan_authorizedUsers) {
       if (plan_authorizedUsers.includes(inviteRef?.current?.value)) {
@@ -229,9 +243,9 @@ function DataControllers() {
         toast.error("Something went wrong while inviting user");
         return;
       }
+      toast.success(`User ${inviteRef.current?.value} was invited`);
       return;
     }
-
     const { error: PlanInviteError } = await supabase
       .from("user_plans")
       .update({
@@ -243,7 +257,7 @@ function DataControllers() {
       return;
     }
 
-    toast.success("User Invited Successfully");
+    toast.success(`User ${inviteRef.current?.value} was invited`);
   };
 
   const handleRemovePlayer = (val: string) => {
@@ -252,7 +266,7 @@ function DataControllers() {
   };
   useEffect(() => {
     if (!IdContext || IdContext == "create") return;
-    if (!currentUser || loading) return;
+    if (loading) return;
     fetchPlanData();
   }, [loading]);
 

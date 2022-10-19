@@ -18,7 +18,7 @@ const ProfileIndex = () => {
             Profile Information
           </h1>
         </div>
-        <div className='p-5 flex items-center flex-col border-2 borde-solid border-white w-full h-full'>
+        <div className='p-5 flex items-center flex-col borde-solid w-full h-full'>
           {/* Testing profile Card */}
           <div className='flex h-screen w-full items-center justify-center'>
             <div className='max-w-md rounded-xl bg-white shadow-lg'>

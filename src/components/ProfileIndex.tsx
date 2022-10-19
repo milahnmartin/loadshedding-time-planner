@@ -5,7 +5,7 @@ import { auth } from "../utils/firebase-config";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
   return (
-    <div className='p-5 flex items-center flex-col border-2 borde-solid border-white w-full h-full relative'>
+    <div className='p-5 flex items-center flex-col w-full h-full relative'>
       <Image
         className='opacity-5 absolute'
         layout='fill'

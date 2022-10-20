@@ -35,10 +35,10 @@ const ProfileIndex = () => {
               </div>
 
               <div className='flex flex-row items-center gap-6 p-8'>
-                <label className='text-2xl font-bold text-slate-800' ><i className='fa-solid fa-user pr-4'></i>Username:</label>
-                <label className='text-2xl font-bold text-slate-600'>
+                <h3 className='text-2xl font-bold text-slate-800'>Username:</h3>
+                <p className='text-2xl font-bold text-slate-600'>
                   {user?.displayName}
-                </label>
+                </p>
               </div>
             </div>
           </div>

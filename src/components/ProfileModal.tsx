@@ -16,7 +16,7 @@ function ProfileModal() {
   return (
     <div
       id='profile-modal'
-      className='h-[8rem] w-[8rem] text-black text-roboto absolute bg-white -left-[5rem] top-12 rounded-md flex items-center justify-start flex-col text-center z-50'
+      className='h-[10rem] w-[8rem] text-black text-roboto absolute bg-white -left-[5rem] top-14 rounded-md flex items-center justify-start flex-col text-center z-50'
     >
       <Link href='/profile'>
         <div className='h-[50%] w-full hover:bg-gray-300 cursor-pointer py-2 px-1 rounded-t-md outline-none border-none flex items-center justify-center'>

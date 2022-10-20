@@ -15,7 +15,7 @@ function UserProfile(props: any) {
         src={props.src}
         width={50}
         height={50}
-        className='rounded-full cursor-pointer hover:scale-95 transition transform duration-200 ease-out'
+        className='rounded-full cursor-pointer hover:scale-95 transition-all duration-200'
       />
       {showmodal && <ProfileModal />}
     </div>

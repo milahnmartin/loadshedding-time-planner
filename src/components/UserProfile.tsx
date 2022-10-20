@@ -13,8 +13,8 @@ function UserProfile(props: any) {
         id='profile-img'
         onClick={handleShowModal}
         src={props.src}
-        width='45'
-        height='45'
+        width={50}
+        height={50}
         className='rounded-full cursor-pointer hover:scale-110 transition transform duration-200 ease-out'
       />
       {showmodal && <ProfileModal />}

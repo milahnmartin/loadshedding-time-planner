@@ -27,6 +27,7 @@ const plans: NextPage = () => {
     <div className='h-screen w-screen overflow-scroll bg-gradient-to-bl from-indigo-500 via-purple-500 to-pink-500'>
       <Head>
         <title>LS Time Planner / Profile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
       </Head>
       <Navbar />
       <div className='w-full h-full flex'>

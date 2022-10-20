@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
   return (
-    <div className='h-screen w-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 max-h-screen overflow-scroll'>
+    <div className='h-screen w-screen bg-black max-h-screen overflow-scroll'>
       <Head>
         <title>LS Time Planner / Home</title>
         <meta property='og:title' content='Loadshedding Time Calculator / Home' />

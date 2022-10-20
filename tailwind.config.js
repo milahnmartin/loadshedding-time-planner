@@ -6,14 +6,19 @@ module.exports = {
     "./src/hooks/**/*.tsx",
   ],
   theme: {
+
     extend: {
       colors: {
         primary: "#002B5B",
         secondary: "#2B4865",
         tersier: "#256D85",
         quaternary: "#8FE3CF",
+        caqua: "#6ac6b4",
+        cblue: "#3c79f0",
+        cpurple: "#431e9a"
       },
     },
+  
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
     },

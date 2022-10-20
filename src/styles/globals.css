@@ -26,3 +26,7 @@
 scrollbar-width {
   display: none;
 } /* Firefox */
+
+.navbarfont {
+  font-size: 1.35rem;
+}

@@ -24,7 +24,7 @@ function IndexMain() {
       <h1 className='text-white font-extralight text-5xl text-center md:text-7xl'>
         SESSIONS AROUND{" "}
       </h1>
-      <h1 className='font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 py-4 md:text-8xl'>
+      <h1 className='font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 space-y-5 flex-col md:flex-row md:space-x-5 md:space-y-0'>

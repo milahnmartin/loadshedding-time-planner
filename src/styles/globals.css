@@ -15,6 +15,14 @@
   src: url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap");
 }
 
-.active {
-  background-color: rgb(75 85 99);
+::-webkit-scrollbar {
+  display: none;
+  /* chrome safari opera */
 }
+
+-ms-overflow-style {
+  display: none;
+} /* IE and Edge */
+scrollbar-width {
+  display: none;
+} /* Firefox */

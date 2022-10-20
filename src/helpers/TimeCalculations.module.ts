@@ -40,7 +40,7 @@ class TimeCalculations {
     MaxGameTime: number
   ) => {
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
-    const LatestLSTime: string | undefined = SortedLSTimes[SortedLSTimes.length - 1];
+    const LatestLSTime: string = SortedLSTimes[SortedLSTimes.length - 1]!;
     if (!LatestLSTime) return;
     const LatestLSTimeSplit = LatestLSTime.split("-")[1];
     const LastLoadsheddingTime = new Date(
@@ -77,16 +77,16 @@ class TimeCalculations {
       const endTime = SortedLSTimes[i + 1]?.split("-")[0];
       if (!endTime) break;
       const start = new Date(
-        2022,
+        new Date().getFullYear(),
         new Date().getMonth(),
-        1,
+        new Date().getDate(),
         Number(startTime?.split(":")[0]),
         Number(startTime?.split(":")[1])
       );
       const end = new Date(
-        2022,
+        new Date().getFullYear(),
         new Date().getMonth(),
-        1,
+        new Date().getDate(),
         Number(endTime?.split(":")[0]),
         Number(endTime?.split(":")[1])
       );

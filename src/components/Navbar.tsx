@@ -41,7 +41,7 @@ function Navbar() {
           )}
         </div>
       </div>
-      <hr className="my-0 mx-auto w-[100%] h-[0.2rem] bg-cblue rounded border-0 md:my-2" />
+      <hr className="my-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-caqua via-cblue to-cpurple rounded border-0 md:my-2" />
     </div>
   );
 }

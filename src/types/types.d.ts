@@ -17,7 +17,7 @@ export interface IUserStateData {
 
 export interface IStartEndTimes {
   startTime: string;
-  endTime: string;
+  endTime: { date: string; time: string };
 }
 
 export interface IPlan {

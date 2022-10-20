@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel='icon' href='/Light-bulb.png' />
+          <link rel='icon' href='/Logov3.png' />
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'

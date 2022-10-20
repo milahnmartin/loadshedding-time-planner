@@ -21,18 +21,18 @@ function Navbar() {
             LS GAME PLANNER
           </h1>
         </div>
-        <div className='h-fit w-[80%] flex items-center navbarfont justify-end pr-5 md:w-[50%]'>
-          <h1 className='font-bold text-white tracking-wide ml-5'>
-            <Link href='/'>HOME</Link>
+        <div className='h-fit w-[80%] space-x-8 flex items-center navbarfont justify-end md:w-[50%] mr-6'>
+          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+            <Link href='/'>Home</Link>
           </h1>
-          <h1 className='font-bold text-white tracking-wide ml-5'>
-            <Link href='/docs'>DOCS</Link>
+          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+            <Link href='/docs'>Docs</Link>
           </h1>
           {user && !loading ? (
             <UserProfile src={user?.photoURL} />
           ) : (
             <Link href='/auth/login'>
-              <button className='px-4 py-1 bg-primary text-white font-bold rounded-lg text-center ml-5'>
+              <button className='px-4 py-1 bg-primary text-white font-black tracking-wide font-Inter rounded-lg text-center'>
                 {loginState}
               </button>
             </Link>

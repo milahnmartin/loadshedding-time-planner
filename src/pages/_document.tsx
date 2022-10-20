@@ -10,9 +10,10 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel='icon' href='/Logov3.png' />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap'
             rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
           />
         </Head>
         <body>

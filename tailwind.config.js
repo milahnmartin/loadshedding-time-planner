@@ -52,7 +52,7 @@ module.exports = {
     },
 
     fontFamily: {
-      roboto: ["Roboto", "sans-serif"],
+      Inter: ["Inter", "sans-serif"],
     },
   },
   plugins: [],

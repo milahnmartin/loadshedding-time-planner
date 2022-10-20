@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 
 function docs() {
   return (
-    <div className='h-screen w-screen overflow-scroll bg-gradient-to-bl from-indigo-500 via-purple-500 to-pink-500'>
+    <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
         <title>LS Time Planner / Docs</title>
       </Head>

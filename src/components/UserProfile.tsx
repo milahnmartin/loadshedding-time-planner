@@ -8,7 +8,7 @@ function UserProfile(props: any) {
   };
 
   return (
-    <div className='rounded-full flex items-center justify-center ml-5 relative'>
+    <div className='rounded-full h-fit flex items-center justify-center relative border-2 border-cblue'>
       <Image
         id='profile-img'
         onClick={handleShowModal}

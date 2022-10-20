@@ -29,7 +29,7 @@ function IndexMain() {
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>
         <Link href='/plan/create'>
-          <button className='relative inline-flex items-center justify-center  p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
+          <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
             NEW PLAN
             <div className='relative left-[6px] top-[1px] transition-all duration-200 group-hover:text-cpurple'>
               {arrowIcon}

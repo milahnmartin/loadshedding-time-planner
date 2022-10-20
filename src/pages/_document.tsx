@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
           <link rel='icon' href='/Logov3.png' />
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link
-            href='https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@100;300;800&display=swap'
             rel='stylesheet'
           />
         </Head>

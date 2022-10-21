@@ -21,7 +21,7 @@ function IndexMain() {
       <h1 className='text-white font-extrabold font-Inter tracking-wide text-4xl text-center md:text-7xl'>
         STRUGGLING TO PLAN YOUR GAMING
       </h1>
-      <h1 className='text-white font-Inter font-extralight tracking-wide text-5xl text-center md:text-7xl'>
+      <h1 className='text-white font-Inter font-extralight tracking-wide text-5xl text-center md:text-7xl '>
         SESSIONS AROUND{" "}
       </h1>
       <h1 className='font-extrabold font-Inter text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>

@@ -33,7 +33,7 @@ function Navbar() {
             LS GAME PLANNER
           </h1>
         </div>
-        <div className='h-full w-[80%] space-x-8 flex items-center navbarfont justify-end md:w-[50%] mr-6'>
+        <div className='h-full w-[80%] flex items-center space-x-5 navbarfont justify-end md:w-[50%] md:space-x-8 mr-6'>
           <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
             <Link href='/'>Home</Link>
           </h1>

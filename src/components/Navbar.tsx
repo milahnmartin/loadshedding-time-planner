@@ -21,7 +21,13 @@ function Navbar() {
       <div className='h-[5rem] flex place-items-center'>
         <div className='h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
-            <Image height={50} width={50} src={Logo} alt='Image of Logo' />
+            <Image
+              className='cursor-pointer'
+              height={50}
+              width={50}
+              src={Logo}
+              alt='Image of Logo'
+            />
           </Link>
           <h1 className='hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
             LS GAME PLANNER

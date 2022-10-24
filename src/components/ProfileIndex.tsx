@@ -15,7 +15,7 @@ const ProfileIndex = () => {
       <div className="flex h-1/3 w-full flex-col">
         <div className="pt-5 flex items-start justify-center w-full h-full">
           <h1 className="font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl">
-            Profile Information
+            PROFILE INFORMATION
           </h1>
         </div>
         <div className="p-5 flex items-center flex-col borde-solid w-full h-full">
@@ -35,7 +35,7 @@ const ProfileIndex = () => {
               </div>
 
               <div className="flex flex-row items-center gap-6 p-8">
-                <h3 className="text-2xl font-bold text-blue-600">Username:</h3>
+                <h3 className="text-2xl font-bold text-slate-300">Username:</h3>
                 <p className="text-2xl font-bold text-slate-300">
                   {user?.displayName}
                 </p>

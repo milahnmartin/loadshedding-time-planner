@@ -34,27 +34,27 @@ const plans: NextPage = () => {
           <div
             id='profile'
             onClick={() => setCurrentPage("profile")}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue'
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
               PROFILE DETAILS
             </h1>
           </div>
           <div
             id='loadshedding'
             onClick={() => setCurrentPage("loadshedding")}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue '
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
               LOADSHEDDING SETTINGS
             </h1>
           </div>
           <div
             id='team'
             onClick={() => setCurrentPage("team")}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue '
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
               TEAM SETTINGS
             </h1>
           </div>

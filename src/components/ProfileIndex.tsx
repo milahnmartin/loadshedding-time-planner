@@ -8,7 +8,7 @@ const ProfileIndex = () => {
     <div className='p-5 flex items-center flex-col w-full h-full'>
       <div className='flex h-1/3 w-full flex-col'>
         <div className='pt-5 flex items-start justify-center w-full h-full'>
-          <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
+          <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-6xl'>
             PROFILE INFORMATION
           </h1>
         </div>

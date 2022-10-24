@@ -24,38 +24,42 @@ const plans: NextPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-scroll bg-black">
+    <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
         <title>LS Time Planner / Profile</title>
       </Head>
       <Navbar />
-      <div className="w-full h-full flex border-2 border-red-700">
-        <div className="w-1/4 h-full flex flex-col items-center justify-center space-y-8 p-5 border-2">
+      <div className='w-full h-full flex border-2 border-red-700'>
+        <div className='w-1/4 h-full flex flex-col items-center justify-center space-y-8 p-5 border-2'>
           <div
-            id="profile"
+            id='profile'
             onClick={() => setCurrentPage("profile")}
-            className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-gradient-to-r from-caqua via-cblue to-cpurple"
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className="font-extrabold text-white">PROFILE DETAILS</h1>
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
+              PROFILE DETAILS
+            </h1>
           </div>
           <div
-            id="loadshedding"
+            id='loadshedding'
             onClick={() => setCurrentPage("loadshedding")}
-            className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-gradient-to-r from-caqua via-cblue to-cpurple "
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className="font-Inter font-black text-white">
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
               LOADSHEDDING SETTINGS
             </h1>
           </div>
           <div
-            id="team"
+            id='team'
             onClick={() => setCurrentPage("team")}
-            className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-gradient-to-r from-caqua via-cblue to-cpurple "
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group transition-all duration-500 hover:bg-cblue'
           >
-            <h1 className="font-Inter font-black text-white">TEAM SETTINGS</h1>
+            <h1 className='font-Inter font-black text-white transition-all duration-500 group-hover:text-cpurple'>
+              TEAM SETTINGS
+            </h1>
           </div>
         </div>
-        <div className="w-3/4 h-full flex boder-2">
+        <div className='w-3/4 h-full flex boder-2'>
           {handlePageRender(currentPage)}
         </div>
       </div>

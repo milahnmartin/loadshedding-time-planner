@@ -34,23 +34,29 @@ const plans: NextPage = () => {
           <div
             id='profile'
             onClick={() => setCurrentPage("profile")}
-            className='px-2 py-1 text-white cursor-pointer transition-all duration-500 hover:bg-sky-700 rounded-2xl'
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue'
           >
-            <h1 className='font-bold text-white text-2xl'>Profile Details</h1>
+            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+              PROFILE DETAILS
+            </h1>
           </div>
           <div
             id='loadshedding'
             onClick={() => setCurrentPage("loadshedding")}
-            className='text-white cursor-pointer transition-all duration-500 hover:bg-sky-700 rounded-2xl'
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue '
           >
-            <h1 className='font-bold text-white text-2xl'>Loadshedding Details</h1>
+            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+              LOADSHEDDING SETTINGS
+            </h1>
           </div>
           <div
             id='team'
             onClick={() => setCurrentPage("team")}
-            className='px-2 py-1 text-white cursor-pointer transition-all duration-500 hover:bg-sky-700 rounded-2xl'
+            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer group hover:bg-cblue '
           >
-            <h1 className='font-bold text-white text-2xl'>Team Settings</h1>
+            <h1 className='font-Inter font-black text-white  group-hover:text-cpurple'>
+              TEAM SETTINGS
+            </h1>
           </div>
         </div>
         <div className='w-3/4 h-full flex boder-2'>

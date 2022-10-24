@@ -4,26 +4,32 @@ import { createContext } from "react";
 import DataControllers from "../../components/DataControllers";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import supabase from "../../utils/supabase-config";
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;
-  return { props: { id } };
-};
-export const GameidContext = createContext("create");
+  const { data, error } = await supabase
+    .from("user_plans")
+    .select(
+      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_created`
+    )
+    .eq("plan_id", id);
 
-const IdPage: NextPage = ({ id }: any) => {
+  return {
+    props: { id, data },
+  };
+};
+export const GameidContext = createContext({ id: "create", data: [] });
+
+const IdPage: NextPage = ({ id, data }: any) => {
+  console.log(data);
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
         <title>LS Time Planner / Plan</title>
       </Head>
       <Navbar />
-      <GameidContext.Provider value={id}>
-        <div className='w-full h-full flex items-center justify-start flex-col pt-10'>
-          <h1 className='font-extrabold text-center pb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 md:text-7xl'>
-            Start Adding New Players !
-          </h1>
-          <DataControllers />
-        </div>
+      <GameidContext.Provider value={{ id, data }}>
+        <DataControllers />
       </GameidContext.Provider>
       <Footer />
     </div>

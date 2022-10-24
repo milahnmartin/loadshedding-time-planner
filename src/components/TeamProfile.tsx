@@ -9,7 +9,7 @@ const TeamProfile = () => {
         src={Logo}
         alt="Image of Lightbulb"
       /> */}
-      <h1 className="text-center font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl">
+      <h1 className="text-center font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-7xl">
         TEAM INFORMATION
       </h1>
     </div>

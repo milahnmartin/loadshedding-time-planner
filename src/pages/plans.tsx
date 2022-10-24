@@ -1,14 +1,11 @@
-import { uuidv4 } from "@firebase/util";
 import { NextPage } from "next";
 import Head from "next/head";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BallTriangle } from "react-loading-icons";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import PlansLabel from "../components/PlansLabel";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const plans: NextPage = () => {
@@ -59,11 +56,7 @@ const plans: NextPage = () => {
             MY PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center'>
-            {loadingPlans ? (
-              <BallTriangle />
-            ) : (
-              myplans.map((plan: any) => <PlansLabel key={uuidv4()} plan={plan} />)
-            )}
+            {/* here it comes */}
           </div>
         </div>
         <div className='flex justify-start flex-col'>
@@ -71,11 +64,7 @@ const plans: NextPage = () => {
             INVITED PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center'>
-            {loadingPlans ? (
-              <BallTriangle />
-            ) : (
-              myplans.map((plan: any) => <PlansLabel key={uuidv4()} plan={plan} />)
-            )}
+            {/* here it comes */}
           </div>
         </div>
       </div>

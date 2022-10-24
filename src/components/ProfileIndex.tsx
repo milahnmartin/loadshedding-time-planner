@@ -1,21 +1,15 @@
 import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Logo from "../pages/assets/Light-bulb.png";
+
 import { auth } from "../utils/firebase-config";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
   return (
-    <div className='p-5 flex items-center flex-col w-full h-full relative'>
-      <Image
-        className='opacity-5 absolute'
-        layout='fill'
-        src={Logo}
-        alt='Image of Lightbulb'
-      />
+    <div className='p-5 flex items-center flex-col w-full h-full'>
       <div className='flex h-1/3 w-full flex-col'>
         <div className='pt-5 flex items-start justify-center w-full h-full'>
-          <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-primary to-amber-300 py-4 md:text-8xl'>
-            Profile Information
+          <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
+            PROFILE INFORMATION
           </h1>
         </div>
         <div className='p-5 flex items-center flex-col borde-solid w-full h-full'>
@@ -35,8 +29,8 @@ const ProfileIndex = () => {
               </div>
 
               <div className='flex flex-row items-center gap-6 p-8'>
-                <h3 className='text-2xl font-bold text-slate-800'>Username:</h3>
-                <p className='text-2xl font-bold text-slate-600'>
+                <h3 className='text-2xl font-bold text-slate-300'>Username:</h3>
+                <p className='text-2xl font-bold text-slate-300'>
                   {user?.displayName}
                 </p>
               </div>

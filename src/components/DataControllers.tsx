@@ -1,18 +1,14 @@
-import Router from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
-import TimeCalculations from "../helpers/TimeCalculations.module";
-import { GameidContext } from "../pages/plan/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
-
+import RedLabel from "./RedLabel";
 function DataControllers() {
   const [currentUser, loading] = useAuthState(auth);
-  const [minGameTimeRef, setGameTimeRef] = useState<number>(40);
+  const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
+  const [teams, setTeams] = useState<Array<string>>([]);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: "10:00",
     endTime: {
@@ -20,262 +16,172 @@ function DataControllers() {
       time: "00:00",
     },
   });
+  const [planData, setplanData] = useState<any>({});
+  const userRefAdd = useRef<HTMLInputElement>(null);
+  const teamRefAdd = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    console.log("time is:", time);
-  }, [time]);
-
-  const IdContext = useContext(GameidContext);
+  // const IdContext = useContext(GameidContext);
+  // useEffect(() => {
+  //   if (IdContext.data.length === 0) {
+  //     toast.error("Plan Doesn't Exist...");
+  //     Router.push("/plan/create");
+  //     return;
+  //   }
+  //   setplanData(IdContext.data[0]);
+  // }, []);
   const inputRef = useRef<HTMLInputElement>(null);
   const inviteRef = useRef<HTMLInputElement>(null);
 
-  const StartTimeCalc = TimeCalculations.getInitialStartTime(
-    users,
-    time?.startTime,
-    minGameTimeRef
-  );
-  const InbetweenTimeCalc = TimeCalculations.getInbetweenTimes(
-    users,
-    minGameTimeRef
-  );
-  const EndTimesCalc = TimeCalculations.getInitialEndTimes(
-    users,
-    time?.endTime.time,
-    minGameTimeRef
-  );
-  const fetchUserInfo = async () => {
-    const { data: userData, error: UserError } = await supabase
-      .from("user_info")
-      .select()
-      .eq("user_id", currentUser?.uid);
-
-    if (UserError) {
-      toast.error("Something Went Wrong..");
-      return [];
-    }
-    return userData;
-  };
-
-  const handleInvalidGame = () => {
-    toast.error("Game ID is invalid or not Authorized");
-  };
-
-  const fetchPlanData = async () => {
-    if (!currentUser) {
-      toast.error("You need to be logged in to view current plan");
-      Router.push("/auth/login");
-      return;
-    }
-    const { data: planData, error: planError } = await supabase
-      .from("user_plans")
-      .select(
-        `plan_id,plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams`
-      )
-      .eq("plan_id", IdContext);
-
-    if (planError) {
-      console.log(planError);
-      return;
-    }
-
-    if (planData!.length == 0) {
-      toast.error("Plan Doesn't Exist, Create a new one");
-      Router.push("/plan/create");
-      return;
-    }
-
-    let {
-      plan_id,
-      plan_lsTimes,
-      plan_authorizedUsers,
-      user_id,
-      plan_authorizedTeams,
-    }: any = planData![0];
-
-    plan_lsTimes = JSON.parse(plan_lsTimes);
-    plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
-    plan_authorizedTeams = JSON.parse(plan_authorizedTeams);
-
-    if (user_id == currentUser?.uid) {
-      setUsers(plan_lsTimes);
-      return;
-    }
-    if (!plan_authorizedUsers) {
-      toast.error("You are not authorized to view this plan");
-      Router.push("/plans");
-      return;
-    }
-
-    if (plan_authorizedUsers.includes(currentUser?.email)) {
-      setUsers(plan_lsTimes);
-      return;
-    }
-    toast.error("You are not authorized to view this plan");
-    Router.push("/plans");
-  };
-
-  const saveToDatabaseRef = async () => {
-    if (!currentUser || loading) {
-      toast.error("You need to be logged in to save a game");
-      Router.push("/auth/login");
-      return;
-    }
-    const { data: PlanData, error: PlanError } = await supabase
-      .from("user_plans")
-      .select(
-        `
-      plan_id,
-      plan_lsTimes
-      `
-      )
-      .eq("plan_id", IdContext);
-
-    let { plan_id, plan_lsTimes }: any = PlanData![0];
-
-    const { data: UpdatedData, error: UpdatedError } = await supabase
-      .from("user_plans")
-      .update({ plan_lsTimes: JSON.stringify([...users]) })
-      .eq("plan_id", plan_id);
-
-    if (!UpdatedError) {
-      toast.success("Updated Plan Succesfully");
-    }
-  };
-
-  const saveToDatabaseCreate = async () => {
-    if (!currentUser || loading) {
-      toast.error("You need to be logged in to save a game");
-      Router.push("/auth/login");
-      return;
-    }
-
-    const userData = await fetchUserInfo();
-
-    if (userData!.length === 0) {
-      const { error: AccountCreateError } = await supabase
-        .from("user_info")
-        .insert({
-          user_id: currentUser?.uid,
-          user_email: currentUser?.email
-            ? currentUser?.email
-            : currentUser?.displayName,
-        })
-        .select("user_id");
-      if (AccountCreateError) {
-        toast.error("User Info didn't Save Correctly");
-        return;
-      }
-    }
-    if (users.length == 0) {
-      toast.warning("You need to add at least one time slot");
-      return;
-    }
-    const { error: PlanInserterror } = await supabase.from("user_plans").insert({
-      plan_id: uuidv4(),
-      user_id: currentUser?.uid,
-      plan_lsTimes: JSON.stringify([...users]),
-    });
-
-    if (PlanInserterror) {
-      toast.error("Plan Failed to Save Correctly...");
-      return;
-    }
-
-    toast.success("Plan Saved Successfully");
-  };
-
-  const handleAddPlayer = () => {
-    const name = inputRef.current?.value;
-    if (!name) return;
-    const parsedNames = name.split(",");
-    setUsers((prev): any => {
-      if (!prev.length) return [...parsedNames];
-      return [...prev, ...parsedNames];
-    });
-    inputRef.current!.value = "";
-  };
-
-  const inviteUserToPlan = async () => {
-    if (!currentUser || loading) {
-      toast.error("You need to be logged in to add users to plans");
-      Router.push("/auth/login");
-      return;
-    }
-
-    if (inviteRef?.current?.value == "") {
-      toast.warning("You need to enter a user to invite");
-      return;
-    }
-
-    if (
-      inviteRef?.current?.value == currentUser?.email ||
-      inviteRef?.current?.value == currentUser?.displayName
-    ) {
-      toast.warning("You can't invite yourself to a plan");
-      return;
-    }
-
-    const { data: PlanData, error: PlanError } = await supabase
-      .from("user_plans")
-      .select(
-        `
-        plan_authorizedUsers,plan_authorizedTeams
-      `
-      )
-      .eq("plan_id", IdContext);
-
-    let { plan_authorizedUsers, plan_authorizedTeams }: any = PlanData![0];
-    plan_authorizedUsers = JSON.parse(plan_authorizedUsers);
-    plan_authorizedTeams = JSON.parse(plan_authorizedTeams);
-
-    if (plan_authorizedUsers) {
-      if (plan_authorizedUsers.includes(inviteRef?.current?.value)) {
-        toast.warning(`User ${inviteRef.current?.value} is already authorized`);
-        return;
-      }
-
-      const { error: PlanInviteError } = await supabase
-        .from("user_plans")
-        .update({
-          plan_authorizedUsers: JSON.stringify([
-            ...plan_authorizedUsers,
-            inviteRef?.current?.value,
-          ]),
-        })
-        .eq("plan_id", IdContext);
-
-      if (PlanInviteError) {
-        toast.error("Something went wrong while inviting user");
-        return;
-      }
-      toast.success(`User ${inviteRef.current?.value} was invited`);
-      return;
-    }
-    const { error: PlanInviteError } = await supabase
-      .from("user_plans")
-      .update({
-        plan_authorizedUsers: JSON.stringify([inviteRef?.current?.value]),
-      })
-      .eq("plan_id", IdContext);
-    if (PlanInviteError) {
-      toast.error("Something went wrong while inviting user");
-      return;
-    }
-
-    toast.success(`User ${inviteRef.current?.value} was invited`);
-  };
-
-  const handleRemovePlayer = (val: string) => {
+  const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
   };
-  useEffect(() => {
-    if (!IdContext || IdContext == "create") return;
-    if (loading) return;
-    fetchPlanData();
-  }, [loading]);
+  const handleRemoveTeam = (val: string) => {
+    const newTeams = teams.filter((team, i) => team !== val);
+    setTeams(newTeams);
+  };
+  const handleAddUsers = () => {
+    if (!userRefAdd?.current?.value) {
+      toast.warning("Nothing Was Entered");
+      return;
+    }
+    const newUsers = Array.from(
+      new Set([...users, userRefAdd.current.value.trim().toLowerCase()])
+    );
+    setUsers(newUsers);
+    userRefAdd.current.value = "";
+  };
 
-  return <div className='w-full flex items-center pt-16'></div>;
+  const handleAddTeam = async () => {
+    if (!teamRefAdd?.current?.value) {
+      toast.warning("Nothing Was Entered");
+      return;
+    }
+    const newTeams = Array.from(
+      new Set([...teams, teamRefAdd.current.value.trim().toLowerCase()])
+    );
+    setTeams(newTeams);
+    teamRefAdd.current.value = "";
+  };
+  return (
+    <div className='w-full h-full grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2'>
+      <div className='border-2 flex flex-col items-center justify-evenly p-2'>
+        <h1 className='text-white font-Inter text-2xl font-bold tracking-wide'>
+          ADDED TEAMS
+        </h1>
+        <div className='p-2'>
+          {teams.map((team) => (
+            <RedLabel data={team} cb={handleRemoveTeam} />
+          ))}
+        </div>
+        <input
+          ref={teamRefAdd}
+          type='text'
+          placeholder='Bravado'
+          className='rounded-xl p-2 outline-none border-none ring-0 focus:ring-4 focus:ring-cblue'
+        />
+        <button
+          onClick={handleAddTeam}
+          className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+        >
+          <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0'>
+            ADD TEAM
+          </span>
+        </button>
+      </div>
+      <div className='border-2 flex flex-col items-center justify-evenly p-2'>
+        <h1 className='text-white font-Inter text-2xl font-bold tracking-wide'>
+          ADDED USERS
+        </h1>
+        <div className='p-2'>
+          {users.map((team) => (
+            <RedLabel data={team} cb={handleRemoveUser} />
+          ))}
+        </div>
+        <input
+          ref={userRefAdd}
+          type='text'
+          placeholder='yourfriendemail@email.com, friendUUID'
+          className='placeholder:text-cblue placeholder:font-black placeholder:font-Inter w-full rounded-xl p-2 placeholder:text-center outline-none border-none ring-0 focus:ring-4 focus:ring-cblue'
+        />
+        <button
+          onClick={handleAddUsers}
+          className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+        >
+          <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0'>
+            ADD TIMES
+          </span>
+        </button>
+      </div>
+      <div className='border-2 flex flex-col items-center justify-evenly p-2 flex-wrap content-center'>
+        <h1 className='text-white font-Inter text-2xl font-bold tracking-wide'>
+          PLAN INFORMATION
+        </h1>
+        <label className='text-white font-black font-Inter text-2xl'>
+          Scheduled Date
+        </label>
+        <input
+          required
+          onChange={(e) => {
+            setTime({
+              ...time,
+              endTime: {
+                ...time.endTime,
+                date: e.target.value,
+              },
+            });
+          }}
+          value={time.endTime.date}
+          className='rounded-xl px-4 py-2 text-black font-black font-Inter'
+          type='date'
+        />
+        <label className='font-black text-white font-Inter text-2xl'>
+          Start Time
+        </label>
+        <input
+          required
+          onChange={(e) => {
+            setTime({ ...time, startTime: e.target.value });
+          }}
+          value={time.startTime}
+          className='rounded-xl px-4 py-2 text-black font-black font-Inter'
+          type='time'
+        />
+        <label className='font-black text-white font-Inter text-2xl'>End Time</label>
+        <input
+          required
+          onChange={(e) =>
+            setTime({
+              ...time,
+              endTime: { ...time.endTime, time: e.target.value },
+            })
+          }
+          value={time.endTime.time}
+          className='rounded-xl px-4 py-2 text-black font-black font-Inter'
+          type='time'
+        />
+        <label className='font-black text-white font-Inter text-2xl'>
+          Min Plan Time
+        </label>
+        <input
+          onChange={(e) => {
+            if (Number(e.target?.value) < 1) {
+              setMinPlanTimeRef(1);
+              console.log("Min Plan Time is 1");
+            } else {
+              setMinPlanTimeRef(Number(e.target?.value));
+            }
+          }}
+          className='rounded-xl px-4 py-2 text-black font-black font-Inter'
+          type='number'
+          value={minPlanTimeRef}
+        />
+      </div>
+      <div className='border-2 flex'>
+        <h1 className='text-white'></h1>
+      </div>
+    </div>
+  );
 }
 
 export default DataControllers;

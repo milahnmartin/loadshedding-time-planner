@@ -45,9 +45,12 @@ function DataControllers() {
       toast.warning("Nothing Was Entered");
       return;
     }
-    const newUsers = Array.from(
-      new Set([...users, userRefAdd.current.value.trim().toLowerCase()])
-    );
+
+    const splitedNewUsers = userRefAdd.current.value
+      ?.trim()
+      .toUpperCase()
+      .split(",");
+    const newUsers = Array.from(new Set([...users, ...splitedNewUsers]));
     setUsers(newUsers);
     userRefAdd.current.value = "";
   };
@@ -57,9 +60,12 @@ function DataControllers() {
       toast.warning("Nothing Was Entered");
       return;
     }
-    const newTeams = Array.from(
-      new Set([...teams, teamRefAdd.current.value.trim().toLowerCase()])
-    );
+
+    const splittedNewTeams = teamRefAdd.current.value
+      ?.trim()
+      .toUpperCase()
+      .split(",");
+    const newTeams = Array.from(new Set([...teams, ...splittedNewTeams]));
     setTeams(newTeams);
     teamRefAdd.current.value = "";
   };

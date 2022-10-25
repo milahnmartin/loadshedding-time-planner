@@ -11,7 +11,7 @@ import UserProfile from "./UserProfile";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
-  const [notifications, setNotifications] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<boolean>(true);
   const [notimodal, setShowNotiModal] = useState<boolean>(false);
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");
@@ -67,7 +67,7 @@ function Navbar() {
                     "h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
                   )
                 : classNames(
-                    "h-fit w-fit cursor-pointer text-red-700 animate-bounce transition-transform duration-200 relative"
+                    "h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
                   )
             }
           >
@@ -77,7 +77,9 @@ function Navbar() {
                 onClick={() => setShowNotiModal((prev) => !prev)}
                 className={
                   notifications
-                    ? classNames("transition-all hover:rotate-[360deg] duration-700")
+                    ? classNames(
+                        "transition-all animate-[wiggle_1.5s_ease-in-out_infinite] duration-500"
+                      )
                     : classNames("")
                 }
                 size={25}

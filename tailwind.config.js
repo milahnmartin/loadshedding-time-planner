@@ -49,6 +49,15 @@ module.exports = {
         cblue: "#3c79f0",
         cpurple: "#431e9a",
       },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-20deg)" },
+          "50%": { transform: "rotate(20deg)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
     },
 
     fontFamily: {

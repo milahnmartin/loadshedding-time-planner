@@ -13,6 +13,7 @@ function RedLabel(props: any) {
         src={close}
         width={20}
         height={20}
+        alt='close img'
       />
     </div>
   );

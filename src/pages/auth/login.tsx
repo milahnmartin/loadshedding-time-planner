@@ -42,7 +42,7 @@ function login() {
       <Navbar />
 
       <div className="h-[80%] flex mt-[3.5rem]">
-        <div className="w-1/3 flex justify-end px-5">
+        <div className="w-1/4 flex justify-end px-5">
           <div className="h-full flex-col items-center justify-center ">
             <div className="h-[45%]  w-full flex justify-center">
               <span className="h-full w-[3px] bg-gradient-to-t from-caqua via-cblue to-cpurple"></span>
@@ -61,8 +61,8 @@ function login() {
             </div>
           </div>
         </div>
-        <div className="w-2/3 flex items-center justify-center flex-col border-2">
-          <div className=" h-2/4 p-2 flex items-center justify-center text-center">
+        <div className="w-3/4 flex items-center justify-center flex-col border-2">
+          <div className=" h-1/4 p-2 flex items-center justify-center text-center">
             <h1 className=" text-center font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-6xl">
               TIME TO LOG IN!
             </h1>

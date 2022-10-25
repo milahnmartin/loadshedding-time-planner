@@ -13,7 +13,7 @@ function NotificationModal() {
     }
   };
   return (
-    <div className='noti-data h-[10rem] w-[9rem] text-black text-Inter absolute bg-white -left-[5rem] top-14 rounded-md flex items-center justify-start flex-col text-center z-50 p-2'>
+    <div className='noti-data h-[10rem] w-[9rem] text-black text-Inter absolute bg-white -left-[5rem] top-10 rounded-md flex items-center justify-start flex-col text-center z-50 p-2'>
       {handleShowInvited()}
     </div>
   );

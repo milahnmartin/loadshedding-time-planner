@@ -64,15 +64,39 @@ function login() {
         <div className="w-full flex items-center justify-center flex-col md:3/4">
           <div className=" h-1/4 p-2 flex items-center justify-center text-center">
             <h1 className=" text-center font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-6xl">
-              TIME TO LOG IN!
+              TIME TO LOG IN
             </h1>
           </div>
           <div className="h-2/4 flex items-center justify-center">
-            <div className="w-fit h-fit p-16 pt-5 rounded-xl bg-white/10">
+            <div className="rounded-xl w-[20rem] h-[20rem] mx-auto  bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
+              <div className="flex flex-col justify-between h-full bg-black text-white rounded-lg p-4 ">
+                {/* <h1 className=" font-bold text-white text-center text-[1.3rem] m-0">
+                  Login with:{" "}
+                </h1> */}
+                <div className="h-full w-full flex flex-col items-center justify-center space-y-4">
+                  <button
+                    onClick={handleGoogleLogin}
+                    className="bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25"
+                  >
+                    <FcGoogle className="h-8 w-8" /> GOOGLE
+                  </button>
+                  <div className="inline-flex justify-center items-center w-full">
+                    <hr className="my-4 w-[14rem] h-px bg-gray-500 border-2 " />
+                  </div>
+                  <button
+                    onClick={handleTwitterLogin}
+                    className="bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25"
+                  >
+                    <SiTwitter className="h-8 w-8" /> Twitter
+                  </button>
+                </div>
+              </div>
+            </div>
+            {/* <div className="w-fit h-fit p-16 pt-5 rounded-xl border-2 border-blue-300 bg-white/10">
               <h1 className=" font-bold text-white text-center text-[1.3rem] pb-3">
                 Login with:{" "}
               </h1>
-              <div className="h-auto w-full flex flex-col items-center justify-center space-y-8">
+              <div className="h-auto w-full flex flex-col items-center justify-center space-y-4">
                 <button
                   onClick={handleGoogleLogin}
                   className="bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25"
@@ -80,7 +104,7 @@ function login() {
                   <FcGoogle className="h-8 w-8" /> GOOGLE
                 </button>
                 <div className="inline-flex justify-center items-center w-full">
-                  <hr className="my-8 w-64 h-px bg-gray-400 border-1 " />
+                  <hr className="my-8 w-[14rem] h-px bg-gray-500 border-2 " />
                 </div>
                 <button
                   onClick={handleTwitterLogin}
@@ -89,7 +113,7 @@ function login() {
                   <SiTwitter className="h-8 w-8" /> Twitter
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

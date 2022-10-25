@@ -18,11 +18,13 @@ function IndexMain() {
   );
   return (
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'>
-      <h1 className='font-Inter text-8xl font-light text-white'>TRYING TO PLAN</h1>
-      <h1 className='text-transparent bg-clip-text font-Inter text-8xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
+      <h1 className='text-center font-Inter text-5xl font-light text-white md:text-8xl'>
+        TRYING TO PLAN
+      </h1>
+      <h1 className='text-transparent bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
         AROUND
       </h1>
-      <h1 className='font-light font-Inter text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
+      <h1 className='font-light font-Inter text-[2.7rem] animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>

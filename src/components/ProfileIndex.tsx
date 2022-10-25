@@ -9,11 +9,10 @@ const ProfileIndex = () => {
         <h1 className="font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pt-4 md:text-6xl">
           PROFILE INFORMATION
         </h1>
-        <hr className="my-0 mx-auto w-[60%] h-[0.3rem] bg-gradient-to-r from-caqua via-cblue to-cpurple rounded border-0 md:my-2" />
       </div>
       <div className="flex h-full w-full items-center justify-center">
-        <div className="max-w-md rounded-xl shadow-lg backdrop-blur-2xl bg-white/10">
-          <div className="flex items-center justify-center w-full h-full space-x-5 pt-8 pb-0 -mb-4">
+        <div className="rounded-xl w-[20rem] h-auto mx-auto bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
+          <div className="flex flex-col items-center h-full bg-black text-white rounded-lg p-4 ">
             {user && (
               <Image
                 className="rounded-full"
@@ -23,11 +22,12 @@ const ProfileIndex = () => {
                 alt="Image of Lightbulb"
               />
             )}
-          </div>
-
-          <div className="flex flex-row items-center gap-6 p-8">
-            <h3 className="text-2xl font-bold text-slate-300">Username:</h3>
-            <p className="text-2xl font-bold text-slate-300">{user?.displayName}</p>
+            <div className="flex flex-row items-center gap-4 p-6 pb-1">
+              <h3 className="text-2xl font-bold text-slate-300">Username:</h3>
+              <p className="text-2xl font-bold text-slate-300">
+                {user?.displayName}
+              </p>
+            </div>
           </div>
         </div>
       </div>

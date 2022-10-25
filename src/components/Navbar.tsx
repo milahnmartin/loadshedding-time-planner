@@ -35,7 +35,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className='sticky top-0 bg-black z-10'>
+    <div className='sticky top-0 z-10 bg-black'>
       <div className='h-[5rem] flex place-items-center'>
         <div className='h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
@@ -48,7 +48,7 @@ function Navbar() {
             />
           </Link>
           <h1 className='hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
-            LS GAME PLANNER
+            LS TIME PLANNER
           </h1>
         </div>
         <div className='h-full w-[80%] flex items-center space-x-5 navbarfont justify-end md:w-[50%] md:space-x-8 mr-6'>
@@ -99,7 +99,7 @@ function Navbar() {
           )}
         </div>
       </div>
-      <hr className='my-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-caqua via-cblue to-cpurple rounded border-0 md:my-2' />
+      <hr className='mt-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-caqua via-cblue to-cpurple rounded border-0 md:mt-2' />
     </div>
   );
 }

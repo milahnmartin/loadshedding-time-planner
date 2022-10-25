@@ -17,21 +17,19 @@ function IndexMain() {
     </svg>
   );
   return (
-    <div className='px-5 border-solid border-red-900 h-full flex justify-start items-center flex-col space-y-9 mt-[9rem]'>
-      <h1 className='text-white font-extrabold font-Inter tracking-wide text-4xl text-center md:text-7xl'>
-        STRUGGLING TO PLAN YOUR GAMING
+    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'>
+      <h1 className='font-Inter text-8xl font-light text-white'>TRYING TO PLAN</h1>
+      <h1 className='text-transparent bg-clip-text font-Inter text-8xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
+        AROUND
       </h1>
-      <h1 className='text-white font-Inter font-extralight tracking-wide text-5xl text-center md:text-7xl '>
-        SESSIONS AROUND{" "}
-      </h1>
-      <h1 className='font-extrabold font-Inter text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
+      <h1 className='font-light font-Inter text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>
         <Link href='/plan/create'>
           <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
             NEW PLAN
-            <div className='relative left-[6px] top-[1px] transition-all duration-200 group-hover:text-cpurple'>
+            <div className='relative left-[6px] top-[.5px] transition-all duration-500 group-hover:text-orange-500'>
               {arrowIcon}
             </div>
           </button>

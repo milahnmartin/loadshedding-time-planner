@@ -6,15 +6,33 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Logo from "../pages/assets/Logov3.png";
 import { auth } from "../utils/firebase-config";
+import NotificationModal from "./NotificationModal";
 import UserProfile from "./UserProfile";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
   const [notifications, setNotifications] = useState<boolean>(false);
+  const [notimodal, setShowNotiModal] = useState<boolean>(true);
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");
     if (!user && !loading) return setLoginState("LOGIN");
   }, [user, loading]);
+
+  useEffect(() => {
+    document.addEventListener(
+      "click",
+      (e: any) => {
+        let nodeList = [...e.target.classList];
+        if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
+          setShowNotiModal(false);
+        }
+      },
+      { capture: true }
+    );
+    return () => {
+      document.removeEventListener("click", () => {}, { capture: true });
+    };
+  }, []);
 
   return (
     <div className='sticky top-0 bg-black z-10'>
@@ -46,23 +64,29 @@ function Navbar() {
             className={
               !notifications
                 ? classNames(
-                    "h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue"
+                    "h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
                   )
                 : classNames(
-                    "h-fit w-fit cursor-pointer text-red-700 animate-bounce transition-transform duration-200 "
+                    "h-fit w-fit cursor-pointer text-red-700 animate-bounce transition-transform duration-200 relative"
                   )
             }
           >
             {
               <IoMdNotificationsOutline
+                id='bell-icon'
+                onClick={() => setShowNotiModal((prev) => !prev)}
                 className={
                   notifications
-                    ? classNames("transition-all hover:rotate-[360deg] duration-700")
-                    : classNames("")
+                    ? classNames(
+                        "transition-all hover:rotate-[360deg] duration-700 relative"
+                      )
+                    : classNames("relative")
                 }
                 size={25}
               />
             }
+
+            {notimodal && <NotificationModal />}
           </span>
           {user && !loading ? (
             <UserProfile src={user?.photoURL} />

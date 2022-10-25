@@ -46,8 +46,11 @@ module.exports = {
         tersier: "#256D85",
         quaternary: "#8FE3CF",
         caqua: "#6ac6b4",
+        c2aqua: "#6EE7B7",
         cblue: "#3c79f0",
+        c2blue: "#3B82F6",
         cpurple: "#431e9a",
+        c2purple: "#9333EA",
       },
       keyframes: {
         wiggle: {

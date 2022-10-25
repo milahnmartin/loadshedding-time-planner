@@ -11,7 +11,7 @@ import UserProfile from "./UserProfile";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
-  const [notifications, setNotifications] = useState<boolean>(true);
+  const [notifications, setNotifications] = useState<boolean>(false);
   const [notimodal, setShowNotiModal] = useState<boolean>(false);
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");

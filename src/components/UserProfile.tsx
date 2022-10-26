@@ -1,6 +1,6 @@
+import ProfileModal from "@comps/ProfileModal";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ProfileModal from "./ProfileModal";
 function UserProfile(props: any) {
   const [showmodal, setShowmodal] = useState(false);
   const handleShowModal = () => {

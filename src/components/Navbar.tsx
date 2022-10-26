@@ -1,3 +1,5 @@
+import NotificationModal from "@comps/NotificationModal";
+import UserProfile from "@comps/UserProfile";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,8 +8,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Logo from "../pages/assets/Logov3.png";
 import { auth } from "../utils/firebase-config";
-import NotificationModal from "./NotificationModal";
-import UserProfile from "./UserProfile";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
@@ -35,32 +35,32 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-10 bg-black">
-      <div className="h-[5rem] flex place-items-center">
-        <div className="h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]">
-          <Link href="/">
+    <div className='sticky top-0 z-10 bg-black'>
+      <div className='h-[5rem] flex place-items-center'>
+        <div className='h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
+          <Link href='/'>
             <Image
-              className="cursor-pointer"
+              className='cursor-pointer'
               height={50}
               width={50}
               src={Logo}
-              alt="Image of Logo"
+              alt='Image of Logo'
             />
           </Link>
-          <h1 className="hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2">
+          <h1 className='hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
             LS TIME PLANNER
           </h1>
         </div>
-        <div className="h-full w-[80%] flex items-center space-x-5 navbarfont justify-end md:w-[50%] md:space-x-8 mr-6">
-          <h1 className="font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue">
-            <Link href="/">Home</Link>
+        <div className='h-full w-[80%] flex items-center space-x-5 navbarfont justify-end md:w-[50%] md:space-x-8 mr-6'>
+          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+            <Link href='/'>Home</Link>
           </h1>
-          <h1 className="font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue">
-            <Link href="/docs">Docs</Link>
+          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+            <Link href='/docs'>Docs</Link>
           </h1>
 
           <span
-            title="Invites"
+            title='Invites'
             className={
               !notifications
                 ? classNames(
@@ -73,7 +73,7 @@ function Navbar() {
           >
             {
               <IoMdNotificationsOutline
-                id="bell-icon"
+                id='bell-icon'
                 onClick={() => setShowNotiModal((prev) => !prev)}
                 className={
                   notifications
@@ -91,15 +91,15 @@ function Navbar() {
           {user && !loading ? (
             <UserProfile src={user?.photoURL} />
           ) : (
-            <Link href="/auth/login">
-              <button className="px-4 py-1 bg-primary text-white font-black tracking-wide font-Inter rounded-lg text-center">
+            <Link href='/auth/login'>
+              <button className='px-4 py-1 bg-primary text-white font-black tracking-wide font-Inter rounded-lg text-center'>
                 {loginState}
               </button>
             </Link>
           )}
         </div>
       </div>
-      <hr className="mt-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 md:mt-2" />
+      <hr className='mt-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 md:mt-2' />
     </div>
   );
 }

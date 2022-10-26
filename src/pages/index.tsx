@@ -1,8 +1,8 @@
+import Footer from "@comps/Footer";
+import IndexMain from "@comps/IndexMain";
+import Navbar from "@comps/Navbar";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Footer from "../components/Footer";
-import IndexMain from "../components/IndexMain";
-import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
   return (

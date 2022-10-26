@@ -3,6 +3,7 @@ class TimeCalculations {
     const unsortedTimes = Array.from(new Set(times));
     return unsortedTimes.sort();
   };
+
   static getInitialStartTime = (
     LoadSheddingTimes: string[],
     UserStartTime: string,

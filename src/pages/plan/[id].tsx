@@ -1,9 +1,9 @@
+import DataControllers from "@comps/DataControllers";
+import Footer from "@comps/Footer";
+import Navbar from "@comps/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
 import { createContext } from "react";
-import DataControllers from "../../components/DataControllers";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import supabase from "../../utils/supabase-config";
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;

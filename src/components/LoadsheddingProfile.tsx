@@ -1,3 +1,4 @@
+import RedLabel from "@comps/RedLabel";
 import { uuidv4 } from "@firebase/util";
 import Router from "next/router";
 import { useEffect, useState } from "react";
@@ -5,7 +6,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
-import RedLabel from "./RedLabel";
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [savedLsTimes, setsavedLsTimes] = useState<Array<string>>([]);

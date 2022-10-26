@@ -1,3 +1,5 @@
+import Footer from "@comps/Footer";
+import Navbar from "@comps/Navbar";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -9,8 +11,6 @@ import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
 import { toast } from "react-toastify";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
 function login() {

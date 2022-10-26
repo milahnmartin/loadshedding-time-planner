@@ -1,11 +1,11 @@
+import Footer from "@comps/Footer";
+import LoadsheddingProfile from "@comps/LoadsheddingProfile";
+import Navbar from "@comps/Navbar";
+import ProfileIndex from "@comps/ProfileIndex";
+import TeamProfile from "@comps/TeamProfile";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import Footer from "../components/Footer";
-import LoadsheddingProfile from "../components/LoadsheddingProfile";
-import Navbar from "../components/Navbar";
-import ProfileIndex from "../components/ProfileIndex";
-import TeamProfile from "../components/TeamProfile";
 
 const plans: NextPage = () => {
   const [currentPage, setCurrentPage] = useState<string>("profile");
@@ -24,15 +24,15 @@ const plans: NextPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-scroll bg-black">
+    <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
         <title>LS Time Planner / Profile</title>
       </Head>
       <Navbar />
-      <div className="w-full h-full flex border-2 border-red-700">
-        <div className="w-1/4 h-full flex flex-col items-center justify-center space-y-8 p-5 border-2">
+      <div className='w-full h-full flex border-2 border-red-700'>
+        <div className='w-1/4 h-full flex flex-col items-center justify-center space-y-8 p-5 border-2'>
           <div
-            id="profile"
+            id='profile'
             onClick={() => setCurrentPage("profile")}
             className={
               currentPage === "profile"
@@ -40,10 +40,10 @@ const plans: NextPage = () => {
                 : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
             }
           >
-            <h1 className="font-Inter font-black text-white">PROFILE DETAILS</h1>
+            <h1 className='font-Inter font-black text-white'>PROFILE DETAILS</h1>
           </div>
           <div
-            id="loadshedding"
+            id='loadshedding'
             onClick={() => setCurrentPage("loadshedding")}
             className={
               currentPage === "loadshedding"
@@ -51,12 +51,12 @@ const plans: NextPage = () => {
                 : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
             }
           >
-            <h1 className="font-Inter font-black text-white">
+            <h1 className='font-Inter font-black text-white'>
               LOADSHEDDING SETTINGS
             </h1>
           </div>
           <div
-            id="team"
+            id='team'
             onClick={() => setCurrentPage("team")}
             className={
               currentPage === "team"
@@ -64,10 +64,10 @@ const plans: NextPage = () => {
                 : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
             }
           >
-            <h1 className="font-Inter font-black text-white">TEAM SETTINGS</h1>
+            <h1 className='font-Inter font-black text-white'>TEAM SETTINGS</h1>
           </div>
         </div>
-        <div className="w-3/4 h-full flex boder-2">
+        <div className='w-3/4 h-full flex boder-2'>
           {handlePageRender(currentPage)}
         </div>
       </div>

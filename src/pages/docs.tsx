@@ -1,7 +1,7 @@
+import DocsContent from "@comps/DocsContent";
+import Footer from "@comps/Footer";
+import Navbar from "@comps/Navbar";
 import Head from "next/head";
-import DocsContent from "../components/DocsContent";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 
 function docs() {
   return (

@@ -1,11 +1,11 @@
+import Footer from "@comps/Footer";
+import Navbar from "@comps/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const plans: NextPage = () => {

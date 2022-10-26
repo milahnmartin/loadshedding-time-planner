@@ -1,9 +1,9 @@
+import RedLabel from "@comps/RedLabel";
 import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
-import RedLabel from "./RedLabel";
 function DataControllers() {
   const [currentUser, loading] = useAuthState(auth);
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);

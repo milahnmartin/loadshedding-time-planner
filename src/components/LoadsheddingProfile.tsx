@@ -10,8 +10,8 @@ const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [savedLsTimes, setsavedLsTimes] = useState<Array<string>>([]);
   const [savedLsDate, setSavedLsDate] = useState<string>("");
-  const handleRemoveLsTime = (time: string) => {
-    const newLsTimes = savedLsTimes.filter((time) => time !== time);
+  const handleRemoveLsTime = (cbTime: string) => {
+    const newLsTimes = savedLsTimes.filter((time) => time !== cbTime);
     setsavedLsTimes(newLsTimes);
   };
   const fetchSavedLsTimes = async () => {

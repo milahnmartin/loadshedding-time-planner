@@ -119,9 +119,10 @@ const LoadsheddingProfile = () => {
 
   const handleEditDate = (date: string) => {
     const dateIndex: number = savedLsDates.findIndex((d) => d === date);
-
     const filteredTimes: any = dateTimes[dateIndex];
+    const filteredDate: any = savedLsDates[dateIndex];
     setsavedLsTimes(filteredTimes);
+    newDateRef.current!.value = filteredDate;
   };
   return (
     <div className='p-5 w-full h-full flex items-center flex-col'>
@@ -175,10 +176,8 @@ const LoadsheddingProfile = () => {
           </div>
         </div>
         <div className='border-2 w-3/4 flex flex-col h-full'>
-          <div className='flex text-center flex-col justify-start items-center h-1/2 p-2'>
-            <h1 className='text-white text-2xl font-Inter font-black mb-5'>
-              Newly Added Times:
-            </h1>
+          <div className='flex text-center flex-col justify-start items-center h-1/2 p-2 flex-wrap content-center space-y-2'>
+            <h1 className='text-white text-2xl font-Inter font-black'>LS TIMES:</h1>
             <div className='flex space-x-2'>
               {savedLsTimes.map((time) => {
                 return (

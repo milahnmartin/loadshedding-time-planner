@@ -64,6 +64,8 @@ const LoadsheddingProfile = () => {
       ...prev,
       [LSStartTimeRef.current!.value, LSEndTimeRef.current!.value].join("-"),
     ]);
+    LSStartTimeRef.current!.value = "";
+    LSEndTimeRef.current!.value = "";
   };
   const fetchSavedLsTimes = async () => {
     if (!user) {
@@ -82,7 +84,8 @@ const LoadsheddingProfile = () => {
       toast.error("Something Happened Sorry...");
       return;
     }
-    if (data[0]!.dates) {
+
+    if (data.length !== 0) {
       const { dates, times }: any = data[0];
       setSavedLsDates([...dates]);
       setDateTimes([...times]);
@@ -226,19 +229,19 @@ const LoadsheddingProfile = () => {
           <div className='flex flex-col justify-end items-center h-1/4 w-full space-y-2 p-2'>
             <button
               onClick={execNewData}
-              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
+              className='text-black w-full py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
             >
-              CLEAR BOXES
+              CLEAR DATA
             </button>
             <button
               onClick={handleAddTime}
-              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
+              className='w-full text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
             >
               ADD TIME
             </button>
             <button
               onClick={handleSaveData}
-              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cpurple hover:text-white'
+              className='w-full text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cpurple hover:text-white'
             >
               UPDATE SETTINGS
             </button>

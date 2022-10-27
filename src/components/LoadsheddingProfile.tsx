@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
+import GreenLabel from "./GreenLabel";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
 );
@@ -21,7 +22,7 @@ const ViewDateTimes = ({ info }: any) => {
       <div className='flex w-full justify-center gap-2 flex-wrap content-center'>
         {info.map((time: string) => {
           return (
-            <RedLabel key={uuidv4()} data={time} cb={() => console.log("PENIS")} />
+            <GreenLabel key={uuidv4()} data={time} cb={() => console.log("PENIS")} />
           );
         })}
       </div>
@@ -32,16 +33,14 @@ const ViewDateTimes = ({ info }: any) => {
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [savedLsTimes, setsavedLsTimes] = useState<Array<string>>([]);
-  const [savedLsDates, setSavedLsDates] = useState<Array<string>>([
-    "2022-02-23",
-    "2023-05-17",
-  ]);
+  const [savedLsDates, setSavedLsDates] = useState<Array<string>>([]);
   const [debounceSave, setDebounceSave] = useState<boolean>(false);
   const [dateTimes, setDateTimes] = useState<Array<string>>([]);
   const [selectDateIndex, setSelectStateIndex] = useState<number>(0);
   const LSStartTimeRef = useRef<HTMLInputElement>(null);
   const LSEndTimeRef = useRef<HTMLInputElement>(null);
   const newDateRef = useRef<HTMLInputElement>(null);
+
   const handleRemoveLsTime = (cbTime: string) => {
     const newLsTimes = savedLsTimes.filter((time) => time !== cbTime);
     setsavedLsTimes(newLsTimes);
@@ -51,7 +50,17 @@ const LoadsheddingProfile = () => {
     const newLsDates = savedLsDates.filter((date) => date !== cbDate);
     setSavedLsDates(newLsDates);
   };
-  const handleAddTime = () => {};
+  const handleAddTime = () => {
+    if (
+      !LSStartTimeRef.current?.value ||
+      !LSEndTimeRef.current?.value ||
+      !newDateRef.current?.value
+    ) {
+      toast.warning("Please Enter A Valid Time and Date");
+      return;
+    }
+    console.log(newDateRef.current.value);
+  };
   const fetchSavedLsTimes = async () => {
     if (!user) {
       toast.warning("Log In to Add Times");
@@ -107,6 +116,13 @@ const LoadsheddingProfile = () => {
     const index = savedLsDates.findIndex((date) => date === cb);
     setSelectStateIndex(index);
   };
+
+  const handleEditDate = (date: string) => {
+    const dateIndex: number = savedLsDates.findIndex((d) => d === date);
+
+    const filteredTimes: any = dateTimes[dateIndex];
+    setsavedLsTimes(filteredTimes);
+  };
   return (
     <div className='p-5 w-full h-full flex items-center flex-col'>
       <div className='w-full flex flex-col items-center justify-start'>
@@ -117,7 +133,7 @@ const LoadsheddingProfile = () => {
       </div>
       <div className='flex h-full w-full border-2 border-pink-400'>
         <div className='flex flex-col border-2 w-1/4'>
-          <div className='flex items-center flex-col justify-center h-3/4 w-full space-y-4'>
+          <div className='flex items-center flex-col justify-start h-3/4 w-full space-y-4'>
             <label className='flex flex-col w-full px-2 py-2'>
               <span className={spanStyles}>Set LS Date:</span>
               <input
@@ -143,15 +159,15 @@ const LoadsheddingProfile = () => {
               />
             </label>
           </div>
-          <div className='flex flex-col justify-center items-center h-1/4 w-full space-y-2'>
+          <div className='flex flex-col justify-end items-center h-1/4 w-full space-y-2 p-2'>
             <button
-              onClick={handleSaveData}
+              onClick={handleAddTime}
               className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
             >
               ADD TIME
             </button>
             <button
-              onClick={handleAddTime}
+              onClick={handleSaveData}
               className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cpurple hover:text-white'
             >
               UPDATE SETTINGS
@@ -160,8 +176,8 @@ const LoadsheddingProfile = () => {
         </div>
         <div className='border-2 w-3/4 flex flex-col h-full'>
           <div className='flex text-center flex-col justify-start items-center h-1/2 p-2'>
-            <h1 className='text-white text-4xl font-Inter font-black mb-5'>
-              Saved Loadshedding Times
+            <h1 className='text-white text-2xl font-Inter font-black mb-5'>
+              Newly Added Times:
             </h1>
             <div className='flex space-x-2'>
               {savedLsTimes.map((time) => {
@@ -178,6 +194,7 @@ const LoadsheddingProfile = () => {
                   date={date}
                   cb={handleShowDateInfo}
                   delTime={handleRemoveDates}
+                  editCb={handleEditDate}
                 />
               ))}
             </div>

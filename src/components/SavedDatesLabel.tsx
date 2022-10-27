@@ -1,11 +1,7 @@
-import { useState } from "react";
+import { CiEdit } from "react-icons/ci";
 import { GrFormView } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
-const SavedDatesLabel = ({ date, cb, delTime }: any) => {
-  const [showInfo, setShowInfo] = useState<boolean>(false);
-
-  const handleSaveData = async () => {};
-
+const SavedDatesLabel = ({ date, cb, delTime, editCb }: any) => {
   return (
     <div className='flex flex-col w-full bg-white font-Inter rounded-sm items-center border-red-700 border-2 p-2'>
       <div className='flex w-full items-center justify-center space-x-2'>
@@ -16,25 +12,28 @@ const SavedDatesLabel = ({ date, cb, delTime }: any) => {
           title='delete'
           className='text-black transition-all duration-200 hover:text-red-700'
         >
-          {
-            <MdDelete
-              className='cursor-pointer'
-              onClick={() => delTime(date)}
-              size={30}
-            />
-          }
+          <MdDelete
+            className='cursor-pointer'
+            onClick={() => delTime(date)}
+            size={30}
+          />
+        </span>
+        <span className='cursor-pointer'>
+          <CiEdit
+            onClick={() => editCb(date)}
+            size={30}
+            className='text-black transition-all duration-200 hover:text-cblue'
+          />
         </span>
         <span
           title='view'
           className='text-black transition-all duration-200 hover:text-red-700'
         >
-          {
-            <GrFormView
-              onClick={() => cb(date)}
-              className='cursor-pointer'
-              size={40}
-            />
-          }
+          <GrFormView
+            onClick={() => cb(date)}
+            className='cursor-pointer'
+            size={40}
+          />
         </span>
       </div>
     </div>

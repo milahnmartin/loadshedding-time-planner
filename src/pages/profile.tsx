@@ -29,7 +29,7 @@ const plans: NextPage = () => {
         <title>LS Time Planner / Profile</title>
       </Head>
       <Navbar />
-      <div className='w-full h-full flex border-2 border-red-700'>
+      <div className='w-full h-[90%] flex border-2 border-red-700'>
         <div className='w-1/4 h-full flex flex-col items-center justify-center space-y-8 p-5 border-2'>
           <div
             id='profile'
@@ -67,9 +67,7 @@ const plans: NextPage = () => {
             <h1 className='font-Inter font-black text-white'>TEAM SETTINGS</h1>
           </div>
         </div>
-        <div className='w-3/4 h-full flex boder-2'>
-          {handlePageRender(currentPage)}
-        </div>
+        <div className='w-3/4 h-full flex'>{handlePageRender(currentPage)}</div>
       </div>
       <Footer />
     </div>

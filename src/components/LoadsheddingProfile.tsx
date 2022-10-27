@@ -37,6 +37,7 @@ const LoadsheddingProfile = () => {
   const [debounceSave, setDebounceSave] = useState<boolean>(false);
   const [dateTimes, setDateTimes] = useState<Array<string>>([]);
   const [selectDateIndex, setSelectStateIndex] = useState<number>(0);
+  const [newSchedule, setNewSchedule] = useState<boolean>(true);
   const LSStartTimeRef = useRef<HTMLInputElement>(null);
   const LSEndTimeRef = useRef<HTMLInputElement>(null);
   const newDateRef = useRef<HTMLInputElement>(null);
@@ -81,11 +82,11 @@ const LoadsheddingProfile = () => {
       toast.error("Something Happened Sorry...");
       return;
     }
-
-    if (data[0]) {
+    if (data[0]!.dates) {
       const { dates, times }: any = data[0];
-      setSavedLsDates(dates);
-      setDateTimes(times);
+      setSavedLsDates([...dates]);
+      setDateTimes([...times]);
+      return;
     }
   };
   useEffect(() => {
@@ -95,7 +96,7 @@ const LoadsheddingProfile = () => {
       return;
     }
     fetchSavedLsTimes();
-  }, [selectDateIndex]);
+  }, [selectDateIndex, newSchedule]);
 
   const handleSaveData = async () => {
     if (!user) {
@@ -107,6 +108,21 @@ const LoadsheddingProfile = () => {
       toast.warning("You saved your times recently, please wait");
       return;
     }
+
+    if (newSchedule) {
+      createNewSchedule();
+    } else {
+      updateExistingSchedule();
+    }
+
+    setDebounceSave(true);
+
+    setTimeout(() => {
+      setDebounceSave(false);
+    }, 10000);
+  };
+
+  const updateExistingSchedule = async () => {
     const exclusiveTimes = dateTimes.filter(
       (time, index) => index !== selectDateIndex
     );
@@ -124,10 +140,30 @@ const LoadsheddingProfile = () => {
       })
       .eq("user_id", user?.uid);
 
-    setDebounceSave(true);
-    setTimeout(() => {
-      setDebounceSave(false);
-    }, 10000);
+    if (!error) {
+      toast.success("Successfully Updated Your Times");
+    }
+  };
+
+  const createNewSchedule = async () => {
+    if (savedLsDates.includes(newDateRef.current?.value!)) {
+      toast.warning("You already have a schedule for this date");
+      return;
+    }
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({
+        user_scheduled_Data: {
+          dates: [...savedLsDates, newDateRef.current?.value],
+          times: [...dateTimes, savedLsTimes],
+        },
+      })
+      .eq("user_id", user?.uid);
+
+    if (!error) {
+      toast.success("Successfully Updated Your Times");
+      execNewData();
+    }
   };
 
   const handleShowDateInfo = (cb: string) => {
@@ -136,11 +172,20 @@ const LoadsheddingProfile = () => {
   };
 
   const handleEditDate = (date: string) => {
+    setNewSchedule(false);
     const dateIndex: number = savedLsDates.findIndex((d) => d === date);
     const filteredTimes: any = dateTimes[dateIndex];
     const filteredDate: any = savedLsDates[dateIndex];
     setsavedLsTimes(filteredTimes);
     newDateRef.current!.value = filteredDate;
+  };
+
+  const execNewData = () => {
+    setsavedLsTimes([]);
+    newDateRef.current!.value = "";
+    LSEndTimeRef.current!.value = "";
+    LSStartTimeRef.current!.value = "";
+    setNewSchedule(true);
   };
   return (
     <div className='p-5 w-full h-full flex items-center flex-col'>
@@ -179,6 +224,12 @@ const LoadsheddingProfile = () => {
             </label>
           </div>
           <div className='flex flex-col justify-end items-center h-1/4 w-full space-y-2 p-2'>
+            <button
+              onClick={execNewData}
+              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
+            >
+              CLEAR BOXES
+            </button>
             <button
               onClick={handleAddTime}
               className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'

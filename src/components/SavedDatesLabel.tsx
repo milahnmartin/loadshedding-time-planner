@@ -1,39 +1,42 @@
 import { useState } from "react";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import { GrFormView } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 const SavedDatesLabel = ({ date, cb, delTime }: any) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
 
+  const handleSaveData = async () => {};
+
   return (
-    <div className='flex flex-col w-full bg-white font-Inter rounded-sm items-center'>
-      <div className='flex border-2 w-full border-pink-600 items-center justify-center space-x-2'>
-        <h1 className='font-black'>Date: {date}</h1>
-        {
-          <AiOutlineArrowDown
-            fill='black'
-            className='cursor-pointer'
-            onClick={() => setShowInfo(!showInfo)}
-          />
-        }
-        {
-          <MdDelete
-            fill='black'
-            className='cursor-pointer'
-            onClick={() => delTime(date)}
-          />
-        }
+    <div className='flex flex-col w-full bg-white font-Inter rounded-sm items-center border-red-700 border-2 p-2'>
+      <div className='flex w-full items-center justify-center space-x-2'>
+        <h1 className='font-black'>{date}</h1>
       </div>
-      {showInfo && (
-        <div className='h-full p-2 text-white flex flex-col items-center justify-end'>
-          <h1 className='text-black'>THIS IS DATA</h1>
-          <button
-            onClick={() => cb(date)}
-            className='h-fit w-full text-white font-Inter font-black p-2 bg-black'
-          >
-            Show Info
-          </button>
-        </div>
-      )}
+      <div className='flex space-x-4 h-[40px] w-full justify-center items-center'>
+        <span
+          title='delete'
+          className='text-black transition-all duration-200 hover:text-red-700'
+        >
+          {
+            <MdDelete
+              className='cursor-pointer'
+              onClick={() => delTime(date)}
+              size={30}
+            />
+          }
+        </span>
+        <span
+          title='view'
+          className='text-black transition-all duration-200 hover:text-red-700'
+        >
+          {
+            <GrFormView
+              onClick={() => cb(date)}
+              className='cursor-pointer'
+              size={40}
+            />
+          }
+        </span>
+      </div>
     </div>
   );
 };

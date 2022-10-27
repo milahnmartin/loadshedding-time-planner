@@ -27,3 +27,8 @@ export interface IPlan {
   plan_authorizedTeams: string | string[];
   user_id: string;
 }
+
+export interface UserSavedDates {
+  times: string[][];
+  dates: string[];
+}

@@ -16,7 +16,8 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "@comps/*": ["./src/components/*"]
+      "@comps/*": ["./src/components/*"],
+      "@lstypes/*": ["./src/types/*"]
     }
   },
 

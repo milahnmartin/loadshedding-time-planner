@@ -8,13 +8,25 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
-
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
 );
 
 const ViewDateTimes = ({ info }: any) => {
-  return <h1 className='text-white text-xl'>{info}</h1>;
+  return (
+    <>
+      <h1 className='text-white font-Inter text-xl font-black text-center h-fit'>
+        Saved LS Times:
+      </h1>
+      <div className='flex w-full justify-center gap-2 flex-wrap content-center'>
+        {info.map((time: string) => {
+          return (
+            <RedLabel key={uuidv4()} data={time} cb={() => console.log("PENIS")} />
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 const LoadsheddingProfile = () => {
@@ -25,8 +37,10 @@ const LoadsheddingProfile = () => {
     "2023-05-17",
   ]);
   const [debounceSave, setDebounceSave] = useState<boolean>(false);
-  const [dateInfo, setdateInfo] = useState<string>("Hi");
-  const newTimeRef = useRef<HTMLInputElement>(null);
+  const [dateTimes, setDateTimes] = useState<Array<string>>([]);
+  const [selectDateIndex, setSelectStateIndex] = useState<number>(0);
+  const LSStartTimeRef = useRef<HTMLInputElement>(null);
+  const LSEndTimeRef = useRef<HTMLInputElement>(null);
   const newDateRef = useRef<HTMLInputElement>(null);
   const handleRemoveLsTime = (cbTime: string) => {
     const newLsTimes = savedLsTimes.filter((time) => time !== cbTime);
@@ -37,18 +51,29 @@ const LoadsheddingProfile = () => {
     const newLsDates = savedLsDates.filter((date) => date !== cbDate);
     setSavedLsDates(newLsDates);
   };
+  const handleAddTime = () => {};
   const fetchSavedLsTimes = async () => {
-    const { data, error } = await supabase
-      .from("user_info")
-      .select(`saved_lsData`)
-      .eq("user_id", user?.uid);
-    if (error) {
-      toast.error("something went wrong");
+    if (!user) {
+      toast.warning("Log In to Add Times");
       return;
     }
-    console.log(data);
-    if (data[0]?.saved_lsData) {
-      setsavedLsTimes(data[0].saved_lsData?.lsTimes);
+    const { data, error } = await supabase
+      .from("user_info")
+      .select(
+        `user_scheduled_Data->dates,
+        user_scheduled_Data->times`
+      )
+      .eq("user_id", user?.uid);
+
+    if (error) {
+      toast.error("Something Happened Sorry...");
+      return;
+    }
+
+    if (data[0]) {
+      const { dates, times }: any = data[0];
+      setSavedLsDates(dates);
+      setDateTimes(times);
     }
   };
   useEffect(() => {
@@ -79,7 +104,8 @@ const LoadsheddingProfile = () => {
   };
 
   const handleShowDateInfo = (cb: string) => {
-    setdateInfo(cb);
+    const index = savedLsDates.findIndex((date) => date === cb);
+    setSelectStateIndex(index);
   };
   return (
     <div className='p-5 w-full h-full flex items-center flex-col'>
@@ -101,17 +127,31 @@ const LoadsheddingProfile = () => {
               />
             </label>
             <label className='flex flex-col w-full px-2 py-2'>
-              <span className={spanStyles}>Set LS Time:</span>
+              <span className={spanStyles}>Set LS Start Time:</span>
               <input
-                ref={newTimeRef}
+                ref={LSStartTimeRef}
+                className='px-4 py-2 w-full rounded-md outline-none border-none ring-none text-cblue font-Inter font-black focus:ring-2 focus:ring-red-500 text-center'
+                type='time'
+              />
+            </label>
+            <label className='flex flex-col w-full px-2 py-2'>
+              <span className={spanStyles}>Set LS End Time:</span>
+              <input
+                ref={LSEndTimeRef}
                 className='px-4 py-2 w-full rounded-md outline-none border-none ring-none text-cblue font-Inter font-black focus:ring-2 focus:ring-red-500 text-center'
                 type='time'
               />
             </label>
           </div>
-          <div className='flex justify-center items-center h-1/4 w-full'>
+          <div className='flex flex-col justify-center items-center h-1/4 w-full space-y-2'>
             <button
               onClick={handleSaveData}
+              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cblue hover:text-white'
+            >
+              ADD TIME
+            </button>
+            <button
+              onClick={handleAddTime}
               className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-cpurple hover:text-white'
             >
               UPDATE SETTINGS
@@ -141,8 +181,14 @@ const LoadsheddingProfile = () => {
                 />
               ))}
             </div>
-            <div className='flex w-1/2 p-2 border-2 border-pink-600'>
-              {<ViewDateTimes info={dateInfo} />}
+            <div className='flex w-1/2 flex-col p-2 space-y-2 border-2 justify-start border-pink-600'>
+              {dateTimes.length > 0 ? (
+                <ViewDateTimes info={dateTimes[selectDateIndex]} />
+              ) : (
+                <h1 className='text-white text-4xl font-Inter font-black mb-5'>
+                  Select A Schedule
+                </h1>
+              )}
             </div>
           </div>
         </div>

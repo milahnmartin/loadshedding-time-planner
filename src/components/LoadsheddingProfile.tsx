@@ -59,7 +59,10 @@ const LoadsheddingProfile = () => {
       toast.warning("Please Enter A Valid Time and Date");
       return;
     }
-    console.log(newDateRef.current.value);
+    setsavedLsTimes((prev) => [
+      ...prev,
+      [LSStartTimeRef.current!.value, LSEndTimeRef.current!.value].join("-"),
+    ]);
   };
   const fetchSavedLsTimes = async () => {
     if (!user) {
@@ -92,7 +95,7 @@ const LoadsheddingProfile = () => {
       return;
     }
     fetchSavedLsTimes();
-  }, []);
+  }, [selectDateIndex]);
 
   const handleSaveData = async () => {
     if (!user) {
@@ -104,7 +107,22 @@ const LoadsheddingProfile = () => {
       toast.warning("You saved your times recently, please wait");
       return;
     }
-    //  insert update query here
+    const exclusiveTimes = dateTimes.filter(
+      (time, index) => index !== selectDateIndex
+    );
+    const exclusiveDates = savedLsDates.filter(
+      (date) => date !== newDateRef.current?.value
+    );
+
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({
+        user_scheduled_Data: {
+          dates: [...exclusiveDates, newDateRef.current?.value],
+          times: [...exclusiveTimes, savedLsTimes],
+        },
+      })
+      .eq("user_id", user?.uid);
 
     setDebounceSave(true);
     setTimeout(() => {

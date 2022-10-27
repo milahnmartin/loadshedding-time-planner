@@ -25,14 +25,18 @@ const LoadsheddingProfile = () => {
     "2023-05-17",
   ]);
   const [debounceSave, setDebounceSave] = useState<boolean>(false);
-  const [dateInfo, setdateInfo] = useState<string>("PENIS");
+  const [dateInfo, setdateInfo] = useState<string>("Hi");
   const newTimeRef = useRef<HTMLInputElement>(null);
   const newDateRef = useRef<HTMLInputElement>(null);
   const handleRemoveLsTime = (cbTime: string) => {
     const newLsTimes = savedLsTimes.filter((time) => time !== cbTime);
     setsavedLsTimes(newLsTimes);
   };
-  const handleRemoveDates = (cbDate: string) => {};
+
+  const handleRemoveDates = (cbDate: string) => {
+    const newLsDates = savedLsDates.filter((date) => date !== cbDate);
+    setSavedLsDates(newLsDates);
+  };
   const fetchSavedLsTimes = async () => {
     const { data, error } = await supabase
       .from("user_info")
@@ -130,7 +134,11 @@ const LoadsheddingProfile = () => {
           <div className='flex h-1/2 border-2'>
             <div className='flex w-1/2 flex-col items-center justify-start p-2 overflow-y-scroll overflow-x-hidden'>
               {savedLsDates.map((date) => (
-                <SavedDatesLabel date={date} cb={handleShowDateInfo} />
+                <SavedDatesLabel
+                  date={date}
+                  cb={handleShowDateInfo}
+                  delTime={handleRemoveDates}
+                />
               ))}
             </div>
             <div className='flex w-1/2 p-2 border-2 border-pink-600'>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
-const SavedDatesLabel = ({ date, cb }: any) => {
+import { MdDelete } from "react-icons/md";
+const SavedDatesLabel = ({ date, cb, delTime }: any) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
 
   return (
@@ -12,6 +13,13 @@ const SavedDatesLabel = ({ date, cb }: any) => {
             fill='black'
             className='cursor-pointer'
             onClick={() => setShowInfo(!showInfo)}
+          />
+        }
+        {
+          <MdDelete
+            fill='black'
+            className='cursor-pointer'
+            onClick={() => delTime(date)}
           />
         }
       </div>

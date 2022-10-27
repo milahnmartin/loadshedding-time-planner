@@ -10,6 +10,8 @@ const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [savedLsTimes, setsavedLsTimes] = useState<Array<string>>([]);
   const [savedLsDate, setSavedLsDate] = useState<string>("");
+  const [debounceSave, setDebounceSave] = useState<boolean>(false);
+
   const handleRemoveLsTime = (cbTime: string) => {
     const newLsTimes = savedLsTimes.filter((time) => time !== cbTime);
     setsavedLsTimes(newLsTimes);
@@ -44,6 +46,10 @@ const LoadsheddingProfile = () => {
       Router.push("/login");
       return;
     }
+    if (debounceSave) {
+      toast.warning("You saved your times recently, please wait");
+      return;
+    }
     const { data, error } = await supabase
       .from("user_info")
       .update({ saved_lsData: { lsTimes: savedLsTimes, lsDate: savedLsDate } })
@@ -52,8 +58,12 @@ const LoadsheddingProfile = () => {
     if (!error) {
       toast.success("data updated");
     }
-    console.log(data);
+    setDebounceSave(true);
+    setTimeout(() => {
+      setDebounceSave(false);
+    }, 10000);
   };
+
   return (
     <div className='p-5 w-full h-full flex items-center flex-col'>
       <div className='w-full flex flex-col items-center justify-start'>
@@ -72,9 +82,12 @@ const LoadsheddingProfile = () => {
             />
             <input type='time' />
           </div>
-          <div className='flex justify-center h-1/4 w-full'>
-            <button onClick={handleSaveData} className='text-white p-2'>
-              Update Settings
+          <div className='flex justify-center items-center h-1/4 w-full'>
+            <button
+              onClick={handleSaveData}
+              className='text-black py-2 px-4 bg-white rounded-lg font-Inter font-black transition-all duration-200 hover:bg-white/30'
+            >
+              UPDATE SETTINGS
             </button>
           </div>
         </div>

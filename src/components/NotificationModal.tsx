@@ -3,6 +3,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import type { IInviteData } from "../types/types";
 import { auth } from "../utils/firebase-config";
+import { uuidv4 } from "@firebase/util";
 function NotificationModal({ inviteArray }: any) {
   const [user, loading] = useAuthState(auth);
 
@@ -14,7 +15,10 @@ function NotificationModal({ inviteArray }: any) {
       {inviteArray.length > 0 ? (
         inviteArray.map((invite: IInviteData) => {
           return (
-            <div className='w-full border-2 noti-data text-black font-Inter font-black flex items-center justify-evenly'>
+            <div
+              key={uuidv4()}
+              className='w-full border-2 noti-data text-black font-Inter font-black flex items-center justify-evenly'
+            >
               <p>{invite!.invitedByUserName[1]}</p>
               <IoMdCheckmarkCircleOutline
                 fill='lime'

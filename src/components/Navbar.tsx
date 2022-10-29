@@ -14,7 +14,6 @@ import supabase from "../utils/supabase-config";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
-  const [notifications, setNotifications] = useState<boolean>(false);
   const [notimodal, setShowNotiModal] = useState<boolean>(false);
   const [invites, setInvites] = useState<Array<any>>([]);
 
@@ -67,6 +66,7 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (!user || loading) return;
     fetchUserInvites();
   }, [notimodal]);
 

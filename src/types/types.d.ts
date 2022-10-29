@@ -32,3 +32,8 @@ export interface UserSavedDates {
   times: string[][];
   dates: string[];
 }
+
+export interface IInviteData {
+  plan_id: string;
+  invitedByUserName: [string, string];
+}

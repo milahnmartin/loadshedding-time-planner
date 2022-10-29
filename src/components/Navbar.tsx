@@ -3,16 +3,48 @@ import UserProfile from "@comps/UserProfile";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { toast } from "react-toastify";
 import Logo from "../pages/assets/Logov3.png";
 import { auth } from "../utils/firebase-config";
+import supabase from "../utils/supabase-config";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
   const [notifications, setNotifications] = useState<boolean>(false);
   const [notimodal, setShowNotiModal] = useState<boolean>(false);
+  const [invites, setInvites] = useState<Array<any>>([]);
+
+  const fetchUserInvites = async () => {
+    if (!user) {
+      toast.error("You need to be signed in");
+      Router.push("/auth/login");
+      return;
+    }
+    const { data, error }: any = await supabase
+      .from("user_info")
+      .select(`user_plan_Invites`)
+      .eq(`user_id`, user?.uid);
+
+    if (error) {
+      toast.error("Something went wrong with invites");
+      return;
+    }
+    if (!data) {
+      toast.warning("Something went wrong");
+      return;
+    }
+    const invites = data[0].user_plan_Invites;
+    if (!invites || invites.length === 0) {
+      setInvites([]);
+      return;
+    }
+
+    setInvites(invites);
+  };
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");
     if (!user && !loading) return setLoginState("LOGIN");
@@ -33,6 +65,10 @@ function Navbar() {
       document.removeEventListener("click", () => {}, { capture: true });
     };
   }, []);
+
+  useEffect(() => {
+    fetchUserInvites();
+  }, [notimodal]);
 
   return (
     <div className='sticky top-0 z-10 bg-black'>
@@ -62,7 +98,7 @@ function Navbar() {
           <span
             title='Invites'
             className={
-              !notifications
+              invites.length === 0
                 ? classNames(
                     "h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
                   )
@@ -76,7 +112,7 @@ function Navbar() {
                 id='bell-icon'
                 onClick={() => setShowNotiModal((prev) => !prev)}
                 className={
-                  notifications
+                  invites.length > 0
                     ? classNames(
                         "transition-all animate-[wiggle_1.5s_ease-in-out_infinite] duration-500"
                       )
@@ -86,7 +122,7 @@ function Navbar() {
               />
             }
 
-            {notimodal && <NotificationModal />}
+            {notimodal && <NotificationModal inviteArray={invites} />}
           </span>
           {user && !loading ? (
             <UserProfile src={user?.photoURL} />

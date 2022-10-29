@@ -21,9 +21,7 @@ const ViewDateTimes = ({ info }: any) => {
       </h1>
       <div className='flex w-full justify-center gap-2 flex-wrap content-center'>
         {info.map((time: string) => {
-          return (
-            <GreenLabel key={uuidv4()} data={time} cb={() => console.log("PENIS")} />
-          );
+          return <GreenLabel key={uuidv4()} data={time} />;
         })}
       </div>
     </>
@@ -69,7 +67,7 @@ const LoadsheddingProfile = () => {
   };
   const fetchSavedLsTimes = async () => {
     if (!user) {
-      toast.warning("Log In to Add Times");
+      toast.warning("Log In to view times");
       return;
     }
     const { data, error } = await supabase
@@ -99,7 +97,7 @@ const LoadsheddingProfile = () => {
       return;
     }
     fetchSavedLsTimes();
-  }, [selectDateIndex, newSchedule]);
+  }, [newSchedule]);
 
   const handleSaveData = async () => {
     if (!user) {
@@ -119,7 +117,6 @@ const LoadsheddingProfile = () => {
     }
 
     setDebounceSave(true);
-
     setTimeout(() => {
       setDebounceSave(false);
     }, 10000);

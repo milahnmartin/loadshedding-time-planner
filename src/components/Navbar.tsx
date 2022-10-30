@@ -32,17 +32,15 @@ function Navbar() {
       toast.error("Something went wrong with invites");
       return;
     }
-    if (!data) {
-      toast.warning("Something went wrong");
-      return;
-    }
-    const invites = data[0].user_plan_Invites;
-    if (!invites || invites.length === 0) {
+
+    const { user_plan_Invites } = data[0];
+
+    if (!user_plan_Invites || user_plan_Invites.length === 0) {
       setInvites([]);
       return;
     }
 
-    setInvites(invites);
+    setInvites(user_plan_Invites);
   };
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");

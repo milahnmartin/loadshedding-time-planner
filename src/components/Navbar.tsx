@@ -33,6 +33,18 @@ function Navbar() {
       return;
     }
 
+    if (!data[0]) {
+      const { data: newAccData, error: newAccError } = await supabase
+        .from("user_info")
+        .insert({
+          user_id: user?.uid,
+          user_email: user?.email ? user?.email : user?.displayName,
+        })
+        .select("user_id");
+      toast.success("accounct created");
+      return;
+    }
+
     const { user_plan_Invites } = data[0];
 
     if (!user_plan_Invites || user_plan_Invites.length === 0) {

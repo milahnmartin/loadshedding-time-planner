@@ -68,7 +68,7 @@ function Navbar() {
   useEffect(() => {
     if (!user || loading) return;
     fetchUserInvites();
-  }, [notimodal]);
+  }, [notimodal, loading]);
 
   return (
     <div className='sticky top-0 z-10 bg-black'>

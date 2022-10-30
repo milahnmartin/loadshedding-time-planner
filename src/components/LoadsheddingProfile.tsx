@@ -70,7 +70,7 @@ const LoadsheddingProfile = () => {
       toast.warning("Log In to view times");
       return;
     }
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from("user_info")
       .select(
         `user_scheduled_Data->dates,

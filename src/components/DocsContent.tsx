@@ -1,15 +1,48 @@
+import Image from "next/image";
+import Logo from "../pages/assets/Logov3.png";
+
 function DocsContent() {
   return (
-    <div className='h-full w-full'>
-      <div className='flex h-[90%] border-2 border-white border-solid'>
-        <div className='flex flex-col space-y-2 w-1/3 p-2 border-primary border-solid border-2 font-Inter text-white text-2xl'>
-          <h1>FIRST THING</h1>
-          <h1>FIRST THING</h1>
-          <h1>FIRST THING</h1>
-          <h1>FIRST THING</h1>
+    <div className="h-[80%] flex mt-[3.5rem]  ">
+      <div className="w-1/3 justify-end px-5 hidden md:flex ">
+        <div className="w-full h-full flex flex-col items-center justify-center space-y-8 p-5 ">
+          <h1 className="text-white">1</h1>
+          <h1 className="text-white">2</h1>
+          <h1 className="text-white">3</h1>
         </div>
-        <div className='flex w-2/3 overflow-scroll'>
-          <div className='flex'></div>
+        {/* Vertical Div */}
+        <div className="h-full items-center justify-center ">
+          <div className="h-[45%] w-full flex justify-center">
+            <span className="h-full w-[1px] bg-gradient-to-t from-caqua via-cblue to-cpurple"></span>
+          </div>
+          <div className="h-[10%] w-full flex items-center justify-center">
+            <Image
+              className="w-fit"
+              width={60}
+              height={60}
+              src={Logo}
+              alt="Image of Logo"
+            />
+          </div>
+          <div className="h-[45%] w-full flex justify-center">
+            <span className="h-full w-[1px] bg-gradient-to-b from-caqua via-cblue to-cpurple"></span>
+          </div>
+        </div>
+        {/* Vertical Div end */}
+      </div>
+      <div className="w-full flex items-center justify-center flex-col md:3/4 ">
+        <div className="w-3/4 h-full flex items-center justify-center">
+          <p className="font-bold text-white">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining
+            essentially unchanged. It was popularised in the 1960s with the release
+            of Letraset sheets containing Lorem Ipsum passages, and more recently
+            with desktop publishing software like Aldus PageMaker including versions
+            of Lorem Ipsum
+          </p>
         </div>
       </div>
     </div>

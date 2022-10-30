@@ -35,5 +35,5 @@ export interface UserSavedDates {
 
 export interface IInviteData {
   plan_id: string;
-  invitedByUserName: [string, string];
+  invitedBy: [string, string];
 }

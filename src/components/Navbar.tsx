@@ -49,21 +49,21 @@ function Navbar() {
     if (!user && !loading) return setLoginState("LOGIN");
   }, [user, loading]);
 
-  useEffect(() => {
-    document.addEventListener(
-      "click",
-      (e: any) => {
-        let nodeList = [...e.target.classList];
-        if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
-          setShowNotiModal(false);
-        }
-      },
-      { capture: true }
-    );
-    return () => {
-      document.removeEventListener("click", () => {}, { capture: true });
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener(
+  //     "click",
+  //     (e: any) => {
+  //       let nodeList = [...e.target.classList];
+  //       if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
+  //         setShowNotiModal(false);
+  //       }
+  //     },
+  //     { capture: true }
+  //   );
+  //   return () => {
+  //     document.removeEventListener("click", () => {}, { capture: true });
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (!user || loading) return;

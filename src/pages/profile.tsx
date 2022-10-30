@@ -44,7 +44,9 @@ const plans: NextPage = () => {
                   : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
-              <h1 className="font-Inter font-black text-white">PROFILE DETAILS</h1>
+              <h1 className="font-Inter font-black text-white text-center">
+                PROFILE DETAILS
+              </h1>
             </div>
 
             <div
@@ -56,7 +58,7 @@ const plans: NextPage = () => {
                   : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
-              <h1 className="font-Inter font-black text-white">
+              <h1 className="font-Inter font-black text-white text-center">
                 LOADSHEDDING SETTINGS
               </h1>
             </div>
@@ -70,7 +72,9 @@ const plans: NextPage = () => {
                   : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
-              <h1 className="font-Inter font-black text-white">TEAM SETTINGS</h1>
+              <h1 className="font-Inter font-black text-white text-center">
+                TEAM SETTINGS
+              </h1>
             </div>
           </div>
           {/* Vertical Div */}

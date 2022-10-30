@@ -1,3 +1,5 @@
+import { NextPage } from "next";
+import { useState } from "react";
 import Image from "next/image";
 import Logo from "../pages/assets/Logov3.png";
 
@@ -6,9 +8,21 @@ function DocsContent() {
     <div className="h-[80%] flex mt-[3.5rem]  ">
       <div className="w-1/3 justify-end px-5 hidden md:flex ">
         <div className="w-full h-full flex flex-col items-center justify-center space-y-8 p-5 ">
-          <h1 className="text-white">1</h1>
-          <h1 className="text-white">2</h1>
-          <h1 className="text-white">3</h1>
+          <div className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple">
+            <h1 className="font-Inter font-black text-white text-center">
+              Example 1
+            </h1>
+          </div>
+          <div className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple">
+            <h1 className="font-Inter font-black text-white text-center">
+              Example 2
+            </h1>
+          </div>
+          <div className="w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple">
+            <h1 className="font-Inter font-black text-white text-center">
+              Example 3
+            </h1>
+          </div>
         </div>
         {/* Vertical Div */}
         <div className="h-full items-center justify-center ">

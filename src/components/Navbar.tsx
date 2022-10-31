@@ -41,7 +41,7 @@ function Navbar() {
           user_email: user?.email ? user?.email : user?.displayName,
         })
         .select("user_id");
-      toast.success("accounct created");
+      console.log(`dev log, account`);
       return;
     }
 
@@ -53,6 +53,18 @@ function Navbar() {
     }
 
     setInvites(user_plan_Invites);
+
+    const { data: somedata, error: somerror } = await supabase
+      .from("user_plans")
+      .select("plan_authorizedUsers")
+      .contains("plan_authorizedUsers", {
+        plan_authorizeUsers: [user?.uid],
+      });
+    if (somerror) {
+      console.log(somerror);
+    } else {
+      console.log(somedata);
+    }
   };
   useEffect(() => {
     if (user && !loading) return setLoginState("LOGOUT");

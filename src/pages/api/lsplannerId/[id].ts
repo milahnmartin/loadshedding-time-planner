@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-export default async function fetchUserLSTimesById(
+export default async function fetchUserLSAreaID(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -7,12 +7,12 @@ export default async function fetchUserLSTimesById(
     res.status(405).json({ message: "Method not allowed" });
   }
   const lsData = await fetch(
-    "https://developer.sepush.co.za/business/2.0/api_allowance",
+    `https://developer.sepush.co.za/business/2.0/areas_search?waterkloofglen?test=current`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Token: "O2PNesb3ZomMCa502gn3",
+        Token: process.env.NEXT_PUBLIC_ESKOM_SEPUSH_TOKEN_2 as string,
       },
     }
   );

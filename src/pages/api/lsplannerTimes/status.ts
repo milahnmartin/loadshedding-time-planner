@@ -1,13 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-export default async function fetchLSTimes(
+export default async function fetchCurrentStatus(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method !== "GET") {
     res.status(405).json({ message: "Method not allowed" });
   }
-  const data = await fetch(
-    "https://developer.sepush.co.za/business/2.0/status&test=current",
+  if (req.headers.host !== "localhost:3000") {
+    res.status(403).json({ message: "Forbidden" });
+  }
+  const lsData = await fetch(
+    `https://developer.sepush.co.za/business/2.0/status&test=current`,
     {
       method: "GET",
       headers: {
@@ -16,6 +19,6 @@ export default async function fetchLSTimes(
       },
     }
   );
-  const jsonDATA = await data.json();
-  res.json(jsonDATA);
+  const lsDataJson = await lsData.json();
+  res.json(lsDataJson);
 }

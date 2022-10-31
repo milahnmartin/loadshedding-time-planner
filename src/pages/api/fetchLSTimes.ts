@@ -12,7 +12,7 @@ export default async function fetchLSTimes(
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Token: process.env.NEXT_PUBLIC_ESKOM_SEPUSH_TOKEN_2 as string,
+        Token: process.env.NEXT_PUBLIC_ESKOM_SEPUSH_TOKEN as string,
       },
     }
   );

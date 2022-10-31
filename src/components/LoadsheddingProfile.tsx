@@ -82,9 +82,8 @@ const LoadsheddingProfile = () => {
       toast.error("Something Happened Sorry...");
       return;
     }
-    console.log(data);
 
-    if (data.length !== 0 && data?.dates !== null && data?.times !== null) {
+    if (data.length !== 0 && data[0]?.dates !== null && data[0]?.times !== null) {
       const { dates, times }: any = data[0];
       setSavedLsDates([...dates]);
       setDateTimes([...times]);

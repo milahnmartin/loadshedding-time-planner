@@ -1,11 +1,14 @@
 import RedLabel from "@comps/RedLabel";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
-function DataControllers({ value }: any) {
+import supabase from "../utils/supabase-config";
+function DataControllers() {
+  const router = useRouter();
+  const { id } = router.query;
   const [currentUser, loading] = useAuthState(auth);
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
@@ -23,13 +26,30 @@ function DataControllers({ value }: any) {
 
   // const idDontext = useContext(Gamevalue);
   useEffect(() => {
-    if (value.data.length === 0) {
-      toast.error("Plan Doesn't Exist...");
-      Router.push("/");
-      return;
-    }
-    setplanData(value.data[0]);
-  }, []);
+    (async () => {
+      const { data, error } = await supabase
+        .from("user_plans")
+        .select(
+          `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
+        )
+        .eq("plan_id", id);
+
+      if (!currentUser || loading) return;
+
+      if (error) {
+        toast.error("An error occured while fetching the plan data");
+        return;
+      }
+
+      if (data.length === 0) {
+        toast.error("Plan Doesn't Exist...");
+        Router.push("/");
+        return;
+      }
+      setplanData(data[0]);
+    })();
+  }, [loading]);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const inviteRef = useRef<HTMLInputElement>(null);
 

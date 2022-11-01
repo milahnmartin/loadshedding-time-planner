@@ -3,32 +3,8 @@ import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
-import { createContext } from "react";
-import { toast } from "react-toastify";
-import supabase from "../../utils/supabase-config";
 
-export async function getServerSideProps(context: any) {
-  const { id } = context.query;
-
-  const { data, error } = await supabase
-    .from("user_plans")
-    .select(
-      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
-    )
-    .eq("plan_id", id);
-
-  if (error) {
-    toast.error("An error occured while fetching the plan data");
-    return;
-  }
-
-  return {
-    props: { id, data },
-  };
-}
-export const GameidContext = createContext({ id: "create", data: [] });
-
-const IdPage: NextPage = ({ id, data }: any) => {
+const IdPage: NextPage = ({ id }: any) => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
@@ -36,7 +12,7 @@ const IdPage: NextPage = ({ id, data }: any) => {
       </Head>
       <Navbar />
       {/* <GameidContext.Provider > */}
-      <DataControllers value={{ id, data }} />
+      <DataControllers />
       {/* \ */}
       <Footer />
     </div>

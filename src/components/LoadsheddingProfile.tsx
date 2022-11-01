@@ -3,6 +3,7 @@ import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
@@ -130,9 +131,9 @@ const LoadsheddingProfile = () => {
           />
           <button
             onClick={handleAreaSearch}
-            className='w-full h-fit bg-transparent fon-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
+            className='w-full h-[3.5rem] flex justify-center items-center bg-transparent fon-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
           >
-            {loadingArea ? "Searching..." : "SEARCH"}
+            {loadingArea ? <ThreeDots height={20} /> : "SEARCH"}
           </button>
           <div className='overflow-y-scroll w-full h-full'>
             {areaData.map((area: IAreaData) => {

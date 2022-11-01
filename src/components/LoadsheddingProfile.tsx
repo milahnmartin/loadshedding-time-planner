@@ -93,7 +93,7 @@ const LoadsheddingProfile = () => {
         <div className='w-1/2 h-full flex items-center justify-center'>
           <div className='rounded-xl w-[22rem] h-auto mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
-              <h1 className=' w-full text-center font-Inter font-black tracking-wide'>
+              <h1 className=' w-full text-center font-Inter font-black tracking-wide text-lg'>
                 CURRENT SAVED AREA:
               </h1>
               {savedUserArea.id ? (

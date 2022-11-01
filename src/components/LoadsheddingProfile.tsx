@@ -15,7 +15,7 @@ const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
   const [debounce, setDebounce] = useState<boolean>(false);
-  const [loadingArea, setLoadingAre] = useState<boolean>(false);
+  const [loadingArea, setLoadingArea] = useState<boolean>(false);
   const [areaData, setAreaData] = useState<Array<IAreaData>>([]);
   const [savedUserArea, setSavedUserArea] = useState<IAreaData>({
     id: null,
@@ -31,6 +31,7 @@ const LoadsheddingProfile = () => {
       toast.warning("Please enter a valid area name");
       return;
     }
+    setLoadingArea(true);
     areaInput.trim();
     setDebounce(true);
     setTimeout(() => {
@@ -38,6 +39,7 @@ const LoadsheddingProfile = () => {
     }, 30000);
     const fetchArea = await fetch(`/api/lsplannerId/${areaInput}`);
     const areaData = await fetchArea.json();
+    setLoadingArea(false);
     setAreaData(areaData);
   };
   useEffect(() => {

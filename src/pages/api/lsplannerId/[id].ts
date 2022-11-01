@@ -7,7 +7,6 @@ export default async function fetchUserLSAreaID(
     res.status(405).json({ message: "Method not allowed" });
   }
   const pushID = req.query.id;
-  console.log(pushID);
   const lsData = await fetch(
     `https://developer.sepush.co.za/business/2.0/areas_search?text=${pushID}`,
     {

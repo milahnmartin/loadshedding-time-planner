@@ -47,19 +47,39 @@ const LoadsheddingProfile = () => {
     (async () => {
       const { data, error } = await supabase
         .from("user_info")
-        .select("user_sepushID")
+        .select("user_sepushID->id,user_sepushID->name,user_sepushID->region")
         .eq("user_id", user?.uid);
       if (error) {
         toast.error("We were unable to fetch your saved area");
         return;
       }
 
-      const { user_SePushID }: any = data[0];
-      if (user_SePushID) {
-        setSavedUserArea(user_SePushID);
+      const { id, name, region }: any = data[0];
+      if (id && name && region) {
+        setSavedUserArea({ id, name, region });
       }
     })();
-  }, []);
+  }, [loading]);
+  const handleSetArea = async (newArea: IAreaData) => {
+    if (!newArea) {
+      toast.error("We were unable to set your area");
+      return;
+    }
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({ user_sepushID: newArea })
+      .eq("user_id", user?.uid)
+      .select("user_sepushID->id,user_sepushID->name,user_sepushID->region");
+
+    if (error) {
+      console.log(error);
+      toast.error("We were unable to set your area");
+      return;
+    }
+
+    const { id, name, region }: any = data[0];
+    setSavedUserArea({ id, name, region });
+  };
 
   return (
     <div className='p-2 w-full h-full flex items-center flex-col border-4'>
@@ -70,16 +90,25 @@ const LoadsheddingProfile = () => {
       </div>
       <div className='flex w-full h-full border-2 border-red-700 overflow-y-scroll'>
         <div className='w-1/2 h-full flex items-center justify-center'>
-          <div className='bg-white h-[20rem] w-[20rem] rounded-xl flex items-center justify-center flex-col space-y-2'>
-            <h1 className='text-black font-Inter font-black trackinh-wide'>
+          <div className='bg-white h-[20rem] w-[20rem] rounded-xl flex items-center justify-start flex-col space-y-2 p-2'>
+            <h1 className='text-black w-full text-center font-Inter font-black tracking-wide'>
               CURRENT SAVED AREA:
             </h1>
             {savedUserArea.id ? (
-              <h1 className='text-cblue font-Inter'>
-                AreaID: {savedUserArea.id}
-                Region: {savedUserArea.region}
-                Name: {savedUserArea.name}
-              </h1>
+              <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center text-cblue font-Inter font-black tracking-wide'>
+                <h1>
+                  <pre className='text-xl'>Area ID:</pre>
+                  {savedUserArea.id}
+                </h1>
+                <h1>
+                  <pre className='text-xl'>Area Region:</pre>
+                  {savedUserArea.region}
+                </h1>
+                <h1>
+                  <pre className='text-xl'>Area Name:</pre>
+                  {savedUserArea.name}
+                </h1>
+              </div>
             ) : (
               <h1 className='text-cblue font-Inter'>
                 You have not saved any area yet
@@ -113,6 +142,7 @@ const LoadsheddingProfile = () => {
                   id={area.id}
                   name={area.name}
                   region={area.region}
+                  cbSetArea={handleSetArea}
                 />
               );
             })}
@@ -121,6 +151,7 @@ const LoadsheddingProfile = () => {
               id={"nelsonmandelabay-15-waterkloofwkkarea30"}
               name={"nelsonmandelabay-15-waterkloofwkkarea30"}
               region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
             /> */}
           </div>
         </div>

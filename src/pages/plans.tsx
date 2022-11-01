@@ -63,8 +63,8 @@ const plans: NextPage = () => {
             {loadingPlans ? (
               <ThreeDots />
             ) : (
-              myplans.map((plan: any) => {
-                return <PlansLabel key={uuidv4()} plan={plan} />;
+              myplans.map((plan_data: any) => {
+                return <PlansLabel key={uuidv4()} plan={plan_data} />;
               })
             )}
           </div>
@@ -75,6 +75,7 @@ const plans: NextPage = () => {
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center'>
             {/* here it comes */}
+            <p className='text-white'>{JSON.stringify(myplans)}</p>
           </div>
         </div>
       </div>

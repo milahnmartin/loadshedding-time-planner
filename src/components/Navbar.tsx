@@ -39,6 +39,7 @@ function Navbar() {
         .insert({
           user_id: user?.uid,
           user_email: user?.email ? user?.email : user?.displayName,
+          account_created: new Date().toISOString(),
         })
         .select("user_id");
       console.log(`dev log, account`);

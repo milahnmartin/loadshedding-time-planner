@@ -9,26 +9,26 @@ import supabase from "../../utils/supabase-config";
 
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;
-  const { data, error } = await supabase
-    .from("user_plans")
-    .select(
-      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
-    )
-    .eq("plan_id", id);
+  if (id) {
+    const { data, error } = await supabase
+      .from("user_plans")
+      .select(
+        `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
+      )
+      .eq("plan_id", id);
+    if (error) {
+      toast.error("An error occured while fetching the plan data");
+      return;
+    }
 
-  if (error) {
-    toast.error("An error occured while fetching the plan data");
-    return;
+    return {
+      props: { id, data },
+    };
   }
-
-  return {
-    props: { id, data },
-  };
 };
 export const GameidContext = createContext({ id: "create", data: [] });
 
 const IdPage: NextPage = ({ id, data }: any) => {
-  console.log(data);
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>

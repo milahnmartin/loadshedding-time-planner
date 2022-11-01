@@ -9,7 +9,7 @@ export default async function fetchUserLSAreaID(
   const pushID = req.query.id;
   console.log(pushID);
   const lsData = await fetch(
-    `https://developer.sepush.co.za/business/2.0/areas_search?text=${pushID}&test=current`,
+    `https://developer.sepush.co.za/business/2.0/areas_search?text=${pushID}`,
     {
       method: "GET",
       headers: {

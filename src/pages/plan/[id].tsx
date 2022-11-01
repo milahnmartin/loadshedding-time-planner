@@ -11,7 +11,7 @@ export const getServerSideProps = async (context: any) => {
   const { data, error } = await supabase
     .from("user_plans")
     .select(
-      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_created`
+      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
     )
     .eq("plan_id", id);
 

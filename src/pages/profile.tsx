@@ -10,7 +10,7 @@ import { useState } from "react";
 import Logo from "./assets/Logov3.png";
 
 const plans: NextPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>("profile");
+  const [currentPage, setCurrentPage] = useState<string>("loadshedding");
 
   const handlePageRender = (page: string) => {
     switch (page) {
@@ -98,9 +98,7 @@ const plans: NextPage = () => {
           {/* Vertical Div end */}
         </div>
         <div className='w-full flex items-center justify-center flex-col md:3/4'>
-          <div className='w-full h-full flex border-2'>
-            {handlePageRender(currentPage)}
-          </div>
+          <div className='w-full h-full flex'>{handlePageRender(currentPage)}</div>
         </div>
       </div>
       <Footer />

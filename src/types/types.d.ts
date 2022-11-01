@@ -37,3 +37,9 @@ export interface IInviteData {
   plan_id: string;
   invitedBy: [string, string];
 }
+
+export interface IAreaData {
+  id: string | null;
+  name: string | null;
+  region: string | null;
+}

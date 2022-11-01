@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const plans: NextPage = () => {
@@ -63,7 +64,7 @@ const plans: NextPage = () => {
               <ThreeDots />
             ) : (
               myplans.map((plan: any) => {
-                return <PlansLabel plan={plan} />;
+                return <PlansLabel key={uuidv4()} plan={plan} />;
               })
             )}
           </div>

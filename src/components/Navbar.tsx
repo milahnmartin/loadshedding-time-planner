@@ -99,8 +99,8 @@ function Navbar() {
           <Link href='/'>
             <Image
               className='cursor-pointer'
-              height={50}
-              width={50}
+              height={55}
+              width={55}
               src={Logo}
               alt='Image of Logo'
             />

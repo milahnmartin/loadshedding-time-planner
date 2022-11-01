@@ -4,6 +4,7 @@ import Navbar from "@comps/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
 import { createContext } from "react";
+import { toast } from "react-toastify";
 import supabase from "../../utils/supabase-config";
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;
@@ -13,6 +14,11 @@ export const getServerSideProps = async (context: any) => {
       `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_created`
     )
     .eq("plan_id", id);
+
+  if (error) {
+    toast.error("An error occured while fetching the plan data");
+    return;
+  }
 
   return {
     props: { id, data },

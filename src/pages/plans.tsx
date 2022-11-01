@@ -58,7 +58,7 @@ const plans: NextPage = () => {
           <div className='flex text-2xl text-white font-bold h-[10%] align-center justify-center content-center'>
             MY PLANS
           </div>
-          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center'>
+          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
             {/* here it comes */}
             {loadingPlans ? (
               <ThreeDots />
@@ -73,7 +73,7 @@ const plans: NextPage = () => {
           <div className='flex text-2xl text-white font-bold h-[10%] aling-center justify-center content-center'>
             INVITED PLANS
           </div>
-          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center'>
+          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>
             {/* here it comes */}
             <p className='text-white'>{JSON.stringify(myplans)}</p>
           </div>

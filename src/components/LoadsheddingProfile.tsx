@@ -83,13 +83,13 @@ const LoadsheddingProfile = () => {
   };
 
   return (
-    <div className='p-2 w-full h-full flex items-center flex-col border-4'>
-      <div className='w-full flex flex-col items-center justify-start border-2'>
+    <div className='p-2 w-full h-full flex items-center flex-col'>
+      <div className='w-full flex flex-col items-center justify-start'>
         <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pt-4 md:text-6xl'>
           LOADSHEDDING SETTINGS
         </h1>
       </div>
-      <div className='flex w-full h-full border-2 border-red-700 overflow-y-scroll'>
+      <div className='flex w-full h-full overflow-y-scroll'>
         <div className='w-1/2 h-full flex items-center justify-center'>
           <div className='rounded-xl w-[22rem] h-auto mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
@@ -133,12 +133,12 @@ const LoadsheddingProfile = () => {
           />
           <button
             onClick={handleAreaSearch}
-            className='w-full h-[3.5rem] flex justify-center items-center bg-transparent fon-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
+            className='w-full h-[3.5rem] flex justify-center items-center bg-transparent fon-Inter font-black outline-none text-white rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
           >
             {loadingArea ? <ThreeDots height={20} /> : "SEARCH"}
           </button>
           <div className='overflow-y-scroll w-full h-full'>
-            {/* {areaData.map((area: IAreaData) => {
+            {areaData.map((area: IAreaData) => {
               return (
                 <AreaLabels
                   key={uuidv4()}
@@ -148,14 +148,14 @@ const LoadsheddingProfile = () => {
                   cbSetArea={handleSetArea}
                 />
               );
-            })} */}
-            <AreaLabels
+            })}
+            {/* <AreaLabels
               key={uuidv4()}
               id={"nelsonmandelabay-15-waterkloofwkkarea30"}
               name={"nelsonmandelabay-15-waterkloofwkkarea30"}
               region={"Nelson Mandela Bay Municipality"}
               cbSetArea={handleSetArea}
-            />
+            /> */}
           </div>
         </div>
       </div>

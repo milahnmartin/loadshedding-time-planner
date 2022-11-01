@@ -1,12 +1,11 @@
 import RedLabel from "@comps/RedLabel";
 import Router from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { GameidContext } from "../pages/plan/[id]";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
-function DataControllers() {
+function DataControllers({ value }: any) {
   const [currentUser, loading] = useAuthState(auth);
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
@@ -22,14 +21,14 @@ function DataControllers() {
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
 
-  const IdContext = useContext(GameidContext);
+  // const idDontext = useContext(Gamevalue);
   useEffect(() => {
-    if (IdContext.data.length === 0) {
+    if (value.data.length === 0) {
       toast.error("Plan Doesn't Exist...");
       Router.push("/");
       return;
     }
-    setplanData(IdContext.data[0]);
+    setplanData(value.data[0]);
   }, []);
   const inputRef = useRef<HTMLInputElement>(null);
   const inviteRef = useRef<HTMLInputElement>(null);

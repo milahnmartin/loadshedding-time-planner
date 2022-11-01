@@ -7,25 +7,25 @@ import { createContext } from "react";
 import { toast } from "react-toastify";
 import supabase from "../../utils/supabase-config";
 
-export const getServerSideProps = async (context: any) => {
+export async function getServerSideProps(context: any) {
   const { id } = context.query;
-  if (id) {
-    const { data, error } = await supabase
-      .from("user_plans")
-      .select(
-        `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
-      )
-      .eq("plan_id", id);
-    if (error) {
-      toast.error("An error occured while fetching the plan data");
-      return;
-    }
 
-    return {
-      props: { id, data },
-    };
+  const { data, error } = await supabase
+    .from("user_plans")
+    .select(
+      `plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt`
+    )
+    .eq("plan_id", id);
+
+  if (error) {
+    toast.error("An error occured while fetching the plan data");
+    return;
   }
-};
+
+  return {
+    props: { id, data },
+  };
+}
 export const GameidContext = createContext({ id: "create", data: [] });
 
 const IdPage: NextPage = ({ id, data }: any) => {
@@ -35,9 +35,9 @@ const IdPage: NextPage = ({ id, data }: any) => {
         <title>LS Time Planner / Plan</title>
       </Head>
       <Navbar />
-      <GameidContext.Provider value={{ id, data }}>
-        <DataControllers />
-      </GameidContext.Provider>
+      {/* <GameidContext.Provider > */}
+      <DataControllers value={{ id, data }} />
+      {/* \ */}
       <Footer />
     </div>
   );

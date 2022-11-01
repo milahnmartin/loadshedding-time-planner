@@ -6,6 +6,7 @@ import Head from "next/head";
 import { createContext } from "react";
 import { toast } from "react-toastify";
 import supabase from "../../utils/supabase-config";
+
 export const getServerSideProps = async (context: any) => {
   const { id } = context.query;
   const { data, error } = await supabase

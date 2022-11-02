@@ -15,9 +15,11 @@ const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
 
-  const { data: AreaData, isFetching: AreaDataLoading } = useFetchArea(
-    areaInput.trim()
-  );
+  const {
+    data: AreaData,
+    isLoading,
+    isFetching: AreaDataLoading,
+  } = useFetchArea(areaInput.trim());
 
   return (
     <div className='p-2 w-full h-full flex items-center flex-col'>

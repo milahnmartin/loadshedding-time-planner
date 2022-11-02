@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const fetchSavedPlans = async ({ queryKey }: any) => {
@@ -23,6 +24,7 @@ export default function useFetchSavedPlans() {
   const [user, loading] = useAuthState(auth);
   if (!loading) {
     if (!user) {
+      toast.error("You must be logged in to view this page");
       Router.push("/auth/login");
     }
   }

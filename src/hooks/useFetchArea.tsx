@@ -11,5 +11,6 @@ export default function useFetchArea(pArea: string) {
   return useQuery([`areaData`, myDebounce], fetchAreaID, {
     refetchOnWindowFocus: false,
     enabled: myDebounce.length > 0,
+    staleTime: Infinity,
   });
 }

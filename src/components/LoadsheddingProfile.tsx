@@ -85,7 +85,7 @@ const LoadsheddingProfile = () => {
   return (
     <div className='p-2 w-full h-full flex items-center flex-col'>
       <div className='w-full flex flex-col items-center justify-start'>
-        <h1 className='font-extrabold mb-5 text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pt-4 md:text-6xl'>
+        <h1 className='font-extrabold  text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pt-4 md:text-6xl'>
           LOADSHEDDING SETTINGS
         </h1>
       </div>
@@ -133,7 +133,7 @@ const LoadsheddingProfile = () => {
           />
           <button
             onClick={handleAreaSearch}
-            className='w-full h-[3.5rem] flex justify-center items-center bg-transparent fon-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
+            className='w-full h-[3rem] flex justify-center items-center bg-transparent font-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
           >
             {loadingArea ? <ThreeDots height={20} /> : "SEARCH"}
           </button>

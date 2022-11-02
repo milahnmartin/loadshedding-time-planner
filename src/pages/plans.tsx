@@ -1,30 +1,21 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
+import { uuidv4 } from "@firebase/util";
+import { useQuery } from "@tanstack/react-query";
 import { NextPage } from "next";
 import Head from "next/head";
-import Router from "next/router";
-import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
+
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
-  const [myplans, setMyPlans] = useState<any>([]);
-  const [loadingPlans, setLoadingPlans] = useState<boolean>(true);
 
   const fetchUserPlans = async () => {
-    if (!user) {
-      toast.error("Login to view your plans", {
-        autoClose: 4000,
-      });
-      Router.push("/auth/login");
-      return;
-    }
-    const { data: UserDataInfo, error } = await supabase
+    const { data: UserDataInfo } = await supabase
       .from("user_plans")
       .select(
         `
@@ -34,19 +25,21 @@ const plans: NextPage = () => {
       .eq("user_id", user?.uid);
 
     if (UserDataInfo?.length == 0) {
-      toast.error("No plans found");
-      setLoadingPlans(false);
-      return;
+      return [];
     }
-    setMyPlans(UserDataInfo);
-    setLoadingPlans(false);
+    return UserDataInfo;
   };
+  const {
+    data: planData,
+    isLoading,
+    isError,
+  } = useQuery([`plans${user?.uid}`], fetchUserPlans, {
+    refetchOnWindowFocus: true,
+  });
 
-  useEffect(() => {
-    if (loading) return;
-    fetchUserPlans();
-  }, [loading]);
-
+  if (isError) {
+    toast.error("Error fetching plans");
+  }
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
@@ -59,12 +52,12 @@ const plans: NextPage = () => {
             MY PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
-            {/* here it comes */}
-            {loadingPlans ? (
+            {/* HERE COMES PLANS */}
+            {isLoading ? (
               <ThreeDots />
             ) : (
-              myplans.map((plan_data: any) => {
-                return <PlansLabel key={uuidv4()} plan={plan_data} />;
+              planData?.map((plan: any) => {
+                return <PlansLabel plan={plan} key={uuidv4()} />;
               })
             )}
           </div>
@@ -75,7 +68,6 @@ const plans: NextPage = () => {
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>
             {/* here it comes */}
-            <p className='text-white'>{JSON.stringify(myplans)}</p>
           </div>
         </div>
       </div>

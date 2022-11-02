@@ -4,9 +4,9 @@ import { FcExpand } from "react-icons/fc";
 const AreaLabels = ({ id, name, region, cbSetArea }: any) => {
   const [extraInfo, setExtraInfo] = useState<boolean>(false);
   return (
-    <div className='w-full h-fit flex-col'>
+    <div className='w-full h-fit flex-col '>
       <div className='font-black font-Inter flex items-center justify-end'>
-        <h1 className='w-full flex justify-start text-white'>{id}</h1>
+        <h1 className='w-full flex justify-start text-white pb-1'>{id}</h1>
         <span className='w-[10%] h-full flex justify-center items-center'>
           <FcExpand
             className={
@@ -20,9 +20,13 @@ const AreaLabels = ({ id, name, region, cbSetArea }: any) => {
         </span>
       </div>
       {extraInfo && (
-        <div className='h-fit flex flex-col justify-evenly items-center text-white font-Inter overflow-y-scroll space-y-3 pb-2'>
-          <pre>Name: {name}</pre>
-          <pre>Region: {region}</pre>
+        <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll  pb-3 border-2 border-blue-500 rounded-2xl'>
+          <h1 className='pt-1 font-bold'>NAME:</h1>
+          <h1 className='mb-3'>{name}</h1>
+
+          <h1 className='pt-1 font-bold'>REGION:</h1>
+          <h1 className='mb-3'>{region}</h1>
+
           <button
             onClick={() => cbSetArea({ id, name, region })}
             className='relative inline-flex items-center justify-center p-0.5  w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-[1.15rem] group bg-gradient-to-br from-c2aqua via-c2blue to-c2purple group-hover:from-c2aqua group-hover:via-c2blue group-hover:to-c2purple hover:text-white dark:text-white '

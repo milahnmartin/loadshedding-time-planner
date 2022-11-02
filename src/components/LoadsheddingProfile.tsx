@@ -1,6 +1,6 @@
 import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ const spanStyles = classNames(
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
+  const areaSearchRef = useRef<any>();
 
   const handleSetArea = async (newArea: IAreaData) => {
     if (!newArea) {
@@ -66,7 +67,7 @@ const LoadsheddingProfile = () => {
                 CURRENT SAVED AREA:
               </h1>
               {FetchingSavedAreaData ? (
-                <ThreeDots />
+                <ThreeDots fill='#3c79f0' />
               ) : SavedAreaData ? (
                 <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
                   <h1 className='text-blue-500 text-lg'>AREA ID:</h1>
@@ -79,9 +80,19 @@ const LoadsheddingProfile = () => {
                   <h1 className='text-blue-200 '>{SavedAreaData.name}</h1>
                 </div>
               ) : (
-                <h1 className='text-cblue font-Inter'>
-                  You have not saved any area yet
-                </h1>
+                <div className='w-full h-full flex items-center flex-col space-y-11 justify-center text-center font-Inter font-black tracking-wide'>
+                  <h1 className='text-cblue font-Inter font-black text-xl tracking-wide'>
+                    NO SAVED AREA
+                  </h1>
+                  <button
+                    onClick={() => document.getElementById("areaSearch")?.focus()}
+                    className='relative inline-flex items-center justify-center p-0.5  w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-[1.15rem] group bg-gradient-to-br from-c2aqua via-c2blue to-c2purple group-hover:from-c2aqua group-hover:via-c2blue group-hover:to-c2purple hover:text-white dark:text-white '
+                  >
+                    <span className='relative px-5 py-2.5 transition-all ease-in duration-200  w-[9.5rem] h-[2.5rem] bg-white dark:bg-gray-900 rounded-[1rem] group-hover:bg-opacity-0 font-bold'>
+                      SET AREA
+                    </span>
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -91,19 +102,22 @@ const LoadsheddingProfile = () => {
             Search For Your Loadshedding Area:
           </h1>
           <input
+            id='areaSearch'
             className='p-2 w-full rounded-xl outline-none focus:ring-2 focus:ring-cblue placeholder:text-cblue placeholder:text-center placeholder:font-Inter'
             type='text'
             name='loadshedding-area'
-            placeholder='Waterkloof, Johannesburg'
+            placeholder='Waterkloof, Durbanville, etc...'
             value={areaInput}
             onChange={(e) => setareaInput(e.target.value)}
+            autoFocus
+            ref={areaSearchRef}
           />
 
           <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
             {/* <div className='overflow-y-scroll w-full h-full'> */}
             {AreaDataLoading ? (
-              <div className='w-full h-full flex items-center justify-center border-2'>
-                <ThreeDots />
+              <div className='w-full h-full flex items-center justify-center'>
+                <ThreeDots fill='#3c79f0' />
               </div>
             ) : (
               AreaData?.map((area: IAreaData) => {

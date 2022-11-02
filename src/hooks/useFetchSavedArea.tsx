@@ -24,7 +24,7 @@ export default function useFetchSavedArea() {
   const [user, loading] = useAuthState(auth);
   return useQuery([`savedAreaData`, user?.uid], fetchAreaFromSupabase, {
     refetchOnWindowFocus: true,
-    staleTime: 120000,
+    staleTime: Infinity,
     enabled: user?.uid ? true : false,
   });
 }

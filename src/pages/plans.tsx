@@ -2,44 +2,22 @@ import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
 import { uuidv4 } from "@firebase/util";
-import { useQuery } from "@tanstack/react-query";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
-import { toast } from "react-toastify";
+import useFetchSavedPlans from "../hooks/useFetchSavedPlans";
 import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
 
 const plans: NextPage = () => {
   const [user, loading] = useAuthState(auth);
-
-  const fetchUserPlans = async () => {
-    const { data: UserDataInfo } = await supabase
-      .from("user_plans")
-      .select(
-        `
-      plan_id,plan_lsTimes,plan_authorizedUsers,plan_authorizedTeams,plan_createdAt
-      `
-      )
-      .eq("user_id", user?.uid);
-
-    if (UserDataInfo?.length == 0) {
-      return [];
-    }
-    return UserDataInfo;
-  };
   const {
-    data: planData,
-    isLoading,
+    data: savedPlans,
+    isLoading: savedPlansLoading,
     isError,
-  } = useQuery([`plans${user?.uid}`], fetchUserPlans, {
-    refetchOnWindowFocus: true,
-  });
+    isFetching,
+  } = useFetchSavedPlans();
 
-  if (isError) {
-    toast.error("Error fetching plans");
-  }
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
@@ -53,10 +31,10 @@ const plans: NextPage = () => {
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
             {/* HERE COMES PLANS */}
-            {isLoading ? (
-              <ThreeDots />
+            {isFetching ? (
+              <ThreeDots fill='#3c79f0' />
             ) : (
-              planData?.map((plan: any) => {
+              savedPlans?.map((plan: any) => {
                 return <PlansLabel plan={plan} key={uuidv4()} />;
               })
             )}

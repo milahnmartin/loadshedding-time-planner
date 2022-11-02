@@ -120,7 +120,7 @@ const LoadsheddingProfile = () => {
             Search For Your Loadshedding Area:
           </h1>
           <input
-            className='p-2 w-full rounded-xl outline-none focus:ring-2 focus:ring-cblue placeholder:text-cblue placeholder:text-center'
+            className='p-2 w-full rounded-xl outline-none focus:ring-2 focus:ring-cblue placeholder:text-cblue placeholder:text-center placeholder:font-Inter'
             type='text'
             name='loadshedding-area'
             placeholder='Waterkloof, Johannesburg'

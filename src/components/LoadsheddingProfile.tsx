@@ -1,6 +1,6 @@
 import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
@@ -17,34 +17,28 @@ const spanStyles = classNames(
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
-  const areaSearchRef = useRef<any>();
 
   const handleSetArea = async (newArea: IAreaData) => {
     if (!newArea) {
       toast.error("We were unable to set your area");
       return;
     }
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("user_info")
       .update({ user_sepushID: newArea })
-      .eq("user_id", user?.uid)
-      .select("user_sepushID->id,user_sepushID->name,user_sepushID->region");
+      .eq("user_id", user?.uid);
 
     if (error) {
       console.log(error);
       toast.error("We were unable to set your area");
       return;
     }
-
-    const { id, name, region }: any = data[0];
     setAreaRefetch();
   };
 
-  const {
-    data: AreaData,
-    isLoading,
-    isFetching: AreaDataLoading,
-  } = useFetchArea(areaInput.trim());
+  const { data: AreaData, isFetching: AreaDataLoading } = useFetchArea(
+    areaInput.trim()
+  );
 
   const {
     data: SavedAreaData,
@@ -53,31 +47,39 @@ const LoadsheddingProfile = () => {
   } = useFetchSavedArea();
 
   return (
-    <div className='p-2 w-full h-full flex items-center flex-col'>
-      <div className='w-full flex flex-col items-center justify-start'>
-        <h1 className='font-extrabold  text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pt-4 md:text-6xl'>
+    <>
+      <div className='w-full h-fit flex items-center justify-center text-center mb-4'>
+        <h1 className='font-extrabold  text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple md:text-6xl'>
           LOADSHEDDING SETTINGS
         </h1>
       </div>
-      <div className='flex w-full h-full overflow-y-scroll'>
-        <div className='w-1/2 h-full flex items-center justify-center'>
-          <div className='rounded-xl w-[22rem] h-[20rem] mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
+      <div className='flex w-full h-full overflow-y-scroll p-2'>
+        <div className='w-1/4 h-full flex items-center justify-center '>
+          <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-4 '>
               <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl '>
                 CURRENT SAVED AREA:
               </h1>
               {FetchingSavedAreaData ? (
                 <ThreeDots fill='#3c79f0' />
               ) : SavedAreaData ? (
-                <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
-                  <h1 className='text-blue-500 text-lg'>AREA ID:</h1>
-                  <h1 className='text-blue-200 '>{SavedAreaData.id}</h1>
-
-                  <h1 className='text-blue-500 text-lg'>AREA REGION:</h1>
-                  <h1 className='text-blue-200 '>{SavedAreaData.region}</h1>
-
-                  <h1 className='text-blue-500 text-lg'>AREA NAME:</h1>
-                  <h1 className='text-blue-200 '>{SavedAreaData.name}</h1>
+                <div className='w-full h-full flex items-center flex-col space-y-8 justify-center text-center font-Inter tracking-wide'>
+                  <div>
+                    <h1 className='text-blue-500 text-xl font-black'>AREA ID:</h1>
+                    <h1 className='text-blue-200 font-bold'>{SavedAreaData.id}</h1>
+                  </div>
+                  <div>
+                    <h1 className='text-blue-500 text-xl font-black'>
+                      AREA REGION:
+                    </h1>
+                    <h1 className='text-blue-200 font-bold'>
+                      {SavedAreaData.region}
+                    </h1>
+                  </div>
+                  <div>
+                    <h1 className='text-blue-500 text-xl font-black'>AREA NAME:</h1>
+                    <h1 className='text-blue-200 font-bold'>{SavedAreaData.name}</h1>
+                  </div>
                 </div>
               ) : (
                 <div className='w-full h-full flex items-center flex-col space-y-11 justify-center text-center font-Inter font-black tracking-wide'>
@@ -97,20 +99,19 @@ const LoadsheddingProfile = () => {
             </div>
           </div>
         </div>
-        <div className='w-1/2 h-full flex flex-col items-center justify-center space-y-2 p-2'>
-          <h1 className='text-white font-Inter font-black text-xl'>
-            Search For Your Loadshedding Area:
-          </h1>
+        <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4 py-2'>
+          {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
+            Search Your Area:
+          </h1> */}
           <input
             id='areaSearch'
-            className='p-2 w-full rounded-xl outline-none focus:ring-2 focus:ring-cblue placeholder:text-cblue placeholder:text-center placeholder:font-Inter'
+            className='px-4 py-2 w-full text-lg rounded-md ring-4 ring-cpurple outline-none font-black text-cblue tracking-wide font-inter focus:ring-4 focus:ring-cblue placeholder:text-cblue placeholder:text-center placeholder:font-Inter placeholder:font-black'
             type='text'
             name='loadshedding-area'
-            placeholder='Waterkloof, Durbanville, etc...'
+            placeholder='Search Your Area: Waterkloof, Durbanville etc...'
             value={areaInput}
             onChange={(e) => setareaInput(e.target.value)}
             autoFocus
-            ref={areaSearchRef}
           />
 
           <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
@@ -135,7 +136,7 @@ const LoadsheddingProfile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

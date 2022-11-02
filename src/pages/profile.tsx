@@ -33,7 +33,7 @@ const plans: NextPage = () => {
       <Navbar />
 
       <div className='h-[80%] flex mt-[3.5rem]  '>
-        <div className='w-1/3 justify-end px-5 hidden md:flex '>
+        <div className='w-1/5 justify-end px-5 hidden md:flex '>
           <div className='w-full h-full flex flex-col items-center justify-center space-y-8 p-5 '>
             <div
               id='profile'
@@ -97,8 +97,8 @@ const plans: NextPage = () => {
           </div>
           {/* Vertical Div end */}
         </div>
-        <div className='w-full flex items-center justify-center flex-col md:3/4'>
-          <div className='w-full h-full flex'>{handlePageRender(currentPage)}</div>
+        <div className='w-full flex items-center justify-center flex-col md:w-4/5'>
+          {handlePageRender(currentPage)}
         </div>
       </div>
       <Footer />

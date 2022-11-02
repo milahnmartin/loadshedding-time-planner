@@ -93,23 +93,19 @@ const LoadsheddingProfile = () => {
         <div className='w-1/2 h-full flex items-center justify-center'>
           <div className='rounded-xl w-[22rem] h-auto mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
-              <h1 className=' w-full text-center font-Inter font-black tracking-wide text-lg'>
+              <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl'>
                 CURRENT SAVED AREA:
               </h1>
               {savedUserArea.id ? (
                 <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
-                  <h1>
-                    <pre className='text-xl'>Area ID:</pre>
-                    {savedUserArea.id}
-                  </h1>
-                  <h1>
-                    <pre className='text-xl'>Area Region:</pre>
-                    {savedUserArea.region}
-                  </h1>
-                  <h1>
-                    <pre className='text-xl'>Area Name:</pre>
-                    {savedUserArea.name}
-                  </h1>
+                  <h1 className='text-blue-400 text-lg'>AREA ID:</h1>
+                  <h1 className='text-white '>{savedUserArea.id}</h1>
+
+                  <h1 className='text-blue-400 text-lg'>AREA REGION:</h1>
+                  <h1 className='text-white '>{savedUserArea.region}</h1>
+
+                  <h1 className='text-blue-400 text-lg'>AREA NAME:</h1>
+                  <h1 className='text-white '>{savedUserArea.name}</h1>
                 </div>
               ) : (
                 <h1 className='text-cblue font-Inter'>

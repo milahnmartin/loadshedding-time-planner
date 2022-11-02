@@ -10,6 +10,7 @@ import useFetchSavedArea from "../hooks/useFetchSavedArea";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
 );
@@ -57,15 +58,23 @@ const LoadsheddingProfile = () => {
         <div className='w-1/4 h-full flex items-center justify-center '>
           <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-4'>
-              <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl '>
+              <h1 className=' w-full text-center font-Inter font-black pb-8 tracking-wide text-xl '>
                 CURRENT SAVED AREA:
               </h1>
+              <Player
+                src='https://assets4.lottiefiles.com/packages/lf20_sj0skmmg.json'
+                className='player w-[200px] h-[200px] '
+                autoplay
+                loop
+                speed={1}
+                // style={{ height: "200px", width: "200px" }}
+              />
               {FetchingSavedAreaData ? (
                 <div className='w-full h-full flex items-center justify-center'>
                   <ThreeDots fill='#3c79f0' />
                 </div>
               ) : SavedAreaData ? (
-                <div className='w-full h-full flex items-center flex-col space-y-8 justify-center text-center font-Inter tracking-wide'>
+                <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center font-Inter tracking-wide'>
                   <div>
                     <h1 className='text-blue-500 text-xl font-black'>AREA ID:</h1>
                     <h1 className='text-blue-200 font-bold'>{SavedAreaData.id}</h1>
@@ -137,6 +146,34 @@ const LoadsheddingProfile = () => {
                 );
               })
             )}
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={() => console.log("YES")}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"tshwane-6-nieuwmuckleneuk"}
+              name={"tshwane-6-nieuwmuckleneuk"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={() => console.log("YES")}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={() => console.log("YES")}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"tshwane-6-nieuwmuckleneuk"}
+              name={"tshwane-6-nieuwmuckleneuk"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={() => console.log("YES")}
+            />
           </div>
         </div>
       </div>

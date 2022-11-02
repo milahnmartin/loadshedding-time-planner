@@ -119,7 +119,7 @@ const LoadsheddingProfile = () => {
             </div>
           </div>
         </div>
-        <div className='w-1/2 h-full flex flex-col items-center justify-start space-y-2 p-2'>
+        <div className='w-1/2 h-full flex flex-col items-center justify-center space-y-2 p-2'>
           <h1 className='text-white font-Inter font-black text-xl'>
             Search For Your Loadshedding Area:
           </h1>
@@ -137,8 +137,9 @@ const LoadsheddingProfile = () => {
           >
             {loadingArea ? <ThreeDots height={20} /> : "SEARCH"}
           </button>
-          <div className='overflow-y-scroll w-full h-full'>
-            {areaData.map((area: IAreaData) => {
+          <div className='overflow-y-scroll w-full h-fit  items-center justify-center'>
+            {/* <div className='overflow-y-scroll w-full h-full'> */}
+            {/* {areaData.map((area: IAreaData) => {
               return (
                 <AreaLabels
                   key={uuidv4()}
@@ -148,14 +149,56 @@ const LoadsheddingProfile = () => {
                   cbSetArea={handleSetArea}
                 />
               );
-            })}
-            {/* <AreaLabels
+            })} */}
+            <AreaLabels
               key={uuidv4()}
               id={"nelsonmandelabay-15-waterkloofwkkarea30"}
               name={"nelsonmandelabay-15-waterkloofwkkarea30"}
               region={"Nelson Mandela Bay Municipality"}
               cbSetArea={handleSetArea}
-            /> */}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
+            <AreaLabels
+              key={uuidv4()}
+              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
+              region={"Nelson Mandela Bay Municipality"}
+              cbSetArea={handleSetArea}
+            />
           </div>
         </div>
       </div>

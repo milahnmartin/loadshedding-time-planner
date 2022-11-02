@@ -105,16 +105,18 @@ const LoadsheddingProfile = () => {
           {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
             Search Your Area:
           </h1> */}
-          <input
-            id='areaSearch'
-            className='bg-black px-4 py-2 w-full text-lg rounded-md ring-2 ring-cpurple outline-none font-black text-white tracking-wide font-inter focus:ring-4 focus:ring-c2aqua placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-pink-500 placeholder:via-red-500 placeholder:to-yellow-500 placeholder:text-center placeholder:font-Inter placeholder:font-black'
-            type='text'
-            name='loadshedding-area'
-            placeholder='Search Your Area: Waterkloof, Durbanville etc...'
-            value={areaInput}
-            onChange={(e) => setareaInput(e.target.value)}
-            autoFocus
-          />
+          <span className='w-full px-1 py-1 bg-gradient-to-t from-cpurple via-pink-600 to-cblue rounded-md'>
+            <input
+              id='areaSearch'
+              className='bg-black px-4 py-2 w-full text-lg rounded-md outline-none font-black text-white tracking-wide font-inter focus:ring-4 focus:ring-c2aqua placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-pink-500 placeholder:via-red-500 placeholder:to-yellow-500 placeholder:text-center placeholder:font-Inter placeholder:font-black'
+              type='text'
+              name='loadshedding-area'
+              placeholder='Search Your Area: Waterkloof, Durbanville etc...'
+              value={areaInput}
+              onChange={(e) => setareaInput(e.target.value)}
+              autoFocus
+            />
+          </span>
 
           <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
             {/* <div className='overflow-y-scroll w-full h-full'> */}

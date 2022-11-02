@@ -7,8 +7,9 @@ const fetchAreaID = async (pArea: string) => {
 };
 
 export default function useFetchArea(pArea: string) {
-  return useQuery([`areaData`, useDebounce(pArea, 3000)], () => fetchAreaID(pArea), {
+  const myDebounce = useDebounce(pArea, 2000);
+  return useQuery([`areaData`, myDebounce], () => fetchAreaID(pArea), {
     refetchOnWindowFocus: false,
-    enabled: pArea.length > 0,
+    enabled: myDebounce.length > 0,
   });
 }

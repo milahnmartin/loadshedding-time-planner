@@ -29,12 +29,7 @@ const LoadsheddingProfile = () => {
       <div className='flex w-full h-full overflow-y-scroll'>
         <div className='w-1/2 h-full flex items-center justify-center'>
           <div className='rounded-xl w-[22rem] h-auto mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
-              <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl'>
-                CURRENT SAVED AREA:
-              </h1>
-              {/* card data */}
-            </div>
+            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '></div>
           </div>
         </div>
         <div className='w-1/2 h-full flex flex-col items-center justify-center space-y-2 p-2'>

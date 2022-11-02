@@ -1,12 +1,11 @@
-import { uuidv4 } from "@firebase/util";
 import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
-import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+import useFetchArea from "../hooks/useFetchArea";
 import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
@@ -15,72 +14,12 @@ const spanStyles = classNames(
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
-  const [debounce, setDebounce] = useState<boolean>(false);
-  const [loadingArea, setLoadingArea] = useState<boolean>(false);
-  const [areaData, setAreaData] = useState<Array<IAreaData>>([]);
-  const [savedUserArea, setSavedUserArea] = useState<IAreaData>({
-    id: null,
-    name: null,
-    region: null,
-  });
-  const handleAreaSearch = async () => {
-    if (debounce) {
-      toast.warning("You are searching too fast, please wait a bit");
-      return;
-    }
-    if (areaInput.length === 0) {
-      toast.warning("Please enter a valid area name");
-      return;
-    }
-    setLoadingArea(true);
-    areaInput.trim();
-    setDebounce(true);
-    setTimeout(() => {
-      setDebounce(false);
-    }, 30000);
-    const fetchArea = await fetch(`/api/lsplannerId/${areaInput}`);
-    const areaData = await fetchArea.json();
-    setLoadingArea(false);
-    setAreaData(areaData);
-  };
-  useEffect(() => {
-    if (!user || loading) return;
-    (async () => {
-      const { data, error } = await supabase
-        .from("user_info")
-        .select("user_sepushID->id,user_sepushID->name,user_sepushID->region")
-        .eq("user_id", user?.uid);
-      if (error) {
-        toast.error("We were unable to fetch your saved area");
-        return;
-      }
 
-      const { id, name, region }: any = data[0];
-      if (id && name && region) {
-        setSavedUserArea({ id, name, region });
-      }
-    })();
-  }, [loading]);
-  const handleSetArea = async (newArea: IAreaData) => {
-    if (!newArea) {
-      toast.error("We were unable to set your area");
-      return;
-    }
-    const { data, error } = await supabase
-      .from("user_info")
-      .update({ user_sepushID: newArea })
-      .eq("user_id", user?.uid)
-      .select("user_sepushID->id,user_sepushID->name,user_sepushID->region");
-
-    if (error) {
-      console.log(error);
-      toast.error("We were unable to set your area");
-      return;
-    }
-
-    const { id, name, region }: any = data[0];
-    setSavedUserArea({ id, name, region });
-  };
+  const {
+    data: AreaData,
+    isFetching: AreaDataLoading,
+    status,
+  } = useFetchArea(areaInput.trim());
 
   return (
     <div className='p-2 w-full h-full flex items-center flex-col'>
@@ -96,22 +35,7 @@ const LoadsheddingProfile = () => {
               <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl'>
                 CURRENT SAVED AREA:
               </h1>
-              {savedUserArea.id ? (
-                <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
-                  <h1 className='text-blue-400 text-lg'>AREA ID:</h1>
-                  <h1 className='text-white '>{savedUserArea.id}</h1>
-
-                  <h1 className='text-blue-400 text-lg'>AREA REGION:</h1>
-                  <h1 className='text-white '>{savedUserArea.region}</h1>
-
-                  <h1 className='text-blue-400 text-lg'>AREA NAME:</h1>
-                  <h1 className='text-white '>{savedUserArea.name}</h1>
-                </div>
-              ) : (
-                <h1 className='text-cblue font-Inter'>
-                  You have not saved any area yet
-                </h1>
-              )}
+              {/* card data */}
             </div>
           </div>
         </div>
@@ -127,74 +51,24 @@ const LoadsheddingProfile = () => {
             value={areaInput}
             onChange={(e) => setareaInput(e.target.value)}
           />
-          <button
-            onClick={handleAreaSearch}
-            className='w-full h-[3rem] flex justify-center items-center bg-transparent font-Inter font-black outline-none text-white border-cblue border-2 rounded-xl px-2 py-2 hover:bg-cblue hover:text-white animation-all duration-500'
-          >
-            {loadingArea ? <ThreeDots height={20} /> : "SEARCH"}
-          </button>
+
           <div className='overflow-y-scroll w-full h-fit  items-center justify-center'>
             {/* <div className='overflow-y-scroll w-full h-full'> */}
-            {/* {areaData.map((area: IAreaData) => {
-              return (
-                <AreaLabels
-                  key={uuidv4()}
-                  id={area.id}
-                  name={area.name}
-                  region={area.region}
-                  cbSetArea={handleSetArea}
-                />
-              );
-            })} */}
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={handleSetArea}
-            />
+            {AreaDataLoading ? (
+              <ThreeDots />
+            ) : (
+              AreaData?.map((area: IAreaData) => {
+                return (
+                  <AreaLabels
+                    key={uuidv4()}
+                    id={area.id}
+                    name={area.name}
+                    region={area.region}
+                    cbSetArea={() => console.log("YES")}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </div>

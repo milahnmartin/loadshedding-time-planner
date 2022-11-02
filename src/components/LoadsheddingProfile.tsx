@@ -6,7 +6,7 @@ import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import useFetchArea from "../hooks/useFetchArea";
-
+import useFetchSavedArea from "../hooks/useFetchSavedArea";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
@@ -17,7 +17,6 @@ const spanStyles = classNames(
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
-  const [savedArea, setSavedArea] = useState<IAreaData | null>(null);
 
   const handleSetArea = async (newArea: IAreaData) => {
     if (!newArea) {
@@ -37,7 +36,7 @@ const LoadsheddingProfile = () => {
     }
 
     const { id, name, region }: any = data[0];
-    setSavedArea({ id, name, region });
+    setAreaRefetch();
   };
 
   const {
@@ -45,6 +44,12 @@ const LoadsheddingProfile = () => {
     isLoading,
     isFetching: AreaDataLoading,
   } = useFetchArea(areaInput.trim());
+
+  const {
+    data: SavedAreaData,
+    isFetching: FetchingSavedAreaData,
+    refetch: setAreaRefetch,
+  } = useFetchSavedArea();
 
   return (
     <div className='p-2 w-full h-full flex items-center flex-col'>
@@ -60,16 +65,18 @@ const LoadsheddingProfile = () => {
               <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl '>
                 CURRENT SAVED AREA:
               </h1>
-              {savedArea ? (
+              {FetchingSavedAreaData ? (
+                <ThreeDots />
+              ) : SavedAreaData ? (
                 <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
                   <h1 className='text-blue-500 text-lg'>AREA ID:</h1>
-                  <h1 className='text-blue-200 '>{savedArea.id}</h1>
+                  <h1 className='text-blue-200 '>{SavedAreaData.id}</h1>
 
                   <h1 className='text-blue-500 text-lg'>AREA REGION:</h1>
-                  <h1 className='text-blue-200 '>{savedArea.region}</h1>
+                  <h1 className='text-blue-200 '>{SavedAreaData.region}</h1>
 
                   <h1 className='text-blue-500 text-lg'>AREA NAME:</h1>
-                  <h1 className='text-blue-200 '>{savedArea.name}</h1>
+                  <h1 className='text-blue-200 '>{SavedAreaData.name}</h1>
                 </div>
               ) : (
                 <h1 className='text-cblue font-Inter'>

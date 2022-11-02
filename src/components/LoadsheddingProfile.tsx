@@ -18,7 +18,7 @@ const LoadsheddingProfile = () => {
   const {
     data: AreaData,
     isFetching: AreaDataLoading,
-    status,
+    isLoading,
   } = useFetchArea(areaInput.trim());
 
   return (
@@ -52,10 +52,12 @@ const LoadsheddingProfile = () => {
             onChange={(e) => setareaInput(e.target.value)}
           />
 
-          <div className='overflow-y-scroll w-full h-fit  items-center justify-center'>
+          <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
             {/* <div className='overflow-y-scroll w-full h-full'> */}
             {AreaDataLoading ? (
-              <ThreeDots />
+              <div className='w-full h-full flex items-center justify-center border-2'>
+                <ThreeDots />
+              </div>
             ) : (
               AreaData?.map((area: IAreaData) => {
                 return (

@@ -98,14 +98,14 @@ const LoadsheddingProfile = () => {
               </h1>
               {savedUserArea.id ? (
                 <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
-                  <h1 className='text-blue-500 text-lg'>AREA ID:</h1>
-                  <h1 className='text-blue-200 '>{savedUserArea.id}</h1>
+                  <h1 className='text-blue-400 text-lg'>AREA ID:</h1>
+                  <h1 className='text-white '>{savedUserArea.id}</h1>
 
-                  <h1 className='text-blue-500 text-lg'>AREA REGION:</h1>
-                  <h1 className='text-blue-200 '>{savedUserArea.region}</h1>
+                  <h1 className='text-blue-400 text-lg'>AREA REGION:</h1>
+                  <h1 className='text-white '>{savedUserArea.region}</h1>
 
-                  <h1 className='text-blue-500 text-lg'>AREA NAME:</h1>
-                  <h1 className='text-blue-200 '>{savedUserArea.name}</h1>
+                  <h1 className='text-blue-400 text-lg'>AREA NAME:</h1>
+                  <h1 className='text-white '>{savedUserArea.name}</h1>
                 </div>
               ) : (
                 <h1 className='text-cblue font-Inter'>

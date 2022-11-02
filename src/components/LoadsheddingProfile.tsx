@@ -3,9 +3,12 @@ import classNames from "classnames";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import useFetchArea from "../hooks/useFetchArea";
+
 import { auth } from "../utils/firebase-config";
+import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
@@ -14,6 +17,28 @@ const spanStyles = classNames(
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
+  const [savedArea, setSavedArea] = useState<IAreaData | null>(null);
+
+  const handleSetArea = async (newArea: IAreaData) => {
+    if (!newArea) {
+      toast.error("We were unable to set your area");
+      return;
+    }
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({ user_sepushID: newArea })
+      .eq("user_id", user?.uid)
+      .select("user_sepushID->id,user_sepushID->name,user_sepushID->region");
+
+    if (error) {
+      console.log(error);
+      toast.error("We were unable to set your area");
+      return;
+    }
+
+    const { id, name, region }: any = data[0];
+    setSavedArea({ id, name, region });
+  };
 
   const {
     data: AreaData,
@@ -30,8 +55,28 @@ const LoadsheddingProfile = () => {
       </div>
       <div className='flex w-full h-full overflow-y-scroll'>
         <div className='w-1/2 h-full flex items-center justify-center'>
-          <div className='rounded-xl w-[22rem] h-auto mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '></div>
+          <div className='rounded-xl w-[22rem] h-[20rem] mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <div className='flex flex-col items-center h-full bg-black text-white rounded-lg p-6 '>
+              <h1 className=' w-full text-center font-Inter font-black pb-2 tracking-wide text-xl '>
+                CURRENT SAVED AREA:
+              </h1>
+              {savedArea ? (
+                <div className='w-full h-full flex items-center flex-col space-y-2 justify-center text-center font-Inter font-black tracking-wide'>
+                  <h1 className='text-blue-500 text-lg'>AREA ID:</h1>
+                  <h1 className='text-blue-200 '>{savedArea.id}</h1>
+
+                  <h1 className='text-blue-500 text-lg'>AREA REGION:</h1>
+                  <h1 className='text-blue-200 '>{savedArea.region}</h1>
+
+                  <h1 className='text-blue-500 text-lg'>AREA NAME:</h1>
+                  <h1 className='text-blue-200 '>{savedArea.name}</h1>
+                </div>
+              ) : (
+                <h1 className='text-cblue font-Inter'>
+                  You have not saved any area yet
+                </h1>
+              )}
+            </div>
           </div>
         </div>
         <div className='w-1/2 h-full flex flex-col items-center justify-center space-y-2 p-2'>
@@ -61,7 +106,7 @@ const LoadsheddingProfile = () => {
                     id={area.id}
                     name={area.name}
                     region={area.region}
-                    cbSetArea={() => console.log("YES")}
+                    cbSetArea={handleSetArea}
                   />
                 );
               })

@@ -50,6 +50,7 @@ const IndexMain = () => {
       <h1 className='text-transparent bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
         AROUND
       </h1>
+
       <h1 className='font-light font-Inter text-[2.6rem] animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
         LOADSHEDDING ?
       </h1>

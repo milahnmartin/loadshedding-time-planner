@@ -29,7 +29,8 @@ const ProfileIndex = () => {
         />
       </div>
       <div className='h-full w-full'>
-        <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+        {/* bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] */}
+        <div className='rounded-xl w-full h-full mx-auto'>
           <div className='flex flex-col items-center justify-center h-full bg-black text-white rounded-lg p-4'>
             <div className='flex items-center justify-center h-full w-[50%]'>
               {user && (
@@ -43,7 +44,7 @@ const ProfileIndex = () => {
               )}
             </div>
 
-            <div className='w-full h-full flex flex-col items-center justify-center gap-4 p-6 pb-1 text-center'>
+            <div className='h-full flex flex-col items-center justify-center gap-8 text-center'>
               <div className='flex space-x-2 items-center justify-start text-center w-full'>
                 <h3 className='text-2xl font-bold text-slate-300'>Username:</h3>
                 <p className='text-2xl font-bold text-cblue'>{user?.displayName}</p>

@@ -64,8 +64,8 @@ function Footer() {
         <hr className='my-4 mx-auto w-[75%] h-1 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple rounded md:my-10' />
         <div className='flex flex-col w-full items-center justify-center space-y-5 md:space-x-8 md:flex-row md:space-y-0'>
           <Image width={60} height={60} src={Logo} alt='Image Of Light' />
-          <h1 className='font-Inter font-extrabold text-1xl tracking-wide text-center md:text-4xl'>
-            LS TIME PLANNER
+          <h1 className='font-Inter font-bold text-2xl tracking-widest text-center'>
+            &#169; LS TIME PLANNER 2022
           </h1>
         </div>
       </div>

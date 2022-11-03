@@ -4,7 +4,7 @@ import Logo from "../pages/assets/Logov3.png";
 function Footer() {
   return (
     <div className='w-full h-full flex flex-col '>
-      <div className='w-full h-[40%] flex items-center justify-center'>
+      <div className='w-full h-[40%] flex items-end justify-center'>
         <span className='relative h-fit w-fit p-4'>
           <Image
             className='cursor-pointer'

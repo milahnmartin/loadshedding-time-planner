@@ -1,3 +1,4 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import { useState } from "react";
@@ -10,7 +11,6 @@ import useFetchSavedArea from "../hooks/useFetchSavedArea";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
 );
@@ -146,7 +146,7 @@ const LoadsheddingProfile = () => {
                 );
               })
             )}
-            <AreaLabels
+            {/* <AreaLabels
               key={uuidv4()}
               id={"nelsonmandelabay-15-waterkloofwkkarea30"}
               name={"nelsonmandelabay-15-waterkloofwkkarea30"}
@@ -173,7 +173,7 @@ const LoadsheddingProfile = () => {
               name={"tshwane-6-nieuwmuckleneuk"}
               region={"Nelson Mandela Bay Municipality"}
               cbSetArea={() => console.log("YES")}
-            />
+            /> */}
           </div>
         </div>
       </div>

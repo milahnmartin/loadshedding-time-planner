@@ -194,7 +194,6 @@ function DataControllers() {
           onChange={(e) => {
             if (Number(e.target?.value) < 1) {
               setMinPlanTimeRef(1);
-              console.log("Min Plan Time is 1");
             } else {
               setMinPlanTimeRef(Number(e.target?.value));
             }

@@ -2,6 +2,7 @@ import { IInviteData } from "@lstypes/types";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import InviteData from "./InviteData";
@@ -49,10 +50,11 @@ function NotificationModal({ inviteArray }: any) {
   };
 
   return (
-    <div className='overflow-y-scroll noti-data h-[10rem] w-[9rem] text-black text-Inter absolute bg-white -left-[5rem] top-10 rounded-md flex items-center justify-start flex-col text-center z-50 p-2'>
+    <div className='noti-data overflow-y-scroll noti-data h-[10rem] w-[9rem] text-black text-Inter absolute bg-white -left-[5rem] top-10 rounded-md flex items-center justify-start flex-col text-center z-50 p-2'>
       {inviteArray.length > 0 ? (
         inviteArray.map((invite: IInviteData) => (
           <InviteData
+            key={uuidv4()}
             cbAccept={handleInviteAccept}
             cbDecline={handleInviteDecline}
             data={invite}

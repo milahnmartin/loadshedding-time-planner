@@ -21,26 +21,23 @@ function ProfileModal() {
       id='profile-modal'
       className='h-[10rem] w-[9rem]  text-black text-Inter absolute bg-white -left-[5rem] top-16 rounded-md flex items-center justify-start flex-col text-center z-50'
     >
-      <>
-        <Link href='/profile' legacyBehavior>
-          <div className='group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-t-md outline-none border-none flex items-center justify-center'>
-            <CgProfile className='pl-3 h-9 w-9 group-hover:text-white' />
-            <h1 className='modal-data w-full font-bold tracking-wide font-Inter group-hover:text-white'>
-              PROFILE
-            </h1>
-          </div>
-        </Link>
-      </>
-      <>
-        <Link href='/plans' legacyBehavior>
-          <div className='group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-b-md outline-none border-none flex items-center justify-center text-center'>
-            <BiBookAlt className='pl-3 h-9 w-9 group-hover:text-white' />
-            <h1 className='modal-data w-full font-bold tracking-wide font-Inter group-hover:text-white'>
-              PLANS
-            </h1>
-          </div>
-        </Link>
-      </>
+      <Link href='/profile' legacyBehavior>
+        <div className='profile-modal group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-t-md outline-none border-none flex items-center justify-center'>
+          <CgProfile className='pl-3 h-9 w-9 group-hover:text-white' />
+          <h1 className='modal-data w-full font-bold tracking-wide font-Inter group-hover:text-white'>
+            PROFILE
+          </h1>
+        </div>
+      </Link>
+
+      <Link href='/plans' legacyBehavior>
+        <div className='group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-b-md outline-none border-none flex items-center justify-center text-center'>
+          <BiBookAlt className='pl-3 h-9 w-9 group-hover:text-white' />
+          <h1 className='modal-data w-full font-bold tracking-wide font-Inter group-hover:text-white'>
+            PLANS
+          </h1>
+        </div>
+      </Link>
 
       <div
         onClick={handleSignOut}

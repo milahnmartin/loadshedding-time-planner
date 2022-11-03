@@ -62,9 +62,7 @@ function Navbar() {
         plan_authorizeUsers: [user?.uid],
       });
     if (somerror) {
-      console.log(somerror);
-    } else {
-      console.log(somedata);
+      throw new Error("Something went wrong");
     }
   };
   useEffect(() => {
@@ -72,31 +70,27 @@ function Navbar() {
     if (!user && !loading) return setLoginState("LOGIN");
   }, [user, loading]);
 
-  // useEffect(() => {
-  //   document.addEventListener(
-  //     "click",
-  //     (e: any) => {
-  //       let nodeList = [...e.target.classList];
-  //       if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
-  //         setShowNotiModal(false);
-  //       }
-  //     },
-  //     { capture: true }
-  //   );
-  //   return () => {
-  //     document.removeEventListener("click", () => {}, { capture: true });
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (!user || loading) return;
     fetchUserInvites();
-  }, [notimodal, loading]);
+  }, [loading]);
+
+  useEffect(() => {
+    document.addEventListener("click", (e: any) => {
+      let nodeList = [...e.target.classList];
+      if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
+        setShowNotiModal(false);
+      }
+    });
+    return () => {
+      document.removeEventListener("click", () => {});
+    };
+  }, []);
 
   return (
     <div className='sticky top-0 z-10 bg-black'>
       <div className='h-[5rem] flex place-items-center'>
-        <div className='h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
+        <div className='noti-data h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
             <Image
               className='cursor-pointer'
@@ -123,10 +117,10 @@ function Navbar() {
             className={
               invites.length === 0
                 ? classNames(
-                    "h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
+                    "not-modal h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
                   )
                 : classNames(
-                    "h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
+                    "noti-modal h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
                   )
             }
           >

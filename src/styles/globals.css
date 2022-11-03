@@ -30,3 +30,20 @@ scrollbar-width {
 .navbarfont {
   font-size: 1rem;
 }
+
+#index-main-div {
+  animation-name: IndexAnimation;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes IndexAnimation {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

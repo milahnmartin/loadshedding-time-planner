@@ -43,11 +43,14 @@ const IndexMain = () => {
     </svg>
   );
   return (
-    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'>
-      <h1 className='text-center font-Inter text-5xl font-light text-white md:text-8xl'>
+    <div
+      id='index-main-div'
+      className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'
+    >
+      <h1 className='text-center font-Inter text-5xl font-[300] text-white md:text-8xl'>
         TRYING TO PLAN
       </h1>
-      <h1 className='text-transparent w-full text-center italic bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
+      <h1 className='text-transparent tracking-tight w-full text-center italic bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
         AROUND
       </h1>
 

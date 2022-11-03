@@ -123,7 +123,6 @@ const LoadsheddingProfile = () => {
               placeholder='Search Your Area: Waterkloof, Durbanville etc...'
               value={areaInput}
               onChange={(e) => setareaInput(e.target.value)}
-              autoFocus
             />
           </span>
 

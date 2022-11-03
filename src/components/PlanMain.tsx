@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
+import { Player } from "@lottiefiles/react-lottie-player";
 function DataControllers() {
   const router = useRouter();
   const { id } = router.query;
@@ -91,7 +92,7 @@ function DataControllers() {
     teamRefAdd.current.value = "";
   };
   return (
-    <div className='w-full h-full grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2'>
+    <div className='w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2'>
       <div className='border-2 flex flex-col items-center justify-evenly p-2'>
         <h1 className='text-white font-Inter text-2xl font-bold tracking-wide'>
           ADDED TEAMS
@@ -204,8 +205,14 @@ function DataControllers() {
           value={minPlanTimeRef}
         />
       </div>
-      <div className='border-2 flex'>
-        <h1 className='text-white'></h1>
+      <div className='border-2 flex items-center justify-center'>
+        <Player
+          src='https://assets1.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+          className='player w-[300px] h-[300px] '
+          autoplay
+          loop
+          speed={0.5}
+        />
       </div>
     </div>
   );

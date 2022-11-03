@@ -1,29 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Logo from "../pages/assets/Logov3.png";
 function Footer() {
-  const [imgSize, setImgSize] = useState<number>(200);
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setImgSize(100);
-    }
-  }, []);
   return (
-    <footer className='w-full h-full flex flex-col'>
-      <div className='w-full h-[40%] flex items-end justify-center'>
-        <span className='relative h-fit w-fit p-4'>
-          <Image
-            className='cursor-pointer'
-            height={imgSize}
-            width={imgSize}
-            src={Logo}
-            alt='Image of Logo'
-          />
-          <span className='animate-ping w-full h-full rounded-full -top-1 -left-0 bg-gradient-to-t from-cpurple via-caqua to-cblue blur-lg absolute opacity-20'></span>
-        </span>
-      </div>
-      <div className='flex flex-col items-center justify-end w-full h-[60%] text-white md:h-[55%]'>
+    <footer className='w-full h-full flex flex-col mb-10'>
+      <div className='flex flex-col items-center justify-end w-full h-full text-white'>
         <div className='w-[70%] flex flex-col items-center font-Inter space-y-10 md:flex-row md:justify-start md:space-y-0'>
           <div className='flex flex-col items-center w-[75%] space-y-5'>
             <h1 className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>

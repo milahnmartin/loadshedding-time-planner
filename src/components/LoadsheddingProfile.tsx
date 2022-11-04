@@ -37,9 +37,10 @@ const LoadsheddingProfile = () => {
     setAreaRefetch();
   };
 
-  const { data: AreaData, isFetching: AreaDataLoading } = useFetchArea(
-    areaInput.trim()
-  );
+  const {
+    data: AreaData,
+    isFetching: AreaDataLoading,
+  }: { data: any; isFetching: boolean } = useFetchArea(areaInput.trim());
 
   const {
     data: SavedAreaData,
@@ -130,23 +131,23 @@ const LoadsheddingProfile = () => {
 
           <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
             {/* <div className='overflow-y-scroll w-full h-full'> */}
-            {AreaDataLoading ? (
+            {AreaDataLoading && (
               <div className='w-full h-full flex items-center justify-center'>
                 <ThreeDots fill='#3c79f0' />
               </div>
-            ) : (
+            )}
+            {AreaData &&
               AreaData?.map((area: IAreaData) => {
                 return (
                   <AreaLabels
                     key={uuidv4()}
-                    id={area.id}
-                    name={area.name}
-                    region={area.region}
+                    id={area.id!}
+                    name={area.name!}
+                    region={area.region!}
                     cbSetArea={handleSetArea}
                   />
                 );
-              })
-            )}
+              })}
             {/* <AreaLabels
               key={uuidv4()}
               id={"nelsonmandelabay-15-waterkloofwkkarea30"}

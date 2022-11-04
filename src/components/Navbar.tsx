@@ -88,7 +88,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className='sticky top-0 z-10 bg-black'>
+    <header className='sticky top-0 z-10 bg-black'>
       <div className='h-[5rem] flex place-items-center'>
         <div className='noti-data h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
@@ -153,7 +153,7 @@ function Navbar() {
         </div>
       </div>
       <hr className='mt-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 md:mt-2' />
-    </div>
+    </header>
   );
 }
 

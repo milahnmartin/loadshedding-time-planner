@@ -50,11 +50,6 @@ const LoadsheddingProfile = () => {
 
   return (
     <>
-      <div className='w-full h-fit flex items-center justify-center text-center mb-4'>
-        <h1 className='font-extrabold  text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple md:text-6xl'>
-          LOADSHEDDING SETTINGS
-        </h1>
-      </div>
       <div className='flex w-full h-full overflow-y-scroll p-2'>
         <div className='w-1/4 h-full flex items-center justify-center '>
           <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>

@@ -11,15 +11,15 @@ type AreaLabelsProps = {
 const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
   const [extraInfo, setExtraInfo] = useState<boolean>(false);
   return (
-    <div className='w-full h-fit flex-col '>
+    <div className='w-full h-fit flex-col group'>
       <div className='font-black font-Inter flex items-center justify-end'>
         <h1 className='w-full flex justify-start text-white pb-1'>{id}</h1>
         <span className='w-[10%] h-full flex justify-center items-center'>
           <FcExpand
             className={
               extraInfo
-                ? classNames("transition-all duration-500 rotate-180 cursor-pointer")
-                : classNames("transition-all duration-500 cursor-pointer")
+                ? classNames("transition-all duration-500 rotate-30 cursor-pointer")
+                : classNames("transition-all duration-500 -rotate-90 cursor-pointer")
             }
             onClick={() => setExtraInfo((prev) => !prev)}
             size={20}
@@ -27,7 +27,7 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
         </span>
       </div>
       {extraInfo && (
-        <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll  pb-3 border-2 border-blue-500 rounded-2xl'>
+        <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll pb-3 rounded-2xl'>
           <h1 className='pt-1 font-bold'>NAME:</h1>
           <h1 className='mb-3'>{name}</h1>
 

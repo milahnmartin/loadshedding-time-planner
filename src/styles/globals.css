@@ -74,10 +74,10 @@ scrollbar-width {
 @keyframes IndexLoadshedding {
   0% {
     opacity: 0;
-    transform: scale(0.5);
+    transform: translateY(100px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }

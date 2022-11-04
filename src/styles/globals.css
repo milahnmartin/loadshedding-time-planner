@@ -31,13 +31,25 @@ scrollbar-width {
   font-size: 1rem;
 }
 
-#index-main-div {
-  animation-name: IndexAnimation;
-  animation-duration: 1s;
+#index-main-trying {
+  animation-name: IndexTrying;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
-@keyframes IndexAnimation {
+#index-main-around {
+  animation-name: IndexAround;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+#index-main-loadshedding {
+  animation-name: IndexLoadshedding;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes IndexTrying {
   0% {
     opacity: 0;
     transform: translateX(100px);
@@ -45,5 +57,27 @@ scrollbar-width {
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes IndexAround {
+  0% {
+    opacity: 0;
+    transform: translatey(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+
+@keyframes IndexLoadshedding {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

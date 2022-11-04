@@ -43,18 +43,24 @@ const IndexMain = () => {
     </svg>
   );
   return (
-    <div
-      id='index-main-div'
-      className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'
-    >
-      <h1 className='text-center font-Inter text-5xl font-[300] text-white md:text-8xl'>
+    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'>
+      <h1
+        id='index-main-trying'
+        className='text-center font-Inter text-5xl font-[300] text-white md:text-8xl'
+      >
         TRYING TO PLAN
       </h1>
-      <h1 className='text-transparent tracking-tight w-full text-center italic bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
+      <h1
+        id='index-main-around'
+        className='text-transparent tracking-tight w-full text-center italic bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
+      >
         AROUND
       </h1>
 
-      <h1 className='font-extrabold text-center font-Inter text-5xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'>
+      <h1
+        id='index-main-loadshedding'
+        className='font-extrabold text-center font-Inter text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'
+      >
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>

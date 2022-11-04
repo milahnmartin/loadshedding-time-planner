@@ -11,7 +11,7 @@ type AreaLabelsProps = {
 const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
   const [extraInfo, setExtraInfo] = useState<boolean>(false);
   return (
-    <div className='w-full h-fit flex-col group'>
+    <div className='w-full h-fit flex-col'>
       <div className='font-black font-Inter flex items-center justify-end'>
         <h1 className='w-full flex justify-start text-white pb-1'>{id}</h1>
         <span className='w-[10%] h-full flex justify-center items-center'>

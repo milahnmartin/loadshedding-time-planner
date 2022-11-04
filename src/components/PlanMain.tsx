@@ -1,12 +1,12 @@
 import RedLabel from "@comps/RedLabel";
+import { Player } from "@lottiefiles/react-lottie-player";
 import Router, { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
-import { Player } from "@lottiefiles/react-lottie-player";
 function DataControllers() {
   const router = useRouter();
   const { id } = router.query;
@@ -150,12 +150,12 @@ function DataControllers() {
         </label>
         <input
           required
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTime({
               ...time,
               endTime: {
                 ...time.endTime,
-                date: e.target.value,
+                date: e.currentTarget.value,
               },
             });
           }}
@@ -168,8 +168,8 @@ function DataControllers() {
         </label>
         <input
           required
-          onChange={(e) => {
-            setTime({ ...time, startTime: e.target.value });
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setTime({ ...time, startTime: e.currentTarget.value });
           }}
           value={time.startTime}
           className='rounded-xl px-4 py-2 text-black font-black font-Inter'
@@ -178,10 +178,10 @@ function DataControllers() {
         <label className='font-black text-white font-Inter text-2xl'>End Time</label>
         <input
           required
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTime({
               ...time,
-              endTime: { ...time.endTime, time: e.target.value },
+              endTime: { ...time.endTime, time: e.currentTarget.value },
             })
           }
           value={time.endTime.time}
@@ -192,11 +192,11 @@ function DataControllers() {
           Min Plan Time
         </label>
         <input
-          onChange={(e) => {
-            if (Number(e.target?.value) < 1) {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            if (Number(e.currentTarget?.value) < 1) {
               setMinPlanTimeRef(1);
             } else {
-              setMinPlanTimeRef(Number(e.target?.value));
+              setMinPlanTimeRef(Number(e.currentTarget?.value));
             }
           }}
           className='rounded-xl px-4 py-2 text-black font-black font-Inter'

@@ -1,7 +1,14 @@
+import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
-const AreaLabels = ({ id, name, region, cbSetArea }: any) => {
+type AreaLabelsProps = {
+  id: string;
+  name: string;
+  region: string;
+  cbSetArea: (newArea: IAreaData) => void;
+};
+const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
   const [extraInfo, setExtraInfo] = useState<boolean>(false);
   return (
     <div className='w-full h-fit flex-col '>

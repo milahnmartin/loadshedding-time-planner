@@ -54,8 +54,8 @@ module.exports = {
       },
       keyframes: {
         wiggle: {
-          "0%, 100%": { transform: "rotate(-20deg)" },
-          "50%": { transform: "rotate(20deg)" },
+          "0%, 100%": { transform: "rotate(-20deg) scale(1)" },
+          "50%": { transform: "rotate(20deg) scale(1.1)" },
         },
       },
       animation: {

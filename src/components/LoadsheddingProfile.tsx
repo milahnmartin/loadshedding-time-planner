@@ -1,7 +1,7 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
@@ -122,7 +122,9 @@ const LoadsheddingProfile = () => {
               name='loadshedding-area'
               placeholder='Search Your Area: Waterkloof, Durbanville etc...'
               value={areaInput}
-              onChange={(e) => setareaInput(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setareaInput(e.currentTarget.value)
+              }
             />
           </span>
 

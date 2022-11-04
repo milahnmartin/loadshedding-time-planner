@@ -3,7 +3,15 @@ import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
-function InviteData({ data, cbAccept, cbDecline }: any) {
+type InvDataProps = {
+  data: {
+    invitedBy: string[];
+    plan_id: string;
+  };
+  cbAccept: (planId: string) => void;
+  cbDecline: (planId: string) => void;
+};
+function InviteData({ data, cbAccept, cbDecline }: InvDataProps) {
   const [showinfo, setShowInfo] = useState<boolean>(false);
   return (
     <div className='noti-data w-full h-fit my-1 flex-col'>

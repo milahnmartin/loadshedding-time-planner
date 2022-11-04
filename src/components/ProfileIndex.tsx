@@ -42,13 +42,13 @@ const ProfileIndex = () => {
           </div>
 
           <div className='h-fit flex flex-col items-center justify-center gap-8 text-center'>
-            <div className='flex space-x-2 flex-col items-center justify-start text-center w-full'>
+            <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <h3 className='text-2xl font-bold text-slate-300'>Username:</h3>
               <p className='text-2xl font-bold text-cblue'>{user?.displayName}</p>
             </div>
-            <div className='flex space-x-2 flex-col items-center justify-start text-center w-full'>
+            <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
               <h3 className='text-2xl font-bold text-slate-300'>UUID:</h3>
-              <span className='flex'>
+              <span className='flex items-center space-x-2'>
                 <p className='text-xl font-bold text-cblue'>{user?.uid}</p>
                 <MdContentCopy
                   className='cursor-pointer h-full w-[20px] animation-all duration-200 hover:text-white/40'
@@ -59,7 +59,7 @@ const ProfileIndex = () => {
                 />
               </span>
             </div>
-            <div className='flex space-x-2 flex-col items-center justify-start text-center w-full'>
+            <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <h3 className='text-2xl font-bold text-slate-300'>Email:</h3>
               <p className='text-2xl font-bold text-cblue'>
                 {user?.email ? user?.email : "No Email Availible"}

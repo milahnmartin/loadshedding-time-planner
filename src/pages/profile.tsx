@@ -10,7 +10,7 @@ import { useState } from "react";
 import Logo from "./assets/Logov3.png";
 
 const plans: NextPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>("loadshedding");
+  const [currentPage, setCurrentPage] = useState<string>("profile");
 
   const handlePageRender = (page: string) => {
     switch (page) {

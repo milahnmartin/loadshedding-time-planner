@@ -47,7 +47,7 @@ const ProfileIndex = () => {
               <p className='text-2xl font-bold text-cblue'>{user?.displayName}</p>
             </div>
             <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
-              <h3 className='text-2xl font-bold text-slate-300'>UUID:</h3>
+              <h3 className='text-2xl font-bold text-slate-300'>ID:</h3>
               <span className='flex items-center space-x-2'>
                 <p className='text-xl font-bold text-cblue'>{user?.uid}</p>
                 <MdContentCopy

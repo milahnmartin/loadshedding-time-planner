@@ -17,6 +17,6 @@ export default async function fetchUserLSAreaID(
       },
     }
   );
-  const lsDataJson = await lsData.json();
+  let lsDataJson = await lsData.json();
   res.json(lsDataJson.areas);
 }

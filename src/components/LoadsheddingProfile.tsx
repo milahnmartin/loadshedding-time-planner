@@ -106,7 +106,7 @@ const LoadsheddingProfile = () => {
             </div>
           </div>
         </div>
-        <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4 py-2'>
+        <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4'>
           {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
             Search Your Area:
           </h1> */}

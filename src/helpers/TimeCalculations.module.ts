@@ -14,9 +14,7 @@ class TimeCalculations {
     const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
     const EarliestLSTimeSplit = EarliestLSTime.split("-")[0];
-    console.log(`endDate ${endDate}`);
     const myEndDate = new Date(endDate);
-    console.log(myEndDate.getHours());
     const EarliestLSTimeDate = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),

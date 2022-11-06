@@ -1,7 +1,7 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -33,13 +33,23 @@ function PlanMain() {
   const [users, setUsers] = useState<Array<string>>([]);
   const [teams, setTeams] = useState<Array<string>>([]);
   const [time, setTime] = useState<IStartEndTimes>({
-    startTime: "10:00",
+    startTime: {
+      date: new Date().toISOString().split("T")[0] as string,
+      time: "10:00",
+    },
     endTime: {
-      date: new Date().toString(),
-      time: "00:00",
+      date: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(),
+        new Date().getHours() + 24
+      )
+        .toISOString()
+        .split("T")[0] as string,
+      time: "02:00",
     },
   });
-  const [planData, setplanData] = useState<any>({});
+
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
 
@@ -94,115 +104,169 @@ function PlanMain() {
 
   const CalcTimes = TimeCalculations.calcAllTimes(
     ["12:00-15:00", "10:00-12:00"],
-    time.startTime,
+    time.startTime.time,
     time.endTime.time,
     minPlanTimeRef,
     time.endTime.date
   );
 
+  useEffect(() => {
+    console.log(`MY TIME DATA: ${JSON.stringify(time)}`);
+  }, [time]);
+
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
       <div className='w-full h-full md:w-1/2'>
         <div className='w-full h-[50%] flex flex-col justify-start items-center p-2 '>
-          <h1 className='text-white font-Inter font-light text-4xl'>PLAN FILTER</h1>
-          <form className='flex flex-col space-y-2 p-2 items-center justify-center w-fit'>
-            <h1 className='text-center flex items-center text-white font-black font-Inter text-xl'>
-              Plan Date:
-              <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
-                title='What Day Are You Planning For?'
-              >
-                <AiOutlineInfoCircle />
-              </span>
-            </h1>
-            <input className={inputStyles} type='date' />
-            <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
-              Min Plan Time
-              <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
-                title='How Long Must The Min Plan Time be'
-              >
-                <AiOutlineInfoCircle />
-              </span>
-            </h1>
-            <input
-              value={minPlanTimeRef}
-              onChange={(e) => {
-                if (!e.target.value) return;
-                if (+e.target.value < 1) {
-                  setMinPlanTimeRef(1);
-                  return;
-                }
-                setMinPlanTimeRef(+e.currentTarget.value);
-              }}
-              className={inputStyles}
-              type='number'
-            />
-            <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
-              Start Time:
-              <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
-                title='Start Time For Plan'
-              >
-                <AiOutlineInfoCircle />
-              </span>
-            </h1>
-            <input
-              value={time.startTime}
-              onChange={(e) => {
-                if (!e.currentTarget.value) return;
-                if (e.currentTarget.value > time.endTime.time) {
-                  let newTime = +time.endTime.time.split(":")[0]!;
-                  console.log(newTime);
-                  newTime = newTime - 1;
+          <h1 className='text-white h-fit text-center w-full font-Inter font-light text-4xl'>
+            PLAN FILTER
+          </h1>
+          <section className='flex p-2 w-full h-full'>
+            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-4'>
+              <h1 className='text-center flex items-center text-white font-black font-Inter text-xl'>
+                Start Plan Date:
+                <span
+                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
+                  title='What Day Are You Planning To Start ?'
+                >
+                  <AiOutlineInfoCircle />
+                </span>
+              </h1>
+              <input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setTime({
                     ...time,
-                    startTime: `${newTime}:00`,
-                  });
-                  return;
+                    startTime: {
+                      time: time.startTime.time,
+                      date: e.currentTarget.value,
+                    },
+                  })
                 }
-                setTime({
-                  ...time,
-                  startTime: e.currentTarget.value,
-                });
-              }}
-              className={inputStyles}
-              type='time'
-            />
-            <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
-              End Time:
-              <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
-                title='End Time For Plan'
-              >
-                <AiOutlineInfoCircle />
-              </span>
-            </h1>
-            <input
-              value={time.endTime.time}
-              onChange={(e) => {
-                if (!e.currentTarget.value) return;
-                if (e.currentTarget.value < time.startTime) {
-                  let newTime = +time.startTime.split(":")[0]!;
-                  newTime = newTime + 1;
+                value={time.startTime.date}
+                className={inputStyles}
+                type='date'
+              />
+              <h1 className='text-center flex items-center text-white font-black font-Inter text-xl'>
+                End Plan Date:
+                <span
+                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
+                  title='What Day Are You Planning To End ?'
+                >
+                  <AiOutlineInfoCircle />
+                </span>
+              </h1>
+              <input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setTime({
+                    ...time,
+                    endTime: {
+                      ...time.endTime,
+                      date: e.currentTarget.value,
+                    },
+                  })
+                }
+                value={time.endTime.date}
+                className={inputStyles}
+                type='date'
+              />
+              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+                Min Plan Time
+                <span
+                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
+                  title='How Long Must The Min Plan Time be'
+                >
+                  <AiOutlineInfoCircle />
+                </span>
+              </h1>
+              <input
+                value={minPlanTimeRef}
+                onChange={(e) => {
+                  if (!e.target.value) return;
+                  if (+e.target.value < 1) {
+                    setMinPlanTimeRef(1);
+                    return;
+                  }
+                  setMinPlanTimeRef(+e.currentTarget.value);
+                }}
+                className={inputStyles}
+                type='number'
+              />
+            </div>
+            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-4'>
+              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+                Start Time:
+                <span
+                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
+                  title='Start Time For Plan'
+                >
+                  <AiOutlineInfoCircle />
+                </span>
+              </h1>
+              <input
+                value={time.startTime.time}
+                onChange={(e) => {
+                  if (!e.currentTarget.value) return;
+                  if (e.currentTarget.value > time.endTime.time) {
+                    let newTime = +time.endTime.time.split(":")[0]!;
+                    newTime = newTime - 1;
+                    setTime({
+                      ...time,
+                      startTime: {
+                        ...time.startTime,
+                        time: `${newTime}:00`,
+                      },
+                    });
+                    return;
+                  }
+                  setTime({
+                    ...time,
+                    startTime: {
+                      ...time.startTime,
+                      time: e.currentTarget.value,
+                    },
+                  });
+                }}
+                className={inputStyles}
+                type='time'
+              />
+              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+                End Time:
+                <span
+                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
+                  title='End Time For Plan'
+                >
+                  <AiOutlineInfoCircle />
+                </span>
+              </h1>
+              <input
+                value={time.endTime.time}
+                onChange={(e) => {
+                  if (!e.currentTarget.value) return;
+                  if (e.currentTarget.value < time.startTime.time) {
+                    let newTime = +time.startTime.time.split(":")[0]!;
+                    newTime = newTime + 1;
+                    setTime({
+                      ...time,
+                      endTime: {
+                        ...time.endTime,
+                        time: `${newTime}:00`,
+                      },
+                    });
+                    return;
+                  }
                   setTime({
                     ...time,
                     endTime: {
                       date: time.endTime.date,
-                      time: `${newTime}:00`,
+                      time: e.currentTarget.value,
                     },
                   });
-                  return;
-                }
-                setTime({
-                  ...time,
-                  endTime: { date: time.endTime.date, time: e.currentTarget.value },
-                });
-              }}
-              className={inputStyles}
-              type='time'
-            />
-          </form>
+                }}
+                className={inputStyles}
+                type='time'
+              />
+            </div>
+          </section>
         </div>
         <div className='w-full h-[50%] flex p-2 overflow-y-scroll overflow-x-hidden '>
           <div className='w-1/2 h-full p-2 flex flex-col items-center space-y-2'>

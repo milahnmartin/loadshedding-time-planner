@@ -3,6 +3,7 @@ import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { AiOutlineSearch } from "react-icons/ai";
 import { ThreeDots } from "react-loading-icons";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -110,10 +111,13 @@ const LoadsheddingProfile = () => {
           {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
             Search Your Area:
           </h1> */}
-          <span className='w-full px-1 py-1 bg-gradient-to-t from-cpurple via-pink-600 to-cblue rounded-md'>
+          <span className='w-full px-1 py-1 bg-gradient-to-t from-cpurple via-pink-600 to-cblue rounded-md relative'>
+            <span className='absolute flex items-center h-full w-fit px-2 -top-[0px]'>
+              <AiOutlineSearch size={25} fill='white' />
+            </span>
             <input
               id='areaSearch'
-              className='bg-black px-4 py-2 w-full text-lg rounded-md outline-none font-black text-white tracking-wide font-inter focus:ring-4 focus:ring-c2aqua placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-pink-500 placeholder:via-red-500 placeholder:to-yellow-500 placeholder:text-center placeholder:font-Inter placeholder:font-black'
+              className='bg-black px-4 text-center py-2 w-full text-lg rounded-md outline-none font-black text-white tracking-wide font-inter focus:ring-4 focus:ring-c2aqua placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-pink-500 placeholder:via-red-500 placeholder:to-yellow-500 placeholder:text-center placeholder:font-Inter placeholder:font-black'
               type='text'
               name='loadshedding-area'
               placeholder='Search Your Area: Waterkloof, Durbanville etc...'

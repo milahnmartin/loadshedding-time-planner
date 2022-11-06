@@ -1,7 +1,7 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -103,16 +103,12 @@ function PlanMain() {
   };
 
   const CalcTimes = TimeCalculations.calcAllTimes(
-    ["12:00-15:00", "10:00-12:00"],
+    ["12:00-14:30", "15:00-16:00"],
     time.startTime.time,
     time.endTime.time,
     minPlanTimeRef,
     time.endTime.date
   );
-
-  useEffect(() => {
-    console.log(`MY TIME DATA: ${JSON.stringify(time)}`);
-  }, [time]);
 
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
@@ -206,18 +202,6 @@ function PlanMain() {
                 value={time.startTime.time}
                 onChange={(e) => {
                   if (!e.currentTarget.value) return;
-                  if (e.currentTarget.value > time.endTime.time) {
-                    let newTime = +time.endTime.time.split(":")[0]!;
-                    newTime = newTime - 1;
-                    setTime({
-                      ...time,
-                      startTime: {
-                        ...time.startTime,
-                        time: `${newTime}:00`,
-                      },
-                    });
-                    return;
-                  }
                   setTime({
                     ...time,
                     startTime: {
@@ -318,16 +302,7 @@ function PlanMain() {
               </button>
             </form>
             <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
-              {users.map((user: string) => {
-                return (
-                  <RedLabel
-                    key={user}
-                    args={false}
-                    data={user}
-                    cb={handleRemoveUser}
-                  />
-                );
-              })}
+              {/* THE LS TIMES WILL COME HERE */}
             </div>
           </div>
         </div>
@@ -338,7 +313,9 @@ function PlanMain() {
           <h1 className='text-white font-Inter text-xl'>LS TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
-              return <GreenLabel variant={MyVariant.ls} key={time} data={time} />;
+              return (
+                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
+              );
             })}
           </div>
         </div>
@@ -348,7 +325,7 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
-                <GreenLabel variant={MyVariant.availible} key={time} data={time} />
+                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
               );
             })}
           </div>
@@ -359,7 +336,7 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
-                <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
               );
             })}
           </div>

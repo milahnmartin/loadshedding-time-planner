@@ -14,7 +14,6 @@ class TimeCalculations {
     const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
     const EarliestLSTimeSplit = EarliestLSTime.split("-")[0];
-    const myEndDate = new Date(endDate);
     const EarliestLSTimeDate = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
@@ -29,14 +28,12 @@ class TimeCalculations {
       Number(UserStartTime?.split(":")[0]),
       Number(UserStartTime?.split(":")[1])
     );
-    console.log(UserStartTime);
-    console.log(EarliestLSTimeDate);
     let TimeDifference =
       (EarliestLSTimeDate.getTime() - UserStartTimeDate.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
 
     if (MaxGameTime <= CalcTimeDifference) {
-      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} min`;
+      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} START`;
     }
   };
 
@@ -67,7 +64,7 @@ class TimeCalculations {
       (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
-      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} min`
+      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} END`
       : undefined;
   };
 
@@ -77,6 +74,7 @@ class TimeCalculations {
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
+    console.log(`LENGHT: ${SortedLSTimes.length}`);
     if (SortedLSTimes.length < 2) return [];
     for (let i = 0; i < SortedLSTimes.length; i++) {
       const startTime = SortedLSTimes[i]?.split("-")[1];
@@ -97,9 +95,10 @@ class TimeCalculations {
         Number(endTime?.split(":")[1])
       );
       let diff = (end.getTime() - start.getTime()) / 1000;
+
       let pStart = (diff /= 60);
       if (MaxGameTime > pStart) continue;
-      LSTimes.push(`Start Time: ${startTime} - ${pStart} min`);
+      LSTimes.push(`Start Time: ${startTime} - ${pStart} INBETWEEN`);
     }
     return LSTimes;
   };

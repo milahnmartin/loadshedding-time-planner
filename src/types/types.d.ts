@@ -43,3 +43,5 @@ export interface IAreaData {
   name: string | null;
   region: string | null;
 }
+
+export type Variants = "ls" | "availible" | "buffer";

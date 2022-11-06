@@ -1,3 +1,4 @@
+type ResponseData = string | undefined[];
 class TimeCalculations {
   static sortLoadSheddingTime = (times: string[]): string[] => {
     const unsortedTimes = Array.from(new Set(times));
@@ -97,6 +98,21 @@ class TimeCalculations {
       LSTimes.push(`Start Time: ${startTime} - ${pStart} min`);
     }
     return LSTimes;
+  };
+  static calcAllTimes = (
+    LSTIMES: string[],
+    StartTime: string,
+    EndTime: string,
+    MaxPlanTime: number
+  ): any => {
+    const InitialStartTime = this.getInitialStartTime(
+      LSTIMES,
+      StartTime,
+      MaxPlanTime
+    );
+    const InitialEndTime = this.getInitialEndTimes(LSTIMES, EndTime, MaxPlanTime);
+    const InbetweenTimes = this.getInbetweenTimes(LSTIMES, MaxPlanTime);
+    return [InitialStartTime, ...InbetweenTimes, InitialEndTime];
   };
 }
 

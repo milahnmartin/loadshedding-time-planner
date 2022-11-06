@@ -17,7 +17,8 @@
     "noUncheckedIndexedAccess": true,
     "paths": {
       "@comps/*": ["./src/components/*"],
-      "@lstypes/*": ["./src/types/*"]
+      "@lstypes/*": ["./src/types/*"],
+      "@helpers/*": ["./src/helpers/*"]
     }
   },
 

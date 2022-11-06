@@ -1,19 +1,24 @@
-import Image from "next/image";
-import close from "../pages/assets/close.png";
-function RedLabel(props: any) {
+import classNames from "classnames";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+type LabelData = {
+  data: string;
+  args: boolean;
+  cb: (val: string) => void;
+};
+
+function RedLabel(props: LabelData) {
+  const LabelColor = classNames(
+    props.args
+      ? "text-white text-1xl rounded-full bg-orange-500 flex items-center justify-center px-2 py-2 font-Inter font-bold mb-2"
+      : "text-white text-1xl rounded-full bg-cpurple flex items-center justify-center px-2 py-2 font-Inter font-bold mb-2"
+  );
   return (
-    <div
-      id='bubbled-red-label-container'
-      className='text-white text-1xl rounded-full bg-red-500 flex items-center justify-center px-2 py-2 font-Inter font-bold mb-2'
-    >
+    <div id='bubbled-red-label-container' className={LabelColor}>
       <h1 className='mx-2'>{props.data}</h1>
-      <Image
+      <AiOutlineCloseCircle
+        className='cursor-pointer relative top-[1px] hover:animate-pulse'
         onClick={() => props.cb(props.data)}
-        className='cursor-pointer'
-        src={close}
-        width={20}
-        height={20}
-        alt='close img'
+        size={20}
       />
     </div>
   );

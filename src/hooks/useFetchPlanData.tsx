@@ -36,5 +36,6 @@ export default function useFetchPlanData(planID: string) {
     refetchOnWindowFocus: true,
     staleTime: 120000,
     retry: 0,
+    enabled: !!planID && !loading,
   });
 }

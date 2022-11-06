@@ -33,7 +33,7 @@ class TimeCalculations {
     let CalcTimeDifference = (TimeDifference /= 60);
 
     if (MaxGameTime <= CalcTimeDifference) {
-      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} START`;
+      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} MIN`;
     }
   };
 
@@ -64,7 +64,7 @@ class TimeCalculations {
       (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
-      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} END`
+      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN`
       : undefined;
   };
 
@@ -98,7 +98,7 @@ class TimeCalculations {
 
       let pStart = (diff /= 60);
       if (MaxGameTime > pStart) continue;
-      LSTimes.push(`Start Time: ${startTime} - ${pStart} INBETWEEN`);
+      LSTimes.push(`Start Time: ${startTime} - ${pStart} MIN`);
     }
     return LSTimes;
   };

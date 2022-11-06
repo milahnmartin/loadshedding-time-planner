@@ -325,7 +325,9 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
-                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
+                time && (
+                  <GreenLabel variant={MyVariant.availible} key={time} data={time} />
+                )
               );
             })}
           </div>
@@ -336,7 +338,9 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
-                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
+                time && (
+                  <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                )
               );
             })}
           </div>

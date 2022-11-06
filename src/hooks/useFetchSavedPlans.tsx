@@ -31,6 +31,6 @@ export default function useFetchSavedPlans() {
   return useQuery([`savedplans`, user?.uid], fetchSavedPlans, {
     refetchOnWindowFocus: true,
     staleTime: 180000,
-    enabled: user?.uid ? true : false,
+    enabled: !loading && !!user,
   });
 }

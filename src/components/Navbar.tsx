@@ -1,4 +1,3 @@
-import NotificationModal from "@comps/NotificationModal";
 import UserProfile from "@comps/UserProfile";
 import classNames from "classnames";
 import Image from "next/image";
@@ -14,7 +13,7 @@ import supabase from "../utils/supabase-config";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
-  const [notimodal, setShowNotiModal] = useState<boolean>(false);
+
   const [invites, setInvites] = useState<Array<any>>([]);
 
   const fetchUserInvites = async () => {
@@ -75,18 +74,6 @@ function Navbar() {
     fetchUserInvites();
   }, [loading]);
 
-  useEffect(() => {
-    document.addEventListener("click", (e: any) => {
-      let nodeList = [...e.target.classList];
-      if (e.target.id !== "bell-icon" && !nodeList.includes("noti-data")) {
-        setShowNotiModal(false);
-      }
-    });
-    return () => {
-      document.removeEventListener("click", () => {});
-    };
-  }, []);
-
   return (
     <header className='sticky top-0 z-10 bg-black'>
       <div className='h-[5rem] flex place-items-center'>
@@ -127,7 +114,7 @@ function Navbar() {
             {
               <IoMdNotificationsOutline
                 id='bell-icon'
-                onClick={() => setShowNotiModal((prev) => !prev)}
+                onClick={() => Router.push("/invites")}
                 className={
                   invites.length > 0
                     ? classNames(
@@ -138,8 +125,6 @@ function Navbar() {
                 size={25}
               />
             }
-
-            {notimodal && <NotificationModal inviteArray={invites} />}
           </span>
           {user && !loading ? (
             <UserProfile src={user?.photoURL} />

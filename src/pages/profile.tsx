@@ -31,7 +31,6 @@ const plans: NextPage = () => {
         <title>LS Time Planner / Profile</title>
       </Head>
       <Navbar />
-
       <div className='h-[80%] flex mt-[3.5rem]  '>
         <div className='w-1/5 justify-end px-5 hidden md:flex '>
           <div className='w-full h-full flex flex-col items-center justify-center space-y-8 p-5 '>

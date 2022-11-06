@@ -24,7 +24,7 @@ const plans: NextPage = () => {
         <title>LS Time Planner / Plans</title>
       </Head>
       <Navbar />
-      <div className='w-full h-full border-white border-2 p-2 grid grid-cols-1 grid-rows-2'>
+      <div className='w-full h-[90%] p-2 grid grid-cols-2 grid-rows-1'>
         <div className='flex justify-start flex-col'>
           <div className='flex text-2xl text-white font-bold h-[10%] align-center justify-center content-center'>
             MY PLANS
@@ -45,7 +45,13 @@ const plans: NextPage = () => {
             INVITED PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>
-            {/* here it comes */}
+            {isFetching ? (
+              <ThreeDots fill='#3c79f0' />
+            ) : (
+              savedPlans?.map((plan: any) => {
+                return <PlansLabel plan={plan} key={uuidv4()} />;
+              })
+            )}
           </div>
         </div>
       </div>

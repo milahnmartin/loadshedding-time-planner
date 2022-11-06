@@ -226,18 +226,6 @@ function PlanMain() {
                 value={time.endTime.time}
                 onChange={(e) => {
                   if (!e.currentTarget.value) return;
-                  if (e.currentTarget.value < time.startTime.time) {
-                    let newTime = +time.startTime.time.split(":")[0]!;
-                    newTime = newTime + 1;
-                    setTime({
-                      ...time,
-                      endTime: {
-                        ...time.endTime,
-                        time: `${newTime}:00`,
-                      },
-                    });
-                    return;
-                  }
                   setTime({
                     ...time,
                     endTime: {

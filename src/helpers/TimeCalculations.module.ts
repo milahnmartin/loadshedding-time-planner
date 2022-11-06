@@ -5,11 +5,14 @@ class TimeCalculations {
     return unsortedTimes.sort() as string[];
   };
 
+  static calcBufferTimes = (times: string[]) => {
+    const sortedTimes = this.sortLoadSheddingTime(times);
+  };
+
   static getInitialStartTime = (
     LoadSheddingTimes: string[],
     UserStartTime: string,
-    MaxGameTime: number,
-    endDate: string
+    MaxGameTime: number
   ): string | undefined => {
     const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
@@ -40,11 +43,14 @@ class TimeCalculations {
   static getInitialEndTimes = (
     LoadSheddingTimes: string[],
     UserEndTime: string,
-    MaxGameTime: number
+    MaxGameTime: number,
+    endDate: string
   ) => {
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
     const LatestLSTime: string = SortedLSTimes[SortedLSTimes.length - 1]!;
     if (!LatestLSTime) return;
+    const newEndDate = new Date(endDate);
+    console.log(endDate);
     const LatestLSTimeSplit = LatestLSTime.split("-")[1];
     const LastLoadsheddingTime = new Date(
       new Date().getFullYear(),
@@ -54,14 +60,14 @@ class TimeCalculations {
       Number(LatestLSTimeSplit?.split(":")[1])
     );
     const LastGameTime = new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate(),
+      newEndDate.getFullYear(),
+      newEndDate.getMonth(),
+      newEndDate.getDate(),
       Number(UserEndTime?.split(":")[0]),
       Number(UserEndTime?.split(":")[1])
     );
     let TimeDifference =
-      (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
+      (LastGameTime.getTime() - LastLoadsheddingTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
       ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN`
@@ -74,7 +80,6 @@ class TimeCalculations {
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
-    console.log(`LENGHT: ${SortedLSTimes.length}`);
     if (SortedLSTimes.length < 2) return [];
     for (let i = 0; i < SortedLSTimes.length; i++) {
       const startTime = SortedLSTimes[i]?.split("-")[1];
@@ -112,10 +117,14 @@ class TimeCalculations {
     const InitialStartTime = this.getInitialStartTime(
       LSTIMES,
       StartTime,
-      MaxPlanTime,
-      EndDate
+      MaxPlanTime
     );
-    const InitialEndTime = this.getInitialEndTimes(LSTIMES, EndTime, MaxPlanTime);
+    const InitialEndTime = this.getInitialEndTimes(
+      LSTIMES,
+      EndTime,
+      MaxPlanTime,
+      EndDate.split("T")[0]!
+    );
     const InbetweenTimes = this.getInbetweenTimes(LSTIMES, MaxPlanTime);
     console.log([[InitialStartTime], [...InbetweenTimes], [InitialEndTime]]);
     return [InitialStartTime, ...InbetweenTimes, InitialEndTime];

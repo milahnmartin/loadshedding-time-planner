@@ -2,24 +2,27 @@ type ResponseData = string | undefined[];
 class TimeCalculations {
   static sortLoadSheddingTime = (times: string[]): string[] => {
     const unsortedTimes = Array.from(new Set(times));
-    return unsortedTimes.sort();
+    return unsortedTimes.sort() as string[];
   };
 
   static getInitialStartTime = (
     LoadSheddingTimes: string[],
     UserStartTime: string,
-    MaxGameTime: number
+    MaxGameTime: number,
+    endDate: string
   ): string | undefined => {
-    const EarliestLSTime: string | undefined =
-      this.sortLoadSheddingTime(LoadSheddingTimes)[0];
+    const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
     const EarliestLSTimeSplit = EarliestLSTime.split("-")[0];
+    console.log(`endDate ${endDate}`);
+    const myEndDate = new Date(endDate);
+    console.log(myEndDate.getHours());
     const EarliestLSTimeDate = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
       new Date().getDate(),
-      Number(EarliestLSTimeSplit?.split(":")[0]),
-      Number(EarliestLSTimeSplit?.split(":")[1])
+      +EarliestLSTimeSplit?.split(":")[0],
+      +EarliestLSTimeSplit?.split(":")[1]
     );
     const UserStartTimeDate = new Date(
       new Date().getFullYear(),
@@ -28,12 +31,15 @@ class TimeCalculations {
       Number(UserStartTime?.split(":")[0]),
       Number(UserStartTime?.split(":")[1])
     );
+    console.log(UserStartTime);
+    console.log(EarliestLSTimeDate);
     let TimeDifference =
       (EarliestLSTimeDate.getTime() - UserStartTimeDate.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
-    return MaxGameTime <= CalcTimeDifference
-      ? ` Start Time: ${UserStartTime} - ${CalcTimeDifference} min`
-      : undefined;
+
+    if (MaxGameTime <= CalcTimeDifference) {
+      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} min`;
+    }
   };
 
   static getInitialEndTimes = (
@@ -103,15 +109,18 @@ class TimeCalculations {
     LSTIMES: string[],
     StartTime: string,
     EndTime: string,
-    MaxPlanTime: number
+    MaxPlanTime: number,
+    EndDate: string
   ): any => {
     const InitialStartTime = this.getInitialStartTime(
       LSTIMES,
       StartTime,
-      MaxPlanTime
+      MaxPlanTime,
+      EndDate
     );
     const InitialEndTime = this.getInitialEndTimes(LSTIMES, EndTime, MaxPlanTime);
     const InbetweenTimes = this.getInbetweenTimes(LSTIMES, MaxPlanTime);
+    console.log([[InitialStartTime], [...InbetweenTimes], [InitialEndTime]]);
     return [InitialStartTime, ...InbetweenTimes, InitialEndTime];
   };
 }

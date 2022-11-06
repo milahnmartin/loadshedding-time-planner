@@ -10,10 +10,11 @@ import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
+
 const enum MyVariant {
   ls = "ls",
   availible = "availible",
-  notAvailible = "notAvailible",
+  buffer = "buffer",
 }
 const inputStyles = classNames(
   "rounded-md w-full px-2 py-1 text-center outline-none border-none ring-2 ring-cblue focus:ring-4 focus:ring-cpurple font-Inter font-black text-transparent bg-clip-text bg-gradient-to-r from-cblue to-cpurple"
@@ -91,11 +92,12 @@ function PlanMain() {
     teamRefAdd.current.value = "";
   };
 
-  const calcedTimes = TimeCalculations.calcAllTimes(
-    ["12:00-15:00"],
+  const CalcTimes = TimeCalculations.calcAllTimes(
+    ["12:00-15:00", "10:00-12:00"],
     time.startTime,
     time.endTime.time,
-    minPlanTimeRef
+    minPlanTimeRef,
+    time.endTime.date
   );
 
   return (
@@ -270,13 +272,17 @@ function PlanMain() {
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
           <h1 className='text-white font-Inter text-xl'>LS TIMES:</h1>
-          <div className='flex gap-1'></div>
+          <div className='flex gap-1 pt-2'>
+            {CalcTimes.map((time: string) => {
+              return <GreenLabel variant={MyVariant.ls} key={time} data={time} />;
+            })}
+          </div>
         </div>
         {/* def availible times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
           <h1 className='text-white font-Inter text-xl'>AVAILIBLE TIMES:</h1>
-          <div className='flex gap-1 py-2'>
-            {calcedTimes.map((time: string) => {
+          <div className='flex gap-1 pt-2'>
+            {CalcTimes.map((time: string) => {
               return (
                 <GreenLabel variant={MyVariant.availible} key={time} data={time} />
               );
@@ -286,7 +292,13 @@ function PlanMain() {
         {/* buffer slot times (30min) */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
           <h1 className='text-white font-Inter text-xl'>BUFFER TIMES:</h1>
-          <div className='flex gap-1'></div>
+          <div className='flex gap-1 pt-2'>
+            {CalcTimes.map((time: string) => {
+              return (
+                <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

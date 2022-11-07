@@ -60,9 +60,9 @@ const ProfileIndex = () => {
               </span>
             </div>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
-              <h3 className='text-2xl font-bold text-slate-300'>Email:</h3>
+              <h3 className='text-2xl font-bold text-slate-300'>Invite Name:</h3>
               <p className='text-2xl font-bold text-cblue'>
-                {user?.email ? user?.email : "No Email Availible"}
+                {user?.email ? user?.email : user?.displayName}
               </p>
             </div>
           </div>

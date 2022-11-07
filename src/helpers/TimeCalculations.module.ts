@@ -33,7 +33,7 @@ class TimeCalculations {
     let CalcTimeDifference = (TimeDifference /= 60);
 
     if (MaxGameTime <= CalcTimeDifference) {
-      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} MIN`;
+      return `Start Time: ${UserStartTime} - ${CalcTimeDifference} MIN~`;
     }
   };
 
@@ -64,18 +64,26 @@ class TimeCalculations {
       (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
-      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN`
+      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN--`
       : undefined;
   };
 
   static getInbetweenTimes = (
     LoadSheddingTimes: string[],
-    MaxGameTime: number
+    MaxGameTime: number,
+    UserStartTime: string
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
     console.log(`LENGHT: ${SortedLSTimes.length}`);
     if (SortedLSTimes.length < 2) return [];
+    const UserStartTimeDate = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      Number(UserStartTime?.split(":")[0]),
+      Number(UserStartTime?.split(":")[1])
+    );
     for (let i = 0; i < SortedLSTimes.length; i++) {
       const startTime = SortedLSTimes[i]?.split("-")[1];
       const endTime = SortedLSTimes[i + 1]?.split("-")[0];
@@ -94,11 +102,13 @@ class TimeCalculations {
         Number(endTime?.split(":")[0]),
         Number(endTime?.split(":")[1])
       );
+      let startTimeCalc = (start.getTime() - UserStartTimeDate.getTime()) / 1000;
+      let startTimeDiff = (startTimeCalc /= 60);
       let diff = (end.getTime() - start.getTime()) / 1000;
-
       let pStart = (diff /= 60);
-      if (MaxGameTime > pStart) continue;
-      LSTimes.push(`Start Time: ${startTime} - ${pStart} MIN`);
+
+      if (MaxGameTime > pStart || startTimeDiff < 1) continue;
+      LSTimes.push(`Start Time: ${startTime} - ${pStart} MIN++`);
     }
     return LSTimes;
   };
@@ -124,7 +134,7 @@ class TimeCalculations {
       EndDate
     );
     const InitialEndTime = this.getInitialEndTimes(mytimes, EndTime, MaxPlanTime);
-    const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime);
+    const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime, StartTime);
     return [InitialStartTime, ...InbetweenTimes, InitialEndTime];
   };
 }

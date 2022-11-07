@@ -298,7 +298,7 @@ function PlanMain() {
                 className={inputStyles}
                 type='text'
               />
-              <button className='px-4 py-2 text-white bg-black border-cblue border-2 rounded-xl w-[30%] hover:bg-cblue animation-all duration-300'>
+              <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
                 ADD TEAM
               </button>
             </form>
@@ -329,7 +329,7 @@ function PlanMain() {
               />
               <button
                 type='submit'
-                className='px-4 py-2 text-white bg-black border-cblue border-2 rounded-xl w-[30%] hover:bg-cblue animation-all duration-300'
+                className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
               >
                 ADD USER
               </button>

@@ -353,7 +353,7 @@ function PlanMain() {
       <div className='w-full h-full border-sky-500 border-2 flexs flex-col p-2 md:w-1/2'>
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>LS TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>LOADSHEDDING TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
@@ -364,7 +364,7 @@ function PlanMain() {
         </div>
         {/* def availible times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>AVAILIBLE TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>AVAILIBLE TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
@@ -377,7 +377,7 @@ function PlanMain() {
         </div>
         {/* buffer slot times (30min) */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>BUFFER TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>BUFFER TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (

@@ -1,11 +1,10 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
-import useFetchPlanData from "../hooks/useFetchPlanData";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
@@ -50,23 +49,22 @@ function PlanMain() {
       time: "02:00",
     },
   });
-  const [lstimes, setlstimes] = useState<any>([]);
 
+  const [lstimes, setlstimes] = useState<any>([]);
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
-
-  const {
-    data: fetchedPlanData,
-    isError,
-    isFetching,
-  } = useFetchPlanData(id as string);
-
   const inputRef = useRef<HTMLInputElement>(null);
   const inviteRef = useRef<HTMLInputElement>(null);
 
   const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
+    const newLsTimes = lstimes.filter(
+      (owner: { user: string; times: string[] }, i: any): any => {
+        return owner.user !== val;
+      }
+    );
+    setlstimes(newLsTimes);
   };
   const handleRemoveTeam = (val: string) => {
     const newTeams = teams.filter((team, i) => team !== val);
@@ -154,20 +152,25 @@ function PlanMain() {
     teamRefAdd.current.value = "";
   };
 
-  const CalcTimes = TimeCalculations.calcAllTimes(
-    lstimes,
-    time.startTime.time,
-    time.endTime.time,
-    minPlanTimeRef,
-    time.endTime.date
+  const memoCalcTimes = useMemo(
+    () =>
+      TimeCalculations.calcAllTimes(
+        lstimes,
+        time.startTime.time,
+        time.endTime.time,
+        minPlanTimeRef,
+        time.endTime.date
+      ),
+    [lstimes, teams, time]
   );
-  const grabDeconstructedTimes = () => {
+  const memoDeconstructTimes = useMemo(() => {
     const times = [];
     for (let info of lstimes) {
       times.push(...info.times);
     }
     return TimeCalculations.sortLoadSheddingTime(times);
-  };
+  }, [lstimes]);
+
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
       <div className='w-full h-full md:w-1/2'>
@@ -377,7 +380,7 @@ function PlanMain() {
           </h1>
 
           <div className='flex gap-1 pt-2 text-white'>
-            {grabDeconstructedTimes().map((time: string) => {
+            {memoDeconstructTimes.map((time: string) => {
               return <GreenLabel variant='ls' data={time} key={time} />;
             })}
           </div>
@@ -394,7 +397,7 @@ function PlanMain() {
             </span>
           </h1>
           <div className='flex gap-1 pt-2'>
-            {CalcTimes.map((time: string) => {
+            {memoCalcTimes.map((time: string) => {
               return (
                 time && (
                   <GreenLabel variant={MyVariant.availible} key={time} data={time} />
@@ -415,7 +418,7 @@ function PlanMain() {
             </span>
           </h1>
           <div className='flex gap-1 pt-2'>
-            {CalcTimes.map((time: string) => {
+            {memoCalcTimes.map((time: string) => {
               return (
                 time && (
                   <GreenLabel variant={MyVariant.buffer} key={time} data={time} />

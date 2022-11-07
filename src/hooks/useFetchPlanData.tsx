@@ -34,7 +34,7 @@ export default function useFetchPlanData(planID: string) {
   }
   return useQuery([`specificPlan`, planID], fetchPlanData, {
     refetchOnWindowFocus: true,
-    staleTime: 120000,
+    staleTime: Infinity,
     retry: 0,
     enabled: !!planID && !loading,
   });

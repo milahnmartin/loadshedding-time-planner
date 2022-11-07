@@ -306,7 +306,7 @@ function PlanMain() {
                 className={inputStyles}
                 type='text'
               />
-              <button className='px-4 py-2 text-white bg-black border-cblue border-2 rounded-xl w-[30%] hover:bg-cblue animation-all duration-300'>
+              <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
                 ADD TEAM
               </button>
             </form>
@@ -337,7 +337,7 @@ function PlanMain() {
               />
               <button
                 type='submit'
-                className='px-4 py-2 text-white bg-black border-cblue border-2 rounded-xl w-[30%] hover:bg-cblue animation-all duration-300'
+                className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
               >
                 ADD USER
               </button>
@@ -361,7 +361,7 @@ function PlanMain() {
       <div className='w-full h-full border-sky-500 border-2 flexs flex-col p-2 md:w-1/2'>
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>LS TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>LS TIMES:</h1>
           <div className='flex gap-1 pt-2 text-white'>
             {grabDeconstructedTimes().map((time: string) => {
               return <GreenLabel variant='ls' data={time} key={time} />;
@@ -370,7 +370,7 @@ function PlanMain() {
         </div>
         {/* def availible times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>AVAILIBLE TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>AVAILABLE TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
@@ -383,7 +383,7 @@ function PlanMain() {
         </div>
         {/* buffer slot times (30min) */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-Inter text-xl'>BUFFER TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>BUFFER TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (

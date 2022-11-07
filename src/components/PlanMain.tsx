@@ -163,6 +163,7 @@ function PlanMain() {
       ),
     [lstimes, teams, time]
   );
+
   const memoDeconstructTimes = useMemo(() => {
     const times = [];
     for (let info of lstimes) {
@@ -397,7 +398,7 @@ function PlanMain() {
             </span>
           </h1>
           <div className='flex gap-1 pt-2'>
-            {memoCalcTimes.map((time: string) => {
+            {memoCalcTimes[0]?.map((time: string) => {
               return (
                 time && (
                   <GreenLabel variant={MyVariant.availible} key={time} data={time} />
@@ -418,7 +419,7 @@ function PlanMain() {
             </span>
           </h1>
           <div className='flex gap-1 pt-2'>
-            {memoCalcTimes.map((time: string) => {
+            {memoCalcTimes[1]?.map((time: string) => {
               return (
                 time && (
                   <GreenLabel variant={MyVariant.buffer} key={time} data={time} />

@@ -64,7 +64,7 @@ class TimeCalculations {
       (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
-      ? ` Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN--`
+      ? `Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN--`
       : undefined;
   };
 
@@ -135,7 +135,31 @@ class TimeCalculations {
     );
     const InitialEndTime = this.getInitialEndTimes(mytimes, EndTime, MaxPlanTime);
     const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime, StartTime);
-    return [InitialStartTime, ...InbetweenTimes, InitialEndTime];
+    const avTimes = [InitialStartTime, ...InbetweenTimes, InitialEndTime];
+    return [avTimes, this.calcBufferTimes(avTimes)];
+  };
+  static calcBufferTimes = (args: any): string[] => {
+    const bufferTimes: string[] = [];
+    for (let i of args) {
+      if (!i) continue;
+      const calcDate = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(),
+        +i?.split(" ")[2].split(":")[0],
+        +i?.split(" ")[2].split(":")[1] - 30
+      );
+      console.log(calcDate.getMinutes());
+      const newMin = +i.split(" ")[4] + 30;
+      bufferTimes.push(
+        `Start Time: ${
+          calcDate.getHours() +
+          ":" +
+          (calcDate.getMinutes() === 0 ? "00" : calcDate.getMinutes())
+        } - ${newMin} MIN?`
+      );
+    }
+    return bufferTimes;
   };
 }
 

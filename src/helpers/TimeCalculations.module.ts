@@ -75,7 +75,6 @@ class TimeCalculations {
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
-    console.log(`LENGHT: ${SortedLSTimes.length}`);
     if (SortedLSTimes.length < 2) return [];
     const UserStartTimeDate = new Date(
       new Date().getFullYear(),
@@ -125,8 +124,6 @@ class TimeCalculations {
     for (let info of LSTIMES) {
       mytimes.push(...info.times);
     }
-
-    console.log(mytimes);
     const InitialStartTime = this.getInitialStartTime(
       mytimes,
       StartTime,
@@ -149,7 +146,6 @@ class TimeCalculations {
         +i?.split(" ")[2].split(":")[0],
         +i?.split(" ")[2].split(":")[1] - 30
       );
-      console.log(calcDate.getMinutes());
       const newMin = +i.split(" ")[4] + 30;
       bufferTimes.push(
         `Start Time: ${

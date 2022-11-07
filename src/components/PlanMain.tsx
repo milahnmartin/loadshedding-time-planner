@@ -364,7 +364,7 @@ function PlanMain() {
         </div>
         {/* def availible times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl'>AVAILIBLE TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl'>AVAILABLE TIMES:</h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (

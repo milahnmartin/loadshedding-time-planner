@@ -97,9 +97,14 @@ function PlanMain() {
       toast.error("No User Found");
       return;
     }
+    const { id }: any = data[0];
+
+    if (!id) {
+      toast.warning("User has not linked their loadshedding area yet");
+      return;
+    }
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
-    const { id }: any = data[0];
 
     const fetchedUserTimes = await fetch(
       `/api/sepush/${id}/${time.startTime.date}}`,

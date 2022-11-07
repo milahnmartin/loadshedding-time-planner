@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useFetchPlanData from "../hooks/useFetchPlanData";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
+import supabase from "../utils/supabase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
 
@@ -49,6 +50,7 @@ function PlanMain() {
       time: "02:00",
     },
   });
+  const [lstimes, setlstimes] = useState<Array<string>>([]);
 
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
@@ -70,25 +72,68 @@ function PlanMain() {
     const newTeams = teams.filter((team, i) => team !== val);
     setTeams(newTeams);
   };
-  const handleAddUsers = (e: React.FormEvent) => {
+  const handleAddUsers = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userRefAdd?.current?.value) {
+    if (!userRefAdd?.current?.value.trim()) {
       toast.warning("Nothing Was Entered");
       return;
     }
 
-    const splitedNewUsers = userRefAdd.current.value
-      ?.trim()
-      .toLowerCase()
-      .split(",");
-    const newUsers = Array.from(new Set([...users, ...splitedNewUsers]));
-    setUsers(newUsers);
+    const inputRef = userRefAdd.current.value.trim();
+
+    const splitedNewUsers = inputRef?.trim().toLowerCase();
+
     userRefAdd.current.value = "";
+    const { data, error } = await supabase
+      .from("user_info")
+      .select("user_sepushID->id")
+      .or(`user_id.eq.${inputRef},user_email.eq.${inputRef.toLowerCase()}`);
+
+    console.log(inputRef);
+    if (error) {
+      console.log(error);
+      return;
+    }
+    if (data.length === 0) {
+      toast.error("No User Found");
+      return;
+    }
+    const newUsers = Array.from(new Set([...users, splitedNewUsers]));
+    setUsers(newUsers);
+    const { id }: any = data[0];
+    console.log(`/api/sepush/${id}/${time.startTime.date}`);
+    const fetchedUserTimes = await fetch(
+      `/api/sepush/${id}/${time.startTime.date}}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const jsonedUserTimes = await fetchedUserTimes.json();
+    const currentLoasheddingStage = jsonedUserTimes.currentStage;
+    const loadsheddingData = jsonedUserTimes.lsdata;
+
+    const specifiedStartDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+        return day.date === time.startTime.date;
+      }
+    )[0];
+    const specifiedEndDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+        return day.date === time.endTime.date;
+      }
+    )[0];
+    setlstimes((prev) => [
+      ...prev,
+      ...specifiedStartDateTimes.stages[currentLoasheddingStage - 1],
+    ]);
   };
 
   const handleAddTeam = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!teamRefAdd?.current?.value) {
+    if (!teamRefAdd?.current?.value.trim()) {
       toast.warning("Nothing Was Entered");
       return;
     }
@@ -103,7 +148,7 @@ function PlanMain() {
   };
 
   const CalcTimes = TimeCalculations.calcAllTimes(
-    ["12:00-14:30", "15:00-16:00"],
+    lstimes,
     time.startTime.time,
     time.endTime.time,
     minPlanTimeRef,
@@ -291,6 +336,16 @@ function PlanMain() {
             </form>
             <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
               {/* THE LS TIMES WILL COME HERE */}
+              {users.map((user: string) => {
+                return (
+                  <RedLabel
+                    key={user}
+                    args={false}
+                    data={user}
+                    cb={handleRemoveUser}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

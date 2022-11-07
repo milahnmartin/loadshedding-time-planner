@@ -6,10 +6,12 @@ export default async function fetchUserLSTimesById(
   if (req.method !== "GET") {
     res.status(405).json({ message: "Method not allowed" });
   }
+  console.log("I WAS HIT");
+
   const pushID = req.query.id;
   const pushDate = req.query.date;
   const lsData = await fetch(
-    `https://developer.sepush.co.za/business/2.0/area?id=${pushID}&test=current`,
+    `https://developer.sepush.co.za/business/2.0/area?id=${pushID}`,
     {
       method: "GET",
       headers: {
@@ -19,17 +21,12 @@ export default async function fetchUserLSTimesById(
     }
   );
   const lsDataJson = await lsData.json();
-
   if (!lsDataJson.error) {
     const { events, info, schedule } = lsDataJson;
-    let currentStage = events[0]?.note;
-
-    currentStage = Number(currentStage.split(" ")[1]);
-    const specificDateTimes = schedule?.days.find(
-      (day: any) => day.date === pushDate
-    );
-    res.json(specificDateTimes?.stages[currentStage - 1]);
-  } else {
-    res.json({ message: "area not found" });
+    const currentStage = +events[0].note.split(" ")[1];
+    const { days } = schedule;
+    res.json({ lsdata: [...days], currentStage });
+    return;
   }
+  res.json({ error: "schedule not found" });
 }

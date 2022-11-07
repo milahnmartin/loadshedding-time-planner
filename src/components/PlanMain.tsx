@@ -366,7 +366,16 @@ function PlanMain() {
       <div className='w-full h-full border-sky-500 border-2 flexs flex-col p-2 md:w-1/2'>
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl'>LS TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl flex items-center'>
+            LS TIMES:{" "}
+            <span
+              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+              data-title={`All Added Users Loadshedding Times for ${time.startTime.date} - ${time.endTime.date}`}
+            >
+              <AiOutlineInfoCircle />
+            </span>
+          </h1>
+
           <div className='flex gap-1 pt-2 text-white'>
             {grabDeconstructedTimes().map((time: string) => {
               return <GreenLabel variant='ls' data={time} key={time} />;
@@ -375,7 +384,15 @@ function PlanMain() {
         </div>
         {/* def availible times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl'>AVAILABLE TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl flex items-center h-fit'>
+            AVAILABLE TIMES:
+            <span
+              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+              data-title={`All Available Times for ${time.startTime.date} - ${time.endTime.date}`}
+            >
+              <AiOutlineInfoCircle />
+            </span>
+          </h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (
@@ -388,7 +405,15 @@ function PlanMain() {
         </div>
         {/* buffer slot times (30min) */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl'>BUFFER TIMES:</h1>
+          <h1 className='text-white font-bold text-2xl flex items-center'>
+            BUFFER TIMES:
+            <span
+              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+              data-title={`30 Minutes Before and After Each Available Time Removed`}
+            >
+              <AiOutlineInfoCircle />
+            </span>
+          </h1>
           <div className='flex gap-1 pt-2'>
             {CalcTimes.map((time: string) => {
               return (

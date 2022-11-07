@@ -91,3 +91,28 @@ scrollbar-width {
     transform: translateY(0);
   }
 }
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+  border-radius: 10px;
+}
+[data-title]:after {
+  content: attr(data-title);
+  background-color: #3c79f0;
+  color: #ffff;
+  position: absolute;
+  top: 30px;
+  font-weight: bold;
+  left: -300px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  padding: 10px;
+  z-index: 99999;
+  visibility: hidden;
+  font-family: "Inter";
+}
+[data-title] {
+  position: relative;
+}

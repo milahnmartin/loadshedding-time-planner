@@ -50,7 +50,7 @@ function PlanMain() {
       time: "02:00",
     },
   });
-  const [lstimes, setlstimes] = useState<Array<string>>([]);
+  const [lstimes, setlstimes] = useState<any>([]);
 
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
@@ -89,7 +89,6 @@ function PlanMain() {
       .select("user_sepushID->id")
       .or(`user_id.eq.${inputRef},user_email.eq.${inputRef.toLowerCase()}`);
 
-    console.log(inputRef);
     if (error) {
       console.log(error);
       return;
@@ -101,7 +100,7 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
     const { id }: any = data[0];
-    console.log(`/api/sepush/${id}/${time.startTime.date}`);
+
     const fetchedUserTimes = await fetch(
       `/api/sepush/${id}/${time.startTime.date}}`,
       {
@@ -125,9 +124,12 @@ function PlanMain() {
         return day.date === time.endTime.date;
       }
     )[0];
-    setlstimes((prev) => [
+    setlstimes((prev: any) => [
       ...prev,
-      ...specifiedStartDateTimes.stages[currentLoasheddingStage - 1],
+      {
+        user: inputRef,
+        times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
+      },
     ]);
   };
 
@@ -154,7 +156,13 @@ function PlanMain() {
     minPlanTimeRef,
     time.endTime.date
   );
-
+  const grabDeconstructedTimes = () => {
+    const times = [];
+    for (let info of lstimes) {
+      times.push(...info.times);
+    }
+    return TimeCalculations.sortLoadSheddingTime(times);
+  };
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
       <div className='w-full h-full md:w-1/2'>
@@ -354,11 +362,9 @@ function PlanMain() {
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
           <h1 className='text-white font-Inter text-xl'>LS TIMES:</h1>
-          <div className='flex gap-1 pt-2'>
-            {CalcTimes.map((time: string) => {
-              return (
-                time && <GreenLabel variant={MyVariant.ls} key={time} data={time} />
-              );
+          <div className='flex gap-1 pt-2 text-white'>
+            {grabDeconstructedTimes().map((time: string) => {
+              return <GreenLabel variant='ls' data={time} key={time} />;
             })}
           </div>
         </div>

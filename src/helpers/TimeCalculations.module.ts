@@ -103,20 +103,28 @@ class TimeCalculations {
     return LSTimes;
   };
   static calcAllTimes = (
-    LSTIMES: string[],
+    LSTIMES: any,
     StartTime: string,
     EndTime: string,
     MaxPlanTime: number,
     EndDate: string
   ): any => {
+    if (LSTIMES.length === 0) return [];
+
+    const mytimes = [];
+    for (let info of LSTIMES) {
+      mytimes.push(...info.times);
+    }
+
+    console.log(mytimes);
     const InitialStartTime = this.getInitialStartTime(
-      LSTIMES,
+      mytimes,
       StartTime,
       MaxPlanTime,
       EndDate
     );
-    const InitialEndTime = this.getInitialEndTimes(LSTIMES, EndTime, MaxPlanTime);
-    const InbetweenTimes = this.getInbetweenTimes(LSTIMES, MaxPlanTime);
+    const InitialEndTime = this.getInitialEndTimes(mytimes, EndTime, MaxPlanTime);
+    const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime);
     return [InitialStartTime, ...InbetweenTimes, InitialEndTime];
   };
 }

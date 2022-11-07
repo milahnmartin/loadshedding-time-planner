@@ -1,6 +1,7 @@
 import React from "react";
-export default function useDebounce(value: string, delay: number = 500) {
-  const [debouncedValue, setDebouncedValue] = React.useState(value);
+type ValueType = string | number;
+export default function useDebounce(value: ValueType, delay: number = 500) {
+  const [debouncedValue, setDebouncedValue] = React.useState<ValueType>(value);
 
   React.useEffect(() => {
     const handler: NodeJS.Timeout = setTimeout(() => {

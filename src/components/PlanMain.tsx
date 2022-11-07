@@ -5,6 +5,7 @@ import { useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
+import useDebounce from "../hooks/useDebounce";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
@@ -161,7 +162,7 @@ function PlanMain() {
         minPlanTimeRef,
         time.endTime.date
       ),
-    [lstimes, teams, time]
+    [lstimes, teams, time, useDebounce(minPlanTimeRef, 500)]
   );
 
   const memoDeconstructTimes = useMemo(() => {

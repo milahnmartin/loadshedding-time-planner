@@ -60,8 +60,7 @@ class TimeCalculations {
       Number(UserEndTime?.split(":")[0]),
       Number(UserEndTime?.split(":")[1])
     );
-    let TimeDifference =
-      (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
+    let TimeDifference = (LastLoadsheddingTime.getTime() - LastGameTime.getTime()) / 1000;
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
       ? `Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN--`
@@ -146,7 +145,7 @@ class TimeCalculations {
         +i?.split(" ")[2].split(":")[0],
         +i?.split(" ")[2].split(":")[1] - 30
       );
-      const newMin = +i.split(" ")[4] + 30;
+      const newMin = +i.split(" ")[4] + 60;
       bufferTimes.push(
         `Start Time: ${
           calcDate.getHours() +

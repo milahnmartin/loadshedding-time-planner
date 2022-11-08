@@ -1,4 +1,3 @@
-import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import PlanMain from "@comps/PlanMain";
 import { NextPage } from "next";
@@ -14,7 +13,6 @@ const IdPage: NextPage = ({ id }: any) => {
       {/* <GameidContext.Provider > */}
       <PlanMain />
       {/* \ */}
-      <Footer />
     </div>
   );
 };

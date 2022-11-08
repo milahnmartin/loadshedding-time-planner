@@ -99,8 +99,8 @@ scrollbar-width {
 }
 [data-title]:after {
   content: attr(data-title);
-  background-color: #3c79f0;
-  color: #ffff;
+  background-color: #fff;
+  color: #3c79f0;
   position: absolute;
   top: 30px;
   font-weight: bold;
@@ -111,7 +111,9 @@ scrollbar-width {
   padding: 10px;
   z-index: 99999;
   visibility: hidden;
-  font-family: "Inter";
+  font-family: "Arial";
+  border: 3px solid #431e9a;
+  letter-spacing: 1px;
 }
 [data-title] {
   position: relative;

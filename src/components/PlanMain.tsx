@@ -17,8 +17,18 @@ const enum MyVariant {
   availible = "availible",
   buffer = "buffer",
 }
-const inputStyles = classNames(
+const inputStyle2 = classNames(
   "rounded-md w-full px-2 py-1 text-center outline-none border-none ring-2 ring-cblue focus:ring-4 focus:ring-cpurple font-Inter font-black text-transparent bg-clip-text bg-gradient-to-r from-cblue to-cpurple"
+);
+const inputStyles = classNames(
+  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-bold font-Inter focus:outline-none focus:text-blue-600 "
+);
+const gline = classNames(
+  " w-[90%] h-[0.25rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 "
+);
+
+const custom_h1 = classNames(
+  "text-center flex items-center text-white font-black font-Inter text-xl pt-4 "
 );
 const loadedPlanStyles = classNames(
   "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
@@ -183,12 +193,12 @@ function PlanMain() {
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
       <div className='w-full h-full md:w-1/2'>
         <div className='w-full h-[50%] flex flex-col justify-start items-center p-2 '>
-          <h1 className='text-white h-fit text-center w-full font-Inter font-light text-4xl'>
-            PLAN FILTER
+          <h1 className='text-white h-fit text-center pt-5 pb-6 w-full font-Inter font-bold text-4xl'>
+            PLAN SETTINGS
           </h1>
           <section className='flex p-2 w-full h-full'>
-            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-4'>
-              <h1 className='text-center flex items-center text-white font-black font-Inter text-xl'>
+            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-0'>
+              <h1 className={custom_h1}>
                 Start Plan Date:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
@@ -211,7 +221,8 @@ function PlanMain() {
                 className={inputStyles}
                 type='date'
               />
-              <h1 className='text-center flex items-center text-white font-black font-Inter text-xl'>
+              <hr className={gline} />
+              <h1 className={custom_h1}>
                 End Plan Date:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
@@ -234,7 +245,8 @@ function PlanMain() {
                 className={inputStyles}
                 type='date'
               />
-              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+              <hr className={gline} />
+              <h1 className={custom_h1}>
                 Min Plan Time
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
@@ -256,9 +268,10 @@ function PlanMain() {
                 className={inputStyles}
                 type='number'
               />
+              <hr className={gline} />
             </div>
-            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-4'>
-              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start '>
+              <h1 className={custom_h1}>
                 Start Time:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
@@ -282,7 +295,8 @@ function PlanMain() {
                 className={inputStyles}
                 type='time'
               />
-              <h1 className='text-center text-white font-Inter font-black text-xl flex items-center'>
+              <hr className={gline} />
+              <h1 className={custom_h1}>
                 End Time:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
@@ -306,15 +320,16 @@ function PlanMain() {
                 className={inputStyles}
                 type='time'
               />
+              <hr className={gline} />
             </div>
           </section>
         </div>
         <div className='w-full h-[50%] flex p-2 overflow-y-scroll overflow-x-hidden '>
-          <div className='w-1/2 h-full p-2 flex flex-col items-center space-y-2'>
-            <h1 className='text-white font-Inter text-xl font-black'>Add Team:</h1>
+          <div className='w-1/2 h-full p-2 flex flex-col items-center '>
+            <h1 className={custom_h1}>Add Team:</h1>
             <form
               onSubmit={handleAddTeam}
-              className='flex flex-col items-center w-full space-y-4'
+              className='flex flex-col items-center w-full '
             >
               <input
                 placeholder='Bravado, Nixuh etc...'
@@ -322,7 +337,8 @@ function PlanMain() {
                 className={inputStyles}
                 type='text'
               />
-              <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
+              <hr className={gline} />
+              <button className='relative inline-flex items-center justify-center p-0.5 mt-4 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '>
                 ADD TEAM
               </button>
             </form>
@@ -339,11 +355,11 @@ function PlanMain() {
               })}
             </div>
           </div>
-          <div className='w-1/2 h-full p-2 flex flex-col items-center space-y-2'>
-            <h1 className='text-white font-Inter text-xl font-black'>Add User:</h1>
+          <div className='w-1/2 h-full p-2 flex flex-col items-center '>
+            <h1 className={custom_h1}>Add User:</h1>
             <form
               onSubmit={handleAddUsers}
-              className='flex flex-col w-full items-center space-y-4'
+              className='flex flex-col w-full items-center '
             >
               <input
                 placeholder='ultrafy@gmail.com, id etc...'
@@ -351,9 +367,10 @@ function PlanMain() {
                 className={inputStyles}
                 type='text'
               />
+              <hr className={gline} />
               <button
                 type='submit'
-                className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
+                className='relative inline-flex items-center justify-center p-0.5 mt-4 mb-2 mr-2 w-[10rem] h-[2.5rem] overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
               >
                 ADD USER
               </button>
@@ -374,10 +391,10 @@ function PlanMain() {
           </div>
         </div>
       </div>
-      <div className='w-full h-full border-sky-500 border-2 flexs flex-col p-2 md:w-1/2'>
+      <div className='w-full h-full border-sky-500 border-0 flexs flex-col p-2 md:w-1/2'>
         {/* ls times */}
         <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl flex items-center'>
+          <h1 className='text-white font-bold text-2xl flex items-center pt-5'>
             LS TIMES:{" "}
             <span
               className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'

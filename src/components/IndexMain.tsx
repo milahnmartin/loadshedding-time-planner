@@ -53,7 +53,10 @@ const IndexMain = () => {
       </h1>
       <div className='flex w-full'>
         <div className='w-1/2 h-fll flex items-center justify-end'>
-          <span className='px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
+          <span
+            id='index-type-writer'
+            className='px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
+          >
             <Typewriter
               typeSpeed={200}
               cursor={true}
@@ -64,7 +67,7 @@ const IndexMain = () => {
         </div>
         <div className='w-1/2 h-fll flex items-center justify-start'>
           <span
-            id='my-around'
+            id='index-around'
             className='px-2 tracking-widest w-fit italic font-Inter text-6xl font-black text-yellow-500 md:text-8xl'
           >
             AROUND
@@ -74,7 +77,7 @@ const IndexMain = () => {
 
       <h1
         id='index-main-loadshedding'
-        className='font-extrabold text-center font-Inter text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'
+        className='font-extrabold text-center font-Inter text-6xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'
       >
         LOADSHEDDING ?
       </h1>

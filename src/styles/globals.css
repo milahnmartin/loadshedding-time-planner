@@ -47,22 +47,26 @@ scrollbar-width {
   animation-fill-mode: forwards;
 }
 
-.index-main-around {
+#index-around {
   animation-name: IndexAround;
-  animation-duration: 5s;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
 #index-main-loadshedding {
   animation-name: IndexLoadshedding;
-  animation-duration: 4s;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
 }
-
-@keyframes IndexTrying {
+#index-type-writer {
+  animation-name: IndexTypeWriter;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+@keyframes IndexTypeWriter {
   0% {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(-100px);
   }
   100% {
     opacity: 1;
@@ -70,13 +74,26 @@ scrollbar-width {
   }
 }
 
+@keyframes IndexTrying {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes IndexAround {
   0% {
     opacity: 0;
+    transform: translateX(100px);
   }
 
   100% {
     opacity: 1;
+    transform: translateX(0);
   }
 }
 

@@ -26,7 +26,7 @@ const plans: NextPage = () => {
       <Navbar />
       <div className='w-full h-[90%] p-2 grid grid-cols-2 grid-rows-1'>
         <div className='flex justify-start flex-col'>
-          <div className='flex text-2xl text-white font-bold h-[10%] align-center justify-center content-center'>
+          <div className='pt-5 flex text-2xl text-white font-bold h-fit align-center justify-center content-center'>
             MY PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
@@ -41,7 +41,7 @@ const plans: NextPage = () => {
           </div>
         </div>
         <div className='flex justify-start flex-col'>
-          <div className='flex text-2xl text-white font-bold h-[10%] aling-center justify-center content-center'>
+          <div className='pt-5 flex text-2xl text-white font-bold h-fit aling-center justify-center content-center'>
             INVITED PLANS
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>

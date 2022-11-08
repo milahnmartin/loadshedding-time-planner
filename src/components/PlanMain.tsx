@@ -23,7 +23,9 @@ const inputStyles = classNames(
 const loadedPlanStyles = classNames(
   "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
 );
-const unLoadedPlanStyles = classNames("w-full h-[90%] flex items-center justify-center");
+const unLoadedPlanStyles = classNames(
+  "w-full h-[90%] flex items-center justify-center"
+);
 function PlanMain() {
   const router = useRouter();
   const { id } = router.query;
@@ -109,12 +111,15 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
 
-    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const fetchedUserTimes = await fetch(
+      `/api/sepush/${id}/${time.startTime.date}}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
@@ -145,7 +150,10 @@ function PlanMain() {
       return;
     }
 
-    const splittedNewTeams = teamRefAdd.current.value?.trim().toLowerCase().split(",");
+    const splittedNewTeams = teamRefAdd.current.value
+      ?.trim()
+      .toLowerCase()
+      .split(",");
     const newTeams = Array.from(new Set([...teams, ...splittedNewTeams]));
     setTeams(newTeams);
     teamRefAdd.current.value = "";
@@ -321,7 +329,12 @@ function PlanMain() {
             <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
               {teams.map((team: string) => {
                 return (
-                  <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
+                  <RedLabel
+                    key={team}
+                    args={true}
+                    data={team}
+                    cb={handleRemoveTeam}
+                  />
                 );
               })}
             </div>
@@ -349,7 +362,12 @@ function PlanMain() {
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
-                  <RedLabel key={user} args={false} data={user} cb={handleRemoveUser} />
+                  <RedLabel
+                    key={user}
+                    args={false}
+                    data={user}
+                    cb={handleRemoveUser}
+                  />
                 );
               })}
             </div>
@@ -410,7 +428,9 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {memoCalcTimes[1]?.map((time: string) => {
               return (
-                time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                time && (
+                  <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                )
               );
             })}
           </div>

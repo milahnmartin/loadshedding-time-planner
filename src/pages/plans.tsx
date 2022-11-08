@@ -1,4 +1,5 @@
 import Footer from "@comps/Footer";
+import { Player } from "@lottiefiles/react-lottie-player";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
 import { uuidv4 } from "@firebase/util";
@@ -32,7 +33,14 @@ const plans: NextPage = () => {
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
             {/* HERE COMES PLANS */}
             {isFetching ? (
-              <ThreeDots fill='#3c79f0' />
+              // <ThreeDots fill='#3c79f0' />
+              <Player
+                src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+                className='player w-[30%] h-[30%] '
+                autoplay
+                loop
+                speed={0.5}
+              />
             ) : (
               savedPlans?.map((plan: any) => {
                 return <PlansLabel plan={plan} key={uuidv4()} />;
@@ -46,7 +54,14 @@ const plans: NextPage = () => {
           </div>
           <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>
             {isFetching ? (
-              <ThreeDots fill='#3c79f0' />
+              // <ThreeDots fill='#3c79f0' />
+              <Player
+                src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+                className='player w-[30%] h-[30%] '
+                autoplay
+                loop
+                speed={0.5}
+              />
             ) : (
               savedPlans?.map((plan: any) => {
                 return <PlansLabel plan={plan} key={uuidv4()} />;

@@ -68,7 +68,14 @@ const LoadsheddingProfile = () => {
               />
               {FetchingSavedAreaData ? (
                 <div className='w-full h-full flex items-center justify-center'>
-                  <ThreeDots fill='#3c79f0' />
+                  {/* <ThreeDots fill='#3c79f0' /> */}
+                  <Player
+                    src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+                    className='player w-[30%] h-[30%] '
+                    autoplay
+                    loop
+                    speed={0.5}
+                  />
                 </div>
               ) : SavedAreaData ? (
                 <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center font-Inter tracking-wide'>
@@ -132,7 +139,14 @@ const LoadsheddingProfile = () => {
             {/* <div className='overflow-y-scroll w-full h-full'> */}
             {AreaDataLoading && (
               <div className='w-full h-full flex items-center justify-center'>
-                <ThreeDots fill='#3c79f0' />
+                {/* <ThreeDots fill='#3c79f0' /> */}
+                <Player
+                  src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+                  className='player w-[30%] h-[30%] '
+                  autoplay
+                  loop
+                  speed={0.5}
+                />
               </div>
             )}
             {AreaData &&

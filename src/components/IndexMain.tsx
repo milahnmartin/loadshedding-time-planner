@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { auth } from "../utils/firebase-config";
@@ -50,12 +51,23 @@ const IndexMain = () => {
       >
         TRYING TO PLAN
       </h1>
-      <h1
-        id='index-main-around'
-        className='text-transparent tracking-tight w-full text-center italic bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
-      >
-        AROUND
-      </h1>
+      <div className='flex w-full'>
+        <div className='w-1/2 h-fll flex items-center justify-end'>
+          <span className='px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-light bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
+            <Typewriter
+              typeSpeed={200}
+              cursor={true}
+              loop={false}
+              words={["GAMING", "MEETINGS"]}
+            />
+          </span>
+        </div>
+        <div className='w-1/2 h-fll flex items-center justify-start'>
+          <span className='px-2 tracking-tight w-fit italic font-Inter text-6xl font-black text-white md:text-8xl'>
+            AROUND
+          </span>
+        </div>
+      </div>
 
       <h1
         id='index-main-loadshedding'

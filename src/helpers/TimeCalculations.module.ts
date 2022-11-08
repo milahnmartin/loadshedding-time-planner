@@ -1,4 +1,3 @@
-type ResponseData = string | undefined[];
 class TimeCalculations {
   static sortLoadSheddingTime = (times: string[]): string[] => {
     const unsortedTimes = Array.from(new Set(times));

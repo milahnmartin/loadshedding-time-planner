@@ -134,3 +134,10 @@ scrollbar-width {
 [data-title] {
   position: relative;
 }
+
+#middle-screen {
+  background-image: url("../pages/assets/bulb-black.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}

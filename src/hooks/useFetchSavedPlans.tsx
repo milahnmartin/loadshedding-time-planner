@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 const fetchSavedPlans = async ({ queryKey }: any) => {
-  const { data: UserDataInfo } = await supabase
+  const { data: UserDataInfo, error } = await supabase
     .from("user_plans")
     .select(
       `
@@ -13,6 +13,11 @@ const fetchSavedPlans = async ({ queryKey }: any) => {
       `
     )
     .eq("user_id", queryKey[1]);
+
+  if (error) {
+    toast.error("Error Occured When trying to fetch plans");
+    return [];
+  }
 
   if (UserDataInfo?.length == 0) {
     return [];

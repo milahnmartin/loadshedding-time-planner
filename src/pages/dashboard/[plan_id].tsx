@@ -3,7 +3,7 @@ import PlanMain from "@comps/PlanMain";
 import { NextPage } from "next";
 import Head from "next/head";
 
-const IdPage: NextPage = ({ id }: any) => {
+const IdPage: NextPage = () => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>

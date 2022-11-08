@@ -28,7 +28,7 @@ const unLoadedPlanStyles = classNames(
 );
 function PlanMain() {
   const router = useRouter();
-  const { id } = router.query;
+  const { plan_id } = router.query;
   const [currentUser, loading] = useAuthState(auth);
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);

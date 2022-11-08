@@ -126,7 +126,7 @@ function Navbar() {
               />
             }
           </span>
-          {user && !loading ? (
+          {user && !loading && user?.photoURL ? (
             <UserProfile src={user?.photoURL} />
           ) : (
             <Link href='/auth/login'>

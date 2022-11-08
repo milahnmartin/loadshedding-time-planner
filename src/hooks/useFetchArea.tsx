@@ -10,7 +10,7 @@ export default function useFetchArea(pArea: string) {
   const myDebounce = useDebounce(pArea, 2000);
   return useQuery([`areaData`, myDebounce], fetchAreaID, {
     refetchOnWindowFocus: false,
-    enabled: myDebounce.length > 0,
+    enabled: typeof myDebounce === "string" && myDebounce.length > 0,
     staleTime: Infinity,
   });
 }

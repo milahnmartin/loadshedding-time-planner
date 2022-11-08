@@ -53,7 +53,7 @@ const IndexMain = () => {
       </h1>
       <div className='flex w-full'>
         <div className='w-1/2 h-fll flex items-center justify-end'>
-          <span className='px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-light bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
+          <span className='index-main-around px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-light bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'>
             <Typewriter
               typeSpeed={200}
               cursor={true}
@@ -63,7 +63,7 @@ const IndexMain = () => {
           </span>
         </div>
         <div className='w-1/2 h-fll flex items-center justify-start'>
-          <span className='px-2 tracking-tight w-fit italic font-Inter text-6xl font-black text-white md:text-8xl'>
+          <span className='index-main-around px-2 tracking-tight w-fit italic font-Inter text-6xl font-black text-white md:text-8xl'>
             AROUND
           </span>
         </div>

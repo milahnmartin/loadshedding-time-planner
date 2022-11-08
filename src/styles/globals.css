@@ -47,9 +47,9 @@ scrollbar-width {
   animation-fill-mode: forwards;
 }
 
-#index-main-around {
+.index-main-around {
   animation-name: IndexAround;
-  animation-duration: 2s;
+  animation-duration: 5s;
   animation-fill-mode: forwards;
 }
 
@@ -73,11 +73,10 @@ scrollbar-width {
 @keyframes IndexAround {
   0% {
     opacity: 0;
-    transform: translatey(100px);
   }
+
   100% {
     opacity: 1;
-    transform: translatey(0);
   }
 }
 

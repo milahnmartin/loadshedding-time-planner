@@ -28,7 +28,7 @@ const plans: NextPage = () => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / Profile</title>
+        <title>LS Planner / Profile</title>
       </Head>
       <Navbar />
       <div className='h-[80%] flex mt-[3.5rem]  '>

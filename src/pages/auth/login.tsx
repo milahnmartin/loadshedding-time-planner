@@ -1,10 +1,6 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  TwitterAuthProvider,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/image";
 import Router from "next/router";
@@ -36,7 +32,7 @@ function login() {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner | Login</title>
+        <title>LS Planner | Login</title>
         <meta name='description' content='Login to LS Game Planner' />
       </Head>
       <Navbar />

@@ -1,12 +1,11 @@
 import Footer from "@comps/Footer";
-import { Player } from "@lottiefiles/react-lottie-player";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
 import { uuidv4 } from "@firebase/util";
+import { Player } from "@lottiefiles/react-lottie-player";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { ThreeDots } from "react-loading-icons";
 import useFetchSavedPlans from "../hooks/useFetchSavedPlans";
 import { auth } from "../utils/firebase-config";
 
@@ -22,7 +21,7 @@ const plans: NextPage = () => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / Plans</title>
+        <title>LS Planner / Plans</title>
       </Head>
       <Navbar />
       <div className='w-full h-[90%] p-2 grid grid-cols-2 grid-rows-1'>

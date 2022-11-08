@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div className='h-screen w-screen bg-black max-h-screen overflow-scroll'>
       <Head>
-        <title>LS Time Planner / Home</title>
+        <title>LS Planner / Home</title>
         <meta property='og:title' content='Loadshedding Time Calculator / Home' />
         <meta property='og:type' content='website' />
         <meta

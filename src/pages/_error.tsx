@@ -6,7 +6,7 @@ const ErrorPage = () => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / 404</title>
+        <title>LS Planner / 404</title>
       </Head>
       <Navbar />
       <div className='h-[90%] w-ful flex-col space-y-8 flex items-center justify-center'>

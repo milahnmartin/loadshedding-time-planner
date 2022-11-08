@@ -6,7 +6,7 @@ const invites = () => {
   return (
     <div className='h-screen w-screen overflow-y-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / Invites</title>
+        <title>LS Planner / Invites</title>
       </Head>
       <Navbar />
       <InviteMain />

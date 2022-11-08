@@ -7,7 +7,7 @@ const IdPage: NextPage = () => {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / Plan</title>
+        <title>LS Planner / Plan</title>
       </Head>
       <Navbar />
       {/* <GameidContext.Provider > */}

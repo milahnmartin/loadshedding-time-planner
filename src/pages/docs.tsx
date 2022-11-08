@@ -7,7 +7,7 @@ function docs() {
   return (
     <div className='h-screen w-screen overflow-scroll bg-black'>
       <Head>
-        <title>LS Time Planner / Docs</title>
+        <title>LS Planner / Docs</title>
       </Head>
       <Navbar />
       <DocsContent />

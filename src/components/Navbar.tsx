@@ -88,7 +88,7 @@ function Navbar() {
             />
           </Link>
           <h1 className='hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
-            LS TIME PLANNER
+            LS PLANNER
           </h1>
         </div>
         <div className='h-full w-[80%] flex items-center space-x-5 navbarfont justify-end md:w-[50%] md:space-x-8 mr-6'>

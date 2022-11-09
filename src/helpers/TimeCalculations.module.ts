@@ -116,6 +116,7 @@ class TimeCalculations {
     MaxPlanTime: number,
     EndDate: string
   ): any => {
+    console.log("LSTIMES", LSTIMES);
     if (LSTIMES.length === 0) return [];
 
     const mytimes = [];

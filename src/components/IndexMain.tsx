@@ -25,7 +25,7 @@ const IndexMain = () => {
       toast.error("Error Creating Plan");
       return;
     }
-    Router.push(`/plan/${newPlanUUID}`);
+    Router.push(`/dashboard/${newPlanUUID}`);
   };
   const arrowIcon = (
     <svg

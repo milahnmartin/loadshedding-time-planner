@@ -1,17 +1,19 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
-import useDebounce from "../hooks/useDebounce";
+import useFetchPlanData from "../hooks/useFetchPlanData";
 import type { IStartEndTimes } from "../types/types";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
-
+type PlanProps = {
+  planData: any;
+};
 const enum MyVariant {
   ls = "ls",
   availible = "availible",
@@ -33,16 +35,20 @@ const custom_h1 = classNames(
 const loadedPlanStyles = classNames(
   "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
 );
-const unLoadedPlanStyles = classNames(
-  "w-full h-[90%] flex items-center justify-center"
-);
+const unLoadedPlanStyles = classNames("w-full h-[90%] flex items-center justify-center");
+
 function PlanMain() {
+  const [loggedUser, loading] = useAuthState(auth);
+  // useRouter Hook
   const router = useRouter();
   const { plan_id } = router.query;
-  const [currentUser, loading] = useAuthState(auth);
+  const { data: planData, isError, isFetching } = useFetchPlanData(plan_id as string);
+
+  // useState Hooks
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
   const [teams, setTeams] = useState<Array<string>>([]);
+  const [lstimes, setlstimes] = useState<any>([]);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: {
       date: new Date().toISOString().split("T")[0] as string,
@@ -61,26 +67,39 @@ function PlanMain() {
     },
   });
 
-  const [lstimes, setlstimes] = useState<any>([]);
+  useEffect(() => {
+    if (loading || !loggedUser) return;
+    addCurrentLoggedInUser(loggedUser.email ? loggedUser.email : loggedUser.displayName!);
+  }, [loading]);
+
+  useEffect(() => {
+    if (planData) {
+      setUsers(planData.plan_authorizedUsers);
+      setTeams(planData.plan_authorizedTeams);
+      setlstimes(planData.plan_lsTimes);
+      setTime((prev): any => {
+        return {
+          ...prev,
+          startTime: {
+            time: prev.startTime.time,
+            date: planData?.plan_createdAt.split("T")[0],
+          },
+        };
+      });
+    }
+  }, [isFetching]);
+
+  // useRef Hooks
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
   const inviteRef = useRef<HTMLInputElement>(null);
 
   const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
-    const newLsTimes = lstimes.filter(
-      (
-        owner: {
-          user: string;
-          times: string[];
-        },
-        i: any
-      ): any => {
-        return owner.user !== val;
-      }
-    );
+    const newLsTimes = lstimes.filter((owner: { user: string; times: string[] }): any => {
+      return owner.user !== val;
+    });
     setlstimes(newLsTimes);
   };
   const handleRemoveTeam = (val: string) => {
@@ -121,15 +140,12 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
 
-    const fetchedUserTimes = await fetch(
-      `/api/sepush/${id}/${time.startTime.date}}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
@@ -160,10 +176,7 @@ function PlanMain() {
       return;
     }
 
-    const splittedNewTeams = teamRefAdd.current.value
-      ?.trim()
-      .toLowerCase()
-      .split(",");
+    const splittedNewTeams = teamRefAdd.current.value?.trim().toLowerCase().split(",");
     const newTeams = Array.from(new Set([...teams, ...splittedNewTeams]));
     setTeams(newTeams);
     teamRefAdd.current.value = "";
@@ -178,7 +191,7 @@ function PlanMain() {
         minPlanTimeRef,
         time.endTime.date
       ),
-    [lstimes, teams, time, useDebounce(minPlanTimeRef, 500)]
+    [lstimes, teams, time, minPlanTimeRef]
   );
 
   const memoDeconstructTimes = useMemo(() => {
@@ -188,6 +201,58 @@ function PlanMain() {
     }
     return TimeCalculations.sortLoadSheddingTime(times);
   }, [lstimes]);
+
+  const addCurrentLoggedInUser = async (user: string) => {
+    const { data, error } = await supabase
+      .from("user_info")
+      .select("user_sepushID->id")
+      .or(`user_id.eq.${user},user_email.eq.${user.toLowerCase()}`);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+    if (data.length === 0) {
+      toast.error("No User Found");
+      return;
+    }
+    const { id }: any = data[0];
+
+    if (!id) {
+      toast.warning("You have not linked your loadshedding area yet");
+      return;
+    }
+    const newUsers = Array.from(new Set([...users, user]));
+    setUsers(newUsers);
+
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const jsonedUserTimes = await fetchedUserTimes.json();
+    const currentLoasheddingStage = jsonedUserTimes.currentStage;
+    const loadsheddingData = jsonedUserTimes.lsdata;
+
+    const specifiedStartDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+        return day.date === time.startTime.date;
+      }
+    )[0];
+    const specifiedEndDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+        return day.date === time.endTime.date;
+      }
+    )[0];
+    setlstimes((prev: any) => [
+      ...prev,
+      {
+        user: user,
+        times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
+      },
+    ]);
+  };
 
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
@@ -327,10 +392,7 @@ function PlanMain() {
         <div className='w-full h-[50%] flex p-2 overflow-y-scroll overflow-x-hidden '>
           <div className='w-1/2 h-full p-2 flex flex-col items-center '>
             <h1 className={custom_h1}>Add Team:</h1>
-            <form
-              onSubmit={handleAddTeam}
-              className='flex flex-col items-center w-full '
-            >
+            <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
               <input
                 placeholder='Bravado, Nixuh etc...'
                 ref={teamRefAdd}
@@ -345,12 +407,7 @@ function PlanMain() {
             <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
               {teams.map((team: string) => {
                 return (
-                  <RedLabel
-                    key={team}
-                    args={true}
-                    data={team}
-                    cb={handleRemoveTeam}
-                  />
+                  <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
                 );
               })}
             </div>
@@ -379,12 +436,7 @@ function PlanMain() {
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
-                  <RedLabel
-                    key={user}
-                    args={false}
-                    data={user}
-                    cb={handleRemoveUser}
-                  />
+                  <RedLabel key={user} args={false} data={user} cb={handleRemoveUser} />
                 );
               })}
             </div>
@@ -445,9 +497,7 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {memoCalcTimes[1]?.map((time: string) => {
               return (
-                time && (
-                  <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
-                )
+                time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
               );
             })}
           </div>

@@ -1,19 +1,12 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import Image from "next/image";
-import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { MdContentCopy } from "react-icons/md";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
-  useEffect(() => {
-    const myBubble = document.getElementById("bubble-test");
-    myBubble?.addEventListener("click", (e) => {
-      console.log(`Target: ${e.target}`);
-      console.log(`Current Target: ${e.currentTarget}`);
-    });
-  }, []);
+
   return (
     <div className='w-full h-full flex items-center flex-row overflow-y-hidden'>
       <div className='w-full h-full flex items-center justify-center'>

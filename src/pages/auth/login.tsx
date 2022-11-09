@@ -14,7 +14,7 @@ function login() {
   const twitterProvider = new TwitterAuthProvider();
   const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
+      await signInWithPopup(auth, googleProvider);
       Router.push("/");
     } catch {
       toast.error("Login failed");
@@ -23,7 +23,7 @@ function login() {
 
   const handleTwitterLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, twitterProvider);
+      await signInWithPopup(auth, twitterProvider);
       Router.push("/");
     } catch {
       console.log("Error");

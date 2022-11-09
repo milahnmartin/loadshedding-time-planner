@@ -19,7 +19,7 @@ const fetchPlanData = async ({ queryKey }: any) => {
 };
 
 export default function useFetchPlanData(planID: string) {
-  console.log("IM FETCHING");
+  console.log(`FETCHING PLAN DATA FOR ${planID}`);
   return useQuery(["specificPlan", planID], fetchPlanData, {
     refetchOnWindowFocus: false,
     staleTime: 180000,

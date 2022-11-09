@@ -9,7 +9,6 @@ const PlansLabel = ({ plan }: any) => {
     plan_authorizedUsers,
     plan_createdAt,
   } = plan;
-  console.log(plan_createdAt);
   return (
     <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl'>
       <span className='flex flex-col w-full h-full bg-black rounded-xl'>

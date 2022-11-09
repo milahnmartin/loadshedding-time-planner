@@ -74,7 +74,7 @@ function PlanMain() {
 
   useEffect(() => {
     if (planData) {
-      setUsers(planData.plan_authorizedUsers);
+      setUsers((prev: string[]) => [...prev, ...planData.plan_authorizedUsers]);
       setTeams(planData.plan_authorizedTeams);
       setlstimes(planData.plan_lsTimes);
       setTime((prev): any => {

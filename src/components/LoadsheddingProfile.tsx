@@ -15,7 +15,13 @@ import AreaLabels from "./AreaLabels";
 const spanStyles = classNames(
   "text-white text-center font-Inter font-black text-xl"
 );
+const gline = classNames(
+  " w-[100%] h-[0.25rem] bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7] rounded border-0 "
+);
 
+const inputStyles = classNames(
+  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-bold font-Inter focus:outline-none focus:text-blue-600 "
+);
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
@@ -118,13 +124,13 @@ const LoadsheddingProfile = () => {
           {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
             Search Your Area:
           </h1> */}
-          <span className='w-full px-1 py-1 bg-gradient-to-t from-cpurple via-pink-600 to-cblue rounded-md relative'>
+          <span className='w-full px-1 py-1  relative'>
             <span className='absolute flex items-center h-full w-fit px-2 -top-[0px]'>
               <AiOutlineSearch size={25} fill='white' />
             </span>
             <input
               id='areaSearch'
-              className='bg-black px-4 text-center py-2 w-full text-lg rounded-md outline-none font-black text-white tracking-wide font-inter focus:ring-4 focus:ring-c2aqua placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-pink-500 placeholder:via-red-500 placeholder:to-yellow-500 placeholder:text-center placeholder:font-Inter placeholder:font-black'
+              className={inputStyles}
               type='text'
               name='loadshedding-area'
               placeholder='Search Your Area: Waterkloof, Durbanville etc...'
@@ -133,6 +139,7 @@ const LoadsheddingProfile = () => {
                 setareaInput(e.currentTarget.value)
               }
             />
+            <hr className={gline} />
           </span>
 
           <div className='overflow-y-scroll w-full h-full  items-center justify-center'>

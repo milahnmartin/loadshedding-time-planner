@@ -12,7 +12,7 @@ export default async function fetchUserLSTimesById(
   const pushDate = req.query.date;
   const lsData = await fetch(
     // &test=current
-    `https://developer.sepush.co.za/business/2.0/area?id=${pushID}`,
+    `https://developer.sepush.co.za/business/2.0/area?id=${pushID}&test=current`,
     {
       method: "GET",
       headers: {

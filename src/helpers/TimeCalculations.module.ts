@@ -48,7 +48,6 @@ class TimeCalculations {
     if (!UserEndTime) return;
     const LatestLSTimeSplit = LatestLSTime.split("-")[1];
     let LastLoadsheddingTime;
-    console.log(`LatestLSTimeSplit: ${LatestLSTimeSplit}`);
     if (Number(LatestLSTimeSplit?.split(":")[0]) < 4) {
       LastLoadsheddingTime = new Date(
         new Date().getFullYear(),
@@ -57,7 +56,6 @@ class TimeCalculations {
         Number(LatestLSTimeSplit?.split(":")[0]),
         Number(LatestLSTimeSplit?.split(":")[1])
       );
-      console.log("WE DOING THE 1");
     } else {
       LastLoadsheddingTime = new Date(
         new Date().getFullYear(),
@@ -66,7 +64,6 @@ class TimeCalculations {
         Number(LatestLSTimeSplit?.split(":")[0]),
         Number(LatestLSTimeSplit?.split(":")[1])
       );
-      console.log("WE DOING THE 2");
     }
 
     console.log(UserEndTime?.split(":")[0]);
@@ -88,11 +85,7 @@ class TimeCalculations {
         Number(UserEndTime?.split(":")[1])
       );
     }
-
-    console.log(LastLoadsheddingTime);
-    console.log(LastGameTime);
     let TimeDifference = (LastGameTime.getTime() - LastLoadsheddingTime.getTime()) / 1000;
-    console.log(TimeDifference / 60);
     let CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
       ? `Start Time: ${LatestLSTimeSplit} - ${CalcTimeDifference} MIN--`

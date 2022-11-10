@@ -228,8 +228,6 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
-    console.log("CALLED FROM ADD CURRENT LOGGED IN USER");
-    console.log(loadsheddingData);
 
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {

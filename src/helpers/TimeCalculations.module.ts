@@ -133,7 +133,7 @@ class TimeCalculations {
       let pStart = (diff /= 60);
 
       if (MaxGameTime > pStart) continue;
-      LSTimes.push(`Start Time: ${startTime} - ${pStart} MIN++ `);
+      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN`);
     }
     return LSTimes;
   };
@@ -144,7 +144,6 @@ class TimeCalculations {
     MaxPlanTime: number,
     EndDate: string
   ): any => {
-    console.log("LSTIMES", LSTIMES);
     if (LSTIMES.length === 0) return [];
 
     const mytimes = [];
@@ -180,11 +179,11 @@ class TimeCalculations {
       );
       const newMin = +i.split(" ")[4] + 60;
       bufferTimes.push(
-        `Start Time: ${
+        `${
           calcDate.getHours() +
           ":" +
           (calcDate.getMinutes() === 0 ? "00" : calcDate.getMinutes())
-        } - ${newMin} MIN?`
+        } @ ${newMin} MIN`
       );
     }
     return bufferTimes;

@@ -445,7 +445,7 @@ function PlanMain() {
             </span>
           </h1>
 
-          <div className='flex gap-1 pt-2 text-white'>
+          <div className='flex gap-1 pt-2 text-white flex-wrap content-center items-center justify-center'>
             {memoDeconstructTimes.map((time: string) => {
               return <GreenLabel variant='ls' data={time} key={time} />;
             })}
@@ -462,7 +462,7 @@ function PlanMain() {
               <AiOutlineInfoCircle />
             </span>
           </h1>
-          <div className='flex gap-1 pt-2'>
+          <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
             {memoCalcTimes[0]?.map((time: string) => {
               return (
                 time && (
@@ -483,7 +483,7 @@ function PlanMain() {
               <AiOutlineInfoCircle />
             </span>
           </h1>
-          <div className='flex gap-1 pt-2'>
+          <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
             {memoCalcTimes[1]?.map((time: string) => {
               return (
                 time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />

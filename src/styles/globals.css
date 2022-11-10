@@ -112,11 +112,14 @@ scrollbar-width {
   transition: all 0.1s ease 0.5s;
   visibility: visible;
   border-radius: 10px;
+  animation-name: IndexTypeWriter;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 [data-title]:after {
   content: attr(data-title);
-  background-color: #fff;
-  color: #3c79f0;
+  background-color: black;
+  color: white;
   position: absolute;
   top: 30px;
   font-weight: bold;
@@ -124,20 +127,16 @@ scrollbar-width {
   font-size: 15px;
   white-space: nowrap;
   opacity: 0;
-  padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
   z-index: 99999;
   visibility: hidden;
-  font-family: "Arial";
-  border: 3px solid #431e9a;
+  font-family: "Inter";
+  border: 3px solid #fff;
   letter-spacing: 1px;
 }
 [data-title] {
-  position: relative;
-}
-
-#middle-screen {
-  background-image: url("../pages/assets/bulb-black.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
   position: relative;
 }

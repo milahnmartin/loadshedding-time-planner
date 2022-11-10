@@ -48,7 +48,7 @@ class TimeCalculations {
     if (!UserEndTime) return;
     const LatestLSTimeSplit = LatestLSTime.split("-")[1];
     let LastLoadsheddingTime;
-    if (Number(LatestLSTimeSplit?.split(":")[0]) < 4) {
+    if (Number(LatestLSTimeSplit?.split(":")[0]) < 8) {
       LastLoadsheddingTime = new Date(
         new Date().getFullYear(),
         new Date().getMonth(),
@@ -68,7 +68,7 @@ class TimeCalculations {
 
     console.log(UserEndTime?.split(":")[0]);
     let LastGameTime;
-    if (Number(UserEndTime?.split(":")[0]) < 4) {
+    if (Number(UserEndTime?.split(":")[0]) < 8) {
       LastGameTime = new Date(
         new Date(UserEndDate).getFullYear(),
         new Date(UserEndDate).getMonth(),

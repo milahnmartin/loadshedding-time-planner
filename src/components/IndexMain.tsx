@@ -51,8 +51,8 @@ const IndexMain = () => {
       >
         TRYING TO PLAN
       </h1>
-      <div className='flex flex-col w-full items-center justify-center md:flex-row border-2'>
-        <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0 border-2'>
+      <div className='flex flex-col w-full items-center justify-center md:flex-row'>
+        <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'
             className='text-transparent tracking-tightest w-fit bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'

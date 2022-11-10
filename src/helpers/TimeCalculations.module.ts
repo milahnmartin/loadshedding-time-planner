@@ -45,8 +45,10 @@ class TimeCalculations {
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
     const LatestLSTime: string = SortedLSTimes[SortedLSTimes.length - 1]!;
     if (!LatestLSTime) return;
+    if (!UserEndTime) return;
     const LatestLSTimeSplit = LatestLSTime.split("-")[1];
     let LastLoadsheddingTime;
+    console.log(`LatestLSTimeSplit: ${LatestLSTimeSplit}`);
     if (Number(LatestLSTimeSplit?.split(":")[0]) < 4) {
       LastLoadsheddingTime = new Date(
         new Date().getFullYear(),
@@ -55,6 +57,7 @@ class TimeCalculations {
         Number(LatestLSTimeSplit?.split(":")[0]),
         Number(LatestLSTimeSplit?.split(":")[1])
       );
+      console.log("WE DOING THE 1");
     } else {
       LastLoadsheddingTime = new Date(
         new Date().getFullYear(),
@@ -63,15 +66,29 @@ class TimeCalculations {
         Number(LatestLSTimeSplit?.split(":")[0]),
         Number(LatestLSTimeSplit?.split(":")[1])
       );
+      console.log("WE DOING THE 2");
     }
 
-    const LastGameTime = new Date(
-      new Date(UserEndDate).getFullYear(),
-      new Date(UserEndDate).getMonth(),
-      new Date(UserEndDate).getDate(),
-      Number(UserEndTime?.split(":")[0]),
-      Number(UserEndTime?.split(":")[1])
-    );
+    console.log(UserEndTime?.split(":")[0]);
+    let LastGameTime;
+    if (Number(UserEndTime?.split(":")[0]) < 4) {
+      LastGameTime = new Date(
+        new Date(UserEndDate).getFullYear(),
+        new Date(UserEndDate).getMonth(),
+        new Date(UserEndDate).getDate(),
+        Number(UserEndTime?.split(":")[0]),
+        Number(UserEndTime?.split(":")[1])
+      );
+    } else {
+      LastGameTime = new Date(
+        new Date(UserEndDate).getFullYear(),
+        new Date(UserEndDate).getMonth(),
+        new Date(UserEndDate).getDate() - 1,
+        Number(UserEndTime?.split(":")[0]),
+        Number(UserEndTime?.split(":")[1])
+      );
+    }
+
     console.log(LastLoadsheddingTime);
     console.log(LastGameTime);
     let TimeDifference = (LastGameTime.getTime() - LastLoadsheddingTime.getTime()) / 1000;

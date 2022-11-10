@@ -42,7 +42,7 @@ function PlanMain() {
   const { plan_id } = router.query;
   const { data: planData, isError, isFetching } = useFetchPlanData(plan_id as string);
   // useState Hooks
-  const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
+  const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(30);
   const [users, setUsers] = useState<Array<string>>([]);
   const [teams, setTeams] = useState<Array<string>>([]);
   const [lstimes, setlstimes] = useState<any>([]);

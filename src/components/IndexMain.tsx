@@ -77,7 +77,7 @@ const IndexMain = () => {
 
       <h1
         id='index-main-loadshedding'
-        className='font-extrabold text-center font-Inter text-6xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'
+        className='font-extrabold text-center font-Inter text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-8xl'
       >
         LOADSHEDDING ?
       </h1>

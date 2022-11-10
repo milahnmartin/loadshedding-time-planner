@@ -166,11 +166,14 @@ function PlanMain() {
       toast.warning("Nothing Was Entered");
       return;
     }
-
-    const splittedNewTeams = teamRefAdd.current.value?.trim().toLowerCase().split(",");
-    const newTeams = Array.from(new Set([...teams, ...splittedNewTeams]));
-    setTeams(newTeams);
+    const splittedNewTeams = teamRefAdd.current.value?.trim().toLowerCase();
     teamRefAdd.current.value = "";
+    if (teams.includes(splittedNewTeams)) {
+      toast.warning("Team already added");
+      return;
+    }
+    const newTeams = Array.from(new Set([...teams, splittedNewTeams]));
+    setTeams(newTeams);
   };
 
   const memoCalcTimes = useMemo(

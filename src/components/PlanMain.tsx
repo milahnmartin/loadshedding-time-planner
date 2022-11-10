@@ -125,6 +125,10 @@ function PlanMain() {
       toast.warning("User has not linked their loadshedding area yet");
       return;
     }
+    if (users.includes(splitedNewUsers)) {
+      toast.warning("User already added");
+      return;
+    }
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
 

@@ -132,7 +132,7 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
     setcalcLoading(true);
-    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -220,7 +220,7 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, user]));
     setUsers(newUsers);
 
-    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

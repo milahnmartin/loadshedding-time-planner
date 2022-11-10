@@ -9,7 +9,6 @@ export default async function fetchUserLSTimesById(
   console.log(`ENDPOINT: /api/sepush/${req.query.id}/${req.query.date} WAS HIT`);
 
   const pushID = req.query.id;
-  const pushDate = req.query.date;
   const lsData = await fetch(
     // &test=current
     `https://developer.sepush.co.za/business/2.0/area?id=${pushID}`,

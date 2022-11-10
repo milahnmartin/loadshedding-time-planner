@@ -1,4 +1,5 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
+import { Player } from "@lottiefiles/react-lottie-player";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -11,9 +12,7 @@ import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import GreenLabel from "./GreenLabel";
 import RedLabel from "./RedLabel";
-type PlanProps = {
-  planData: any;
-};
+
 const enum MyVariant {
   ls = "ls",
   availible = "availible",
@@ -46,6 +45,7 @@ function PlanMain() {
   const [users, setUsers] = useState<Array<string>>([]);
   const [teams, setTeams] = useState<Array<string>>([]);
   const [lstimes, setlstimes] = useState<any>([]);
+  const [calcLoading, setcalcLoading] = useState<boolean>(true);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: {
       date: new Date().toISOString().split("T")[0] as string,
@@ -131,7 +131,7 @@ function PlanMain() {
     }
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
-
+    setcalcLoading(true);
     const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
       method: "GET",
       headers: {
@@ -141,6 +141,7 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
+    setcalcLoading(false);
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {
         return day.date === time.startTime.date;
@@ -228,7 +229,7 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
-
+    setcalcLoading(false);
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {
         return day.date === time.startTime.date;
@@ -438,66 +439,79 @@ function PlanMain() {
           </div>
         </div>
       </div>
-      <div className='w-full h-full border-sky-500 border-0 flexs flex-col p-2 md:w-1/2'>
-        {/* ls times */}
-        <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl flex items-center pt-5'>
-            LS TIMES:{" "}
-            <span
-              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
-              data-title={`All Added Users Loadshedding Times for ${time.startTime.date} - ${time.endTime.date}`}
-            >
-              <AiOutlineInfoCircle />
-            </span>
-          </h1>
 
-          <div className='flex gap-1 pt-2 text-white flex-wrap content-center items-center justify-center'>
-            {memoDeconstructTimes.map((time: string) => {
-              return <GreenLabel variant='ls' data={time} key={time} />;
-            })}
+      {calcLoading && (
+        <div className='w-full h-full border-sky-500 border-2 flex items-center justify-center p-2 md:w-1/2'>
+          <Player
+            src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+            className='player w-[50%] h-[50%] '
+            autoplay
+            loop
+            speed={0.5}
+          />
+        </div>
+      )}
+      {!calcLoading && (
+        <div className='w-full h-full border-sky-500 border-2 flex flex-col p-2 md:w-1/2'>
+          <div className='w-full h-1/3 flex flex-col items-center justify-start'>
+            <h1 className='text-white font-bold text-2xl flex items-center pt-5'>
+              LS TIMES:
+              <span
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                data-title={`All Added Users Loadshedding Times for ${time.startTime.date} - ${time.endTime.date}`}
+              >
+                <AiOutlineInfoCircle />
+              </span>
+            </h1>
+
+            <div className='flex gap-1 pt-2 text-white flex-wrap content-center items-center justify-center'>
+              {memoDeconstructTimes.map((time: string) => {
+                return <GreenLabel variant='ls' data={time} key={time} />;
+              })}
+            </div>
+          </div>
+
+          <div className='w-full h-1/3 flex flex-col items-center justify-start'>
+            <h1 className='text-white font-bold text-2xl flex items-center h-fit'>
+              AVAILABLE TIMES:
+              <span
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                data-title={`All Available Times for ${time.startTime.date} - ${time.endTime.date}`}
+              >
+                <AiOutlineInfoCircle />
+              </span>
+            </h1>
+            <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
+              {memoCalcTimes[0]?.map((time: string) => {
+                return (
+                  time && (
+                    <GreenLabel variant={MyVariant.availible} key={time} data={time} />
+                  )
+                );
+              })}
+            </div>
+          </div>
+
+          <div className='w-full h-1/3 flex flex-col items-center justify-start'>
+            <h1 className='text-white font-bold text-2xl flex items-center'>
+              BUFFER TIMES:
+              <span
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                data-title={`30 Minutes Before and After Each Available Time Removed`}
+              >
+                <AiOutlineInfoCircle />
+              </span>
+            </h1>
+            <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
+              {memoCalcTimes[1]?.map((time: string) => {
+                return (
+                  time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                );
+              })}
+            </div>
           </div>
         </div>
-        {/* def availible times */}
-        <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl flex items-center h-fit'>
-            AVAILABLE TIMES:
-            <span
-              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
-              data-title={`All Available Times for ${time.startTime.date} - ${time.endTime.date}`}
-            >
-              <AiOutlineInfoCircle />
-            </span>
-          </h1>
-          <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
-            {memoCalcTimes[0]?.map((time: string) => {
-              return (
-                time && (
-                  <GreenLabel variant={MyVariant.availible} key={time} data={time} />
-                )
-              );
-            })}
-          </div>
-        </div>
-        {/* buffer slot times (30min) */}
-        <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-          <h1 className='text-white font-bold text-2xl flex items-center'>
-            BUFFER TIMES:
-            <span
-              className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
-              data-title={`30 Minutes Before and After Each Available Time Removed`}
-            >
-              <AiOutlineInfoCircle />
-            </span>
-          </h1>
-          <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
-            {memoCalcTimes[1]?.map((time: string) => {
-              return (
-                time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

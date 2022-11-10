@@ -77,7 +77,7 @@ function Navbar() {
   return (
     <header className='sticky top-0 z-10 bg-black'>
       <div className='h-[5rem] flex'>
-        <div className='noti-data h-full w-[20%] flex items-center justify-start pl-5 md:w-[50%]'>
+        <div className='noti-data h-full w-[30%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
             <Image
               className='cursor-pointer'
@@ -91,7 +91,7 @@ function Navbar() {
             LS PLANNER
           </h1>
         </div>
-        <div className='h-full w-[80%] flex items-center space-x-5 navbarfont justify-evenly md:justify-end md:w-[50%] md:space-x-8 md:pr-5'>
+        <div className='h-full w-[70%] flex items-center space-x-5 navbarfont justify-evenly md:justify-end md:w-[50%] md:space-x-8 md:pr-5'>
           <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
             <Link href='/'>Home</Link>
           </h1>

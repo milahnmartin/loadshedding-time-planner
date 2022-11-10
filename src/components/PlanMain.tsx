@@ -41,7 +41,6 @@ function PlanMain() {
   const router = useRouter();
   const { plan_id } = router.query;
   const { data: planData, isError, isFetching } = useFetchPlanData(plan_id as string);
-
   // useState Hooks
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
   const [users, setUsers] = useState<Array<string>>([]);
@@ -138,23 +137,23 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
-    // const specifiedStartDateTimes = loadsheddingData.filter(
-    //   (day: { date: string; name: string; stages: string[][]; stage: string }) => {
-    //     return day.date === time.startTime.date;
-    //   }
-    // )[0];
-    // const specifiedEndDateTimes = loadsheddingData.filter(
-    //   (day: { date: string; name: string; stages: string[][]; stage: string }) => {
-    //     return day.date === time.endTime.date;
-    //   }
-    // )[0];
-    // setlstimes((prev: any) => [
-    //   ...prev,
-    //   {
-    //     user: inputRef,
-    //     times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
-    //   },
-    // ]);
+    const specifiedStartDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][] }) => {
+        return day.date === time.startTime.date;
+      }
+    )[0];
+    const specifiedEndDateTimes = loadsheddingData.filter(
+      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+        return day.date === time.endTime.date;
+      }
+    )[0];
+    setlstimes((prev: any) => [
+      ...prev,
+      {
+        user: inputRef,
+        times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
+      },
+    ]);
   };
 
   const handleAddTeam = async (e: React.FormEvent) => {

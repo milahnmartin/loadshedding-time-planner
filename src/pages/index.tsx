@@ -24,14 +24,6 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <IndexMain />
-      <div
-        id='middle-screen'
-        className='w-full h-[50rem] flex items-center justify-center'
-      >
-        {/* <h1 className='px-2 text-transparent tracking-tight w-fit bg-clip-text text-center font-Inter text-5xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-7xl'>
-          WHAT IS LOADSHEDDING ?
-        </h1> */}
-      </div>
       <Footer />
     </div>
   );

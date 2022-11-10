@@ -51,8 +51,8 @@ const IndexMain = () => {
       >
         TRYING TO PLAN
       </h1>
-      <div className='flex w-full'>
-        <div className='w-1/2 h-fll flex items-center justify-end'>
+      <div className='flex flex-col w-full md:flex-row'>
+        <div className='w-full h-fll flex items-center justify-end md:w-1/2'>
           <span
             id='index-type-writer'
             className='px-2 text-transparent tracking-tight w-fit bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
@@ -65,7 +65,7 @@ const IndexMain = () => {
             />
           </span>
         </div>
-        <div className='w-1/2 h-fll flex items-center justify-start'>
+        <div className='w-full h-full flex items-center justify-center md:w-1/2 md:justify-start'>
           <span
             id='index-around'
             className='px-2 tracking-widest w-fit italic font-Inter text-6xl font-black text-yellow-500 md:text-8xl'

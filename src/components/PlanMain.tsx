@@ -256,13 +256,13 @@ function PlanMain() {
 
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
-      <div className='w-full h-full md:w-1/2 border-dotted border-red-700 border-2'>
-        <div className='w-full h-[40%] flex flex-col justify-start items-center p-2 border-pink-600 border-4'>
+      <div className='w-full h-full md:w-1/2'>
+        <div className='w-full h-[40%] flex flex-col justify-start items-center p-2'>
           <h1 className='text-white h-fit text-center pt-5 pb-6 w-full font-Inter font-bold text-4xl'>
             PLAN SETTINGS
           </h1>
           <section className='flex p-2 w-full h-full'>
-            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-0'>
+            <div className='w-1/2 h-full flex flex-col items-center justify-start space-y-0'>
               <h1 className={custom_h1}>
                 Plan Date:
                 <span
@@ -311,7 +311,7 @@ function PlanMain() {
               />
               <hr className={gline} />
             </div>
-            <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start '>
+            <div className='w-1/2 h-full flex flex-col items-center justify-start '>
               <h1 className={custom_h1}>
                 Start Time:
                 <span
@@ -366,9 +366,9 @@ function PlanMain() {
           </section>
         </div>
         {/* bottom left  (whole)*/}
-        <div className='w-full h-[60%] flex border-4 border-orange-500'>
+        <div className='w-full h-[60%] flex'>
           {/* bottom left left */}
-          <div className='w-1/2 h-full px-2 flex flex-col items-center border-2 border-cblue'>
+          <div className='w-1/2 h-full flex flex-col items-center'>
             <h1 className={custom_h1}>Add Team:</h1>
             <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
               <input
@@ -382,7 +382,7 @@ function PlanMain() {
                 ADD TEAM
               </button>
             </form>
-            <div className='h-full w-full flex flex-wrap content-start justify-center gap-1 border-2 overflow-y-scroll'>
+            <div className='h-full w-full flex flex-wrap content-center justify-center gap-1 overflow-y-scroll pt-2'>
               {teams.map((team: string) => {
                 return (
                   <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
@@ -391,7 +391,7 @@ function PlanMain() {
             </div>
           </div>
           {/* left bottom right */}
-          <div className='w-1/2 h-full px-2 flex flex-col items-center border-2 border-cpurple'>
+          <div className='w-1/2 h-full flex flex-col items-center'>
             <h1 className={custom_h1}>Add User:</h1>
             <form
               onSubmit={handleAddUsers}
@@ -411,7 +411,7 @@ function PlanMain() {
                 ADD USER
               </button>
             </form>
-            <div className='h-full w-full flex flex-wrap content-start justify-center gap-1 border-2 border-pink overflow-y-scroll'>
+            <div className='h-full w-full flex flex-wrap content-center justify-center gap-1 overflow-y-scroll pt-2'>
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (

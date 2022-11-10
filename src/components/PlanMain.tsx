@@ -277,7 +277,7 @@ function PlanMain() {
               />
               <hr className={gline} />
               <h1 className={custom_h1}>
-                End Plan Date:
+                End Plan Date (disabled : not needed):
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='What Day Are You Planning To End ?'
@@ -286,6 +286,7 @@ function PlanMain() {
                 </span>
               </h1>
               <input
+                disabled
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setTime({
                     ...time,

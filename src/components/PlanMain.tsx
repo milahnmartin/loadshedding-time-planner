@@ -33,20 +33,14 @@ const custom_h1 = classNames(
 const loadedPlanStyles = classNames(
   "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
 );
-const unLoadedPlanStyles = classNames(
-  "w-full h-[90%] flex items-center justify-center"
-);
+const unLoadedPlanStyles = classNames("w-full h-[90%] flex items-center justify-center");
 
 function PlanMain() {
   const [loggedUser, loading] = useAuthState(auth);
   // useRouter Hook
   const router = useRouter();
   const { plan_id } = router.query;
-  const {
-    data: planData,
-    isError,
-    isFetching,
-  } = useFetchPlanData(plan_id as string);
+  const { data: planData, isError, isFetching } = useFetchPlanData(plan_id as string);
 
   // useState Hooks
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(40);
@@ -72,29 +66,18 @@ function PlanMain() {
   });
 
   useEffect(() => {
-    if (loading || !loggedUser) return;
-    addCurrentLoggedInUser(
-      loggedUser.email ? loggedUser.email : loggedUser.displayName!
-    );
-  }, [loading]);
-
-  useEffect(() => {
+    if (isFetching) return;
     if (planData) {
       setUsers((prev: string[]) => [...prev, ...planData.plan_authorizedUsers]);
       setTeams(planData.plan_authorizedTeams);
       setlstimes(planData.plan_lsTimes);
-      setTime((prev): any => {
-        return {
-          ...prev,
-          startTime: {
-            time: prev.startTime.time,
-            date: planData?.plan_createdAt.split("T")[0],
-          },
-        };
-      });
     }
   }, [isFetching]);
 
+  useEffect(() => {
+    if (loading || !loggedUser) return;
+    addCurrentLoggedInUser(loggedUser.email ? loggedUser.email : loggedUser.displayName!);
+  }, [loading]);
   // useRef Hooks
   const userRefAdd = useRef<HTMLInputElement>(null);
   const teamRefAdd = useRef<HTMLInputElement>(null);
@@ -103,11 +86,9 @@ function PlanMain() {
   const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
-    const newLsTimes = lstimes.filter(
-      (owner: { user: string; times: string[] }): any => {
-        return owner.user !== val;
-      }
-    );
+    const newLsTimes = lstimes.filter((owner: { user: string; times: string[] }): any => {
+      return owner.user !== val;
+    });
     setlstimes(newLsTimes);
   };
   const handleRemoveTeam = (val: string) => {
@@ -148,36 +129,32 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
 
-    const fetchedUserTimes = await fetch(
-      `/api/sepush/${id}/${time.startTime.date}}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
-
-    const specifiedStartDateTimes = loadsheddingData.filter(
-      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
-        return day.date === time.startTime.date;
-      }
-    )[0];
-    const specifiedEndDateTimes = loadsheddingData.filter(
-      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
-        return day.date === time.endTime.date;
-      }
-    )[0];
-    setlstimes((prev: any) => [
-      ...prev,
-      {
-        user: inputRef,
-        times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
-      },
-    ]);
+    // const specifiedStartDateTimes = loadsheddingData.filter(
+    //   (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+    //     return day.date === time.startTime.date;
+    //   }
+    // )[0];
+    // const specifiedEndDateTimes = loadsheddingData.filter(
+    //   (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+    //     return day.date === time.endTime.date;
+    //   }
+    // )[0];
+    // setlstimes((prev: any) => [
+    //   ...prev,
+    //   {
+    //     user: inputRef,
+    //     times: [...specifiedStartDateTimes.stages[currentLoasheddingStage - 1]],
+    //   },
+    // ]);
   };
 
   const handleAddTeam = async (e: React.FormEvent) => {
@@ -187,10 +164,7 @@ function PlanMain() {
       return;
     }
 
-    const splittedNewTeams = teamRefAdd.current.value
-      ?.trim()
-      .toLowerCase()
-      .split(",");
+    const splittedNewTeams = teamRefAdd.current.value?.trim().toLowerCase().split(",");
     const newTeams = Array.from(new Set([...teams, ...splittedNewTeams]));
     setTeams(newTeams);
     teamRefAdd.current.value = "";
@@ -239,21 +213,20 @@ function PlanMain() {
     const newUsers = Array.from(new Set([...users, user]));
     setUsers(newUsers);
 
-    const fetchedUserTimes = await fetch(
-      `/api/sepush/${id}/${time.startTime.date}}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const fetchedUserTimes = await fetch(`/api/sepush/${id}/${time.startTime.date}}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
+    console.log("CALLED FROM ADD CURRENT LOGGED IN USER");
+    console.log(loadsheddingData);
 
     const specifiedStartDateTimes = loadsheddingData.filter(
-      (day: { date: string; name: string; stages: string[][]; stage: string }) => {
+      (day: { date: string; name: string; stages: string[][] }) => {
         return day.date === time.startTime.date;
       }
     )[0];
@@ -409,10 +382,7 @@ function PlanMain() {
         <div className='w-full h-[50%] flex p-2 overflow-y-scroll overflow-x-hidden '>
           <div className='w-1/2 h-full p-2 flex flex-col items-center '>
             <h1 className={custom_h1}>Add Team:</h1>
-            <form
-              onSubmit={handleAddTeam}
-              className='flex flex-col items-center w-full '
-            >
+            <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
               <input
                 placeholder='Bravado, Nixuh etc...'
                 ref={teamRefAdd}
@@ -427,12 +397,7 @@ function PlanMain() {
             <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
               {teams.map((team: string) => {
                 return (
-                  <RedLabel
-                    key={team}
-                    args={true}
-                    data={team}
-                    cb={handleRemoveTeam}
-                  />
+                  <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
                 );
               })}
             </div>
@@ -461,12 +426,7 @@ function PlanMain() {
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
-                  <RedLabel
-                    key={user}
-                    args={false}
-                    data={user}
-                    cb={handleRemoveUser}
-                  />
+                  <RedLabel key={user} args={false} data={user} cb={handleRemoveUser} />
                 );
               })}
             </div>
@@ -527,9 +487,7 @@ function PlanMain() {
           <div className='flex gap-1 pt-2'>
             {memoCalcTimes[1]?.map((time: string) => {
               return (
-                time && (
-                  <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
-                )
+                time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
               );
             })}
           </div>

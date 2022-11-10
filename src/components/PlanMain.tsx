@@ -1,7 +1,7 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
 import { Player } from "@lottiefiles/react-lottie-player";
 import classNames from "classnames";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -229,6 +229,11 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
+    if (!loadsheddingData) {
+      toast.error("API Error, Contact The Owner Please");
+      Router.push("/");
+      return;
+    }
     setcalcLoading(false);
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {
@@ -251,15 +256,15 @@ function PlanMain() {
 
   return (
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
-      <div className='w-full h-full md:w-1/2'>
-        <div className='w-full h-[50%] flex flex-col justify-start items-center p-2 '>
+      <div className='w-full h-full md:w-1/2 border-dotted border-red-700 border-2'>
+        <div className='w-full h-[40%] flex flex-col justify-start items-center p-2 border-pink-600 border-4'>
           <h1 className='text-white h-fit text-center pt-5 pb-6 w-full font-Inter font-bold text-4xl'>
             PLAN SETTINGS
           </h1>
           <section className='flex p-2 w-full h-full'>
             <div className='w-1/2 h-full px-2 flex flex-col items-center justify-start space-y-0'>
               <h1 className={custom_h1}>
-                Start Plan Date:
+                Plan Date:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='What Day Are You Planning To Start ?'
@@ -278,31 +283,6 @@ function PlanMain() {
                   })
                 }
                 value={time.startTime.date}
-                className={inputStyles}
-                type='date'
-              />
-              <hr className={gline} />
-              <h1 className={custom_h1}>
-                End Plan Date (disabled : not needed):
-                <span
-                  className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
-                  title='What Day Are You Planning To End ?'
-                >
-                  <AiOutlineInfoCircle />
-                </span>
-              </h1>
-              <input
-                disabled
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setTime({
-                    ...time,
-                    endTime: {
-                      ...time.endTime,
-                      date: e.currentTarget.value,
-                    },
-                  })
-                }
-                value={time.endTime.date}
                 className={inputStyles}
                 type='date'
               />
@@ -385,8 +365,10 @@ function PlanMain() {
             </div>
           </section>
         </div>
-        <div className='w-full h-[50%] flex p-2 overflow-y-scroll overflow-x-hidden '>
-          <div className='w-1/2 h-full p-2 flex flex-col items-center '>
+        {/* bottom left  (whole)*/}
+        <div className='w-full h-[60%] flex border-4 border-orange-500'>
+          {/* bottom left left */}
+          <div className='w-1/2 h-full px-2 flex flex-col items-center border-2 border-cblue'>
             <h1 className={custom_h1}>Add Team:</h1>
             <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
               <input
@@ -400,7 +382,7 @@ function PlanMain() {
                 ADD TEAM
               </button>
             </form>
-            <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
+            <div className='h-full w-full flex flex-wrap content-start justify-center gap-1 border-2 overflow-y-scroll'>
               {teams.map((team: string) => {
                 return (
                   <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
@@ -408,7 +390,8 @@ function PlanMain() {
               })}
             </div>
           </div>
-          <div className='w-1/2 h-full p-2 flex flex-col items-center '>
+          {/* left bottom right */}
+          <div className='w-1/2 h-full px-2 flex flex-col items-center border-2 border-cpurple'>
             <h1 className={custom_h1}>Add User:</h1>
             <form
               onSubmit={handleAddUsers}
@@ -428,7 +411,7 @@ function PlanMain() {
                 ADD USER
               </button>
             </form>
-            <div className='h-full w-full flex flex-wrap content-center justify-center items-center gap-1 '>
+            <div className='h-full w-full flex flex-wrap content-start justify-center gap-1 border-2 border-pink overflow-y-scroll'>
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
@@ -441,7 +424,7 @@ function PlanMain() {
       </div>
 
       {calcLoading && (
-        <div className='w-full h-full border-sky-500 border-2 flex items-center justify-center p-2 md:w-1/2'>
+        <div className='w-full h-full flex items-center justify-center p-2 md:w-1/2'>
           <Player
             src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
             className='player w-[50%] h-[50%] '
@@ -452,7 +435,7 @@ function PlanMain() {
         </div>
       )}
       {!calcLoading && (
-        <div className='w-full h-full border-sky-500 border-2 flex flex-col p-2 md:w-1/2'>
+        <div className='w-full h-full flex flex-col p-2 md:w-1/2'>
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
             <h1 className='text-white font-bold text-2xl flex items-center pt-5'>
               LS TIMES:

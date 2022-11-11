@@ -30,7 +30,7 @@ function login() {
     }
   };
   return (
-    <div className='h-screen w-screen overflow-scroll bg-black'>
+    <div className='h-screen w-screen overflow-scroll'>
       <Head>
         <title>LS Planner | Login</title>
         <meta name='description' content='Login to LS Game Planner' />

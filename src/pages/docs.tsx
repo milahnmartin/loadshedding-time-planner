@@ -5,7 +5,7 @@ import Head from "next/head";
 
 function docs() {
   return (
-    <div className='h-screen w-screen overflow-scroll bg-black'>
+    <div className='h-screen w-screen overflow-scroll'>
       <Head>
         <title>LS Planner / Docs</title>
       </Head>

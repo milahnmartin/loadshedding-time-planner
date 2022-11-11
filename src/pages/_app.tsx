@@ -8,13 +8,13 @@ import "../styles/globals.css";
 const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = new QueryClient();
   return (
-    <>
+    <div className='bg-slate-800'>
       <QueryClientProvider client={queryClient}>
         <ToastContainer position='bottom-right' />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </>
+    </div>
   );
 };
 

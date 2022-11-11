@@ -4,7 +4,7 @@ import Head from "next/head";
 import Router from "next/router";
 const ErrorPage = () => {
   return (
-    <div className='h-screen w-screen overflow-scroll bg-black'>
+    <div className='h-screen w-screen overflow-scroll'>
       <Head>
         <title>LS Planner / 404</title>
       </Head>

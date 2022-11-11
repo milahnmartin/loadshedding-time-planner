@@ -4,7 +4,7 @@ import Navbar from "@comps/Navbar";
 import Head from "next/head";
 const invites = () => {
   return (
-    <div className='h-screen w-screen overflow-y-scroll bg-black'>
+    <div className='h-screen w-screen overflow-y-scroll'>
       <Head>
         <title>LS Planner / Invites</title>
       </Head>

@@ -19,7 +19,7 @@ const plans: NextPage = () => {
   } = useFetchSavedPlans();
 
   return (
-    <div className='h-screen w-screen overflow-scroll bg-black'>
+    <div className='h-screen w-screen overflow-scroll'>
       <Head>
         <title>LS Planner / Plans</title>
       </Head>

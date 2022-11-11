@@ -6,7 +6,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div className='h-screen w-screen bg-black max-h-screen overflow-scroll'>
+    <div id='bg-main' className='h-screen w-screen max-h-screen overflow-scroll'>
       <Head>
         <title>LS Planner / Home</title>
         <meta property='og:title' content='Loadshedding Time Calculator / Home' />

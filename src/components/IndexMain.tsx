@@ -44,7 +44,7 @@ const IndexMain = () => {
     </svg>
   );
   return (
-    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 bg-black'>
+    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9'>
       <h1
         id='index-main-trying'
         className='text-center font-Inter text-5xl font-bold text-white md:text-8xl'
@@ -94,7 +94,7 @@ const IndexMain = () => {
 
         <Link href='/plans'>
           <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-black rounded-full group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               SAVED PLANS
             </span>
           </button>

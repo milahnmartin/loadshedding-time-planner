@@ -75,7 +75,7 @@ function Navbar() {
   }, [loading]);
 
   return (
-    <header className='sticky top-0 z-10 bg-transparent'>
+    <header className='sticky top-0 z-10 bg-slate-800'>
       <div className='h-[5rem] flex'>
         <div className='noti-data h-full w-[30%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>

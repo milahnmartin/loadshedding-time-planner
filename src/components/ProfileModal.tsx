@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiBookAlt } from "react-icons/bi";
 import { CgLogOut, CgProfile } from "react-icons/cg";
+
 import { auth } from "../utils/firebase-config";
 
 function ProfileModal() {

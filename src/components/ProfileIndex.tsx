@@ -4,6 +4,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { MdContentCopy } from "react-icons/md";
 import { toast } from "react-toastify";
 import { auth } from "../utils/firebase-config";
+import { FaUserCircle } from "react-icons/fa";
+import { HiOutlineKey } from "react-icons/hi";
+import { MdOutlineMail } from "react-icons/md";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
 
@@ -36,11 +39,21 @@ const ProfileIndex = () => {
 
           <div className='h-fit flex flex-col items-center justify-center gap-8 text-center'>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
-              <h3 className='text-2xl font-bold text-slate-300'>Username:</h3>
+              <span className='flex items-center space-x-1'>
+                <FaUserCircle className='text-2xl align-center justify-center pt-[2px]' />
+                <h3 className='text-2xl font-bold text-slate-300 align-center justify-center'>
+                  Username:
+                </h3>
+              </span>
               <p className='text-2xl font-bold text-cblue'>{user?.displayName}</p>
             </div>
             <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
-              <h3 className='text-2xl font-bold text-slate-300'>ID:</h3>
+              <span className='flex items-center space-x-1'>
+                <HiOutlineKey className='text-2xl align-center justify-center pt-[2px]' />
+                <h3 className='text-2xl font-bold text-slate-300 align-center justify-center'>
+                  ID:
+                </h3>
+              </span>
               <span className='flex items-center space-x-2'>
                 <p className='text-xl font-bold text-cblue'>{user?.uid}</p>
                 <MdContentCopy
@@ -53,7 +66,10 @@ const ProfileIndex = () => {
               </span>
             </div>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
-              <h3 className='text-2xl font-bold text-slate-300'>Invite Name:</h3>
+              <span className='flex items-center space-x-1'>
+                <MdOutlineMail className='text-2xl align-center justify-center pt-[3px]' />
+                <h3 className='text-2xl font-bold text-slate-300'>Invite Name:</h3>
+              </span>
               <p className='text-2xl font-bold text-cblue'>
                 {user?.email ? user?.email : user?.displayName}
               </p>

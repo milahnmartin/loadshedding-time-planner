@@ -95,7 +95,8 @@ class TimeCalculations {
 
   static getInbetweenTimes = (
     LoadSheddingTimes: string[],
-    MaxGameTime: number
+    MaxGameTime: number,
+    UserFilteredStartTime: string
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
@@ -135,7 +136,24 @@ class TimeCalculations {
       let pStart = (diff /= 60);
 
       if (MaxGameTime > pStart) continue;
-      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN----`);
+      const FilteredStartTime = new Date();
+      FilteredStartTime.setHours(
+        +UserFilteredStartTime.split(":")[0]!,
+        +UserFilteredStartTime.split(":")[1]!
+      );
+      let filteredDiff = (FilteredStartTime.getTime() - start.getTime()) / 1000;
+      let filteredDiffCalc = (filteredDiff /= 60);
+      if (Math.floor(filteredDiffCalc) > 0) {
+        LSTimes.push(
+          `${
+            FilteredStartTime.getHours() +
+            ":" +
+            (FilteredStartTime.getMinutes() === 0 ? "00" : FilteredStartTime.getMinutes())
+          } - ${endTime} @ ${pStart - Math.floor(filteredDiffCalc)} MIN`
+        );
+        continue;
+      }
+      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN`);
     }
     return LSTimes;
   };
@@ -159,7 +177,7 @@ class TimeCalculations {
       EndDate,
       MaxPlanTime
     );
-    const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime);
+    const InbetweenTimes = this.getInbetweenTimes(mytimes, MaxPlanTime, StartTime);
     const avTimes = [InitialStartTime, ...InbetweenTimes, InitialEndTime];
     return [avTimes, this.calcBufferTimes(avTimes)];
   };

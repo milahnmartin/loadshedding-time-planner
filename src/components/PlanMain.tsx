@@ -437,10 +437,10 @@ function PlanMain() {
       {!calcLoading && (
         <div className='w-full h-full flex flex-col p-2 md:w-1/2'>
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-            <h1 className='text-white font-bold text-2xl flex items-center pt-5'>
+            <h1 className='text-white font-Inter font-black text-2xl text-center flex items-center pt-5'>
               LS TIMES:
               <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[-1px]'
                 data-title={`All Added Users Loadshedding Times for ${time.startTime.date} - ${time.endTime.date}`}
               >
                 <AiOutlineInfoCircle />
@@ -455,10 +455,10 @@ function PlanMain() {
           </div>
 
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-            <h1 className='text-white font-bold text-2xl flex items-center h-fit'>
+            <h1 className='text-white font-Inter font-black text-2xl flex items-center h-fit'>
               AVAILABLE TIMES:
               <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[-1px]'
                 data-title={`All Available Times for ${time.startTime.date} - ${time.endTime.date}`}
               >
                 <AiOutlineInfoCircle />
@@ -476,10 +476,10 @@ function PlanMain() {
           </div>
 
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
-            <h1 className='text-white font-bold text-2xl flex items-center'>
+            <h1 className='text-white font-black font-Inter text-2xl flex items-center'>
               BUFFER TIMES:
               <span
-                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[1px]'
+                className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer relative top-[-1px]'
                 data-title={`30 Minutes Before and After Each Available Time Removed`}
               >
                 <AiOutlineInfoCircle />

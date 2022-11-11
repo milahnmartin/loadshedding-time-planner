@@ -139,6 +139,11 @@ function PlanMain() {
       },
     });
     const jsonedUserTimes = await fetchedUserTimes.json();
+    if (!jsonedUserTimes) {
+      toast.error("API Error, Contact Developer");
+      Router.push("/");
+      return;
+    }
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
     setcalcLoading(false);

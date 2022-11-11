@@ -17,7 +17,7 @@ function RedLabel(props: LabelData) {
     <div id='bubbled-red-label-container' className={LabelColor}>
       <h1 className='mx-2'>{props.data}</h1>
       <AiOutlineCloseCircle
-        className='cursor-pointer relative top-[1px] hover:animate-pulse'
+        className='cursor-pointer relative top-[1px] hover:animate-spin'
         onClick={() => props.cb(props.data)}
         size={20}
       />

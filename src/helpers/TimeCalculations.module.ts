@@ -12,6 +12,7 @@ class TimeCalculations {
     const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
     const EarliestLSTimeSplit = EarliestLSTime.split("-")[0];
+    console.log(EarliestLSTimeSplit);
     const EarliestLSTimeDate = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
@@ -31,7 +32,7 @@ class TimeCalculations {
     let CalcTimeDifference = (TimeDifference /= 60);
 
     if (MaxGameTime <= CalcTimeDifference) {
-      return `${UserStartTime} - ${EarliestLSTime} @ ${CalcTimeDifference} MIN+++`;
+      return `${UserStartTime} - ${EarliestLSTimeSplit} @ ${CalcTimeDifference} MIN+++`;
     }
   };
 

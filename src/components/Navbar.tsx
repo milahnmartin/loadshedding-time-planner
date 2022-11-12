@@ -65,8 +65,8 @@ function Navbar() {
     }
   };
   useEffect(() => {
-    if (user && !loading) return setLoginState("LOGOUT");
-    if (!user && !loading) return setLoginState("LOGIN");
+    if (user && !loading) return setLoginState("Sign Out");
+    if (!user && !loading) return setLoginState("Sign In");
   }, [user, loading]);
 
   useEffect(() => {
@@ -130,7 +130,7 @@ function Navbar() {
             <UserProfile src={user?.photoURL} />
           ) : (
             <Link href='/auth/login'>
-              <button className='px-4 py-1 bg-primary text-white font-black tracking-wide font-Inter rounded-lg text-center'>
+              <button className='px-5 py-[5px] ring-2 outline-none ring-cblue text-white font-bold rounded-full text-center hover:bg-cblue animation-all duration-500'>
                 {loginState}
               </button>
             </Link>

@@ -74,7 +74,13 @@ function PlanMain() {
   }, [isFetching]);
 
   useEffect(() => {
-    if (loading || !loggedUser) return;
+    if (loading) return;
+    if (!loggedUser) {
+      console.log(`user is ${loggedUser}`);
+      toast.error("Need to be logged in to add yourself");
+      Router.push("/");
+      return;
+    }
     addCurrentLoggedInUser(loggedUser.email ? loggedUser.email : loggedUser.displayName!);
   }, [loading]);
   // useRef Hooks

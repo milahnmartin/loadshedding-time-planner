@@ -24,13 +24,13 @@ export default function App() {
       glowColor: [1, 1, 1],
       markers: [
         // longitude latitude
-        { location: [-30.0, 25.0], size: 0.2, markerColor: [1, 2, 2] },
+        { location: [-30.0, 24.0], size: 0.1, markerColor: [1, 1, 1] },
       ],
       onRender: (state) => {
         // Called on every animation frame.
         // `state` will be an empty object, return updated params.
         state.phi = phi;
-        phi += 0.003;
+        phi += 0.002;
       },
     });
 

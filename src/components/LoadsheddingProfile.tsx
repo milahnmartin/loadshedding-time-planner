@@ -17,7 +17,7 @@ const gline = classNames(
 );
 
 const inputStyles = classNames(
-  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-bold font-Inter focus:outline-none focus:text-blue-600 "
+  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-bold font-Inter focus:outline-none focus:text-white "
 );
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -56,7 +56,7 @@ const LoadsheddingProfile = () => {
     <div className='flex w-full h-full overflow-y-scroll p-2'>
       <div className='w-1/4 h-full flex items-center justify-center '>
         <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-          <div className='flex flex-col items-center h-full bg-slate-900 text-white rounded-lg p-4'>
+          <div className='flex flex-col items-center h-full bg-slate-800 text-white rounded-lg p-4'>
             <h1 className=' w-full text-center font-Inter font-black pb-8 tracking-wide text-xl '>
               CURRENT SAVED AREA:
             </h1>

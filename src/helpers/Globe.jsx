@@ -18,8 +18,8 @@ export default function App() {
       dark: 1,
       diffuse: 1.2,
       mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: [0.1, 0.1, 0.1],
+      mapBrightness: 10,
+      baseColor: [0.1, 0.2, 0.5],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
       markers: [

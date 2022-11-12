@@ -1,3 +1,4 @@
+import Globe from "@helpers/Globe";
 import Link from "next/link";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -44,14 +45,15 @@ const IndexMain = () => {
     </svg>
   );
   return (
-    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9'>
+    <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
         id='index-main-trying'
-        className='text-center font-Inter text-5xl font-bold text-white md:text-8xl'
+        className='text-center font-Inter text-5xl font-bold text-white md:text-8xl z-[1]'
       >
         TRYING TO PLAN
       </h1>
-      <div className='flex flex-col w-full items-center justify-center md:flex-row'>
+      <div className='flex flex-col w-full items-center justify-center md:flex-row relative '>
+        <Globe />
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'

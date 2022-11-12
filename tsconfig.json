@@ -22,6 +22,14 @@
     }
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    "src/helpers/Globe.jsxx",
+    "src/helpers/Globe.jsxx"
+  ],
   "exclude": ["node_modules"]
 }

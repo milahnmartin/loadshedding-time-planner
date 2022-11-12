@@ -263,7 +263,7 @@ function PlanMain() {
     <div className='w-full h-[90%] flex flex-col md:flex-row'>
       <div className='w-full h-full md:w-1/2'>
         <div className='w-full h-[40%] flex flex-col justify-start items-center p-2'>
-          <h1 className='text-white h-fit text-center pt-5 pb-6 w-full font-Inter font-bold text-4xl'>
+          <h1 className='text-white h-fit text-center pt-5 pb-6 w-full font-bold text-4xl'>
             PLAN SETTINGS
           </h1>
           <section className='flex p-2 w-full h-full'>

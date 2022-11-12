@@ -80,18 +80,28 @@ const LoadsheddingProfile = () => {
                 />
               </div>
             ) : SavedAreaData ? (
-              <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center font-Inter tracking-wide'>
+              <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center tracking-wide'>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black'>AREA ID:</h1>
-                  <h1 className='text-blue-200 font-bold'>{SavedAreaData.id}</h1>
+                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                    AREA ID:
+                  </h1>
+                  <h1 className='text-blue-200 text-xl font-bold tracking-wide'>
+                    {SavedAreaData.id}
+                  </h1>
                 </div>
                 <div>
                   <h1 className='text-blue-500 text-xl font-black'>AREA REGION:</h1>
-                  <h1 className='text-blue-200 font-bold'>{SavedAreaData.region}</h1>
+                  <h1 className='text-blue-200 text-xl font-bold'>
+                    {SavedAreaData.region}
+                  </h1>
                 </div>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black'>AREA NAME:</h1>
-                  <h1 className='text-blue-200 font-bold'>{SavedAreaData.name}</h1>
+                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                    AREA NAME:
+                  </h1>
+                  <h1 className='text-blue-200 text-xl font-bold'>
+                    {SavedAreaData.name}
+                  </h1>
                 </div>
               </div>
             ) : (

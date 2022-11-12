@@ -1,10 +1,7 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/pages/**/*.tsx",
-    "./src/components/**/*.tsx",
-    "./src/hooks/**/*.tsx",
-  ],
+  content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx", "./src/hooks/**/*.tsx"],
   theme: {
     extend: {
       colors: {
@@ -64,7 +61,7 @@ module.exports = {
     },
 
     fontFamily: {
-      Inter: ["Inter", "sans-serif"],
+      Inter: ["var(--font-inter)", ...fontFamily.sans],
     },
   },
   plugins: [],

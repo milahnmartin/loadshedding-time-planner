@@ -75,7 +75,7 @@ function Navbar() {
   }, [loading]);
 
   return (
-    <header className='sticky top-0 z-10 bg-zinc-900'>
+    <header className='sticky top-0 z-10'>
       <div className='h-[5rem] flex'>
         <div className='noti-data h-full w-[30%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
@@ -95,7 +95,7 @@ function Navbar() {
           <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
             <Link href='/'>Home</Link>
           </h1>
-          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+          <h1 className='font-bold font-Inter text-white transition-all duration-150 hover:text-cblue'>
             <Link href='/docs'>Docs</Link>
           </h1>
 

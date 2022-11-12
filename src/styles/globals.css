@@ -10,11 +10,6 @@
   padding: 0;
 }
 
-@font-face {
-  font-family: "main";
-  src: url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap");
-}
-
 ::-webkit-scrollbar {
   display: none;
   /* chrome safari opera */

@@ -89,7 +89,7 @@ const IndexMain = () => {
           className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
         >
           NEW PLAN
-          <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500'>
+          <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500 '>
             {arrowIcon}
           </div>
         </button>

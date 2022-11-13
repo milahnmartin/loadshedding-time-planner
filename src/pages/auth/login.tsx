@@ -10,6 +10,7 @@ import Image from "next/image";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
+import { Player } from "@lottiefiles/react-lottie-player";
 import { toast } from "react-toastify";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
@@ -42,7 +43,16 @@ function login() {
       <Navbar />
 
       <div className='h-[80%] flex mt-[3.5rem]'>
-        <div className='w-1/4 justify-end px-5 hidden md:flex'>
+        <div className='w-2/5 justify-end px-5 hidden md:flex'>
+          <div className='w-full h-full flex items-center justify-center'>
+            <Player
+              src='https://assets9.lottiefiles.com/packages/lf20_gjmecwii.json'
+              className='player w-full h-full '
+              autoplay
+              loop
+              speed={0.5}
+            />
+          </div>
           <div className='h-full items-center justify-center '>
             <div className='h-[45%] w-full flex justify-center'>
               <span className='h-full w-[1px] bg-gradient-to-t from-caqua via-cblue to-cpurple'></span>
@@ -62,8 +72,8 @@ function login() {
           </div>
         </div>
         <div className='w-full flex items-center justify-center flex-col md:3/4'>
-          <div className=' h-1/4 p-2 flex items-center justify-center text-center'>
-            <h1 className=' text-center font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple py-4 md:text-6xl'>
+          <div className=' h-fit pb-2 flex items-center justify-center text-center'>
+            <h1 className=' text-center font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pb-4 md:text-6xl'>
               TIME TO LOG IN
             </h1>
           </div>

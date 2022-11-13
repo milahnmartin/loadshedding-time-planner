@@ -38,7 +38,6 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
             onClick={() => cbSetArea({ id, name, region })}
             className='relative inline-flex items-center justify-center p-0.5  w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-[1.15rem] group bg-gradient-to-br from-c2aqua via-c2blue to-c2purple group-hover:from-c2aqua group-hover:via-c2blue group-hover:to-c2purple hover:text-white dark:text-white '
           >
-            {/* className='p-2 bg-cblue rounded-full h-fit w-[50%] font-Inter font-black' */}
             <span className='relative px-5 py-2.5 transition-all ease-in duration-200  w-[9.5rem] h-[2.5rem] bg-white dark:bg-gray-900 rounded-[1rem] group-hover:bg-opacity-0 font-bold'>
               SET AREA
             </span>

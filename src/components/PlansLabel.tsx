@@ -13,15 +13,15 @@ const PlansLabel = ({ plan }: any) => {
     <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl'>
       <span className='flex flex-col w-full h-full rounded-xl'>
         <div className='w-full h-full flex items-center justify-center flex-col space-y-2 overflow-y-scroll'>
-          <pre className='text-white text-center'>{plan_id}</pre>
-          <pre className='text-white text-center'>
+          <h1 className='text-white text-center font-Inter font-bold'>{plan_id}</h1>
+          <pre className='text-white text-center font-bold'>
             {new Date(plan_createdAt).toUTCString()}
           </pre>
           {plan_lsTimes.map((time: string) => {
             return (
-              <pre className='text-white text-center' key={uuidv4()}>
+              <h1 className='text-white text-center font-bold' key={uuidv4()}>
                 {time}
-              </pre>
+              </h1>
             );
           })}
           {plan_authorizedUsers.map((user: string) => {

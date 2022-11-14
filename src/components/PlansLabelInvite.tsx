@@ -2,7 +2,7 @@ import { uuidv4 } from "@firebase/util";
 import Link from "next/link";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-const PlansLabel = ({ plan }: any) => {
+const PlansLabelInvite = ({ plan }: any) => {
   let {
     plan_id,
     plan_lsTimes,
@@ -16,11 +16,11 @@ const PlansLabel = ({ plan }: any) => {
       <div className='flex flex-col items-center justify-center h-full bg-slate-800 text-white rounded-lg p-2'>
         <span className='flex flex-col items-center w-full h-full rounded-xl'>
           <Player
-            src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
+            src='https://assets10.lottiefiles.com/packages/lf20_9ti102vm.json'
             className='player w-[90px] h-[90px] '
             autoplay
             loop
-            speed={0.8}
+            speed={0.4}
           />
           <div className='w-full h-full flex items-center justify-center flex-col space-y-1 overflow-y-scroll'>
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
@@ -68,4 +68,4 @@ const PlansLabel = ({ plan }: any) => {
   );
 };
 
-export default PlansLabel;
+export default PlansLabelInvite;

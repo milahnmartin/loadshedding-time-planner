@@ -1,6 +1,7 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
+import PlansLabelInvite from "@comps/PlansLabelInvite";
 import { uuidv4 } from "@firebase/util";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { NextPage } from "next";
@@ -30,7 +31,8 @@ const plans: NextPage = () => {
           <div className='pt-5 flex text-3xl text-white font-bold h-fit align-center justify-center content-center'>
             MY PLANS
           </div>
-          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
+
+          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center gap-3'>
             {/* HERE COMES PLANS */}
             {isFetching ? (
               <Player
@@ -51,7 +53,7 @@ const plans: NextPage = () => {
           <div className='pt-5 flex text-3xl text-white font-bold h-fit aling-center justify-center content-center'>
             INVITED PLANS
           </div>
-          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center space-x-2'>
+          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center gap-3'>
             {isFetching ? (
               <Player
                 src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
@@ -62,7 +64,7 @@ const plans: NextPage = () => {
               />
             ) : (
               savedPlans?.map((plan: any) => {
-                return <PlansLabel plan={plan} key={uuidv4()} />;
+                return <PlansLabelInvite plan={plan} key={uuidv4()} />;
               })
             )}
           </div>

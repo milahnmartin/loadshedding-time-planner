@@ -154,7 +154,7 @@ class TimeCalculations {
         );
         continue;
       }
-      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN,,,,`);
+      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN,,,`);
     }
     return LSTimes;
   };

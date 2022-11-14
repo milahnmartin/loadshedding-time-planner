@@ -11,7 +11,9 @@ import useFetchSavedArea from "../hooks/useFetchSavedArea";
 import { auth } from "../utils/firebase-config";
 import supabase from "../utils/supabase-config";
 import AreaLabels from "./AreaLabels";
-const spanStyles = classNames("text-white text-center font-Inter font-black text-xl");
+const spanStyles = classNames(
+  "text-white text-center font-Inter font-black text-xl"
+);
 const gline = classNames(
   " w-[100%] h-[0.25rem] bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7] rounded border-0 "
 );
@@ -170,34 +172,6 @@ const LoadsheddingProfile = () => {
                 />
               );
             })}
-          {/* <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={() => console.log("YES")}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"tshwane-6-nieuwmuckleneuk"}
-              name={"tshwane-6-nieuwmuckleneuk"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={() => console.log("YES")}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              name={"nelsonmandelabay-15-waterkloofwkkarea30"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={() => console.log("YES")}
-            />
-            <AreaLabels
-              key={uuidv4()}
-              id={"tshwane-6-nieuwmuckleneuk"}
-              name={"tshwane-6-nieuwmuckleneuk"}
-              region={"Nelson Mandela Bay Municipality"}
-              cbSetArea={() => console.log("YES")}
-            /> */}
         </div>
       </div>
     </div>

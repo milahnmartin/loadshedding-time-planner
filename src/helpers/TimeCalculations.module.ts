@@ -90,7 +90,7 @@ class TimeCalculations {
           LastGameTime.getHours() +
           ":" +
           (LastGameTime.getMinutes() === 0 ? "00" : LastGameTime.getMinutes())
-        } @ ${CalcTimeDifference} MIN`
+        } @ ${CalcTimeDifference} MIN~~~~`
       : undefined;
   };
 
@@ -150,11 +150,11 @@ class TimeCalculations {
             FilteredStartTime.getHours() +
             ":" +
             (FilteredStartTime.getMinutes() === 0 ? "00" : FilteredStartTime.getMinutes())
-          } - ${endTime} @ ${pStart - Math.floor(filteredDiffCalc)} MIN`
+          } - ${endTime} @ ${pStart - Math.floor(filteredDiffCalc)} MIN????`
         );
         continue;
       }
-      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN`);
+      LSTimes.push(`${startTime} - ${endTime} @ ${pStart} MIN,,,,`);
     }
     return LSTimes;
   };

@@ -31,18 +31,25 @@ const PlansLabel = ({ plan }: any) => {
       <div className='flex flex-col items-center h-full bg-slate-800 text-white rounded-lg p-4'>
         <span className='flex flex-col w-full h-full rounded-xl'>
           <div className='w-full h-full flex items-center justify-center flex-col space-y-2 overflow-y-scroll'>
-            <h1>Plan ID</h1>
-            <h1 className='text-white text-center font-Inter font-bold'>
+            <h1 className='text-blue-500 text-center font-Inter font-black text-xl'>
+              PLAN ID
+            </h1>
+            <h1 className='text-blue-200 text-center text-lg font-bold '>
               {plan_id}
             </h1>
 
-            <h1>Plan Created On:</h1>
-            <pre className='text-white text-center font-bold'>
+            <h1 className='text-blue-500 text-center font-black text-xl'>
+              PLAN CREATED:
+            </h1>
+            <h1 className='text-blue-200 text-center text-lg font-bold '>
               {new Date(plan_createdAt).toUTCString()}
-            </pre>
+            </h1>
             {plan_lsTimes.map((time: string) => {
               return (
-                <h1 className='text-white text-center font-bold' key={uuidv4()}>
+                <h1
+                  className='text-blue-500 text-center font-black text-lg'
+                  key={uuidv4()}
+                >
                   {time}
                 </h1>
               );
@@ -61,12 +68,6 @@ const PlansLabel = ({ plan }: any) => {
                   View Plan
                 </span>
               </button>
-              {/* <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] hover:text-white dark:text-white '>
-                View Plan
-                <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500 '>
-                  {arrowIcon}
-                </div>
-              </button> */}
             </Link>
           </div>
         </span>

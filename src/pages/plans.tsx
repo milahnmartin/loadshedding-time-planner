@@ -50,9 +50,8 @@ const plans: NextPage = () => {
           <div className='pt-5 flex text-3xl text-white font-bold h-fit aling-center justify-center content-center'>
             INVITED PLANS
           </div>
-          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center'>
+          <div className='flex h-[90%] overflow-y-scroll flex-wrap content-center items-center justify-center text-center space-x-2'>
             {isFetching ? (
-              // <ThreeDots fill='#3c79f0' />
               <Player
                 src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
                 className='player w-[30%] h-[30%] '

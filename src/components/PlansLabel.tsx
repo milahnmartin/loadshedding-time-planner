@@ -13,7 +13,10 @@ const PlansLabel = ({ plan }: any) => {
     <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl'>
       <span className='flex flex-col w-full h-full rounded-xl'>
         <div className='w-full h-full flex items-center justify-center flex-col space-y-2 overflow-y-scroll'>
+          <h1>Plan ID</h1>
           <h1 className='text-white text-center font-Inter font-bold'>{plan_id}</h1>
+
+          <h1>Plan Created On:</h1>
           <pre className='text-white text-center font-bold'>
             {new Date(plan_createdAt).toUTCString()}
           </pre>

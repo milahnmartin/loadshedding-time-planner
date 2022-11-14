@@ -4,6 +4,7 @@ import PlansLabel from "@comps/PlansLabel";
 import { uuidv4 } from "@firebase/util";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { NextPage } from "next";
+import { BiRightArrowAlt } from "react-icons/bi";
 import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
 import useFetchSavedPlans from "../hooks/useFetchSavedPlans";

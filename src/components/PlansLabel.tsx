@@ -63,7 +63,7 @@ const PlansLabel = ({ plan }: any) => {
                 </span>
               </button> */}
               <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] hover:text-white dark:text-white '>
-                NEW PLAN
+                View Plan
                 <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500 '>
                   {arrowIcon}
                 </div>

@@ -41,7 +41,7 @@ const ProfileIndex = () => {
               <span className='flex items-center space-x-1'>
                 <FaUserCircle className='text-2xl align-center justify-center pt-[2px]' />
                 <h3 className='text-2xl font-bold text-slate-300 align-center justify-center'>
-                  Username:
+                  USERNAME:
                 </h3>
               </span>
               <p className='text-2xl font-bold text-cblue'>{user?.displayName}</p>
@@ -67,7 +67,7 @@ const ProfileIndex = () => {
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <span className='flex items-center space-x-1'>
                 <MdOutlineMail className='text-2xl align-center justify-center pt-[3px]' />
-                <h3 className='text-2xl font-bold text-slate-300'>Invite Name:</h3>
+                <h3 className='text-2xl font-bold text-slate-300'>INVITE NAME:</h3>
               </span>
               <p className='text-2xl font-bold text-cblue'>
                 {user?.email ? user?.email : user?.displayName}

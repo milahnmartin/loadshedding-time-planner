@@ -1,6 +1,6 @@
 import { uuidv4 } from "@firebase/util";
-import Link from "next/link";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Link from "next/link";
 
 const PlansLabelInvite = ({ plan }: any) => {
   let {
@@ -26,9 +26,7 @@ const PlansLabelInvite = ({ plan }: any) => {
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
               PLAN ID
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-bold '>
-              {plan_id}
-            </h1>
+            <h1 className='text-blue-200 text-center text-lg font-bold '>{plan_id}</h1>
 
             <h1 className='text-blue-500 text-center font-black text-lg'>
               PLAN CREATED:

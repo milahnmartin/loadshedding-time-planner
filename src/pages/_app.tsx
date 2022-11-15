@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 const inter = Inter({
+  subsets: ["latin"],
   variable: "--font-inter",
 });
 const MyApp: AppType = ({ Component, pageProps }) => {

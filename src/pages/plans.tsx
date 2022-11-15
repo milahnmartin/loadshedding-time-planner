@@ -27,7 +27,7 @@ const plans: NextPage = () => {
         <h1 className='text-white text-center text-5xl font-black tracking-wide'>
           ACCESSED PLANS
         </h1>
-        <div className='flex h-full w-full flex-wrap content-center items-center justify-center overflow-sroll'>
+        <div className='flex h-full w-full flex-wrap content-center items-center justify-center overflow-sroll gap-4'>
           {savedPlansIsFetching ? (
             <Player
               src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'

@@ -66,7 +66,8 @@ const LoadsheddingProfile = () => {
             </h1>
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_sj0skmmg.json'
-              className='player w-[200px] h-[200px] '
+              // className='player w-[200px] h-[200px] '
+              style={{ width: "80%" }}
               autoplay
               loop
               speed={1}
@@ -75,7 +76,8 @@ const LoadsheddingProfile = () => {
               <div className='w-full h-full flex items-center justify-center'>
                 <Player
                   src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
-                  className='player w-[30%] h-[30%] '
+                  // className='player w-[30%] h-[30%] '
+                  style={{ height: "30%", width: "30%" }}
                   autoplay
                   loop
                   speed={0.5}
@@ -159,7 +161,8 @@ const LoadsheddingProfile = () => {
             <div className='w-full h-full flex items-center justify-center'>
               <Player
                 src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
-                className='player w-[30%] h-[30%] '
+                // className='player w-[30%] h-[30%] '
+                style={{ height: "30%", width: "30%" }}
                 autoplay
                 loop
                 speed={0.5}

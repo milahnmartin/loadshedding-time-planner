@@ -1,16 +1,12 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  TwitterAuthProvider,
-} from "firebase/auth";
+import { Player } from "@lottiefiles/react-lottie-player";
+import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/image";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
-import { Player } from "@lottiefiles/react-lottie-player";
 import { toast } from "react-toastify";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
@@ -41,7 +37,6 @@ function login() {
         <meta name='description' content='Login to LS Game Planner' />
       </Head>
       <Navbar />
-
       <div className='h-[80%] flex mt-[3.5rem]'>
         <div className='w-2/5 justify-end px-5 hidden md:flex'>
           <div className='w-full h-full flex items-center justify-center'>

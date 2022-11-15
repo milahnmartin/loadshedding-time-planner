@@ -47,7 +47,8 @@ function login() {
           <div className='w-full h-full flex items-center justify-center'>
             <Player
               src='https://assets9.lottiefiles.com/packages/lf20_gjmecwii.json'
-              className='player w-full h-full '
+              // className='player w-[400px] h-[400px] '
+              style={{ height: "100%", width: "100%" }}
               autoplay
               loop
               speed={0.5}

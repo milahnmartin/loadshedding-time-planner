@@ -4,6 +4,8 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BiMap } from "react-icons/bi";
+import { HiOutlineMap, HiOutlineKey } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import useFetchArea from "../hooks/useFetchArea";
@@ -68,11 +70,9 @@ const LoadsheddingProfile = () => {
               autoplay
               loop
               speed={1}
-              // style={{ height: "200px", width: "200px" }}
             />
             {FetchingSavedAreaData ? (
               <div className='w-full h-full flex items-center justify-center'>
-                {/* <ThreeDots fill='#3c79f0' /> */}
                 <Player
                   src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
                   className='player w-[30%] h-[30%] '
@@ -84,23 +84,34 @@ const LoadsheddingProfile = () => {
             ) : SavedAreaData ? (
               <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center tracking-wide'>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
-                    AREA ID:
-                  </h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <HiOutlineKey className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA ID:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold tracking-wide'>
                     {SavedAreaData.id}
                   </h1>
                 </div>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black'>AREA REGION:</h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <BiMap className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA REGION:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold'>
                     {SavedAreaData.region}
                   </h1>
                 </div>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
-                    AREA NAME:
-                  </h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <HiOutlineMap className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA NAME:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold'>
                     {SavedAreaData.name}
                   </h1>
@@ -125,9 +136,6 @@ const LoadsheddingProfile = () => {
         </div>
       </div>
       <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4'>
-        {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
-            Search Your Area:
-          </h1> */}
         <span className='w-full px-1 py-1  relative'>
           <span className='absolute flex items-center h-full w-fit px-2 -top-[0px]'>
             <AiOutlineSearch size={25} fill='white' />
@@ -147,10 +155,8 @@ const LoadsheddingProfile = () => {
         </span>
 
         <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
-          {/* <div className='overflow-y-scroll w-full h-full'> */}
           {AreaDataLoading && (
             <div className='w-full h-full flex items-center justify-center'>
-              {/* <ThreeDots fill='#3c79f0' /> */}
               <Player
                 src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
                 className='player w-[30%] h-[30%] '

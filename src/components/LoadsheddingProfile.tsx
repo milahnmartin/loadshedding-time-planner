@@ -4,6 +4,8 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BiMap } from "react-icons/bi";
+import { HiOutlineMap, HiOutlineKey } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import useFetchArea from "../hooks/useFetchArea";
@@ -84,23 +86,34 @@ const LoadsheddingProfile = () => {
             ) : SavedAreaData ? (
               <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center tracking-wide'>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
-                    AREA ID:
-                  </h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <HiOutlineKey className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA ID:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold tracking-wide'>
                     {SavedAreaData.id}
                   </h1>
                 </div>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black'>AREA REGION:</h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <BiMap className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA REGION:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold'>
                     {SavedAreaData.region}
                   </h1>
                 </div>
                 <div>
-                  <h1 className='text-blue-500 text-xl font-black tracking-wide'>
-                    AREA NAME:
-                  </h1>
+                  <span className='flex items-center justify-center space-x-1'>
+                    <HiOutlineMap className='text-2xl align-center justify-center pt-[2px]' />
+                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                      AREA NAME:
+                    </h1>
+                  </span>
                   <h1 className='text-blue-200 text-xl font-bold'>
                     {SavedAreaData.name}
                   </h1>

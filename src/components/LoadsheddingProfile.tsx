@@ -70,11 +70,9 @@ const LoadsheddingProfile = () => {
               autoplay
               loop
               speed={1}
-              // style={{ height: "200px", width: "200px" }}
             />
             {FetchingSavedAreaData ? (
               <div className='w-full h-full flex items-center justify-center'>
-                {/* <ThreeDots fill='#3c79f0' /> */}
                 <Player
                   src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
                   className='player w-[30%] h-[30%] '
@@ -138,9 +136,6 @@ const LoadsheddingProfile = () => {
         </div>
       </div>
       <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4'>
-        {/* <h1 className='text-white font-Inter font-black text-2xl tracking-widest '>
-            Search Your Area:
-          </h1> */}
         <span className='w-full px-1 py-1  relative'>
           <span className='absolute flex items-center h-full w-fit px-2 -top-[0px]'>
             <AiOutlineSearch size={25} fill='white' />
@@ -160,10 +155,8 @@ const LoadsheddingProfile = () => {
         </span>
 
         <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
-          {/* <div className='overflow-y-scroll w-full h-full'> */}
           {AreaDataLoading && (
             <div className='w-full h-full flex items-center justify-center'>
-              {/* <ThreeDots fill='#3c79f0' /> */}
               <Player
                 src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
                 className='player w-[30%] h-[30%] '

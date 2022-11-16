@@ -2,6 +2,9 @@ import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
+import { BiMap } from "react-icons/bi";
+import { HiOutlineMap } from "react-icons/hi";
+
 type AreaLabelsProps = {
   id: string;
   name: string;
@@ -13,7 +16,9 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
   return (
     <div className='w-full h-fit flex-col'>
       <div className='font-black font-Inter flex items-center justify-end'>
-        <h1 className='w-full flex justify-start text-white pb-1'>{id}</h1>
+        <h1 className='w-full flex justify-start text-white pb-1 tracking-wide'>
+          {id}
+        </h1>
         <span className='w-[10%] h-full flex justify-center items-center'>
           <FcExpand
             className={
@@ -28,11 +33,17 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
       </div>
       {extraInfo && (
         <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll pb-3 rounded-2xl'>
-          <h1 className='pt-1 font-bold'>NAME:</h1>
-          <h1 className='mb-3'>{name}</h1>
+          <span className='flex items-center justify-center space-x-1'>
+            <HiOutlineMap className='text-xl align-center justify-center pt-[3px]' />
+            <h1 className='pt-1 font-extrabold text-blue-500 '>AREA NAME:</h1>
+          </span>
+          <h1 className='mb-2 font-bold text-blue-200'>{name}</h1>
 
-          <h1 className='pt-1 font-bold'>REGION:</h1>
-          <h1 className='mb-3'>{region}</h1>
+          <span className='flex items-center justify-center '>
+            <BiMap className='text-xl align-center justify-center pt-[3px]' />
+            <h1 className='pt-1 font-extrabold text-blue-500 '>AREA REGION:</h1>
+          </span>
+          <h1 className='mb-3 font-bold text-blue-200'>{region}</h1>
 
           <button
             onClick={() => cbSetArea({ id, name, region })}

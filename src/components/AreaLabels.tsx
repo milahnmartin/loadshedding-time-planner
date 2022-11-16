@@ -28,10 +28,10 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
       </div>
       {extraInfo && (
         <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll pb-3 rounded-2xl'>
-          <h1 className='pt-1 font-bold'>NAME:</h1>
+          <h1 className='pt-1 font-bold text-white'>NAME:</h1>
           <h1 className='mb-3'>{name}</h1>
 
-          <h1 className='pt-1 font-bold'>REGION:</h1>
+          <h1 className='pt-1 font-bold text-white'>REGION:</h1>
           <h1 className='mb-3'>{region}</h1>
 
           <button

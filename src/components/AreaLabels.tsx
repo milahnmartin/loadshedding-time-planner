@@ -2,6 +2,8 @@ import { IAreaData } from "@lstypes/types";
 import classNames from "classnames";
 import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
+import { BiMap } from "react-icons/bi";
+import { HiOutlineMap, HiOutlineKey } from "react-icons/hi";
 type AreaLabelsProps = {
   id: string;
   name: string;
@@ -30,10 +32,16 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
       </div>
       {extraInfo && (
         <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll pb-3 rounded-2xl'>
-          <h1 className='pt-1 font-extrabold text-blue-500 '>AREA NAME:</h1>
+          <span className='flex items-center justify-center '>
+            <HiOutlineMap className='text-xl align-center justify-center pt-[3px]' />
+            <h1 className='pt-1 font-extrabold text-blue-500 '>AREA NAME:</h1>
+          </span>
           <h1 className='mb-2 font-bold text-blue-200'>{name}</h1>
 
-          <h1 className='pt-1 font-extrabold text-blue-500 '>AREA REGION:</h1>
+          <span className='flex items-center justify-center '>
+            <BiMap className='text-xl align-center justify-center pt-[3px]' />
+            <h1 className='pt-1 font-extrabold text-blue-500 '>AREA REGION:</h1>
+          </span>
           <h1 className='mb-3 font-bold text-blue-200'>{region}</h1>
 
           <button

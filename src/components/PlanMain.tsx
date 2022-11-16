@@ -32,14 +32,20 @@ const custom_h1 = classNames(
 const loadedPlanStyles = classNames(
   "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
 );
-const unLoadedPlanStyles = classNames("w-full h-[90%] flex items-center justify-center");
+const unLoadedPlanStyles = classNames(
+  "w-full h-[90%] flex items-center justify-center"
+);
 
 function PlanMain() {
   const [loggedUser, loading] = useAuthState(auth);
   // useRouter Hook
   const router = useRouter();
   const { plan_id } = router.query;
-  const { data: planData, isError, isFetching } = useFetchPlanData(plan_id as string);
+  const {
+    data: planData,
+    isError,
+    isFetching,
+  } = useFetchPlanData(plan_id as string);
   // useState Hooks
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(30);
   const [users, setUsers] = useState<Array<string>>([]);
@@ -81,7 +87,9 @@ function PlanMain() {
       Router.push("/");
       return;
     }
-    addCurrentLoggedInUser(loggedUser.email ? loggedUser.email : loggedUser.displayName!);
+    addCurrentLoggedInUser(
+      loggedUser.email ? loggedUser.email : loggedUser.displayName!
+    );
   }, [loading]);
   // useRef Hooks
   const userRefAdd = useRef<HTMLInputElement>(null);
@@ -91,9 +99,11 @@ function PlanMain() {
   const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
-    const newLsTimes = lstimes.filter((owner: { user: string; times: string[] }): any => {
-      return owner.user !== val;
-    });
+    const newLsTimes = lstimes.filter(
+      (owner: { user: string; times: string[] }): any => {
+        return owner.user !== val;
+      }
+    );
     setlstimes(newLsTimes);
   };
   const handleRemoveTeam = (val: string) => {
@@ -275,7 +285,7 @@ function PlanMain() {
           <section className='flex p-2 w-full h-full'>
             <div className='w-1/2 h-full flex flex-col items-center justify-start space-y-0'>
               <h1 className={custom_h1}>
-                Plan Date:
+                PLAN DATE:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='What Day Are You Planning To Start ?'
@@ -299,7 +309,7 @@ function PlanMain() {
               />
               <hr className={gline} />
               <h1 className={custom_h1}>
-                Min Plan Time
+                MIN PLAN TIME:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='How Long Must The Min Plan Time be'
@@ -324,7 +334,7 @@ function PlanMain() {
             </div>
             <div className='w-1/2 h-full flex flex-col items-center justify-start '>
               <h1 className={custom_h1}>
-                Start Time:
+                START TIME:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='Start Time For Plan'
@@ -349,7 +359,7 @@ function PlanMain() {
               />
               <hr className={gline} />
               <h1 className={custom_h1}>
-                End Time:
+                END TIME:
                 <span
                   className='ml-2 animation-all duration-300 hover:text-cblue cursor-pointer'
                   title='End Time For Plan'
@@ -380,8 +390,11 @@ function PlanMain() {
         <div className='w-full h-[60%] flex'>
           {/* bottom left left */}
           <div className='w-1/2 h-full flex flex-col items-center'>
-            <h1 className={custom_h1}>Add Team:</h1>
-            <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
+            <h1 className={custom_h1}>ADD TEAM:</h1>
+            <form
+              onSubmit={handleAddTeam}
+              className='flex flex-col items-center w-full '
+            >
               <input
                 placeholder='Bravado, Nixuh etc...'
                 ref={teamRefAdd}
@@ -396,14 +409,19 @@ function PlanMain() {
             <div className='h-full w-full flex flex-wrap content-center justify-center gap-1 overflow-y-scroll pt-2'>
               {teams.map((team: string) => {
                 return (
-                  <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
+                  <RedLabel
+                    key={team}
+                    args={true}
+                    data={team}
+                    cb={handleRemoveTeam}
+                  />
                 );
               })}
             </div>
           </div>
           {/* left bottom right */}
           <div className='w-1/2 h-full flex flex-col items-center'>
-            <h1 className={custom_h1}>Add User:</h1>
+            <h1 className={custom_h1}>ADD USER:</h1>
             <form
               onSubmit={handleAddUsers}
               className='flex flex-col w-full items-center '
@@ -426,7 +444,12 @@ function PlanMain() {
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
-                  <RedLabel key={user} args={false} data={user} cb={handleRemoveUser} />
+                  <RedLabel
+                    key={user}
+                    args={false}
+                    data={user}
+                    cb={handleRemoveUser}
+                  />
                 );
               })}
             </div>
@@ -479,7 +502,11 @@ function PlanMain() {
               {memoCalcTimes[0]?.map((time: string) => {
                 return (
                   time && (
-                    <GreenLabel variant={MyVariant.availible} key={time} data={time} />
+                    <GreenLabel
+                      variant={MyVariant.availible}
+                      key={time}
+                      data={time}
+                    />
                   )
                 );
               })}
@@ -499,7 +526,9 @@ function PlanMain() {
             <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
               {memoCalcTimes[1]?.map((time: string) => {
                 return (
-                  time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                  time && (
+                    <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
+                  )
                 );
               })}
             </div>

@@ -2,6 +2,8 @@ import { uuidv4 } from "@firebase/util";
 import Link from "next/link";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { BiRightArrowAlt } from "react-icons/bi";
+import { HiOutlineKey } from "react-icons/hi";
+import { BsCalendar } from "react-icons/bs";
 
 const PlansLabel = ({ plan }: any) => {
   let {
@@ -24,16 +26,23 @@ const PlansLabel = ({ plan }: any) => {
             speed={0.8}
           />
           <div className='w-full h-full flex items-center justify-center flex-col space-y-1 overflow-y-scroll'>
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
-              PLAN ID
-            </h1>
+            <span className='flex items-center justify-center space-x-1'>
+              <HiOutlineKey className='text-[1.15rem] align-center justify-center pt-[0px]' />
+              <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+                PLAN ID:
+              </h1>
+            </span>
+
             <h1 className='text-blue-200 text-center text-lg font-bold '>
               {plan_id}
             </h1>
 
-            <h1 className='text-blue-500 text-center font-black text-lg'>
-              PLAN CREATED:
-            </h1>
+            <span className='flex items-center justify-center space-x-1'>
+              <BsCalendar className='text-[1.075rem] align-center justify-center pt-[0px]' />
+              <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+                PLAN CREATED:
+              </h1>
+            </span>
             <h1 className='text-blue-200 text-center text-lg font-bold '>
               {new Date(plan_createdAt).toUTCString()}
             </h1>

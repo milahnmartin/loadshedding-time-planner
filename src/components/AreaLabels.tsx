@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
 import { BiMap } from "react-icons/bi";
+import { BsCalendarDate } from "react-icons/bs";
 import { HiOutlineMap } from "react-icons/hi";
 
 type AreaLabelsProps = {

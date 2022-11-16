@@ -24,8 +24,8 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='flex flex-col h-[90%] w-full p-4'>
-        <h1 className='text-white text-center text-5xl font-black tracking-wide'>
-          ACCESSED PLANS
+        <h1 className='text-white text-center text-5xl font-black tracking-wide pt-3'>
+          YOUR PLANS
         </h1>
         <div className='flex h-full w-full flex-wrap content-center items-center justify-center overflow-sroll gap-4'>
           {savedPlansIsFetching ? (

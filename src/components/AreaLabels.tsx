@@ -3,7 +3,8 @@ import classNames from "classnames";
 import { useState } from "react";
 import { FcExpand } from "react-icons/fc";
 import { BiMap } from "react-icons/bi";
-import { HiOutlineMap, HiOutlineKey } from "react-icons/hi";
+import { HiOutlineMap } from "react-icons/hi";
+
 type AreaLabelsProps = {
   id: string;
   name: string;
@@ -32,7 +33,7 @@ const AreaLabels = ({ id, name, region, cbSetArea }: AreaLabelsProps) => {
       </div>
       {extraInfo && (
         <div className='h-fit flex flex-col justify-center items-center text-white font-Inter overflow-y-scroll pb-3 rounded-2xl'>
-          <span className='flex items-center justify-center '>
+          <span className='flex items-center justify-center space-x-1'>
             <HiOutlineMap className='text-xl align-center justify-center pt-[3px]' />
             <h1 className='pt-1 font-extrabold text-blue-500 '>AREA NAME:</h1>
           </span>

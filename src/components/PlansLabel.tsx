@@ -1,6 +1,7 @@
 import { uuidv4 } from "@firebase/util";
 import Link from "next/link";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { BiRightArrowAlt } from "react-icons/bi";
 
 const PlansLabel = ({ plan }: any) => {
   let {
@@ -57,7 +58,10 @@ const PlansLabel = ({ plan }: any) => {
             <Link href={`/dashboard/${plan_id}`}>
               <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
                 <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
-                  View Plan
+                  <span className='flex items-center justify-center space-x-1'>
+                    View Plan
+                    <BiRightArrowAlt className='text-xl align-center justify-center ' />
+                  </span>
                 </span>
               </button>
             </Link>

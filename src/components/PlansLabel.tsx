@@ -65,7 +65,7 @@ const PlansLabel = ({ plan }: any) => {
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
                 <span className='flex items-center justify-around'>
                   View Plan
-                  <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple group-hover:right-0' />
+                  <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple' />
                 </span>
               </span>
             </button>

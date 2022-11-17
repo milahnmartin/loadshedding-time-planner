@@ -1,5 +1,3 @@
-import { NextPage } from "next";
-import { useState } from "react";
 import Image from "next/image";
 import Logo from "../pages/assets/Logov3.png";
 

@@ -9,10 +9,10 @@ class TimeCalculations {
     UserStartTime: string,
     MaxGameTime: number
   ): string | undefined => {
+    //fix any types
     const EarliestLSTime: any = this.sortLoadSheddingTime(LoadSheddingTimes)[0];
     if (!EarliestLSTime) return;
     const EarliestLSTimeSplit = EarliestLSTime.split("-")[0];
-    console.log(EarliestLSTimeSplit);
     const EarliestLSTimeDate = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
@@ -29,7 +29,7 @@ class TimeCalculations {
     );
     let TimeDifference =
       (EarliestLSTimeDate.getTime() - UserStartTimeDate.getTime()) / 1000;
-    let CalcTimeDifference = (TimeDifference /= 60);
+    const CalcTimeDifference = TimeDifference /= 60;
 
     if (MaxGameTime <= CalcTimeDifference) {
       return `${UserStartTime} - ${EarliestLSTimeSplit} @ ${CalcTimeDifference} MIN+++`;
@@ -43,6 +43,7 @@ class TimeCalculations {
     MaxGameTime: number
   ) => {
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const LatestLSTime: string = SortedLSTimes[SortedLSTimes.length - 1]!;
     if (!LatestLSTime) return;
     if (!UserEndTime) return;
@@ -84,7 +85,7 @@ class TimeCalculations {
       );
     }
     let TimeDifference = (LastGameTime.getTime() - LastLoadsheddingTime.getTime()) / 1000;
-    let CalcTimeDifference = (TimeDifference /= 60);
+    const CalcTimeDifference = (TimeDifference /= 60);
     return MaxGameTime <= CalcTimeDifference
       ? `${LatestLSTimeSplit} - ${
           LastGameTime.getHours() +
@@ -101,7 +102,6 @@ class TimeCalculations {
   ): string[] => {
     const LSTimes: string[] = [];
     const SortedLSTimes: string[] = this.sortLoadSheddingTime(LoadSheddingTimes);
-    console.log(SortedLSTimes);
     if (SortedLSTimes.length < 2) return [];
 
     // const UserStartTimeDate = new Date(
@@ -130,21 +130,33 @@ class TimeCalculations {
         Number(endTime?.split(":")[0]),
         Number(endTime?.split(":")[1])
       );
+
+      const userStartTime = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(),
+        Number(UserFilteredStartTime?.split(":")[0]),
+        Number(UserFilteredStartTime?.split(":")[1])
+        );
       // THIS WAS USED FOR SOMETHING NOT SURE
       // let startTimeCalc = (start.getTime() - UserStartTimeDate.getTime()) / 1000;
       // let startTimeDiff = (startTimeCalc /= 60);
       let diff = (end.getTime() - start.getTime()) / 1000;
-      let pStart = (diff /= 60);
-
+      const pStart = (diff /= 60);
+      const userStartTimevsLSStartDiff = (start.getTime() - userStartTime.getTime()) / 1000;
+      console.log(`${MaxGameTime} - ${pStart}`);
       if (MaxGameTime > pStart) continue;
+      if(userStartTimevsLSStartDiff < 0) continue;
       const FilteredStartTime = new Date();
       FilteredStartTime.setHours(
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         +UserFilteredStartTime.split(":")[0]!,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         +UserFilteredStartTime.split(":")[1]!
       );
       let filteredDiff = (FilteredStartTime.getTime() - start.getTime()) / 1000;
-      let filteredDiffCalc = (filteredDiff /= 60);
-      if (Math.floor(filteredDiffCalc) > 0) {
+      const filteredDiffCalc = (filteredDiff /= 60);
+      if (Math.floor(filteredDiffCalc) > 0 && pStart - Math.floor(filteredDiffCalc) > MaxGameTime) {
         LSTimes.push(
           `${
             FilteredStartTime.getHours() +
@@ -168,7 +180,7 @@ class TimeCalculations {
     if (LSTIMES.length === 0) return [];
 
     const mytimes = [];
-    for (let info of LSTIMES) {
+    for (const info of LSTIMES) {
       mytimes.push(...info.times);
     }
     const InitialStartTime = this.getInitialStartTime(mytimes, StartTime, MaxPlanTime);
@@ -184,8 +196,7 @@ class TimeCalculations {
   };
   static calcBufferTimes = (args: any): string[] => {
     const bufferTimes: string[] = [];
-    console.log(args);
-    for (let i of args) {
+    for (const i of args) {
       if (!i) continue;
       const calcDate = new Date(
         new Date().getFullYear(),

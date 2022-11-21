@@ -35,7 +35,7 @@ const plans: NextPage = () => {
         }
 
         toast.success(`Plan ${plan_id} Deleted Successfully`);
-        refetchSavedPlans();
+        await refetchSavedPlans();
     }
   return (
     <div className='h-screen w-screen overflow-y-scroll'>

@@ -5,7 +5,7 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { BsCalendar } from "react-icons/bs";
 import { HiOutlineKey } from "react-icons/hi";
 import {v1 as uuidv1} from 'uuid'
-import {MdOutlineDeleteOutline} from 'react-icons/md'
+import {MdDeleteForever} from 'react-icons/md'
 type planData = {
   plan_id: string;
     plan_lsTimes:string[];
@@ -31,8 +31,8 @@ const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
 
   return (
     // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
-    <div className='rounded-xl w-[25rem] h-[20rem] bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-      <div className='flex flex-col items-center justify-center h-full w-full bg-slate-800 text-white rounded-lg'>
+    <div className='rounded-xl w-[25rem] h-[30rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+      <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit'>
           <Player
             src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
@@ -42,7 +42,7 @@ const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
             speed={0.8}
           />
         </span>
-        <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col space-y-1'>
+        <div className='w-full h-full flex items-center justify-around flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center space-x-1'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
@@ -75,7 +75,7 @@ const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
             return <pre key={uuidv1()} className='text-white text-center'>{user}</pre>;
           })}
         </div>
-        <div className='flex items-center justify-center w-full pb-[1px] space-x-4'>
+        <div className='flex items-center justify-center w-full h-fit py-2 space-x-4'>
           <Link href={`/dashboard/${plan_id}`}>
             <button className='relative flex items-center justify-center  w-[10rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
@@ -86,7 +86,7 @@ const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
               </span>
             </button>
           </Link>
-          <MdOutlineDeleteOutline title="Delete Plan" onClick={()=>deleteCB(plan_id)} className='cursor-pointer text-[1.5rem] align-center justify-center hover:text-cblue transition-all duration-500' />
+          <MdDeleteForever title="Delete Plan" onClick={()=>deleteCB(plan_id)} className='cursor-pointer text-[1.5rem] align-center justify-center hover:text-red-700 transition-all duration-300' />
         </div>
       </div>
     </div>

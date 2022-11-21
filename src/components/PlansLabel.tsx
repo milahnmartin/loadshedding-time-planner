@@ -42,25 +42,27 @@ const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
             speed={0.8}
           />
         </span>
-        <div className='w-full h-full flex items-center justify-around flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
-          <span className='flex items-center justify-center space-x-1'>
+        <div className='w-full h-full flex items-center justify-evenly flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
+          <span className='flex items-center justify-center flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
               PLAN ID:
             </h1>
+               <h1 className='text-blue-200 text-center text-lg font-bold '>{plan_id}</h1>
           </span>
 
-          <h1 className='text-blue-200 text-center text-lg font-bold '>{plan_id}</h1>
 
-          <span className='flex items-center justify-center space-x-1'>
+
+          <span className='flex items-center justify-center flex-col'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
               PLAN CREATED:
             </h1>
-          </span>
-          <h1 className='text-blue-200 text-center text-lg font-bold '>
+             <h1 className='text-blue-200 text-center text-lg font-bold '>
             {new Date(plan_createdAt).toUTCString()}
           </h1>
+          </span>
+
           {plan_lsTimes.map((time: string) => {
             return (
               <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv1()}>

@@ -16,6 +16,7 @@ const plans: NextPage = () => {
   const {
     data: savedPlans,
     isFetching: savedPlansIsFetching,
+      refetch: refetchSavedPlans,
       // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useFetchSavedPlans();
     const handlePlanDelete = async (plan_id:string) => {
@@ -34,18 +35,15 @@ const plans: NextPage = () => {
         }
 
         toast.success(`Plan ${plan_id} Deleted Successfully`);
+        refetchSavedPlans();
     }
   return (
-    <div className='h-screen w-screen overflow-y-scroll overflow-x-hidden'>
+    <div className='h-screen w-screen overflow-y-scroll'>
       <Head>
         <title>LS Planner / Plans</title>
       </Head>
       <Navbar />
-      <div className='flex flex-col h-[90%] w-full p-4'>
-        <h1 className='text-white text-center text-5xl font-black tracking-wide pt-3'>
-          YOUR PLANS
-        </h1>
-        <div className='flex h-full w-full flex-wrap content-center items-center justify-center overflow-sroll gap-4'>
+        <div className='flex h-[90vh] w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 border-2'>
           {savedPlansIsFetching ? (
             <Player
               src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
@@ -59,7 +57,6 @@ const plans: NextPage = () => {
               return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
             })
           )}
-        </div>
       </div>
       <Footer />
     </div>

@@ -1,22 +1,40 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/Navbar";
 import PlansLabel from "@comps/PlansLabel";
-import { uuidv4 } from "@firebase/util";
+import {v1 as uuidv1} from "uuid";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
 import useFetchSavedPlans from "../hooks/useFetchSavedPlans";
 import { auth } from "../utils/firebase-config";
+import {toast} from "react-toastify";
+import supabase from "../utils/supabase-config";
+import {PostgrestQueryBuilder} from "@supabase/postgrest-js";
 const plans: NextPage = () => {
-  const [user, loading] = useAuthState(auth);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
     data: savedPlans,
-    isLoading: savedPlansLoading,
-    isError,
     isFetching: savedPlansIsFetching,
+      // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useFetchSavedPlans();
+    const handlePlanDelete = async (plan_id:string) => {
+        if(!plan_id){
+            toast.error("No Plan Id Provided");
+            return;
+        }
+        const {error} = await supabase
+            .from("user_plans")
+            .delete()
+            .eq("plan_id",plan_id);
 
+        if(error){
+            toast.error(error.message);
+            return;
+        }
+
+        toast.success(`Plan ${plan_id} Deleted Successfully`);
+    }
   return (
     <div className='h-screen w-screen overflow-y-scroll overflow-x-hidden'>
       <Head>
@@ -38,7 +56,7 @@ const plans: NextPage = () => {
             />
           ) : (
             savedPlans?.map((plan: any) => {
-              return <PlansLabel plan={plan} key={uuidv4()} />;
+              return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
             })
           )}
         </div>

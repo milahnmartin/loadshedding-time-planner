@@ -4,15 +4,31 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { BsCalendar } from "react-icons/bs";
 import { HiOutlineKey } from "react-icons/hi";
+import {v1 as uuidv1} from 'uuid'
+import {MdOutlineDeleteOutline} from 'react-icons/md'
+type planData = {
+  plan_id: string;
+    plan_lsTimes:string[];
+    plan_authorizedUsers:string[];
+    plan_authorizedTeams:string[];
+    plan_createdAt:string;
+}
+type PlansLabelProps = {
+  plan:planData;
+  deleteCB:(plan_id:string)=>void;
+}
 
-const PlansLabel = ({ plan }: any) => {
-  let {
+import supabase from "../utils/supabase-config";
+const PlansLabel = ({plan,deleteCB}:PlansLabelProps) => {
+  const {
     plan_id,
     plan_lsTimes,
     plan_authorizedTeams,
     plan_authorizedUsers,
     plan_createdAt,
   } = plan;
+
+
   return (
     // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
     <div className='rounded-xl w-[25rem] h-[20rem] bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
@@ -47,19 +63,19 @@ const PlansLabel = ({ plan }: any) => {
           </h1>
           {plan_lsTimes.map((time: string) => {
             return (
-              <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv4()}>
+              <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv1()}>
                 {time}
               </h1>
             );
           })}
           {plan_authorizedUsers.map((user: string) => {
-            return <pre className='text-white text-center'>{user}</pre>;
+            return <pre key={uuidv1()} className='text-white text-center'>{user}</pre>;
           })}
           {plan_authorizedTeams.map((user: string) => {
-            return <pre className='text-white text-center'>{user}</pre>;
+            return <pre key={uuidv1()} className='text-white text-center'>{user}</pre>;
           })}
         </div>
-        <div className='flex items-center justify-center w-full pb-[1px]'>
+        <div className='flex items-center justify-center w-full pb-[1px] space-x-4'>
           <Link href={`/dashboard/${plan_id}`}>
             <button className='relative flex items-center justify-center  w-[10rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
@@ -70,6 +86,7 @@ const PlansLabel = ({ plan }: any) => {
               </span>
             </button>
           </Link>
+          <MdOutlineDeleteOutline title="Delete Plan" onClick={()=>deleteCB(plan_id)} className='cursor-pointer text-[1.5rem] align-center justify-center hover:text-cblue transition-all duration-500' />
         </div>
       </div>
     </div>

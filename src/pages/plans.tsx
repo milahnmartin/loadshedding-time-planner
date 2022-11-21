@@ -5,12 +5,10 @@ import {v1 as uuidv1} from "uuid";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { NextPage } from "next";
 import Head from "next/head";
-import { useAuthState } from "react-firebase-hooks/auth";
 import useFetchSavedPlans from "../hooks/useFetchSavedPlans";
-import { auth } from "../utils/firebase-config";
 import {toast} from "react-toastify";
 import supabase from "../utils/supabase-config";
-import {PostgrestQueryBuilder} from "@supabase/postgrest-js";
+
 const plans: NextPage = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
@@ -43,7 +41,7 @@ const plans: NextPage = () => {
         <title>LS Planner / Plans</title>
       </Head>
       <Navbar />
-        <div className='flex h-[90vh] w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 border-2'>
+        <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
           {savedPlansIsFetching ? (
             <Player
               src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'

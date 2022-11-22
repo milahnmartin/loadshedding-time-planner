@@ -30,12 +30,12 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
 
   return (
     // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
-    <div className='rounded-xl w-[25rem] h-[25rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[25rem] h-[26rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
-        <span className='flex flex-col items-center w-full h-fit'>
+        <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player
             src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
-            className='player w-[90px] h-[90px] '
+            className='player w-[110px] h-[110px] '
             autoplay
             loop
             speed={0.8}

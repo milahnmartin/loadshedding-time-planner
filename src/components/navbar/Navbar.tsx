@@ -1,4 +1,4 @@
-import UserProfile from "@comps/UserProfile";
+import UserProfile from "@comps/profile/UserProfile";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";

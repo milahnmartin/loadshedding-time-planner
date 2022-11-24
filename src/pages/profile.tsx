@@ -1,8 +1,8 @@
 import Footer from "@comps/Footer";
-import LoadsheddingProfile from "@comps/LoadsheddingProfile";
 import Navbar from "@comps/navbar/Navbar";
-import ProfileIndex from "@comps/ProfileIndex";
-import TeamProfile from "@comps/TeamProfile";
+import LoadsheddingProfile from "@comps/profile/LoadsheddingProfile";
+import ProfileIndex from "@comps/profile/ProfileIndex";
+import TeamProfile from "@comps/profile/TeamProfile";
 import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";

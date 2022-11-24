@@ -6,7 +6,7 @@ export default async function fetchUserLSTimesById(
   if (req.method !== "GET") {
     res.status(405).json({ message: "Method not allowed" });
   }
-  console.log(`ENDPOINT: /api/sepush/${req.query.id}/${req.query.date} WAS HIT`);
+  console.log(`ENDPOINT: /api/sepush/${req.query.id} WAS HIT`);
 
   const pushID = req.query.id;
   const lsData = await fetch(

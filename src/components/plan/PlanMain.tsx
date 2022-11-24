@@ -1,18 +1,17 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
+import useFetchPlanData from "@hooks/useFetchPlanData";
+import useFetchUserData from "@hooks/useFetchUserData";
+import GreenLabel from "@labels/GreenLabel";
+import RedLabel from "@labels/RedLabel";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import Router, { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
-import useFetchPlanData from "../hooks/useFetchPlanData";
-import type { IStartEndTimes } from "../types/types";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
-import GreenLabel from "./GreenLabel";
-import RedLabel from "./RedLabel";
-
 const enum MyVariant {
   ls = "ls",
   availible = "availible",
@@ -29,29 +28,16 @@ const gline = classNames(
 const custom_h1 = classNames(
   "text-center flex items-center text-white font-black font-Inter text-xl pt-4 "
 );
-const loadedPlanStyles = classNames(
-  "w-full h-[90%] grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2"
-);
-const unLoadedPlanStyles = classNames(
-  "w-full h-[90%] flex items-center justify-center"
-);
 
 function PlanMain() {
   const [loggedUser, loading] = useAuthState(auth);
   // useRouter Hook
   const router = useRouter();
   const { plan_id } = router.query;
-  const {
-    data: planData,
-    isError,
-    isFetching,
-  } = useFetchPlanData(plan_id as string);
-  // useState Hooks
   const [minPlanTimeRef, setMinPlanTimeRef] = useState<number>(30);
   const [users, setUsers] = useState<Array<string>>([]);
   const [teams, setTeams] = useState<Array<string>>([]);
   const [lstimes, setlstimes] = useState<any>([]);
-  const [calcLoading, setcalcLoading] = useState<boolean>(true);
   const [time, setTime] = useState<IStartEndTimes>({
     startTime: {
       date: new Date().toISOString().split("T")[0] as string,
@@ -69,6 +55,10 @@ function PlanMain() {
       time: "02:00",
     },
   });
+  const { data: userData, isFetching: isFetchingUser } = useFetchUserData(
+    loggedUser?.uid as string
+  );
+  const { data: planData, isFetching } = useFetchPlanData(plan_id as string);
 
   useEffect(() => {
     if (isFetching) return;
@@ -87,9 +77,8 @@ function PlanMain() {
       Router.push("/");
       return;
     }
-    addCurrentLoggedInUser(
-      loggedUser.email ? loggedUser.email : loggedUser.displayName!
-    );
+
+    // addCurrentLoggedInUser(loggedUser.email ? loggedUser.email : loggedUser.displayName!);
   }, [loading]);
   // useRef Hooks
   const userRefAdd = useRef<HTMLInputElement>(null);
@@ -99,11 +88,9 @@ function PlanMain() {
   const handleRemoveUser = (val: string) => {
     const newUsers = users.filter((user, i) => user !== val);
     setUsers(newUsers);
-    const newLsTimes = lstimes.filter(
-      (owner: { user: string; times: string[] }): any => {
-        return owner.user !== val;
-      }
-    );
+    const newLsTimes = lstimes.filter((owner: { user: string; times: string[] }): any => {
+      return owner.user !== val;
+    });
     setlstimes(newLsTimes);
   };
   const handleRemoveTeam = (val: string) => {
@@ -147,7 +134,6 @@ function PlanMain() {
     }
     const newUsers = Array.from(new Set([...users, splitedNewUsers]));
     setUsers(newUsers);
-    setcalcLoading(true);
     const fetchedUserTimes = await fetch(`/api/sepush/${id}`, {
       method: "GET",
       headers: {
@@ -162,7 +148,6 @@ function PlanMain() {
     }
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
-    setcalcLoading(false);
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {
         return day.date === time.startTime.date;
@@ -250,12 +235,12 @@ function PlanMain() {
     const jsonedUserTimes = await fetchedUserTimes.json();
     const currentLoasheddingStage = jsonedUserTimes.currentStage;
     const loadsheddingData = jsonedUserTimes.lsdata;
+
     if (!loadsheddingData) {
       toast.error("API Error, Contact The Owner Please");
       Router.push("/");
       return;
     }
-    setcalcLoading(false);
     const specifiedStartDateTimes = loadsheddingData.filter(
       (day: { date: string; name: string; stages: string[][] }) => {
         return day.date === time.startTime.date;
@@ -391,10 +376,7 @@ function PlanMain() {
           {/* bottom left left */}
           <div className='w-1/2 h-full flex flex-col items-center'>
             <h1 className={custom_h1}>ADD TEAM:</h1>
-            <form
-              onSubmit={handleAddTeam}
-              className='flex flex-col items-center w-full '
-            >
+            <form onSubmit={handleAddTeam} className='flex flex-col items-center w-full '>
               <input
                 placeholder='Bravado, Nixuh etc...'
                 ref={teamRefAdd}
@@ -414,12 +396,7 @@ function PlanMain() {
             <div className='h-full w-full flex flex-wrap content-center justify-center gap-1 overflow-y-scroll pt-2'>
               {teams.map((team: string) => {
                 return (
-                  <RedLabel
-                    key={team}
-                    args={true}
-                    data={team}
-                    cb={handleRemoveTeam}
-                  />
+                  <RedLabel key={team} args={true} data={team} cb={handleRemoveTeam} />
                 );
               })}
             </div>
@@ -454,12 +431,7 @@ function PlanMain() {
               {/* THE LS TIMES WILL COME HERE */}
               {users.map((user: string) => {
                 return (
-                  <RedLabel
-                    key={user}
-                    args={false}
-                    data={user}
-                    cb={handleRemoveUser}
-                  />
+                  <RedLabel key={user} args={false} data={user} cb={handleRemoveUser} />
                 );
               })}
             </div>
@@ -467,7 +439,7 @@ function PlanMain() {
         </div>
       </div>
 
-      {calcLoading && (
+      {isFetchingUser && (
         <div className='w-full h-full flex items-center justify-center p-2 md:w-1/2'>
           <Player
             src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
@@ -478,7 +450,7 @@ function PlanMain() {
           />
         </div>
       )}
-      {!calcLoading && (
+      {!isFetchingUser && (
         <div className='w-full h-full flex flex-col p-2 md:w-1/2'>
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
             <h1 className='text-white font-Inter font-black text-2xl text-center flex items-center pt-5'>
@@ -495,6 +467,7 @@ function PlanMain() {
               {memoDeconstructTimes.map((time: string) => {
                 return <GreenLabel variant='ls' data={time} key={time} />;
               })}
+              {JSON.stringify(userData)}
             </div>
           </div>
 
@@ -512,11 +485,7 @@ function PlanMain() {
               {memoCalcTimes[0]?.map((time: string) => {
                 return (
                   time && (
-                    <GreenLabel
-                      variant={MyVariant.availible}
-                      key={time}
-                      data={time}
-                    />
+                    <GreenLabel variant={MyVariant.availible} key={time} data={time} />
                   )
                 );
               })}
@@ -536,9 +505,7 @@ function PlanMain() {
             <div className='flex gap-1 pt-2 flex-wrap content-center items-center justify-center'>
               {memoCalcTimes[1]?.map((time: string) => {
                 return (
-                  time && (
-                    <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
-                  )
+                  time && <GreenLabel variant={MyVariant.buffer} key={time} data={time} />
                 );
               })}
             </div>

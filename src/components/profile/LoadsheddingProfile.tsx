@@ -1,21 +1,19 @@
+import useFetchArea from "@hooks/useFetchArea";
+import useFetchSavedArea from "@hooks/useFetchSavedArea";
+import AreaLabels from "@labels/AreaLabels";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IAreaData } from "@lstypes/types";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiMap } from "react-icons/bi";
-import { HiOutlineMap, HiOutlineKey } from "react-icons/hi";
+import { HiOutlineKey, HiOutlineMap } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import useFetchArea from "../hooks/useFetchArea";
-import useFetchSavedArea from "../hooks/useFetchSavedArea";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
-import AreaLabels from "./AreaLabels";
-const spanStyles = classNames(
-  "text-white text-center font-Inter font-black text-xl"
-);
+const spanStyles = classNames("text-white text-center font-Inter font-black text-xl");
 const gline = classNames(
   " w-[100%] h-[0.25rem] bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7] rounded border-0 "
 );

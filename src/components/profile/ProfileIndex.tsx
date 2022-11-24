@@ -1,11 +1,11 @@
 import { Player } from "@lottiefiles/react-lottie-player";
+import { auth } from "@utils/firebase-config";
 import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUserCircle } from "react-icons/fa";
 import { HiOutlineKey } from "react-icons/hi";
 import { MdContentCopy, MdOutlineMail } from "react-icons/md";
 import { toast } from "react-toastify";
-import { auth } from "../utils/firebase-config";
 const ProfileIndex = () => {
   const [user, loading] = useAuthState(auth);
 

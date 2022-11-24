@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { BiBookAlt } from "react-icons/bi";
 import { CgLogOut, CgProfile } from "react-icons/cg";
 
-import { auth } from "../utils/firebase-config";
+import { auth } from "@utils/firebase-config";
 
 function ProfileModal() {
   const [user, loading] = useAuthState(auth);

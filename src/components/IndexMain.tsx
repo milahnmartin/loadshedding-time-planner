@@ -1,12 +1,12 @@
 import Globe from "@helpers/Globe";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import Link from "next/link";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
 const IndexMain = () => {
   const [user, loading] = useAuthState(auth);
   const handleNewPlan = async () => {

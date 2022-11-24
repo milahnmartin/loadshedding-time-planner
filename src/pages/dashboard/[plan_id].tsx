@@ -1,5 +1,5 @@
-import Navbar from "@comps/Navbar";
-import PlanMain from "@comps/PlanMain";
+import Navbar from "@comps/navbar/Navbar";
+import PlanMain from "@comps/plan/PlanMain";
 import { NextPage } from "next";
 import Head from "next/head";
 

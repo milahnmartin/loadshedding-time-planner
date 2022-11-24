@@ -1,6 +1,6 @@
 import Footer from "@comps/Footer";
+import PlansLabel from "@comps/labels/PlansLabel";
 import Navbar from "@comps/navbar/Navbar";
-import PlansLabel from "@comps/plan/PlansLabel";
 import useFetchSavedPlans from "@hooks/useFetchSavedPlans";
 import { Player } from "@lottiefiles/react-lottie-player";
 import supabase from "@utils/supabase-config";

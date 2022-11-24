@@ -1,4 +1,4 @@
-import ProfileModal from "@comps/ProfileModal";
+import ProfileModal from "@comps/navbar/ProfileModal";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 function UserProfile(props: any) {

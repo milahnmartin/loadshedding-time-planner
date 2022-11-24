@@ -1,6 +1,6 @@
 import Footer from "@comps/Footer";
 import InviteMain from "@comps/InviteMain";
-import Navbar from "@comps/Navbar";
+import Navbar from "@comps/navbar/Navbar";
 import Head from "next/head";
 const invites = () => {
   return (

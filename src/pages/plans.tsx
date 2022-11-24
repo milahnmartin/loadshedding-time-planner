@@ -1,13 +1,13 @@
 import Footer from "@comps/Footer";
-import Navbar from "@comps/Navbar";
-import PlansLabel from "@comps/PlansLabel";
-import { v1 as uuidv1 } from "uuid";
+import Navbar from "@comps/navbar/Navbar";
+import PlansLabel from "@comps/plan/PlansLabel";
+import useFetchSavedPlans from "@hooks/useFetchSavedPlans";
 import { Player } from "@lottiefiles/react-lottie-player";
+import supabase from "@utils/supabase-config";
 import { NextPage } from "next";
 import Head from "next/head";
-import useFetchSavedPlans from "../hooks/useFetchSavedPlans";
 import { toast } from "react-toastify";
-import supabase from "../utils/supabase-config";
+import { v1 as uuidv1 } from "uuid";
 
 const plans: NextPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -22,10 +22,7 @@ const plans: NextPage = () => {
       toast.error("No Plan Id Provided");
       return;
     }
-    const { error } = await supabase
-      .from("user_plans")
-      .delete()
-      .eq("plan_id", plan_id);
+    const { error } = await supabase.from("user_plans").delete().eq("plan_id", plan_id);
 
     if (error) {
       toast.error(error.message);
@@ -52,9 +49,7 @@ const plans: NextPage = () => {
           />
         ) : (
           savedPlans?.map((plan: any) => {
-            return (
-              <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />
-            );
+            return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
           })
         )}
       </div>

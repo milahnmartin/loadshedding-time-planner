@@ -1,4 +1,6 @@
 import UserProfile from "@comps/UserProfile";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +9,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { toast } from "react-toastify";
-import Logo from "../pages/assets/Logov3.png";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
+import Logo from "../../pages/assets/Logov3.png";
 function Navbar() {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");

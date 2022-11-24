@@ -1,18 +1,17 @@
 import TimeCalculations from "@helpers/TimeCalculations.module";
+import useFetchPlanData from "@hooks/useFetchPlanData";
+import useFetchUserData from "@hooks/useFetchUserData";
+import GreenLabel from "@labels/GreenLabel";
+import RedLabel from "@labels/RedLabel";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import Router, { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { toast } from "react-toastify";
-import useFetchPlanData from "../hooks/useFetchPlanData";
-import useFetchUserData from "../hooks/useFetchUserData";
-import type { IStartEndTimes } from "../types/types";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
-import GreenLabel from "./GreenLabel";
-import RedLabel from "./RedLabel";
 const enum MyVariant {
   ls = "ls",
   availible = "availible",
@@ -57,9 +56,7 @@ function PlanMain() {
     },
   });
   const { data: userData, isFetching: isFetchingUser } = useFetchUserData(
-    loggedUser?.uid as string,
-    lstimes,
-    setlstimes
+    loggedUser?.uid as string
   );
   const { data: planData, isFetching } = useFetchPlanData(plan_id as string);
 
@@ -470,6 +467,7 @@ function PlanMain() {
               {memoDeconstructTimes.map((time: string) => {
                 return <GreenLabel variant='ls' data={time} key={time} />;
               })}
+              {JSON.stringify(userData)}
             </div>
           </div>
 

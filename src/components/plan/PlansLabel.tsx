@@ -1,11 +1,10 @@
-import { uuidv4 } from "@firebase/util";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { BsCalendar } from "react-icons/bs";
 import { HiOutlineKey } from "react-icons/hi";
-import { v1 as uuidv1 } from "uuid";
 import { MdDeleteForever } from "react-icons/md";
+import { v1 as uuidv1 } from "uuid";
 type planData = {
   plan_id: string;
   plan_lsTimes: string[];
@@ -18,7 +17,6 @@ type PlansLabelProps = {
   deleteCB: (plan_id: string) => void;
 };
 
-import supabase from "../utils/supabase-config";
 const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
   const {
     plan_id,
@@ -64,10 +62,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
 
           {plan_lsTimes.map((time: string) => {
             return (
-              <h1
-                className='text-blue-500 text-center font-black text-lg'
-                key={uuidv1()}
-              >
+              <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv1()}>
                 {time}
               </h1>
             );

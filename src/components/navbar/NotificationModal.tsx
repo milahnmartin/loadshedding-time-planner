@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
-import InviteData from "./InviteData";
+import { auth } from "../../utils/firebase-config";
+import supabase from "../../utils/supabase-config";
+import InviteData from "../InviteData";
 function NotificationModal({ inviteArray }: any) {
   const [user, loading] = useAuthState(auth);
   const [dropdown, setDropdown] = useState<boolean>(false);

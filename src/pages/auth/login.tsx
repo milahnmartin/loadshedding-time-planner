@@ -1,5 +1,5 @@
 import Footer from "@comps/Footer";
-import Navbar from "@comps/Navbar";
+import Navbar from "@comps/navbar/Navbar";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";

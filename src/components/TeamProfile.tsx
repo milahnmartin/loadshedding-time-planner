@@ -1,5 +1,5 @@
+import { auth } from "@utils/firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase-config";
 
 const TeamProfile = () => {
   const [user, loading] = useAuthState(auth);

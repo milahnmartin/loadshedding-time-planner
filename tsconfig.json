@@ -18,7 +18,10 @@
     "paths": {
       "@comps/*": ["./src/components/*"],
       "@lstypes/*": ["./src/types/*"],
-      "@helpers/*": ["./src/helpers/*"]
+      "@helpers/*": ["./src/helpers/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@labels/*": ["./src/components/labels/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
 

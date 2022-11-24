@@ -1,6 +1,6 @@
 import Footer from "@comps/Footer";
 import LoadsheddingProfile from "@comps/LoadsheddingProfile";
-import Navbar from "@comps/Navbar";
+import Navbar from "@comps/navbar/Navbar";
 import ProfileIndex from "@comps/ProfileIndex";
 import TeamProfile from "@comps/TeamProfile";
 import { NextPage } from "next";

@@ -4,6 +4,7 @@ import useFetchUserData from "@hooks/useFetchUserData";
 import GreenLabel from "@labels/GreenLabel";
 import RedLabel from "@labels/RedLabel";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { IStartEndTimes } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";

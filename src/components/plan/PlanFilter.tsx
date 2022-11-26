@@ -4,13 +4,19 @@ import { AiFillFilter } from "react-icons/ai";
 import { v1 as uuidv1 } from "uuid";
 import type { PlanFilterType } from "../../types/types";
 
+type filterInputData = {
+  startDate: string;
+  startTime: string;
+  endTime: string;
+};
+
 function PlanFilter({ members, teams, onFilter }: PlanFilterType) {
-  const [inputData, setInputData] = useState<any>({
+  const [inputData, setInputData] = useState<filterInputData>({
     startDate: new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
       new Date().getDate(),
-      new Date().getHours() + 24
+      new Date().getHours()
     )
       .toISOString()
       .split("T")[0] as string,
@@ -20,7 +26,11 @@ function PlanFilter({ members, teams, onFilter }: PlanFilterType) {
 
   const handleFilterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onFilter(inputData);
+    onFilter({
+      members,
+      teams,
+      filterInputs: inputData,
+    });
   };
 
   const handleRemoveMember = (cmember: string) => {
@@ -75,8 +85,8 @@ function PlanFilter({ members, teams, onFilter }: PlanFilterType) {
             className='relative flex items-center justify-center p-0.5 mb-2 mr-2 w-full h-[2.7rem] overflow-hidden text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white'
           >
             <h1 className='group-hover:hidden'>APPLY</h1>
-            <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-red-700  group-hover:animate-wiggle'>
-              {<AiFillFilter className='group-hover:scale-125' />}
+            <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-yellow-500  group-hover:animate-pulse'>
+              {<AiFillFilter />}
             </div>
           </button>
         </form>

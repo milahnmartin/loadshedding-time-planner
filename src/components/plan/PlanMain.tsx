@@ -1,7 +1,7 @@
 import PlanFilter from "@comps/plan/PlanFilter";
 import type { FilterData } from "@lstypes/types";
 import { useReducer } from "react";
-const handleReducer = (state: any, action: any) => {
+const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "TOGGLE_FILTER":
       return {
@@ -11,8 +11,9 @@ const handleReducer = (state: any, action: any) => {
     case "SET_FILTER_DATA":
       return {
         ...state,
-        members: action.payload.members,
-        teams: action.payload.teams,
+        members: action.PAYLOAD.members,
+        teams: action.PAYLOAD.teams,
+        filterInputs: action.PAYLOAD.filterInputs,
       };
   }
 };
@@ -21,14 +22,29 @@ export default function PlanMain() {
     filter: true,
     members: ["bluevultra@gmail.com"],
     teams: ["bravado"],
+    filterInputs: {
+      startDate: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(),
+        new Date().getHours()
+      )
+        .toISOString()
+        .split("T")[0] as string,
+      startTime: "17:00",
+      endTime: "02:00",
+    },
+    userLoadSheddingTimes: {},
+    currentLoadSheddingStage: 0,
   });
 
-  const handleFilterChange = ({ members, teams }: FilterData) => {
+  const handleFilterChange = ({ members, teams, filterInputs }: FilterData) => {
     dispatch({
       TYPE: "SET_FILTER_DATA",
-      payload: {
+      PAYLOAD: {
         members,
         teams,
+        filterInputs,
       },
     });
   };
@@ -47,7 +63,7 @@ export default function PlanMain() {
       >
         TOGGLE
       </button>
-      {JSON.stringify(state)}
+      <h1 className='text-white text-sm font-black'>{JSON.stringify(state)}</h1>
     </div>
   );
 }

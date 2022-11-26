@@ -49,6 +49,11 @@ export type Variants = "ls" | "availible" | "buffer";
 export type FilterData = {
   members: string[];
   teams: string[];
+  filterInputs?: {
+    startDate: string;
+    endTime: string;
+    startTime: string;
+  };
 };
 
 export type PlanFilterType = {

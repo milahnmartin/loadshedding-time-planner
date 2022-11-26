@@ -45,3 +45,14 @@ export interface IAreaData {
 }
 
 export type Variants = "ls" | "availible" | "buffer";
+
+export type FilterData = {
+  members: string[];
+  teams: string[];
+};
+
+export type PlanFilterType = {
+  members: FilterData.members;
+  teams: FilterData.teams;
+  onFilter: (filterData: FilterData) => void;
+};

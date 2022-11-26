@@ -102,7 +102,7 @@ scrollbar-width {
     transform: translateY(0);
   }
 }
-[data-title]:hover:after {
+/* [data-title]:hover:after {
   opacity: 1;
   transition: all 0.1s ease 0.5s;
   visibility: visible;
@@ -134,4 +134,10 @@ scrollbar-width {
 }
 [data-title] {
   position: relative;
+} */
+
+#dashboard-filter {
+  animation-name: IndexAround;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }

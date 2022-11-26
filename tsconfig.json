@@ -32,7 +32,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "src/helpers/Globe.jsxx",
-    "src/helpers/Globe.jsxx"
+    "src/components/*/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

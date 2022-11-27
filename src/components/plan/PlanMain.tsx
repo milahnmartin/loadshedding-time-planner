@@ -54,6 +54,7 @@ export default function PlanMain() {
         <PlanFilter
           members={state.members}
           teams={state.teams}
+          filterSettings={state.filterInputs}
           onFilter={handleFilterChange}
         />
       )}

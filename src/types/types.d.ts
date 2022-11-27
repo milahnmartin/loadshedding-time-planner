@@ -46,18 +46,21 @@ export interface IAreaData {
 
 export type Variants = "ls" | "availible" | "buffer";
 
+export type FilterTime = {
+  startDate: string;
+  endTime: string;
+  startTime: string;
+};
+
 export type FilterData = {
   members: string[];
   teams: string[];
-  filterInputs?: {
-    startDate: string;
-    endTime: string;
-    startTime: string;
-  };
+  filterInputs?: FilterTime;
 };
 
 export type PlanFilterType = {
   members: FilterData.members;
   teams: FilterData.teams;
+  filterSettings?: FilterTime;
   onFilter: (filterData: FilterData) => void;
 };

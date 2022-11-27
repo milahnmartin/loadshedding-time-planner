@@ -24,9 +24,37 @@ const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [areaInput, setareaInput] = useState<string>("");
 
+  const setUpdateWeekTimes = async (pAreaID: string) => {
+    const areaWeekLSTimes = await fetch(`/api/sepush/${pAreaID}`).then((resp) =>
+      resp.json()
+    );
+    if (!areaWeekLSTimes) {
+      toast.error("Error Occured When Trying To Update LS Times");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({ user_weekLSTimes: areaWeekLSTimes?.lsdata })
+      .eq("user_id", user?.uid)
+      .select();
+
+    if (error) {
+      console.log(error);
+      toast.error("Error Occured When Trying To Update LS Times");
+      return;
+    }
+    console.log("DEV LOG: NEW LS TIMES", data);
+  };
+
   const handleSetArea = async (newArea: IAreaData) => {
     if (!newArea) {
       toast.error("We were unable to set your area");
+      return;
+    }
+
+    if (SavedAreaData?.id === newArea?.id) {
+      toast.warning("You are already using this area");
       return;
     }
     const { error } = await supabase
@@ -40,6 +68,7 @@ const LoadsheddingProfile = () => {
       return;
     }
     setAreaRefetch();
+    setUpdateWeekTimes(newArea?.id!);
   };
 
   const {

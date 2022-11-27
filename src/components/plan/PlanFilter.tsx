@@ -9,12 +9,6 @@ const filterInputClassNames = classNames(
   "rounded-xl px-6 py-2 text-center bg-slate-500 text-white font-inter shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
 );
 
-type filterInputData = {
-  startDate: string;
-  startTime: string;
-  endTime: string;
-};
-
 function PlanFilter({ members, teams, filterSettings, onFilter }: PlanFilterType) {
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
   const [inputData, setInputData] = useState<FilterTime>({

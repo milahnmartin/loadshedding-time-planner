@@ -13,7 +13,6 @@ import { BiMap } from "react-icons/bi";
 import { HiOutlineKey, HiOutlineMap } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-const spanStyles = classNames("text-white text-center font-Inter font-black text-xl");
 const gline = classNames(
   " w-[100%] h-[0.25rem] bg-gradient-to-r from-[#9333EA] via-[#3B82F6] to-[#6EE7B7] rounded border-0 "
 );

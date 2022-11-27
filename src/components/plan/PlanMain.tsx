@@ -1,9 +1,10 @@
 import PlanFilter from "@comps/plan/PlanFilter";
-import useFetchAuthorizedUsers from "@hooks/useFetchAuthorizedUsers";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
+import supabase from "@utils/supabase-config";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
+import { toast } from "react-toastify";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "TOGGLE_FILTER":
@@ -11,12 +12,15 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
         ...state,
         filter: !state.filter,
       };
-    case "SET_FILTER_DATA":
+    case "SET_LS_USERS_TIME":
       return {
         ...state,
-        members: action.PAYLOAD.members,
-        teams: action.PAYLOAD.teams,
-        filterInputs: action.PAYLOAD.filterInputs,
+        member_times: action.PAYLOAD,
+      };
+    case "SET_LS_TEAM_TIME":
+      return {
+        ...state,
+        team_times: action.PAYLOAD,
       };
     case "SET_LS_STAGE":
       return {
@@ -29,6 +33,8 @@ export default function PlanMain() {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
     filter: true,
+    member_times: [],
+    team_times: [],
     filterInputs: {
       startDate: new Date(
         new Date().getFullYear(),
@@ -54,8 +60,15 @@ export default function PlanMain() {
       },
     });
   };
+  const {
+    data: planData,
+    error: planError,
+    isLoading: planLoading,
+    isFetching: planFetching,
+  } = useFetchPlanData(router.query.plan_id as string);
 
   useEffect(() => {
+    console.log("MOUNTED");
     (async () => {
       const res = await fetch("/api/sepush/status");
       const data = await res.json();
@@ -69,20 +82,29 @@ export default function PlanMain() {
         },
       });
     })();
+    return () => {
+      console.log("UNMOUNTED");
+    };
   }, []);
-  const {
-    data: planData,
-    error: planError,
-    isLoading: planLoading,
-    isFetching: planFetching,
-  } = useFetchPlanData(router.query.plan_id as string);
 
-  const {
-    data: authorizedUsersData,
-    error: authorizedUsersError,
-    isLoading: authorizedUsersLoading,
-    isFetching: authorizedUsersFetching,
-  } = useFetchAuthorizedUsers(planData?.plan_authorizedUsers as string[]);
+  useEffect(() => {
+    if (planLoading) return;
+    (async () => {
+      const { data, error } = await supabase
+        .from("user_info")
+        .select("user_id,user_email,user_weekLSTimes")
+        .in("user_email", planData?.plan_authorizedUsers);
+
+      if (error) {
+        toast.error("Error fetching authorized users");
+        return;
+      }
+      dispatch({
+        TYPE: "SET_LS_USERS_TIME",
+        PAYLOAD: data,
+      });
+    })();
+  }, [planLoading]);
 
   return (
     <div className='w-full h-full relative'>
@@ -105,9 +127,6 @@ export default function PlanMain() {
         </button>
         <h1 className='text-white text-sm font-black'>{JSON.stringify(state)}</h1>
         <h1 className='text-orange-500 text-sm font-black'>{JSON.stringify(planData)}</h1>
-        <h1 className='text-red-700 text-2xl font-black'>
-          {JSON.stringify(planData?.plan_authorizedUsers)}
-        </h1>
       </div>
     </div>
   );

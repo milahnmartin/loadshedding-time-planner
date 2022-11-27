@@ -1,4 +1,5 @@
 import PlanFilter from "@comps/plan/PlanFilter";
+import useFetchAuthorizedUsers from "@hooks/useFetchAuthorizedUsers";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import { useRouter } from "next/router";
@@ -28,8 +29,6 @@ export default function PlanMain() {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
     filter: true,
-    members: ["bluevultra@gmail.com"],
-    teams: ["bravado"],
     filterInputs: {
       startDate: new Date(
         new Date().getFullYear(),
@@ -42,11 +41,6 @@ export default function PlanMain() {
       startTime: "17:00",
       endTime: "02:00",
     },
-    InvitedData: {
-      invited_users: ["milahnmartin@gmail.com"],
-      invited_teams: ["pieter@gmail.com"],
-    },
-    userLoadSheddingTimes: {},
     currentLoadSheddingStage: { capetown: 0, eskom: 0 },
   });
 
@@ -83,7 +77,13 @@ export default function PlanMain() {
     isFetching: planFetching,
   } = useFetchPlanData(router.query.plan_id as string);
 
-  console.log({ planLoading, planFetching });
+  const {
+    data: authorizedUsersData,
+    error: authorizedUsersError,
+    isLoading: authorizedUsersLoading,
+    isFetching: authorizedUsersFetching,
+  } = useFetchAuthorizedUsers(planData?.plan_authorizedUsers as string[]);
+
   return (
     <div className='w-full h-full relative'>
       {state.filter && (
@@ -104,9 +104,9 @@ export default function PlanMain() {
           TOGGLE
         </button>
         <h1 className='text-white text-sm font-black'>{JSON.stringify(state)}</h1>
-        <h1 className='text-white text-sm font-black'>{JSON.stringify(planData)}</h1>
+        <h1 className='text-orange-500 text-sm font-black'>{JSON.stringify(planData)}</h1>
         <h1 className='text-red-700 text-2xl font-black'>
-          {JSON.stringify({ planLoading, planFetching })}
+          {JSON.stringify(planData?.plan_authorizedUsers)}
         </h1>
       </div>
     </div>

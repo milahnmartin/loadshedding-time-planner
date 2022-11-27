@@ -32,6 +32,6 @@ export default function useFetchSavedArea() {
   return useQuery([`savedAreaData`, user?.uid], fetchAreaFromSupabase, {
     refetchOnWindowFocus: true,
     staleTime: Infinity,
-    enabled: user?.uid ? true : false,
+    enabled: !!user?.uid,
   });
 }

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import supabase from "../utils/supabase-config";
 type PostPlanArgs = {
-  users: Array<string>;
+  users: string[];
   planID: string;
 };
 const postPlanUsers = async (args: PostPlanArgs) => {
@@ -19,7 +19,5 @@ const postPlanUsers = async (args: PostPlanArgs) => {
 };
 
 export default function usePostPlanUsers(users: string[], planID: string) {
-  return useMutation([`postPlanUsers`, planID], () =>
-    postPlanUsers({ users, planID })
-  );
+  return useMutation([`postPlanUsers`, planID], () => postPlanUsers({ users, planID }));
 }

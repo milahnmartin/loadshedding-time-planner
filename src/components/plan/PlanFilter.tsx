@@ -9,7 +9,13 @@ const filterInputClassNames = classNames(
   "rounded-xl px-6 py-2 text-center bg-slate-500 text-white font-inter shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
 );
 
-function PlanFilter({ members, teams, filterSettings, onFilter }: PlanFilterType) {
+function PlanFilter({
+  members,
+  teams,
+  filterSettings,
+  onFilter,
+  invitedData,
+}: PlanFilterType) {
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
   const [inputData, setInputData] = useState<FilterTime>({
     startDate: filterSettings?.startDate,
@@ -41,12 +47,12 @@ function PlanFilter({ members, teams, filterSettings, onFilter }: PlanFilterType
   return (
     <div
       id='dashboard-filter'
-      className='absolute flex flex-col p-1 right-0 h-[90vh] w-[20rem] bg-slate-600 rounded-sm'
+      className='absolute flex p-1 right-0 h-[90vh] w-[40rem] bg-slate-600 rounded-sm'
     >
-      <div className='border-2 w-full h-full p-2 flex flex-col items-center'>
+      <div className='flex flex-col h-full w-1/2'>
         <form
           onSubmit={handleFilterSubmit}
-          className='flex flex-col space-y-2 w-full h-full justify-evenly'
+          className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'
         >
           <input
             value={inputData.startDate}
@@ -95,16 +101,44 @@ function PlanFilter({ members, teams, filterSettings, onFilter }: PlanFilterType
             </div>
           </button>
         </form>
+
+        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+          {members?.map((member: string) => (
+            <RedLabel key={uuidv1()} args={false} data={member} cb={handleRemoveMember} />
+          ))}
+        </div>
+        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+          {teams?.map((team: string) => (
+            <RedLabel key={uuidv1()} args={true} data={team} cb={handleRemoveTeam} />
+          ))}
+        </div>
       </div>
-      <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-        {members?.map((member: string) => (
-          <RedLabel key={uuidv1()} args={false} data={member} cb={handleRemoveMember} />
-        ))}
-      </div>
-      <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-        {teams?.map((team: string) => (
-          <RedLabel key={uuidv1()} args={true} data={team} cb={handleRemoveTeam} />
-        ))}
+      <div className='flex flex-col h-full w-1/2'>
+        <div className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'>
+          <input
+            type='text'
+            className={filterInputClassNames}
+            placeholder='invite Member via ID or Email'
+          />
+          <button>SEND INVITE</button>
+          <input
+            type='text'
+            className={filterInputClassNames}
+            placeholder='Invite Team Via ID or Name'
+          />
+          <button>INVITE TEAM</button>
+        </div>
+
+        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+          {invitedData?.invitedUsers?.map((member: string) => (
+            <RedLabel key={uuidv1()} args={false} data={member} cb={handleRemoveMember} />
+          ))}
+        </div>
+        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+          {invitedData?.invitedTeams?.map((team: string) => (
+            <RedLabel key={uuidv1()} args={true} data={team} cb={handleRemoveTeam} />
+          ))}
+        </div>
       </div>
     </div>
   );

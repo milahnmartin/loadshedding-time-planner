@@ -13,6 +13,7 @@ const plans: NextPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
     data: savedPlans,
+    isLoading: savedPlansLoading,
     isFetching: savedPlansIsFetching,
     refetch: refetchSavedPlans,
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -39,7 +40,7 @@ const plans: NextPage = () => {
       </Head>
       <Navbar />
       <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
-        {savedPlansIsFetching ? (
+        {savedPlansLoading ? (
           <Player
             src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
             className='player w-[30%] h-[30%] '

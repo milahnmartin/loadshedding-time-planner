@@ -27,10 +27,10 @@ const GreenLabel = ({ data, variant }: LabelProps) => {
         return bufferColor;
     }
   };
-
+  console.log(data);
   return (
     <div className={theColor()}>
-      <pre>{data}</pre>
+      <pre className='text-white'>{JSON.stringify(data)}</pre>
     </div>
   );
 };

@@ -12,10 +12,29 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
         ...state,
         filter: !state.filter,
       };
+    case "SET_FILTER_DATA":
+      return {
+        ...state,
+        filterInputs: action.PAYLOAD.filterInputs,
+        active_member_times: state.member_times.map((items: any) => {
+          if (items.user_weekLSTimes) {
+            return items.user_weekLSTimes.filter((times: any) => {
+              return times.date === action.PAYLOAD.filterInputs?.startDate;
+            });
+          }
+        }),
+      };
     case "SET_LS_USERS_TIME":
       return {
         ...state,
         member_times: action.PAYLOAD,
+        active_member_times: action.PAYLOAD.map((items: any) => {
+          if (items.user_weekLSTimes) {
+            return items.user_weekLSTimes.filter((times: any) => {
+              return times.date === state.filterInputs?.startDate;
+            });
+          }
+        }),
       };
     case "SET_LS_TEAM_TIME":
       return {
@@ -27,14 +46,22 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
         ...state,
         currentLoadSheddingStage: action.PAYLOAD,
       };
+
+    case "SET_ACTIVE_DATE_TIMES_USERS":
+      return {
+        ...state,
+        active_member_times: action.PAYLOAD,
+      };
   }
 };
 export default function PlanMain() {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
-    filter: true,
+    filter: false,
     member_times: [],
+    active_member_times: [],
     team_times: [],
+    active_team_times: [],
     filterInputs: {
       startDate: new Date(
         new Date().getFullYear(),
@@ -50,41 +77,54 @@ export default function PlanMain() {
     currentLoadSheddingStage: { capetown: 0, eskom: 0 },
   });
 
-  const handleFilterChange = ({ members, teams, filterInputs }: FilterData) => {
+  const handleFilterChange = ({ filterInputs }: FilterData) => {
     dispatch({
       TYPE: "SET_FILTER_DATA",
       PAYLOAD: {
-        members,
-        teams,
         filterInputs,
       },
     });
   };
+
+  const handleUserRemove = async (rUser: string) => {
+    if (!rUser) return;
+    const newMembers = planData?.plan_authorizedUsers?.filter(
+      (member: string) => member !== rUser
+    );
+    const { error } = await supabase
+      .from("user_plans")
+      .update({ plan_authorizedUsers: newMembers })
+      .eq("plan_id", router.query.plan_id);
+
+    if (error) {
+      console.log(error);
+      toast.error("Error removing member");
+      return;
+    }
+    planRefetch();
+  };
+
   const {
     data: planData,
     error: planError,
     isLoading: planLoading,
     isFetching: planFetching,
+    refetch: planRefetch,
   } = useFetchPlanData(router.query.plan_id as string);
 
   useEffect(() => {
-    console.log("MOUNTED");
     (async () => {
       const res = await fetch("/api/sepush/status");
       const data = await res.json();
+      console.log(data);
       dispatch({
         TYPE: "SET_LS_STAGE",
         PAYLOAD: {
-          currentLoadSheddingStage: {
-            capetown: data?.capetown?.stage,
-            eskom: data?.eskom?.stage,
-          },
+          capetown: data?.captetown?.stage,
+          eskom: data?.eskom?.stage,
         },
       });
     })();
-    return () => {
-      console.log("UNMOUNTED");
-    };
   }, []);
 
   useEffect(() => {
@@ -115,18 +155,25 @@ export default function PlanMain() {
           invitedData={planData?.plan_InvitedData}
           filterSettings={state.filterInputs}
           onFilter={handleFilterChange}
+          removeUserCB={handleUserRemove}
         />
       )}
 
-      <div className='flex flex-col h-full w-3/6'>
+      <div className='flex flex-col h-full w-6/6'>
         <button
           className='p-4 bg-orange-400 text-black rounded-xl text-2xl font-Inter'
           onClick={() => dispatch({ TYPE: "TOGGLE_FILTER" })}
         >
           TOGGLE
         </button>
-        <h1 className='text-white text-sm font-black'>{JSON.stringify(state)}</h1>
-        <h1 className='text-orange-500 text-sm font-black'>{JSON.stringify(planData)}</h1>
+        <h1 className='text-white text-sm font-black'>
+          {JSON.stringify(state.filterInputs)}
+        </h1>
+
+        <pre className='text-pink-500'>{JSON.stringify(planData)}</pre>
+        <div className='text-cblue tracking-widest font-black text-sm w-full h-full flex flex-wrap content-start items-center justify-center border-2 overflow-scroll'>
+          <h6>{JSON.stringify(state.active_member_times)}</h6>
+        </div>
       </div>
     </div>
   );

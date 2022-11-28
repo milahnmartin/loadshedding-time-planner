@@ -29,6 +29,7 @@ export type PlanFilterType = {
   filterSettings?: FilterTime;
   invitedData?: PlanInvitedType;
   onFilter: (filterData: FilterData) => void;
+  removeUserCB: (userId: string) => void;
 };
 
 export type PlanInvitedType = {

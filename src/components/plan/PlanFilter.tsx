@@ -15,6 +15,7 @@ function PlanFilter({
   filterSettings,
   onFilter,
   invitedData,
+  removeUserCB,
 }: PlanFilterType) {
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
   const [inputData, setInputData] = useState<FilterTime>({
@@ -36,10 +37,6 @@ function PlanFilter({
     }, 2110);
   };
 
-  const handleRemoveMember = (cmember: string) => {
-    const newMembers = members.filter((member: string) => member !== cmember);
-    onFilter({ members: newMembers, teams, filterInputs: inputData });
-  };
   const handleRemoveTeam = (cteam: string) => {
     const newTeam = teams.filter((team: string) => team !== cteam);
     onFilter({ teams: newTeam, members, filterInputs: inputData });
@@ -104,7 +101,12 @@ function PlanFilter({
 
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
           {members?.map((member: string) => (
-            <RedLabel key={uuidv1()} args={false} data={member} cb={handleRemoveMember} />
+            <RedLabel
+              key={uuidv1()}
+              args={false}
+              data={member}
+              cb={() => removeUserCB(member)}
+            />
           ))}
         </div>
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
@@ -131,7 +133,12 @@ function PlanFilter({
 
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
           {invitedData?.invitedUsers?.map((member: string) => (
-            <RedLabel key={uuidv1()} args={false} data={member} cb={handleRemoveMember} />
+            <RedLabel
+              key={uuidv1()}
+              args={false}
+              data={member}
+              cb={() => console.log("YES")}
+            />
           ))}
         </div>
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>

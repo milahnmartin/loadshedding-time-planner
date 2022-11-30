@@ -81,7 +81,7 @@ const InviteMain = () => {
             cbDecline={handleInviteAccept}
           />
         ))}
-      {inviteData && inviteData.length === 0 && <p>No Invites</p>}
+      {!inviteLoading && inviteData.length === 0 && <p>No Invites</p>}
     </div>
   );
 };

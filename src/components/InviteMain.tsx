@@ -50,7 +50,6 @@ const InviteMain = () => {
     toast.error("Could not decline invite");
   };
   const handleInviteAccept = async (plan_id: string) => {
-    console.log("BALLS");
     if (!plan_id) {
       toast.error("Could not accept invite");
       return;
@@ -77,6 +76,7 @@ const InviteMain = () => {
       .eq(`plan_id`, plan_id);
 
     const removePlanStatus = await handleRemoveAcceptedPlan(plan_id, inviteData);
+
     if (removePlanStatus && !updatedUserPlanError) {
       toast.success("Invite Accepted");
       await refetchInvites();

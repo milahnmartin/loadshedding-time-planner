@@ -18,6 +18,9 @@ const InviteMain = () => {
 
       <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
         <InviteLabel />
+        <InviteLabel />
+        <InviteLabel />
+        <InviteLabel />
       </div>
     </div>
   );

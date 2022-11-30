@@ -1,5 +1,8 @@
 import useFetchUserInvites from "@hooks/useFetchUserInvites";
+<<<<<<< Updated upstream
 import { Player } from "@lottiefiles/react-lottie-player";
+=======
+>>>>>>> Stashed changes
 import { IInviteData } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
@@ -56,7 +59,7 @@ const InviteMain = () => {
     }
     const { data: user_plan_data, error: user_plan_error } = await supabase
       .from("user_plans")
-      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedData`)
+      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedUsers`)
       .eq(`plan_id`, plan_id);
     if (user_plan_error) {
       console.log(user_plan_error);

@@ -14,6 +14,8 @@ const InviteMain = () => {
     refetch: refetchInvites,
   } = useFetchUserInvites();
 
+  // todo - plan_InvitedData needs to be updated for both decline and accept
+
   const handleRemoveAcceptedPlan = async (
     plan_id: string,
     old_plan_invites: IInviteData[]
@@ -29,11 +31,23 @@ const InviteMain = () => {
       .update({ user_plan_Invites: oldInvites })
       .eq("user_id", user?.uid);
 
-    if (removeError) {
-      return false;
+    return removeError ? false : true;
+  };
+
+  const handleDeclinceInvite = async (plan_id: string) => {
+    if (!plan_id) {
+      toast.error("Could not decline invite");
+      return;
+    }
+    const removeAcceptedPlanStatus = await handleRemoveAcceptedPlan(plan_id, inviteData);
+
+    if (removeAcceptedPlanStatus) {
+      toast.success("Invite declined");
+      refetchInvites();
+      return;
     }
 
-    return true;
+    toast.error("Could not decline invite");
   };
   const handleInviteAccept = async (plan_id: string) => {
     if (!plan_id) {
@@ -87,7 +101,7 @@ const InviteMain = () => {
             key={invite.plan_id}
             data={invite}
             cbAccept={handleInviteAccept}
-            cbDecline={handleInviteAccept}
+            cbDecline={handleDeclinceInvite}
           />
         ))}
       {!inviteLoading && inviteData.length === 0 && <p>No Invites</p>}

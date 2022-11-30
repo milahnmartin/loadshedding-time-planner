@@ -7,7 +7,33 @@ import { toast } from "react-toastify";
 import InviteLabel from "./labels/InviteLabel";
 const InviteMain = () => {
   const [user, loading] = useAuthState(auth);
-  const { data: inviteData, isLoading: inviteLoading } = useFetchUserInvites();
+  const {
+    data: inviteData,
+    isLoading: inviteLoading,
+    refetch: refetchInvites,
+  } = useFetchUserInvites();
+
+  const handleRemoveAcceptedPlan = async (
+    plan_id: string,
+    old_plan_invites: IInviteData[]
+  ): Promise<boolean> => {
+    if (!plan_id) {
+      return false;
+    }
+    const oldInvites = old_plan_invites.filter((invite: IInviteData) => {
+      return invite.plan_id !== plan_id;
+    });
+    const { error: removeError } = await supabase
+      .from("user_info")
+      .update({ user_plan_Invites: oldInvites })
+      .eq("user_id", user?.uid);
+
+    if (removeError) {
+      return false;
+    }
+
+    return true;
+  };
   const handleInviteAccept = async (plan_id: string) => {
     if (!plan_id) {
       toast.error("Could not accept invite");
@@ -34,11 +60,12 @@ const InviteMain = () => {
       })
       .eq(`plan_id`, plan_id);
 
-    if (!updatedUserPlanError) {
-      toast.success("Invite accepted");
+    const removePlanStatus = await handleRemoveAcceptedPlan(plan_id, inviteData);
+    if (removePlanStatus && !updatedUserPlanError) {
+      toast.success("Invite Accepted");
+      await refetchInvites();
       return;
     }
-    console.log(updatedUserPlanError);
     toast.error("Could not accept invite");
   };
   return (
@@ -54,7 +81,7 @@ const InviteMain = () => {
             cbDecline={handleInviteAccept}
           />
         ))}
-      {inviteData && inviteData.length === 0 && <p>No Invites</p>}
+      {!inviteLoading && inviteData.length === 0 && <p>No Invites</p>}
     </div>
   );
 };

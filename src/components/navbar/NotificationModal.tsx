@@ -4,44 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { auth } from "../../utils/firebase-config";
-import supabase from "../../utils/supabase-config";
 import InviteData from "../InviteData";
 function NotificationModal({ inviteArray }: any) {
   const [user, loading] = useAuthState(auth);
   const [dropdown, setDropdown] = useState<boolean>(false);
 
-  const handleInviteAccept = async (plan_id: string) => {
-    if (!plan_id) {
-      toast.error("Could not accept invite");
-      return;
-    }
-    const { data: user_plan_data, error: user_plan_error } = await supabase
-      .from("user_plans")
-      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedUsers`)
-      .eq(`plan_id`, plan_id);
-    if (user_plan_error) {
-      console.log(user_plan_error);
-      return;
-    }
-    const { plan_authorizedUsers, plan_authorizeTeams, plan_InvitedUsers }: any =
-      user_plan_data[0];
-    const newInvitedUsers = plan_InvitedUsers.filter(
-      (invite: string) => invite !== user?.uid
-    );
-    const { data: updatedUserPlanData, error: updatedUserPlanError } = await supabase
-      .from("user_plans")
-      .update({
-        plan_InvitedUsers: newInvitedUsers,
-        plan_authorizedUsers: [...plan_authorizedUsers, user?.uid],
-      })
-      .eq(`plan_id`, plan_id);
-
-    if (!updatedUserPlanError) {
-      toast.success("Invite accepted");
-      return;
-    }
-    toast.error("Could not accept invite");
-  };
   const handleInviteDecline = async (plan_id: string) => {
     if (!plan_id) {
       toast.error("Could not decline invite");
@@ -55,7 +22,7 @@ function NotificationModal({ inviteArray }: any) {
         inviteArray.map((invite: IInviteData) => (
           <InviteData
             key={uuidv4()}
-            cbAccept={handleInviteAccept}
+            cbAccept={() => console.log("YES")}
             cbDecline={handleInviteDecline}
             data={invite}
           />

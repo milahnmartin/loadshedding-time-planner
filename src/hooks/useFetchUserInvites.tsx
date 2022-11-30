@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
 const fetchUserInvites = async ({ queryKey }: any) => {
   const { data: invitedPlanData, error } = await supabase
     .from("user_info")
@@ -19,7 +19,7 @@ const fetchUserInvites = async ({ queryKey }: any) => {
   if (invitedPlanData?.length == 0) {
     return [];
   }
-  return invitedPlanData;
+  return invitedPlanData[0]?.user_plan_Invites;
 };
 
 export default function useFetchUserInvites() {

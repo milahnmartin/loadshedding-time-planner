@@ -7,11 +7,7 @@ import { toast } from "react-toastify";
 import InviteLabel from "./labels/InviteLabel";
 const InviteMain = () => {
   const [user, loading] = useAuthState(auth);
-  const {
-    data: inviteData,
-    isLoading: inviteLoading,
-    isError: inviteError,
-  } = useFetchUserInvites();
+  const { data: inviteData, isLoading: inviteLoading } = useFetchUserInvites();
   const handleInviteAccept = async (plan_id: string) => {
     if (!plan_id) {
       toast.error("Could not accept invite");
@@ -19,21 +15,21 @@ const InviteMain = () => {
     }
     const { data: user_plan_data, error: user_plan_error } = await supabase
       .from("user_plans")
-      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedUsers`)
+      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedData`)
       .eq(`plan_id`, plan_id);
     if (user_plan_error) {
       console.log(user_plan_error);
       return;
     }
-    const { plan_authorizedUsers, plan_authorizeTeams, plan_InvitedUsers }: any =
+    const { plan_authorizedUsers, plan_authorizeTeams, plan_InvitedData }: any =
       user_plan_data[0];
-    const newInvitedUsers = plan_InvitedUsers.filter(
+    const oldInvitedUsers = plan_InvitedData.filter(
       (invite: string) => invite !== user?.uid
     );
-    const { data: updatedUserPlanData, error: updatedUserPlanError } = await supabase
+    const { error: updatedUserPlanError } = await supabase
       .from("user_plans")
       .update({
-        plan_InvitedUsers: newInvitedUsers,
+        plan_InvitedData: oldInvitedUsers,
         plan_authorizedUsers: [...plan_authorizedUsers, user?.uid],
       })
       .eq(`plan_id`, plan_id);
@@ -42,6 +38,7 @@ const InviteMain = () => {
       toast.success("Invite accepted");
       return;
     }
+    console.log(updatedUserPlanError);
     toast.error("Could not accept invite");
   };
   return (
@@ -54,7 +51,7 @@ const InviteMain = () => {
             key={invite.plan_id}
             data={invite}
             cbAccept={handleInviteAccept}
-            cbDecline={() => console.log("YES")}
+            cbDecline={handleInviteAccept}
           />
         ))}
       {inviteData && inviteData.length === 0 && <p>No Invites</p>}

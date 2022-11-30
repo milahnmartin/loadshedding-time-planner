@@ -15,7 +15,7 @@ const InviteLabel = ({
   cbDecline,
 }: InviteLabelProps) => {
   return (
-    <div className='rounded-xl w-[26rem] h-[31rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[26rem] h-[32rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player
@@ -29,7 +29,8 @@ const InviteLabel = ({
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN ID:
             </h1>
             <h1 className='text-blue-200 text-center text-lg font-bold pb-5'>
@@ -39,7 +40,8 @@ const InviteLabel = ({
 
           <span className='flex items-center justify-center  flex-col'>
             <FaUserCircle className='text-[1.15rem] align-center justify-center' />
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               INVITED BY:
             </h1>
             <h1 className='text-blue-200 text-center text-lg font-bold pb-2'>
@@ -52,11 +54,12 @@ const InviteLabel = ({
 
           <span className='flex items-center justify-center flex-col'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN CREATED:
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-bold '>
-              DUMMY PLAN CREATED
+            <h1 className='text-blue-200 text-center text-lg font-bold pb-2 '>
+              Wed, 30 Nov 2022 10:56:11 GMT
             </h1>
           </span>
         </div>

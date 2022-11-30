@@ -105,7 +105,9 @@ const InviteMain = () => {
             cbDecline={handleDeclinceInvite}
           />
         ))}
-      {!inviteLoading && inviteData.length === 0 && <p>No Invites</p>}
+      {!inviteLoading && inviteData.length === 0 && (
+        <p className='text-white font-black text-6xl'>No Invites</p>
+      )}
     </div>
   );
 };

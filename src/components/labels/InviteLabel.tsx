@@ -11,7 +11,6 @@ const InviteLabel = ({ plan }: any) => {
     plan_createdAt,
   } = plan;
   return (
-    // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
     <div className='rounded-xl w-[25rem] h-[20rem] bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col items-center justify-center h-full bg-slate-800 text-white rounded-lg p-2'>
         <span className='flex flex-col items-center w-full h-full rounded-xl'>
@@ -26,7 +25,9 @@ const InviteLabel = ({ plan }: any) => {
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
               PLAN ID
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-bold '>{plan_id}</h1>
+            <h1 className='text-blue-200 text-center text-lg font-bold '>
+              {plan_id}
+            </h1>
 
             <h1 className='text-blue-500 text-center font-black text-lg'>
               PLAN CREATED:

@@ -33,7 +33,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
         <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player
             src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
-            className='player w-[110px] h-[110px] '
+            className='player w-[115px] h-[115px] '
             autoplay
             loop
             speed={0.8}
@@ -62,7 +62,10 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
 
           {plan_lsTimes.map((time: string) => {
             return (
-              <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv1()}>
+              <h1
+                className='text-blue-500 text-center font-black text-lg'
+                key={uuidv1()}
+              >
                 {time}
               </h1>
             );

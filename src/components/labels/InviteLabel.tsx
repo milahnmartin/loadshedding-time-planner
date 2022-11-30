@@ -15,11 +15,11 @@ const InviteLabel = ({
   cbDecline,
 }: InviteLabelProps) => {
   return (
-    <div className='rounded-xl w-[25rem] h-[30rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[27rem] h-[30rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player
-            src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
+            src='https://assets4.lottiefiles.com/packages/lf20_cD9T3LPg2R.json'
             className='player w-[110px] h-[110px] '
             autoplay
             loop
@@ -59,10 +59,10 @@ const InviteLabel = ({
         </div>
         <div className='flex items-center justify-center w-full h-fit pb-4 space-x-4'>
           <button
-            className='relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='relative flex items-center justify-center  w-[6rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={() => cbAccept(plan_id)}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[4.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[5.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around'>
                 <FaCheck className='text-xl align-center justify-center relative top-[1px] group-hover:text-green-600' />
               </span>
@@ -71,9 +71,9 @@ const InviteLabel = ({
 
           <button
             onClick={() => cbDecline(plan_id)}
-            className='group relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='group relative flex items-center justify-center  w-[6rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[4.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[5.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around'>
                 <ImCross
                   title='Delete Plan'

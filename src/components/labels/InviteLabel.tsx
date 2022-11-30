@@ -15,7 +15,7 @@ const InviteLabel = ({
   cbDecline,
 }: InviteLabelProps) => {
   return (
-    <div className='rounded-xl w-[27rem] h-[30rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[26rem] h-[31rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player
@@ -42,8 +42,11 @@ const InviteLabel = ({
             <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
               INVITED BY:
             </h1>
+            <h1 className='text-blue-200 text-center text-lg font-bold pb-2'>
+              {invitedBy[1]}
+            </h1>
             <h1 className='text-blue-200 text-center text-lg font-bold pb-5'>
-              {invitedBy}
+              {invitedBy[0]}
             </h1>
           </span>
 
@@ -64,7 +67,7 @@ const InviteLabel = ({
           >
             <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[5.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around'>
-                <FaCheck className='text-xl align-center justify-center relative top-[1px] group-hover:text-green-600' />
+                <FaCheck className='text-xl align-center justify-center relative top-[1px] group-hover:text-green-500' />
               </span>
             </span>
           </button>

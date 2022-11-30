@@ -1,3 +1,4 @@
+import GreenLabel from "@comps/labels/GreenLabel";
 import PlanFilter from "@comps/plan/PlanFilter";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
@@ -16,13 +17,15 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
       return {
         ...state,
         filterInputs: action.PAYLOAD.filterInputs,
-        active_member_times: state.member_times.map((items: any) => {
-          if (items.user_weekLSTimes) {
-            return items.user_weekLSTimes.filter((times: any) => {
-              return times.date === action.PAYLOAD.filterInputs?.startDate;
-            });
-          }
-        }),
+        active_member_times: state.member_times
+          .map((items: any) => {
+            if (items.user_weekLSTimes) {
+              return items.user_weekLSTimes.filter((times: any) => {
+                return times.date === action.PAYLOAD.filterInputs?.startDate;
+              });
+            }
+          })
+          .flat(),
       };
     case "SET_LS_USERS_TIME":
       return {
@@ -34,7 +37,7 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
               return times.date === state.filterInputs?.startDate;
             });
           }
-        }),
+        }).flat(),
       };
     case "SET_LS_TEAM_TIME":
       return {
@@ -120,7 +123,7 @@ export default function PlanMain() {
       dispatch({
         TYPE: "SET_LS_STAGE",
         PAYLOAD: {
-          capetown: data?.captetown?.stage,
+          capetown: data?.capetown?.stage,
           eskom: data?.eskom?.stage,
         },
       });
@@ -167,12 +170,23 @@ export default function PlanMain() {
           TOGGLE
         </button>
         <h1 className='text-white text-sm font-black'>
-          {JSON.stringify(state.filterInputs)}
+          {JSON.stringify(state.currentLoadSheddingStage)}
         </h1>
 
         <pre className='text-pink-500'>{JSON.stringify(planData)}</pre>
         <div className='text-cblue tracking-widest font-black text-sm w-full h-full flex flex-wrap content-start items-center justify-center border-2 overflow-scroll'>
           <h6>{JSON.stringify(state.active_member_times)}</h6>
+          {state.active_member_times?.map(
+            (time: { date: string; name: string; stages: string[] }) => {
+              console.log(time.stages);
+              return (
+                <GreenLabel
+                  variant='ls'
+                  data={time.stages[+state.currentLoadSheddingStage.eskom - 1]!}
+                />
+              );
+            }
+          )}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { uuidv4 } from "@firebase/util";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Link from "next/link";
 
-const PlansLabelInvite = ({ plan }: any) => {
+const InviteLabel = ({ plan }: any) => {
   let {
     plan_id,
     plan_lsTimes,
@@ -66,4 +66,4 @@ const PlansLabelInvite = ({ plan }: any) => {
   );
 };
 
-export default PlansLabelInvite;
+export default InviteLabel;

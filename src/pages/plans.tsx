@@ -53,6 +53,7 @@ const plans: NextPage = () => {
             return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
           })
         )}
+        {savedPlans?.length === 0 && <h1 className='text-white'>NO PLANS</h1>}
       </div>
       <Footer />
     </div>

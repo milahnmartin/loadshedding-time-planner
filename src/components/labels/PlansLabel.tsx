@@ -42,7 +42,8 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN ID:
             </h1>
             <h1 className='text-blue-200 text-center text-lg font-bold pb-5'>
@@ -52,7 +53,8 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
 
           <span className='flex items-center justify-center flex-col'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
-            <h1 className='text-blue-500 text-center font-Inter font-black text-lg'>
+            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN CREATED:
             </h1>
             <h1 className='text-blue-200 text-center text-lg font-bold '>

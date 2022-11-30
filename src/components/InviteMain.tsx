@@ -1,4 +1,5 @@
 import useFetchUserInvites from "@hooks/useFetchUserInvites";
+import { Player } from "@lottiefiles/react-lottie-player";
 import { IInviteData } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
@@ -70,7 +71,15 @@ const InviteMain = () => {
   };
   return (
     <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
-      {inviteLoading && <p>Loading...</p>}
+      {inviteLoading && (
+        <Player
+          src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+          className='player w-[30%] h-[30%] '
+          autoplay
+          loop
+          speed={0.5}
+        />
+      )}
       {inviteData &&
         inviteData.length > 0 &&
         inviteData.map((invite: IInviteData) => (

@@ -1,8 +1,5 @@
 import useFetchUserInvites from "@hooks/useFetchUserInvites";
-<<<<<<< Updated upstream
 import { Player } from "@lottiefiles/react-lottie-player";
-=======
->>>>>>> Stashed changes
 import { IInviteData } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";

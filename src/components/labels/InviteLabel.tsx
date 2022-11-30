@@ -1,13 +1,9 @@
-<<<<<<< Updated upstream
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IInviteData } from "@lstypes/types";
 import { BsCalendar } from "react-icons/bs";
 import { FaCheck, FaUserCircle } from "react-icons/fa";
 import { HiOutlineKey } from "react-icons/hi";
 import { ImCross } from "react-icons/im";
-=======
-import { IInviteData } from "@lstypes/types";
->>>>>>> Stashed changes
 type InviteLabelProps = {
   cbAccept: (plan_id: string) => void;
   cbDecline: (plan_id: string) => void;

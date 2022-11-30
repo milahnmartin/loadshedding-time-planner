@@ -78,10 +78,7 @@ const InviteLabel = ({
           >
             <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[5.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around'>
-                <ImCross
-                  title='Delete Plan'
-                  className='cursor-pointer text-[1.3rem] align-center justify-center group-hover:text-red-700 transition-all duration-300'
-                />
+                <ImCross className='cursor-pointer text-xl align-center justify-center group-hover:text-red-700 transition-all duration-300' />
               </span>
             </span>
           </button>

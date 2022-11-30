@@ -42,7 +42,7 @@ const InviteMain = () => {
     toast.error("Could not accept invite");
   };
   return (
-    <div className='h-[90%] w-full border-2 p-2 flex'>
+    <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
       {inviteLoading && <p>Loading...</p>}
       {inviteData &&
         inviteData.length > 0 &&

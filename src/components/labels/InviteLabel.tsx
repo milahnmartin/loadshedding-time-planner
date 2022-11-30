@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";

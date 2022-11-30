@@ -50,13 +50,14 @@ const InviteMain = () => {
     toast.error("Could not decline invite");
   };
   const handleInviteAccept = async (plan_id: string) => {
+    console.log("BALLS");
     if (!plan_id) {
       toast.error("Could not accept invite");
       return;
     }
     const { data: user_plan_data, error: user_plan_error } = await supabase
       .from("user_plans")
-      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedUsers`)
+      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedData`)
       .eq(`plan_id`, plan_id);
     if (user_plan_error) {
       console.log(user_plan_error);

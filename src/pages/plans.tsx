@@ -8,7 +8,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
-import Link from "next/link";
 
 const plans: NextPage = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks

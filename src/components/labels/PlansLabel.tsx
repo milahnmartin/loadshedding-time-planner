@@ -113,11 +113,6 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
               </span>
             </span>
           </button>
-          {/* <MdDeleteForever
-            title='Delete Plan'
-            onClick={() => deleteCB(plan_id)}
-            className='cursor-pointer text-[1.5rem] align-center justify-center hover:text-red-700 transition-all duration-300'
-          /> */}
         </div>
       </div>
     </div>

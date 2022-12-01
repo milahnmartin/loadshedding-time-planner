@@ -1,4 +1,3 @@
-import GreenLabel from "@comps/labels/GreenLabel";
 import PlanFilter from "@comps/plan/PlanFilter";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
@@ -174,20 +173,7 @@ export default function PlanMain() {
         </h1>
 
         <pre className='text-pink-500'>{JSON.stringify(planData)}</pre>
-        <div className='text-cblue tracking-widest font-black text-sm w-full h-full flex flex-wrap content-start items-center justify-center border-2 overflow-scroll'>
-          <h6>{JSON.stringify(state.active_member_times)}</h6>
-          {state.active_member_times?.map(
-            (time: { date: string; name: string; stages: string[] }) => {
-              console.log(time.stages);
-              return (
-                <GreenLabel
-                  variant='ls'
-                  data={time.stages[+state.currentLoadSheddingStage.eskom - 1]!}
-                />
-              );
-            }
-          )}
-        </div>
+        <pre className='text-white whitespace-pre-wrap'>{JSON.stringify(state)}</pre>
       </div>
     </div>
   );

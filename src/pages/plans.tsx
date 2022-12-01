@@ -23,7 +23,10 @@ const plans: NextPage = () => {
       toast.error("No Plan Id Provided");
       return;
     }
-    const { error } = await supabase.from("user_plans").delete().eq("plan_id", plan_id);
+    const { error } = await supabase
+      .from("user_plans")
+      .delete()
+      .eq("plan_id", plan_id);
 
     if (error) {
       toast.error(error.message);
@@ -50,10 +53,27 @@ const plans: NextPage = () => {
           />
         ) : (
           savedPlans?.map((plan: any) => {
-            return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
+            return (
+              <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />
+            );
           })
         )}
-        {savedPlans?.length === 0 && <h1 className='text-white'>NO PLANS</h1>}
+        {savedPlans?.length === 0 && (
+          <div className='rounded-xl w-[20rem] h-fit bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
+              <span className='flex flex-col items-center w-full h-fit pt-2'>
+                <Player
+                  src='https://assets3.lottiefiles.com/private_files/lf30_17bvu2tk.json'
+                  className='player w-[110px] h-[110px] '
+                  autoplay
+                  loop
+                  speed={0.5}
+                />
+                <h1 className='text-2xl font-bold pb-4'>NO PLANS</h1>
+              </span>
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </div>

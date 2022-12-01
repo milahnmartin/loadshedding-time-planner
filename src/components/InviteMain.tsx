@@ -106,7 +106,20 @@ const InviteMain = () => {
           />
         ))}
       {!inviteLoading && inviteData.length === 0 && (
-        <p className='text-white font-black text-6xl'>No Invites</p>
+        <div className='rounded-xl w-[20rem] h-fit bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+          <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
+            <span className='flex flex-col items-center w-full h-fit pt-2'>
+              <Player
+                src='https://assets3.lottiefiles.com/private_files/lf30_17bvu2tk.json'
+                className='player w-[110px] h-[110px] '
+                autoplay
+                loop
+                speed={0.5}
+              />
+              <h1 className='text-2xl font-bold pb-4'>NO INVITES</h1>
+            </span>
+          </div>
+        </div>
       )}
     </div>
   );

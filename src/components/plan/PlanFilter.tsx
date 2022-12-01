@@ -1,8 +1,9 @@
 import RedLabel from "@comps/labels/RedLabel";
 import { Player } from "@lottiefiles/react-lottie-player";
 import classNames from "classnames";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { AiFillFilter } from "react-icons/ai";
+import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 import type { FilterTime, PlanFilterType } from "../../types/types";
 const filterInputClassNames = classNames(
@@ -37,9 +38,15 @@ function PlanFilter({
     }, 2110);
   };
 
-  const handleRemoveTeam = (cteam: string) => {
-    const newTeam = teams.filter((team: string) => team !== cteam);
-    onFilter({ teams: newTeam, members, filterInputs: inputData });
+  const inviteInputRef = useRef<HTMLInputElement>(null);
+
+  const handleInviteMember = () => {
+    const inviteInput = inviteInputRef.current?.value.trim();
+    if (!inviteInput || inviteInput.length === 0) {
+      toast.warning("Please enter a valid UUID or email");
+      inviteInputRef.current?.focus();
+      return;
+    }
   };
   return (
     <div
@@ -55,13 +62,15 @@ function PlanFilter({
             value={inputData.startDate}
             type='date'
             className={filterInputClassNames}
-            onChange={(e) => setInputData({ ...inputData, startDate: e.target.value })}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setInputData({ ...inputData, startDate: e.target.value })
+            }
           />
           <input
             value={inputData.startTime}
             type='time'
             className={filterInputClassNames}
-            onChange={(e) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInputData({
                 ...inputData,
                 startTime: e.target.value,
@@ -72,7 +81,7 @@ function PlanFilter({
             value={inputData.endTime}
             type='time'
             className={filterInputClassNames}
-            onChange={(e) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setInputData({
                 ...inputData,
                 endTime: e.target.value,
@@ -111,7 +120,12 @@ function PlanFilter({
         </div>
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
           {teams?.map((team: string) => (
-            <RedLabel key={uuidv1()} args={true} data={team} cb={handleRemoveTeam} />
+            <RedLabel
+              key={uuidv1()}
+              args={true}
+              data={team}
+              cb={() => removeUserCB(team)}
+            />
           ))}
         </div>
       </div>
@@ -121,8 +135,9 @@ function PlanFilter({
             type='text'
             className={filterInputClassNames}
             placeholder='invite Member via ID or Email'
+            ref={inviteInputRef}
           />
-          <button>SEND INVITE</button>
+          <button onClick={handleInviteMember}>SEND INVITE</button>
           <input
             type='text'
             className={filterInputClassNames}
@@ -143,7 +158,12 @@ function PlanFilter({
         </div>
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
           {invitedData?.invitedTeams?.map((team: string) => (
-            <RedLabel key={uuidv1()} args={true} data={team} cb={handleRemoveTeam} />
+            <RedLabel
+              key={uuidv1()}
+              args={true}
+              data={team}
+              cb={() => console.log("REMOVED")}
+            />
           ))}
         </div>
       </div>

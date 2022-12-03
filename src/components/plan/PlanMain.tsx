@@ -116,9 +116,7 @@ export default function PlanMain() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/sepush/status");
-      const data = await res.json();
-      console.log(data);
+      const data = await fetch("/api/sepush/status").then((resp) => resp.json());
       dispatch({
         TYPE: "SET_LS_STAGE",
         PAYLOAD: {

@@ -130,7 +130,7 @@ function Navbar() {
             <UserProfile src={user?.photoURL} />
           ) : (
             <Link href='/auth/login'>
-              <button className='px-5 py-[5px] ring-2 outline-none ring-cblue text-white font-bold rounded-full text-center hover:bg-cblue animation-all duration-500'>
+              <button className='px-5 py-[5px] ring-2 outline-none ring-cblue text-white font-satoshiBold rounded-full text-center hover:bg-cblue animation-all duration-500'>
                 {loginState}
               </button>
             </Link>

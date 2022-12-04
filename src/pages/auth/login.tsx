@@ -4,6 +4,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/image";
+import classNames from "classnames";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
@@ -12,6 +13,9 @@ import { toast } from "react-toastify";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
 function login() {
+  const gline = classNames(
+    " w-[80%] h-[0.3rem] my-4 bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 "
+  );
   const googleProvider = new GoogleAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
   const handleGoogleLogin = async () => {
@@ -85,7 +89,8 @@ function login() {
                     <FcGoogle className='h-8 w-8 pr-1' /> Google
                   </button>
                   <div className='inline-flex justify-center items-center w-full'>
-                    <hr className='my-4 w-[14rem] h-px bg-gray-500 border-2 ' />
+                    {/* <hr className='my-4 w-[14rem] h-px bg-white border-2 ' /> */}
+                    <hr className={gline} />
                   </div>
                   <button
                     onClick={handleTwitterLogin}

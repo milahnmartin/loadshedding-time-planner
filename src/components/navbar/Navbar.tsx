@@ -87,15 +87,15 @@ function Navbar() {
               alt='Image of Logo'
             />
           </Link>
-          <h1 className='hidden font-bold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
+          <h1 className='hidden font-satoshiBold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
             LS PLANNER
           </h1>
         </div>
         <div className='h-full w-[70%] flex items-center space-x-5 navbarfont justify-evenly md:justify-end md:w-[50%] md:space-x-8 md:pr-5'>
-          <h1 className='font-bold font-Inter text-white tracking-wide transition-all duration-150 hover:text-cblue'>
+          <h1 className='font-bold font-satoshiBold text-white tracking-wide transition-all duration-150 hover:text-cblue'>
             <Link href='/'>Home</Link>
           </h1>
-          <h1 className='font-bold font-Inter text-white transition-all duration-150 hover:text-cblue'>
+          <h1 className='font-bold font-satoshiBold text-white transition-all duration-150 hover:text-cblue'>
             <Link href='/docs'>Docs</Link>
           </h1>
 

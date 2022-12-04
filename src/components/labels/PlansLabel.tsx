@@ -43,10 +43,10 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
           <span className='flex items-center justify-center  flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
             {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
-            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+            <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN ID:
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-bold pb-5'>
+            <h1 className='text-blue-200 text-center text-lg font-satoshiBold pb-5'>
               {plan_id}
             </h1>
           </span>
@@ -54,20 +54,17 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
           <span className='flex items-center justify-center flex-col'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
             {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
-            <h1 className='text-center font-Inter font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+            <h1 className='text-center font-satoshiBlack font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN CREATED:
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-bold '>
+            <h1 className='text-blue-200 text-center text-lg font-satoshiBold '>
               {new Date(plan_createdAt).toUTCString()}
             </h1>
           </span>
 
           {plan_lsTimes.map((time: string) => {
             return (
-              <h1
-                className='text-blue-500 text-center font-black text-lg'
-                key={uuidv1()}
-              >
+              <h1 className='text-blue-500 text-center font-black text-lg' key={uuidv1()}>
                 {time}
               </h1>
             );
@@ -91,7 +88,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
           <Link href={`/dashboard/${plan_id}`}>
             <button className='relative flex items-center justify-center  w-[10rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
-                <span className='flex items-center justify-around'>
+                <span className='flex items-center justify-around font-satoshiBlack'>
                   View Plan
                   <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple' />
                 </span>

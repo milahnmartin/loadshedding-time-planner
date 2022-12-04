@@ -62,6 +62,10 @@ module.exports = {
 
     fontFamily: {
       Inter: ["var(--font-inter)", ...fontFamily.sans],
+      satoshi: ["Satoshi-Variable"],
+      satoshiItalic: ["Satoshi-BlackItalic"],
+      satoshiBlack: ["Satoshi-Black"],
+      satoshiBold: ["Satoshi-Bold"],
     },
   },
   plugins: [],

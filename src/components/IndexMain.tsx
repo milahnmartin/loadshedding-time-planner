@@ -48,7 +48,7 @@ const IndexMain = () => {
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
         id='index-main-trying'
-        className='text-center font-Inter text-5xl font-bold text-white md:text-8xl z-[1]'
+        className='text-center font-satoshi text-5xl font-bold text-white md:text-8xl z-[1]'
       >
         TRYING TO PLAN
       </h1>
@@ -57,7 +57,7 @@ const IndexMain = () => {
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'
-            className='text-transparent tracking-tightest w-fit bg-clip-text font-Inter text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
+            className='text-transparent tracking-tightest w-fit bg-clip-text font-satoshiItalic text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
           >
             <Typewriter
               typeSpeed={200}
@@ -70,7 +70,7 @@ const IndexMain = () => {
         <div className='w-full h-full flex items-center justify-center md:w-1/2 md:justify-start'>
           <span
             id='index-around'
-            className='px-2 tracking-widest w-fit italic font-Inter text-6xl font-black text-yellow-500 md:text-8xl'
+            className='px-2 tracking-widest font-satoshiBold w-fit font-s text-6xl text-yellow-500 md:text-8xl'
           >
             AROUND
           </span>
@@ -79,14 +79,14 @@ const IndexMain = () => {
 
       <h1
         id='index-main-loadshedding'
-        className='font-extrabold text-center font-Inter text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple px-2 md:text-8xl'
+        className='font-extrabold text-center font-satoshiBlack text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple px-2 md:text-8xl drop-shadow-lg'
       >
         LOADSHEDDING ?
       </h1>
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>
         <button
           onClick={handleNewPlan}
-          className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
+          className='relative inline-flex font-satoshiBold items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
         >
           NEW PLAN
           <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500 '>
@@ -95,7 +95,7 @@ const IndexMain = () => {
         </button>
 
         <Link href='/plans'>
-          <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
+          <button className='font-satoshiBold relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
             <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
               SAVED PLANS
             </span>

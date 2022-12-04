@@ -28,7 +28,7 @@ function NotificationModal({ inviteArray }: any) {
           />
         ))
       ) : (
-        <p className='font-Inter font-black text-xl'>NO INVITES</p>
+        <p className='font-satoshiBlack font-black text-xl'>NO INVITES</p>
       )}
     </div>
   );

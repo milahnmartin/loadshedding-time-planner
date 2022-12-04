@@ -1,14 +1,11 @@
-import { Inter } from "@next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppType } from "next/dist/shared/lib/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import "../styles/satoshi.css";
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = new QueryClient();
 

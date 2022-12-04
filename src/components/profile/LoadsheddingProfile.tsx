@@ -18,7 +18,7 @@ const gline = classNames(
 );
 
 const inputStyles = classNames(
-  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-bold font-Inter focus:outline-none focus:text-white "
+  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-satoshiBold focus:outline-none focus:text-white "
 );
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -87,8 +87,8 @@ const LoadsheddingProfile = () => {
       <div className='w-1/4 h-full flex items-center justify-center '>
         <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
           <div className='flex flex-col items-center h-full bg-slate-800 text-white rounded-lg p-4'>
-            <h1 className=' w-full text-center font-Inter font-black pb-8 tracking-wide text-2xl '>
-              CURRENT SAVED AREA:
+            <h1 className='w-full text-center font-satoshiBlack pb-8 text-2xl '>
+              CURRENT SET AREA:
             </h1>
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_sj0skmmg.json'
@@ -113,34 +113,34 @@ const LoadsheddingProfile = () => {
               <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center tracking-wide'>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <HiOutlineKey className='text-2xl align-center justify-center pt-[2px]' />
-                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                    <HiOutlineKey className='text-2xl align-center justify-center' />
+                    <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA ID:
                     </h1>
                   </span>
-                  <h1 className='text-blue-200 text-xl font-bold tracking-wide'>
+                  <h1 className='text-blue-200 text-xl font-satoshiBold tracking-wide'>
                     {SavedAreaData.id}
                   </h1>
                 </div>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <BiMap className='text-2xl align-center justify-center pt-[2px]' />
-                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                    <BiMap className='text-2xl align-center justify-center' />
+                    <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA REGION:
                     </h1>
                   </span>
-                  <h1 className='text-blue-200 text-xl font-bold'>
+                  <h1 className='text-blue-200 text-xl font-satoshiBold'>
                     {SavedAreaData.region}
                   </h1>
                 </div>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <HiOutlineMap className='text-2xl align-center justify-center pt-[2px]' />
-                    <h1 className='text-blue-500 text-xl font-black tracking-wide'>
+                    <HiOutlineMap className='text-2xl align-center justify-center' />
+                    <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA NAME:
                     </h1>
                   </span>
-                  <h1 className='text-blue-200 text-xl font-bold'>
+                  <h1 className='text-blue-200 text-xl font-satoshiBold'>
                     {SavedAreaData.name}
                   </h1>
                 </div>

@@ -10,13 +10,13 @@ function Footer() {
             <h1 className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               SOCIAL MEDIA
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/'>Discord</Link>
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/'>Twitter</Link>
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/'>Instagram</Link>
             </h1>
           </div>
@@ -24,13 +24,13 @@ function Footer() {
             <h1 className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               NAVIGATE
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/'>Home</Link>
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/plan/create'>Create New Plan</Link>
             </h1>
-            <h1 className='font-black hover:font-bold hover:animate-pulse'>
+            <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
               <Link href='/docs'>Docs</Link>
             </h1>
           </div>
@@ -38,7 +38,7 @@ function Footer() {
         <hr className='my-4 mx-auto w-[60%] h-[0.2rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 md:my-8' />
         <div className='flex flex-col w-full items-center justify-center space-y-5 md:space-x-8 md:flex-row md:space-y-0'>
           <Image width={60} height={60} src={Logo} alt='Image Of logo' />
-          <h1 className='font-Inter font-bold text-2xl tracking-widest text-center'>
+          <h1 className='font-satoshiBlack text-xl tracking-widest text-center'>
             &#169; LS PLANNER 2022
           </h1>
         </div>

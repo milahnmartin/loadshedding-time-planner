@@ -7,6 +7,7 @@ import Image from "next/image";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
+import { ImTwitter } from "react-icons/im";
 import { toast } from "react-toastify";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
@@ -68,29 +69,29 @@ function login() {
           </div>
         </div>
         <div className='w-full flex items-center justify-center flex-col md:3/4'>
-          <div className=' h-fit pb-2 flex items-center justify-center text-center'>
+          {/* <div className=' h-fit pb-2 flex items-center justify-center text-center'>
             <h1 className=' text-center font-extrabold text-4xl animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple pb-4 md:text-6xl'>
               TIME TO LOG IN
             </h1>
-          </div>
+          </div> */}
           <div className='h-2/4 flex items-center justify-center'>
             <div className='rounded-xl w-[20rem] h-[20rem] mx-auto bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
               <div className='flex flex-col justify-between h-full bg-slate-800 text-white rounded-lg p-4 '>
                 <div className='h-full w-full flex flex-col items-center justify-center space-y-4'>
                   <button
                     onClick={handleGoogleLogin}
-                    className='bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
+                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
                   >
-                    <FcGoogle className='h-8 w-8' /> GOOGLE
+                    <FcGoogle className='h-8 w-8 pr-1' /> Google
                   </button>
                   <div className='inline-flex justify-center items-center w-full'>
                     <hr className='my-4 w-[14rem] h-px bg-gray-500 border-2 ' />
                   </div>
                   <button
                     onClick={handleTwitterLogin}
-                    className='bg-white px-3 py-1 text-black font-bold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
+                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
                   >
-                    <SiTwitter className='h-8 w-8' /> Twitter
+                    <ImTwitter className='h-8 w-8 text-blue-400 pr-1' /> Twitter
                   </button>
                 </div>
               </div>

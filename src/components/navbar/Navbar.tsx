@@ -87,7 +87,7 @@ function Navbar() {
               alt='Image of Logo'
             />
           </Link>
-          <h1 className='hidden font-satoshiBold text-white text-3xl tracking-wide ml-2 md:inline pl-2'>
+          <h1 className='hidden font-satoshiBold text-white tracking-tight text-3xl ml-2 md:inline pl-2'>
             LS PLANNER
           </h1>
         </div>

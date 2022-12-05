@@ -48,7 +48,7 @@ const IndexMain = () => {
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
         id='index-main-trying'
-        className='text-center font-satoshi text-5xl font-bold text-white md:text-8xl z-[1]'
+        className='text-center font-satoshiBold text-5xl tracking-tighter text-white md:text-8xl z-[1]'
       >
         TRYING TO PLAN
       </h1>
@@ -57,7 +57,7 @@ const IndexMain = () => {
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'
-            className='text-transparent tracking-tightest w-fit bg-clip-text font-satoshiItalic text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
+            className='text-transparent tracking-wide w-fit bg-clip-text font-satoshi text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
           >
             <Typewriter
               typeSpeed={200}

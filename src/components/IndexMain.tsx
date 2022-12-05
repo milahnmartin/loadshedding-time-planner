@@ -86,10 +86,10 @@ const IndexMain = () => {
       <div className='flex w-full h-auto items-center justify-center pt-10 flex-col md:flex-row '>
         <button
           onClick={handleNewPlan}
-          className='relative inline-flex font-satoshiBold items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
+          className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white '
         >
-          NEW PLAN
-          <div className='relative left-[6px] top-[.5px] transition-all duration-250 group-hover:text-yellow-500 '>
+          New Plan
+          <div className='relative left-[6px] top-[1px] transition-all duration-250 group-hover:text-yellow-500'>
             {arrowIcon}
           </div>
         </button>
@@ -97,7 +97,7 @@ const IndexMain = () => {
         <Link href='/plans'>
           <button className='font-satoshiBold relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>
             <span className='relative px-5 py-2.5 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
-              SAVED PLANS
+              Saved Plans
             </span>
           </button>
         </Link>

@@ -1,20 +1,19 @@
 import Footer from "@comps/Footer";
 import Navbar from "@comps/navbar/Navbar";
 import { Player } from "@lottiefiles/react-lottie-player";
+import classNames from "classnames";
 import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/image";
-import classNames from "classnames";
 import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
-import { SiTwitter } from "react-icons/si";
 import { ImTwitter } from "react-icons/im";
 import { toast } from "react-toastify";
 import { auth } from "../../utils/firebase-config";
 import Logo from "../assets/Logov3.png";
 function login() {
   const gline = classNames(
-    " w-[80%] h-[0.3rem] my-4 bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 "
+    " mx-auto w-[80%] h-[0.3rem] my-4 bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 "
   );
   const googleProvider = new GoogleAuthProvider();
   const twitterProvider = new TwitterAuthProvider();
@@ -46,12 +45,12 @@ function login() {
         <div className='w-2/5 justify-end px-5 hidden md:flex'>
           <div className='w-full h-full flex items-center justify-center'>
             <Player
-              src='https://assets9.lottiefiles.com/packages/lf20_gjmecwii.json'
+              src='https://assets9.lottiefiles.com/private_files/lf30_quepwpqp.json'
               // className='player w-[400px] h-[400px] '
               style={{ height: "100%", width: "100%" }}
               autoplay
               loop
-              speed={0.5}
+              speed={1}
             />
           </div>
           <div className='h-full items-center justify-center '>
@@ -80,23 +79,22 @@ function login() {
           </div> */}
           <div className='h-2/4 flex items-center justify-center'>
             <div className='rounded-xl w-[20rem] h-[20rem] mx-auto bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-              <div className='flex flex-col justify-between h-full bg-slate-800 text-white rounded-lg p-4 '>
-                <div className='h-full w-full flex flex-col items-center justify-center space-y-4'>
+              <div className='h-full bg-slate-800 text-white rounded-lg p-4'>
+                <div className='h-full w-full flex flex-col items-center justify-evenly'>
                   <button
                     onClick={handleGoogleLogin}
-                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
+                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-evenly w-32 h-10 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/75'
                   >
-                    <FcGoogle className='h-8 w-8 pr-1' /> Google
+                    <FcGoogle size={20} /> Google
                   </button>
-                  <div className='inline-flex justify-center items-center w-full'>
-                    {/* <hr className='my-4 w-[14rem] h-px bg-white border-2 ' /> */}
+                  <div className='w-full'>
                     <hr className={gline} />
                   </div>
                   <button
                     onClick={handleTwitterLogin}
-                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-center w-32 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/25'
+                    className='bg-white px-3 py-1 text-black font-satoshiBold flex items-center justify-evenly w-32 h-10 rounded-md outline-none border-none transition-all duration-200 hover:bg-white/75'
                   >
-                    <ImTwitter className='h-8 w-8 text-blue-400 pr-1' /> Twitter
+                    <ImTwitter size={20} className=' text-blue-400' /> Twitter
                   </button>
                 </div>
               </div>

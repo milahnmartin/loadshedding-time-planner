@@ -45,12 +45,12 @@ function login() {
         <div className='w-2/5 justify-end px-5 hidden md:flex'>
           <div className='w-full h-full flex items-center justify-center'>
             <Player
-              src='https://assets9.lottiefiles.com/private_files/lf30_quepwpqp.json'
+              src='https://assets10.lottiefiles.com/packages/lf20_xaxnRHNB4U.json'
               // className='player w-[400px] h-[400px] '
               style={{ height: "100%", width: "100%" }}
               autoplay
               loop
-              speed={1}
+              speed={0.7}
             />
           </div>
           <div className='h-full items-center justify-center '>

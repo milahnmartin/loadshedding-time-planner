@@ -147,17 +147,24 @@ const LoadsheddingProfile = () => {
               </div>
             ) : (
               <div className='w-full h-full flex items-center flex-col space-y-11 justify-center text-center font-Inter font-black tracking-wide'>
-                <h1 className='text-cblue font-Inter font-black text-xl tracking-wide'>
-                  NO SAVED AREA
-                </h1>
-                <button
-                  onClick={() => document.getElementById("areaSearch")?.focus()}
-                  className='relative inline-flex items-center justify-center p-0.5  w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-[1.15rem] group bg-gradient-to-br from-c2aqua via-c2blue to-c2purple group-hover:from-c2aqua group-hover:via-c2blue group-hover:to-c2purple hover:text-white dark:text-white '
-                >
-                  <span className='relative px-5 py-2.5 transition-all ease-in duration-200  w-[9.5rem] h-[2.5rem] bg-white dark:bg-gray-900 rounded-[1rem] group-hover:bg-opacity-0 font-bold'>
-                    SET AREA
-                  </span>
-                </button>
+                <span className='flex flex-col items-center w-full h-fit pt-2 pb-4'>
+                  <Player
+                    src='https://assets3.lottiefiles.com/private_files/lf30_17bvu2tk.json'
+                    className='player w-[110px] h-[110px] '
+                    autoplay
+                    loop
+                    speed={0.5}
+                  />
+                  <h1 className='text-2xl font-satoshiBlack pb-4'>NO SAVED AREA</h1>
+                  <button
+                    onClick={() => document.getElementById("areaSearch")?.focus()}
+                    className='relative inline-flex items-center justify-center p-0.5  w-[10rem] h-[3rem] overflow-hidden text-sm font-medium text-gray-900 rounded-[1.15rem] group bg-gradient-to-br from-c2aqua via-c2blue to-c2purple group-hover:from-c2aqua group-hover:via-c2blue group-hover:to-c2purple hover:text-white dark:text-white '
+                  >
+                    <span className='relative px-5 py-2.5 transition-all ease-in duration-200  w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-[1rem] group-hover:bg-opacity-0 font-bold'>
+                      SET AREA
+                    </span>
+                  </button>
+                </span>
               </div>
             )}
           </div>

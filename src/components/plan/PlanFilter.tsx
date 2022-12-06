@@ -21,6 +21,7 @@ function PlanFilter({
   onFilter,
   invitedData,
   removeUserCB,
+  refetchPlanData,
 }: PlanFilterType) {
   const [loggedInUser, loading] = useAuthState(auth);
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
@@ -93,7 +94,7 @@ function PlanFilter({
         user_plan_Invites: [
           ...user_plan_Invites,
           {
-            plan_id: router.query.id,
+            plan_id: router.query.plan_id,
             invitedBy: [
               loggedInUser?.uid,
               loggedInUser?.email ? loggedInUser?.email : loggedInUser?.displayName,
@@ -121,6 +122,8 @@ function PlanFilter({
     }
 
     toast.success("User Succesfully Invited");
+    await refetchPlanData!();
+    inviteInputRef!.current!.value = "";
   };
 
   const handleInviteMember = async () => {

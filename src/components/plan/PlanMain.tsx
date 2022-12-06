@@ -156,6 +156,7 @@ export default function PlanMain() {
           filterSettings={state.filterInputs}
           onFilter={handleFilterChange}
           removeUserCB={handleUserRemove}
+          refetchPlanData={planRefetch}
         />
       )}
 

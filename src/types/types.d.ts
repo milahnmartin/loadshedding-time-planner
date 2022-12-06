@@ -27,7 +27,7 @@ export type PlanFilterType = {
   members: FilterData.members;
   teams: FilterData.teams;
   filterSettings?: FilterTime;
-  invitedData?: PlanInvitedType;
+  invitedData?: string[];
   onFilter: (filterData: FilterData) => void;
   removeUserCB: (userId: string) => void;
 };

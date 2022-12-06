@@ -20,11 +20,11 @@ export default function App() {
       mapSamples: 16000,
       mapBrightness: 10,
       baseColor: [0.1, 0.2, 0.5],
-      markerColor: [0.1, 0.8, 1],
+      markerColor: [255, 119, 0],
       glowColor: [1, 1, 1],
       markers: [
         // longitude latitude
-        { location: [-30.0, 24.0], size: 0.1, markerColor: [1, 1, 1] },
+        { location: [-30.0, 24.0], size: 0.1, markerColor: [72, 0, 255] },
       ],
       onRender: (state) => {
         // Called on every animation frame.

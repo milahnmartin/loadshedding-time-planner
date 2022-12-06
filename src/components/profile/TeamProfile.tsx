@@ -9,6 +9,13 @@ const TeamProfile = () => {
         <div className='rounded-xl w-[45rem] h-fit bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
           <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
             <span className='flex flex-col items-center w-full h-fit pt-2 pb-4'>
+              <Player
+                src='https://assets9.lottiefiles.com/packages/lf20_cmaqoazd.json'
+                className='player w-[300px] h-[300px] '
+                autoplay
+                loop
+                speed={0.5}
+              />
               <h1 className='text-2xl font-satoshiBlack pb-4'>
                 TEAM INVITES AND SETTINGS COMMING SOON
               </h1>

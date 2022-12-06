@@ -171,7 +171,9 @@ export default function PlanMain() {
           {JSON.stringify(state.currentLoadSheddingStage)}
         </h1>
 
-        <pre className='text-pink-500'>{JSON.stringify(planData)}</pre>
+        <pre className='text-pink-500 whitespace-pre-wrap'>
+          {JSON.stringify(planData)}
+        </pre>
         <pre className='text-white whitespace-pre-wrap'>{JSON.stringify(state)}</pre>
       </div>
     </div>

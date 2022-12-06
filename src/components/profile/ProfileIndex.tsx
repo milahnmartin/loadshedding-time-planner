@@ -39,7 +39,7 @@ const ProfileIndex = () => {
           <div className='h-fit flex flex-col items-center justify-center gap-8 text-center'>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <span className='flex items-center space-x-1'>
-                <FaUserCircle className='text-2xl align-center justify-center' />
+                <FaUserCircle className='text-2xl align-center justify-center ' />
                 <h3 className='text-2xl font-satoshiBlack text-slate-300 align-center justify-center'>
                   USERNAME:
                 </h3>
@@ -48,7 +48,7 @@ const ProfileIndex = () => {
             </div>
             <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
               <span className='flex items-center space-x-1'>
-                <HiOutlineKey className='text-2xl align-center justify-center' />
+                <HiOutlineKey className='text-2xl align-center justify-center text-yellow-500' />
                 <h3 className='text-2xl font-satoshiBlack text-slate-300 align-center justify-center'>
                   ID:
                 </h3>
@@ -66,7 +66,7 @@ const ProfileIndex = () => {
             </div>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <span className='flex items-center space-x-1'>
-                <MdOutlineMail className='text-2xl align-center justify-center' />
+                <MdOutlineMail className='text-2xl align-center justify-center text-red-600' />
                 <h3 className='text-2xl font-satoshiBlack text-slate-300'>
                   INVITE NAME:
                 </h3>

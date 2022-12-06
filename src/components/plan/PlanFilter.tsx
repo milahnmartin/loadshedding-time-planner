@@ -1,11 +1,15 @@
 import RedLabel from "@comps/labels/RedLabel";
 import { Player } from "@lottiefiles/react-lottie-player";
+import type { FilterTime, IInviteData, PlanFilterType } from "@lstypes/types";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 import { ChangeEvent, useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
-import type { FilterTime, PlanFilterType } from "../../types/types";
 const filterInputClassNames = classNames(
   "rounded-xl px-6 py-2 text-center bg-slate-500 text-white font-inter shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
 );
@@ -17,14 +21,16 @@ function PlanFilter({
   onFilter,
   invitedData,
   removeUserCB,
+  refetchPlanData,
 }: PlanFilterType) {
+  const [loggedInUser, loading] = useAuthState(auth);
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
   const [inputData, setInputData] = useState<FilterTime>({
     startDate: filterSettings?.startDate,
     startTime: filterSettings?.startTime,
     endTime: filterSettings?.endTime,
   } as FilterTime);
-
+  const router = useRouter();
   const handleFilterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onFilter({
@@ -40,13 +46,100 @@ function PlanFilter({
 
   const inviteInputRef = useRef<HTMLInputElement>(null);
 
-  const handleInviteMember = () => {
+  const configureUserInviteForInfo = async (invite_id: string) => {
+    if (!invite_id) {
+      toast.error("Could not find invite");
+      return;
+    }
+    const { data: userData, error: userError } = await supabase
+      .from("user_info")
+      .select(`user_id,user_email,user_sepushID,user_plan_Invites,user_weekLSTimes`)
+      .or(`user_id.eq.${invite_id},user_email.eq.${invite_id}`);
+
+    if (userError) {
+      toast.error("Something Went Wrong While Fetching User Info");
+      return;
+    }
+
+    if (userData.length === 0) {
+      toast.warning("User Does Not Exist");
+      return;
+    }
+
+    const {
+      user_id,
+      user_email,
+      user_sepushID,
+      user_plan_Invites,
+      user_weekLSTimes,
+    }: any = userData[0];
+
+    const userAlreadyInvited: boolean = user_plan_Invites.find((data: IInviteData) => {
+      return data.plan_id === router.query.id;
+    });
+
+    if (userAlreadyInvited) {
+      toast.warning("User Already Invited");
+      return;
+    }
+
+    if (!user_sepushID) {
+      toast.warning("User has not added their loadshedding area yet");
+      return;
+    }
+
+    const { error: inviteError } = await supabase
+      .from("user_info")
+      .update({
+        user_plan_Invites: [
+          ...user_plan_Invites,
+          {
+            plan_id: router.query.plan_id,
+            invitedBy: [
+              loggedInUser?.uid,
+              loggedInUser?.email ? loggedInUser?.email : loggedInUser?.displayName,
+            ],
+          },
+        ],
+      })
+      .eq("user_id", user_id);
+
+    if (inviteError) {
+      toast.error("Something Went Wrong While Inviting User");
+      return;
+    }
+
+    const { error: planInvitedDataError } = await supabase
+      .from("user_plans")
+      .update({
+        plan_InvitedData: [...invitedData!, user_id],
+      })
+      .eq("plan_id", router.query.plan_id);
+
+    if (planInvitedDataError) {
+      toast.error("Something Went Wrong While Inviting User");
+      return;
+    }
+
+    toast.success("User Succesfully Invited");
+    await refetchPlanData!();
+    inviteInputRef!.current!.value = "";
+  };
+
+  const handleInviteMember = async () => {
     const inviteInput = inviteInputRef.current?.value.trim();
     if (!inviteInput || inviteInput.length === 0) {
       toast.warning("Please enter a valid UUID or email");
       inviteInputRef.current?.focus();
       return;
     }
+    const plan_id = router.query.plan_id;
+    if (!plan_id) {
+      toast.error("The Plan ID Could not be found");
+      return;
+    }
+
+    await configureUserInviteForInfo(inviteInput);
   };
   return (
     <div
@@ -147,7 +240,7 @@ function PlanFilter({
         </div>
 
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-          {invitedData?.invitedUsers?.map((member: string) => (
+          {invitedData?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
               args={false}
@@ -157,14 +250,7 @@ function PlanFilter({
           ))}
         </div>
         <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-          {invitedData?.invitedTeams?.map((team: string) => (
-            <RedLabel
-              key={uuidv1()}
-              args={true}
-              data={team}
-              cb={() => console.log("REMOVED")}
-            />
-          ))}
+          {JSON.stringify(invitedData)}
         </div>
       </div>
     </div>

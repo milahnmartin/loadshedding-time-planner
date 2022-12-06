@@ -82,6 +82,10 @@ const InviteMain = () => {
       await refetchInvites();
       return;
     }
+    console.log({
+      removePlan: removePlanStatus,
+      updatedUserPlanError: updatedUserPlanError,
+    });
     toast.error("Could not accept invite");
   };
   return (

@@ -50,7 +50,7 @@ function login() {
               style={{ height: "100%", width: "100%" }}
               autoplay
               loop
-              speed={0.7}
+              speed={0.6}
             />
           </div>
           <div className='h-full items-center justify-center '>

@@ -113,7 +113,7 @@ const LoadsheddingProfile = () => {
               <div className='w-full h-full flex items-center flex-col space-y-6 justify-center text-center tracking-wide'>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <HiOutlineKey className='text-2xl align-center justify-center' />
+                    <HiOutlineKey className='text-2xl align-center justify-center text-yellow-600' />
                     <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA ID:
                     </h1>
@@ -124,7 +124,7 @@ const LoadsheddingProfile = () => {
                 </div>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <BiMap className='text-2xl align-center justify-center' />
+                    <BiMap className='text-2xl align-center justify-center text-red-500' />
                     <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA REGION:
                     </h1>
@@ -135,7 +135,7 @@ const LoadsheddingProfile = () => {
                 </div>
                 <div>
                   <span className='flex items-center justify-center space-x-1'>
-                    <HiOutlineMap className='text-2xl align-center justify-center' />
+                    <HiOutlineMap className='text-2xl align-center justify-center text-transparent text-green-300' />
                     <h1 className='text-blue-500 text-xl font-satoshiBlack tracking-wide'>
                       AREA NAME:
                     </h1>

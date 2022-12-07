@@ -103,7 +103,7 @@ export default function PlanMain() {
       toast.error("Error removing member");
       return;
     }
-    planRefetch();
+    await planRefetch();
   };
 
   const {

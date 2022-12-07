@@ -194,7 +194,7 @@ function PlanFilter({
                   src='https://assets4.lottiefiles.com/packages/lf20_lk80fpsm.json'
                   className='h-8 w-8'
                   autoplay
-                  speed={0.7}
+                  speed={0.8}
                 />
               )}
             </div>

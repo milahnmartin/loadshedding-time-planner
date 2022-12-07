@@ -80,11 +80,18 @@ function PlanFilter({
 
     if (userAlreadyInvited) {
       toast.warning("User Already Invited");
+      inviteInputRef!.current!.focus();
       return;
     }
 
     if (!user_sepushID) {
-      toast.warning("User has not added their loadshedding area yet");
+      toast.warning(
+        `${user_email} has not linked their loadshedding area yet ! This Can be Done in Profile Settings.`,
+        {
+          autoClose: 10000,
+        }
+      );
+      inviteInputRef!.current!.focus();
       return;
     }
 

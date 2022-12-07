@@ -48,7 +48,7 @@ function PlanFilter({
 
   const configureUserInviteForInfo = async (invite_id: string) => {
     if (!invite_id) {
-      toast.error("Could not find invite");
+      toast.error("Error Occured When Trying To Invite, no invite id");
       return;
     }
     const { data: userData, error: userError } = await supabase
@@ -75,7 +75,7 @@ function PlanFilter({
     }: any = userData[0];
 
     const userAlreadyInvited: boolean = user_plan_Invites.find((data: IInviteData) => {
-      return data.plan_id === router.query.id;
+      return data.plan_id === router.query.plan_id;
     });
 
     if (userAlreadyInvited) {
@@ -127,18 +127,17 @@ function PlanFilter({
   };
 
   const handleInviteMember = async () => {
+    const plan_id = router.query.plan_id;
+    if (!plan_id) {
+      toast.error("The Plan ID Could not be found");
+      return;
+    }
     const inviteInput = inviteInputRef.current?.value.trim();
     if (!inviteInput || inviteInput.length === 0) {
       toast.warning("Please enter a valid UUID or email");
       inviteInputRef.current?.focus();
       return;
     }
-    const plan_id = router.query.plan_id;
-    if (!plan_id) {
-      toast.error("The Plan ID Could not be found");
-      return;
-    }
-
     await configureUserInviteForInfo(inviteInput);
   };
   return (

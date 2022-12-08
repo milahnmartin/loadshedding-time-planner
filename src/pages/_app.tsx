@@ -11,7 +11,7 @@ const gradient = new Gradient() as any;
 const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = new QueryClient();
 
-  const ref = useRef();
+  const ref = useRef() as any;
   useEffect(() => {
     if (ref.current) {
       console.log(ref);

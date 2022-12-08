@@ -21,7 +21,9 @@
       "@helpers/*": ["./src/helpers/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@labels/*": ["./src/components/labels/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@docs/*": ["./src/components/docs/*"],
+      "@assets/*": ["./src/pages/assets/*"]
     }
   },
 

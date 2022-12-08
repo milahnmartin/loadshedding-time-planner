@@ -1,4 +1,4 @@
-import DocsContent from "@comps/DocsContent";
+import DocsContent from "@comps/docs/DocsContent";
 import Footer from "@comps/Footer";
 import Navbar from "@comps/navbar/Navbar";
 import Head from "next/head";

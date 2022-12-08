@@ -141,3 +141,12 @@ scrollbar-width {
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
+#gradient-canvas {
+  width: 100%;
+  height: 100%;
+  --gradient-color-1: #3c79f0;
+  --gradient-color-2: #6ac6b4;
+  --gradient-color-3: #431e9a;
+  --gradient-color-4: #9333ea;
+}

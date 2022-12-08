@@ -143,6 +143,7 @@ scrollbar-width {
 }
 
 #gradient-canvas {
+  z-index: -1;
   width: 100%;
   height: 100%;
   --gradient-color-1: #3c79f0;

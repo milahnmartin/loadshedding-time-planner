@@ -20,15 +20,18 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, [ref]);
 
   return (
-    <canvas className='w-full h-[90%]' id='gradient-canvas' data-transition-in>
-      <div ref={ref} className='ref'>
-        <QueryClientProvider client={queryClient}>
-          <ToastContainer position='bottom-right' />
-          <Component ref={ref} {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </div>
-    </canvas>
+    <div ref={ref} className='w-full h-[90vh]'>
+      <canvas
+        className='w-full h-[100%] absolute'
+        id='gradient-canvas'
+        data-transition-in
+      />
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer position='bottom-right' />
+        <Component ref={ref} {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </div>
   );
 };
 

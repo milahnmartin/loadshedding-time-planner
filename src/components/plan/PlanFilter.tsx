@@ -10,6 +10,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
+
+enum LabelType {
+  authorized,
+  invited,
+  invitedPending,
+}
 const filterInputClassNames = classNames(
   "rounded-xl px-6 py-2 text-center bg-slate-500 text-white font-inter shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
 );
@@ -211,7 +217,7 @@ function PlanFilter({
           {members?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
-              args={false}
+              args={LabelType.authorized}
               data={member}
               cb={() => removeUserCB(member)}
             />
@@ -221,7 +227,7 @@ function PlanFilter({
           {teams?.map((team: string) => (
             <RedLabel
               key={uuidv1()}
-              args={true}
+              args={LabelType.authorized}
               data={team}
               cb={() => removeUserCB(team)}
             />
@@ -249,7 +255,7 @@ function PlanFilter({
           {invitedData?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
-              args={false}
+              args={LabelType.invited}
               data={member}
               cb={() => console.log("YES")}
             />

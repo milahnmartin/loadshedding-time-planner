@@ -130,18 +130,23 @@ export default function PlanMain() {
   useEffect(() => {
     if (planLoading) return;
     (async () => {
-      const { data, error } = await supabase
+      const { data: emailData, error: errorData } = await supabase
         .from("user_info")
         .select("user_id,user_email,user_weekLSTimes")
         .in("user_email", planData?.plan_authorizedUsers);
 
-      if (error) {
+      const { data: uidData, error: uidError } = await supabase
+        .from("user_info")
+        .select("user_id,user_email,user_weekLSTimes")
+        .in("user_id", planData?.plan_authorizedUsers);
+
+      if (errorData || uidError) {
         toast.error("Error fetching authorized users");
         return;
       }
       dispatch({
         TYPE: "SET_LS_USERS_TIME",
-        PAYLOAD: data,
+        PAYLOAD: [...emailData, ...uidData],
       });
     })();
   }, [planLoading]);
@@ -174,7 +179,9 @@ export default function PlanMain() {
         <pre className='text-pink-500 whitespace-pre-wrap'>
           {JSON.stringify(planData)}
         </pre>
-        <pre className='text-white whitespace-pre-wrap'>{JSON.stringify(state)}</pre>
+        <pre className='text-white whitespace-pre-wrap font-satoshiBold'>
+          {JSON.stringify(state.active_member_times)}
+        </pre>
       </div>
     </div>
   );

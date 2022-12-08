@@ -24,8 +24,34 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel='icon' href='/Logov3.png' />
-          <link rel='stylesheet' href='/src/styles/satoshi.css' />
-          <link rel='stylesheet' href='/src/styles/globals.css' />
+          <link
+            ref='preload'
+            href='/fonts/Satoshi-Bold.woff'
+            as='font'
+            type='font/woff'
+            crossOrigin=''
+          />
+          <link
+            ref='preload'
+            href='/fonts/Satoshi-Variable.woff'
+            as='font'
+            type='font/woff'
+            crossOrigin=''
+          />
+          <link
+            ref='preload'
+            href='/fonts/Satoshi-Black.woff'
+            as='font'
+            type='font/woff'
+            crossOrigin=''
+          />
+          <link
+            ref='preload'
+            href='/fonts/Satoshi-BlackItalic.woff'
+            as='font'
+            type='font/woff'
+            crossOrigin=''
+          />
         </Head>
         <body>
           <Main />

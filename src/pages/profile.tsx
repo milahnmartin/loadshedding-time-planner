@@ -39,8 +39,8 @@ const plans: NextPage = () => {
               onClick={() => setCurrentPage("profile")}
               className={
                 currentPage === "profile"
-                  ? "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                  : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  ? "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  : "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
               <h1 className='font-satoshiBold text-white text-center'>PROFILE DETAILS</h1>
@@ -51,8 +51,8 @@ const plans: NextPage = () => {
               onClick={() => setCurrentPage("loadshedding")}
               className={
                 currentPage === "loadshedding"
-                  ? "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                  : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  ? "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  : "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
               <h1 className='font-satoshiBold text-white text-center'>
@@ -65,8 +65,8 @@ const plans: NextPage = () => {
               onClick={() => setCurrentPage("team")}
               className={
                 currentPage === "team"
-                  ? "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                  : "w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  ? "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                  : "w-full h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
               }
             >
               <h1 className='font-satoshiBold text-white text-center'>TEAM SETTINGS</h1>

@@ -23,7 +23,7 @@ function DocsContent() {
     }
   };
   return (
-    <div className='h-[80%] flex mt-[3.5rem]  '>
+    <div className='h-[80%] flex mt-[3.5rem] pr-4 '>
       <div className='w-1/3 justify-end px-5 hidden md:flex '>
         <div className='w-full h-full flex flex-col items-center justify-center space-y-8 p-5 '>
           <div

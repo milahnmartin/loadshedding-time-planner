@@ -5,7 +5,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 import "../styles/satoshi.css";
-
 const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = new QueryClient();
 

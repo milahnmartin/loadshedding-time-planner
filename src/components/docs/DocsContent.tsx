@@ -30,7 +30,11 @@ function DocsContent() {
             onClick={() => {
               setdocPage(DocPages.Introduction);
             }}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'
+            className={
+              docpage === DocPages.Introduction
+                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+            }
           >
             <h1 className='font-Inter font-black text-white text-center'>INTRODUCTION</h1>
           </div>
@@ -38,7 +42,11 @@ function DocsContent() {
             onClick={() => {
               setdocPage(DocPages.GettingStarted);
             }}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'
+            className={
+              docpage === DocPages.GettingStarted
+                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+            }
           >
             <h1 className='font-Inter font-black text-white text-center'>
               GETTING STARTED
@@ -48,7 +56,11 @@ function DocsContent() {
             onClick={() => {
               setdocPage(DocPages.HowToUse);
             }}
-            className='w-fit h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'
+            className={
+              docpage === DocPages.HowToUse
+                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
+            }
           >
             <h1 className='font-Inter font-black text-white text-center'>HOW TO USE</h1>
           </div>

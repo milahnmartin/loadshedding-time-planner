@@ -1,5 +1,4 @@
 import RedLabel from "@comps/labels/RedLabel";
-import { Player } from "@lottiefiles/react-lottie-player";
 import type { FilterTime, IInviteData, PlanFilterType } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
@@ -8,9 +7,9 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
-
 enum LabelType {
   authorized,
   invited,
@@ -200,14 +199,13 @@ function PlanFilter({
           >
             <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-yellow-500  group-hover:animate-pulse'>
               {!filterbuttonText ? (
-                <AiFillFilter />
+                <span className='flex items-center gap-2'>
+                  <AiFillFilter /> Filter
+                </span>
               ) : (
-                <Player
-                  src='https://assets4.lottiefiles.com/packages/lf20_lk80fpsm.json'
-                  className='h-8 w-8'
-                  autoplay
-                  speed={0.8}
-                />
+                <span className='flex items-center gap-2 text-lime-500'>
+                  <IoCheckmarkDoneCircleOutline fill='green' size={30} /> Applied
+                </span>
               )}
             </div>
           </button>

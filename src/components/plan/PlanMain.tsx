@@ -5,6 +5,7 @@ import supabase from "@utils/supabase-config";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
+
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "TOGGLE_FILTER":

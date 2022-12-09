@@ -1,8 +1,9 @@
+import Logo from "@assets/Logov3.png";
 import { Gradient } from "@helpers/Gradient.js";
-import { Player } from "@lottiefiles/react-lottie-player";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppType } from "next/dist/shared/lib/utils";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,14 +31,17 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   if (isLoading) {
     return (
-      <div className='w-screen h-screen flex items-center justify-center bg-slate-700'>
-        <Player
-          src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
-          className='player w-[30%] h-[30%] '
-          autoplay
-          loop
-          speed={0.5}
+      <div className='w-screen h-screen flex flex-col items-center justify-center bg-slate-800 gap-4'>
+        <Image
+          className='cursor-pointer animate-spin'
+          height={155}
+          width={155}
+          src={Logo}
+          alt='Image of Logo'
         />
+        <h1 className='font-satoshiBold text-white tracking-widest text-5xl animate-pulse'>
+          LS PLANNER
+        </h1>
       </div>
     );
   }

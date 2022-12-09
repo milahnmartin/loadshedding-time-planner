@@ -155,7 +155,7 @@ function PlanFilter({
   return (
     <div
       id='dashboard-filter'
-      className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-600 rounded-sm'
+      className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm'
     >
       <div className='flex flex-col h-full w-1/2'>
         <form

@@ -1,3 +1,4 @@
+import Logo from "@assets/Logov3.png";
 import UserProfile from "@comps/profile/UserProfile";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
@@ -8,9 +9,17 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
-import Logo from "../../pages/assets/Logov3.png";
-function Navbar() {
+type NavbarProps = {
+  dashboard?: boolean;
+  filterState?: {
+    filter: boolean;
+    setshowfilter: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+};
+
+function Navbar({ dashboard, filterState }: NavbarProps) {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
 
@@ -126,6 +135,15 @@ function Navbar() {
               />
             }
           </span>
+          {dashboard && (
+            <IoFilterOutline
+              title='Filter Data'
+              className='text-white cursor-pointer hover:text-cblue transition-all duration-150'
+              fill='white'
+              size={20}
+              onClick={() => filterState?.setshowfilter(!filterState?.filter)}
+            />
+          )}
           {user && !loading && user?.photoURL ? (
             <UserProfile src={user?.photoURL} />
           ) : (

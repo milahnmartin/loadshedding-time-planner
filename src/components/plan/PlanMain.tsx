@@ -8,11 +8,6 @@ import { toast } from "react-toastify";
 
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
-    case "TOGGLE_FILTER":
-      return {
-        ...state,
-        filter: !state.filter,
-      };
     case "SET_FILTER_DATA":
       return {
         ...state,
@@ -57,10 +52,9 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
       };
   }
 };
-export default function PlanMain() {
+export default function PlanMain({ filterState }: any) {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
-    filter: false,
     member_times: [],
     active_member_times: [],
     team_times: [],
@@ -154,7 +148,7 @@ export default function PlanMain() {
 
   return (
     <div className='w-full h-full relative'>
-      {state.filter && (
+      {filterState && (
         <PlanFilter
           members={planData?.plan_authorizedUsers}
           teams={planData?.plan_authorizedTeams}
@@ -167,12 +161,6 @@ export default function PlanMain() {
       )}
 
       <div className='flex flex-col h-full w-6/6'>
-        <button
-          className='p-4 bg-orange-400 text-black rounded-xl text-2xl font-Inter'
-          onClick={() => dispatch({ TYPE: "TOGGLE_FILTER" })}
-        >
-          TOGGLE
-        </button>
         <h1 className='text-white text-sm font-black'>
           {JSON.stringify(state.currentLoadSheddingStage)}
         </h1>

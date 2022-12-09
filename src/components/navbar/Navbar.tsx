@@ -9,8 +9,8 @@ import Link from "next/link";
 import Router from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BiHide, BiShow } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { IoFilterOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 type NavbarProps = {
@@ -150,11 +150,17 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
               />
             }
           </span>
-          {dashboard && (
-            <IoFilterOutline
+          {dashboard && !filterState?.filter ? (
+            <BiShow
               title='Filter Data'
               className='text-white cursor-pointer hover:text-cblue transition-all duration-150'
-              fill='white'
+              size={20}
+              onClick={() => filterState?.setshowfilter(!filterState?.filter)}
+            />
+          ) : (
+            <BiHide
+              title='Filter Data'
+              className='text-white cursor-pointer hover:text-cblue transition-all duration-150'
               size={20}
               onClick={() => filterState?.setshowfilter(!filterState?.filter)}
             />

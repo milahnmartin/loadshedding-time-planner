@@ -5,12 +5,17 @@ import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import Logo from "../../pages/assets/Logov3.png";
+import { Gradient } from "@helpers/Gradient.js";
+
+const gradient = new Gradient() as any;
+
 function Navbar() {
+  const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
 
@@ -64,6 +69,7 @@ function Navbar() {
       throw new Error("Something went wrong");
     }
   };
+
   useEffect(() => {
     if (user && !loading) return setLoginState("Sign Out");
     if (!user && !loading) return setLoginState("Sign In");
@@ -74,9 +80,20 @@ function Navbar() {
     fetchUserInvites();
   }, [loading]);
 
+  useEffect(() => {
+    if (ref.current) {
+      gradient.initGradient("#gradient-canvas-nav");
+    }
+  }, [ref]);
+
   return (
-    <header className='sticky top-0 z-10'>
-      <div className='h-[5rem] flex'>
+    <header ref={ref} className='sticky top-0 z-10 '>
+      <canvas
+        className='w-full h-[100%] absolute'
+        id='gradient-canvas-nav'
+        data-transition-in
+      />
+      <div className='h-[5rem] flex '>
         <div className='noti-data h-full w-[30%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
             <Image

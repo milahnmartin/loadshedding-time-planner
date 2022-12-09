@@ -150,8 +150,8 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
               />
             }
           </span>
-          {dashboard ? (
-            !filterState?.filter ? (
+          {dashboard &&
+            (!filterState?.filter ? (
               <BiShow
                 title='Filter Data'
                 className='text-white cursor-pointer hover:text-cblue transition-all duration-150'
@@ -165,8 +165,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
                 size={20}
                 onClick={() => filterState?.setshowfilter(!filterState?.filter)}
               />
-            )
-          ) : null}
+            ))}
           {user && !loading && user?.photoURL ? (
             <UserProfile src={user?.photoURL} />
           ) : (

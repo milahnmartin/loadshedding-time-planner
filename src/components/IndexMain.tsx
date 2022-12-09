@@ -4,6 +4,7 @@ import supabase from "@utils/supabase-config";
 import Link from "next/link";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -28,22 +29,6 @@ const IndexMain = () => {
     }
     Router.push(`/dashboard/${newPlanUUID}`);
   };
-  const arrowIcon = (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      fill='none'
-      viewBox='0 0 24 24'
-      strokeWidth={1.5}
-      stroke='currentcolor'
-      className='w-6 h-6'
-    >
-      <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        d='M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3'
-      />
-    </svg>
-  );
   return (
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
@@ -89,8 +74,17 @@ const IndexMain = () => {
           className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mb-2 mr-2 w-[10rem] h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '
         >
           New Plan
-          <div className='relative left-[6px] top-[1px] transition-all duration-250 group-hover:text-orange-600'>
-            {arrowIcon}
+          <div className='group h-full flex items-center'>
+            <IoMdArrowRoundForward
+              id='my-arrow'
+              size={20}
+              className='hidden group-hover:inline transition-all duration-250'
+            />
+            <IoIosArrowForward
+              id='normal-arrow'
+              size={20}
+              className='group-hover:hidden transition-all duration-250'
+            />
           </div>
         </button>
 

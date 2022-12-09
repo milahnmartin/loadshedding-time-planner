@@ -102,6 +102,17 @@ scrollbar-width {
     transform: translateY(0);
   }
 }
+
+@keyframes ArrowIcon {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 /* [data-title]:hover:after {
   opacity: 1;
   transition: all 0.1s ease 0.5s;
@@ -170,4 +181,16 @@ scrollbar-width {
   --gradient-color-2: #1e293b;
   --gradient-color-3: #0f1a29;
   --gradient-color-4: #0f1a29;
+}
+
+#my-arrow {
+  animation-name: ArrowIcon;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+#normal-arrow {
+  animation-name: ArrowIcon;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }

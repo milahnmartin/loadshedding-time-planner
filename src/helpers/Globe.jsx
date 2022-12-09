@@ -11,15 +11,15 @@ export default function App() {
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: 700 * 2,
+      height: 700 * 2,
       phi: 0,
       theta: 0,
       dark: 1,
       diffuse: 1.2,
       mapSamples: 16000,
       mapBrightness: 10,
-      baseColor: [0.1, 0.2, 0.5],
+      baseColor: [0, 0.2, 1],
       markerColor: [255, 119, 0],
       glowColor: [1, 1, 1],
       markers: [
@@ -40,12 +40,13 @@ export default function App() {
   }, []);
 
   return (
-    <div className='absolute overflow-hidden'>
+    <div className='absolute overflow-hidden p-0'>
       <canvas
         ref={canvasRef}
         style={{
-          width: 600,
-          height: 600,
+          padding: 0,
+          width: 700,
+          height: 700,
         }}
       />
     </div>

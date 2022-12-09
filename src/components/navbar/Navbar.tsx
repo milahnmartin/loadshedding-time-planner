@@ -1,16 +1,18 @@
 import Logo from "@assets/Logov3.png";
 import UserProfile from "@comps/profile/UserProfile";
+import { Gradient } from "@helpers/Gradient.js";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+
 type NavbarProps = {
   dashboard?: boolean;
   filterState?: {
@@ -18,8 +20,9 @@ type NavbarProps = {
     setshowfilter: React.Dispatch<React.SetStateAction<boolean>>;
   };
 };
-
+const gradient = new Gradient() as any;
 function Navbar({ dashboard, filterState }: NavbarProps) {
+  const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
 
@@ -73,6 +76,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
       throw new Error("Something went wrong");
     }
   };
+
   useEffect(() => {
     if (user && !loading) return setLoginState("Sign Out");
     if (!user && !loading) return setLoginState("Sign In");
@@ -83,9 +87,20 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
     fetchUserInvites();
   }, [loading]);
 
+  useEffect(() => {
+    if (ref.current) {
+      gradient.initGradient("#gradient-canvas-nav");
+    }
+  }, [ref]);
+
   return (
-    <header className='sticky top-0 z-10'>
-      <div className='h-[5rem] flex'>
+    <header ref={ref} className='sticky top-0 z-10 '>
+      <canvas
+        className='w-full h-[100%] absolute'
+        id='gradient-canvas-nav'
+        data-transition-in
+      />
+      <div className='h-[5rem] flex '>
         <div className='noti-data h-full w-[30%] flex items-center justify-start pl-5 md:w-[50%]'>
           <Link href='/'>
             <Image

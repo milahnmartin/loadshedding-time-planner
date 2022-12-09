@@ -146,8 +146,26 @@ scrollbar-width {
   z-index: -1;
   width: 100%;
   height: 100%;
-  --gradient-color-1: #374151;
+  /* --gradient-color-1: #374151;
   --gradient-color-2: #111827;
   --gradient-color-3: #0f172a;
-  --gradient-color-4: #1e293b;
+  --gradient-color-4: #1e293b; */
+  --gradient-color-1: #252d3a;
+  --gradient-color-2: #151e2d;
+  --gradient-color-3: #252d3a;
+  --gradient-color-4: #151e2d;
+}
+
+#gradient-canvas-nav {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  /* --gradient-color-1: #6ee7b7;
+  --gradient-color-2: #3b82f6;
+  --gradient-color-3: #9333ea;
+  --gradient-color-4: #003ece; */
+  --gradient-color-1: #252d3a;
+  --gradient-color-2: #060d1b;
+  --gradient-color-3: #101a31;
+  --gradient-color-4: #151e2d;
 }

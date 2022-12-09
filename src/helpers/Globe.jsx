@@ -19,8 +19,8 @@ export default function App() {
       diffuse: 1.2,
       mapSamples: 16000,
       mapBrightness: 10,
-      baseColor: [0, 0.2, 1],
-      markerColor: [255, 119, 0],
+      baseColor: [0.1, 0.2, 0.5],
+      markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
       markers: [
         // longitude latitude

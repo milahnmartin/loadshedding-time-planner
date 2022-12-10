@@ -28,7 +28,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
   } = plan;
 
   return (
-    <div className='rounded-xl w-[25rem] h-[26rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[25rem] h-[26rem] bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit pt-2'>
           <Player

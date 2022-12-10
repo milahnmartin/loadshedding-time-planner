@@ -28,7 +28,6 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
   } = plan;
 
   return (
-    // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
     <div className='rounded-xl w-[25rem] h-[26rem] bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         <span className='flex flex-col items-center w-full h-fit pt-2'>
@@ -43,7 +42,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center' />
-            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+
             <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN ID:
             </h1>
@@ -54,7 +53,7 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
 
           <span className='flex items-center justify-center flex-col'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
-            {/* <h1 className='text-blue-500 text-center font-Inter font-black text-lg'> */}
+
             <h1 className='text-center font-satoshiBlack font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN CREATED:
             </h1>
@@ -91,7 +90,6 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
                 <span className='flex items-center justify-around font-satoshiBlack'>
                   View Plan
-                  {/* <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple' /> */}
                   <div className='group h-full flex items-center'>
                     <IoMdArrowRoundForward
                       id='my-arrow'
@@ -117,7 +115,6 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
               <span className='flex items-center justify-around'>
                 <MdDeleteForever
                   title='Delete Plan'
-                  // onClick={() => deleteCB(plan_id)}
                   className='cursor-pointer text-[1.3rem] align-center justify-center group-hover:text-red-700 transition-all duration-300'
                 />
               </span>

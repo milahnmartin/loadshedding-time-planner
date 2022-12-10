@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { BsCalendar } from "react-icons/bs";
 import { HiOutlineKey } from "react-icons/hi";
+import { IoMdArrowRoundForward, IoIosArrowForward } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { v1 as uuidv1 } from "uuid";
 type planData = {
@@ -90,7 +91,19 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
               <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
                 <span className='flex items-center justify-around font-satoshiBlack'>
                   View Plan
-                  <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple' />
+                  {/* <BiRightArrowAlt className='text-xl align-center justify-center relative top-[1px] group-hover:text-cpurple' /> */}
+                  <div className='group h-full flex items-center'>
+                    <IoMdArrowRoundForward
+                      id='my-arrow'
+                      size={20}
+                      className='hidden group-hover:inline transition-all duration-250'
+                    />
+                    <IoIosArrowForward
+                      id='normal-arrow'
+                      size={20}
+                      className='group-hover:hidden transition-all duration-250'
+                    />
+                  </div>
                 </span>
               </span>
             </button>

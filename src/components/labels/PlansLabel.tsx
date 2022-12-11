@@ -56,16 +56,15 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
   return (
     <div className='rounded-xl w-[25rem] h-[30rem] bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
-        <span className='flex flex-col items-center w-full h-fit pt-2'>
-          <Player
-            src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
-            className='player w-[115px] h-[115px] '
-            autoplay
-            loop
-            speed={0.8}
-          />
-
-          {plan_authorizedUsers.includes(user?.uid!) ? (
+        {plan_authorizedUsers.includes(user?.uid!) ? (
+          <span className='flex flex-col items-center w-full h-fit pt-2'>
+            <Player
+              src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
+              className='player w-[115px] h-[115px]'
+              autoplay
+              loop
+              speed={0.8}
+            />
             <span className='flex items-center justify-center flex-col'>
               <BsPeople className='text-[1.25rem] align-center justify-center' />
               <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
@@ -75,7 +74,16 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
                 INVITED PLAN
               </h1>
             </span>
-          ) : (
+          </span>
+        ) : (
+          <span className='flex flex-col items-center w-full h-fit pt-2'>
+            <Player
+              src='https://assets4.lottiefiles.com/packages/lf20_oo3N9WVAgU.json'
+              className='player w-[115px] h-[115px] pb-3'
+              autoplay
+              loop
+              speed={0.8}
+            />
             <span className='flex items-center justify-center flex-col'>
               <BsPerson className='text-[1.25rem] align-center justify-center' />
               <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
@@ -85,8 +93,8 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
                 YOUR PLAN
               </h1>
             </span>
-          )}
-        </span>
+          </span>
+        )}
 
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>

@@ -64,22 +64,30 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             loop
             speed={0.8}
           />
-          <span className='flex items-center justify-center flex-col'>
-            <BsPerson className='text-[1.25rem] align-center justify-center' />
-            <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
-              TYPE:
-            </h1>
-            {plan_authorizedUsers.includes(user?.uid!) ? (
+
+          {plan_authorizedUsers.includes(user?.uid!) ? (
+            <span className='flex items-center justify-center flex-col'>
+              <BsPeople className='text-[1.25rem] align-center justify-center' />
+              <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+                TYPE:
+              </h1>
               <h1 className='text-blue-200 text-center text-lg font-satoshiBold'>
                 INVITED PLAN
               </h1>
-            ) : (
-              <h1 className='text-blue-200 text-center text-lg font-satoshiBold'>
-                OWN PLAN
+            </span>
+          ) : (
+            <span className='flex items-center justify-center flex-col'>
+              <BsPerson className='text-[1.25rem] align-center justify-center' />
+              <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+                TYPE:
               </h1>
-            )}
-          </span>
+              <h1 className='text-blue-200 text-center text-lg font-satoshiBold'>
+                YOUR PLAN
+              </h1>
+            </span>
+          )}
         </span>
+
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center ' />

@@ -54,10 +54,10 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
   };
 
   return (
-    <div className='rounded-xl w-[25rem] h-[30rem] bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+    <div className='rounded-xl w-[25rem] h-[29.2rem] bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
       <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
         {plan_authorizedUsers.includes(user?.uid!) ? (
-          <span className='flex flex-col items-center w-full h-fit pt-2'>
+          <span className='flex flex-col items-center w-full h-fit pt-2 pb-4'>
             <Player
               src='https://assets10.lottiefiles.com/packages/lf20_qwATcU.json'
               className='player w-[115px] h-[115px]'
@@ -76,7 +76,7 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             </span>
           </span>
         ) : (
-          <span className='flex flex-col items-center w-full h-fit pt-2'>
+          <span className='flex flex-col items-center w-full h-fit pt-2 pb-4'>
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_oo3N9WVAgU.json'
               className='player w-[115px] h-[115px] pb-3 pt-2'
@@ -96,19 +96,19 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
           </span>
         )}
 
-        <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
-          <span className='flex items-center justify-center  flex-col'>
+        <div className='w-full h-fit flex items-center  flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col '>
+          <span className='flex items-center justify-center  flex-col pb-4'>
             <HiOutlineKey className='text-[1.15rem] align-center justify-center ' />
 
             <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               PLAN ID:
             </h1>
-            <h1 className='text-blue-200 text-center text-lg font-satoshiBold pb-5'>
+            <h1 className='text-blue-200 text-center text-lg font-satoshiBold '>
               {plan_id}
             </h1>
           </span>
 
-          <span className='flex items-center justify-center flex-col'>
+          <span className='flex items-center justify-center flex-col pb-4'>
             <BsCalendar className='text-[1.075rem] align-center justify-center' />
 
             <h1 className='text-center font-satoshiBlack font-black text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
@@ -127,6 +127,7 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             );
           })}
         </div>
+
         <div className='flex items-center justify-center w-full h-fit pb-4 space-x-4'>
           <Link href={`/dashboard/${plan_id}`}>
             <button className='relative flex items-center justify-center  w-[10rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '>

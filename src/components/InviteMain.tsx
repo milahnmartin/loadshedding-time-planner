@@ -41,9 +41,32 @@ const InviteMain = () => {
     }
     const removeAcceptedPlanStatus = await handleRemoveAcceptedPlan(plan_id, inviteData);
 
-    if (removeAcceptedPlanStatus) {
+    const { data: user_plan_data, error: user_plan_error } = await supabase
+      .from("user_plans")
+      .select(`plan_authorizedUsers,plan_authorizedTeams,plan_InvitedData`)
+      .eq(`plan_id`, plan_id);
+    if (user_plan_error) {
+      console.log(user_plan_error);
+      return;
+    }
+    if (!user_plan_data[0]) {
+      toast.error("Plan was possibly deleted, we removed it for you...");
+      await refetchInvites();
+      return;
+    }
+    const { plan_InvitedData } = user_plan_data[0] as any;
+    const { error: removeInviteFromPlan } = await supabase
+      .from("user_plans")
+      .update({
+        plan_InvitedData: plan_InvitedData.filter((invite: string) => {
+          return invite !== user?.uid;
+        }),
+      })
+      .eq(`plan_id`, plan_id);
+
+    if (removeAcceptedPlanStatus && !removeInviteFromPlan) {
       toast.success("Invite declined");
-      refetchInvites();
+      await refetchInvites();
       return;
     }
 

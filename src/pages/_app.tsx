@@ -56,7 +56,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         />
 
         <ToastContainer position='bottom-right' />
-        <Component ref={ref} {...pageProps} />
+        <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </div>
     </QueryClientProvider>

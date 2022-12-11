@@ -1,6 +1,8 @@
+import { QueryClient } from "@tanstack/react-query";
 import Document, { DocumentContext, Head, Html, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 export default class MyDocument extends Document {
+  queryClient = new QueryClient();
   static async getIntitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;

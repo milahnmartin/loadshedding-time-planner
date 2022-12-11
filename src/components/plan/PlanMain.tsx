@@ -1,11 +1,11 @@
 import PlanFilter from "@comps/plan/PlanFilter";
+import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import supabase from "@utils/supabase-config";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
-
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "SET_FILTER_DATA":
@@ -71,7 +71,6 @@ export default function PlanMain({ filterState }: any) {
       startTime: "17:00",
       endTime: "02:00",
     },
-    currentLoadSheddingStage: { capetown: 0, eskom: 0 },
   });
 
   const handleFilterChange = ({ filterInputs }: FilterData) => {
@@ -109,18 +108,13 @@ export default function PlanMain({ filterState }: any) {
     refetch: planRefetch,
   } = useFetchPlanData(router.query.plan_id as string);
 
-  useEffect(() => {
-    (async () => {
-      const data = await fetch("/api/sepush/status").then((resp) => resp.json());
-      dispatch({
-        TYPE: "SET_LS_STAGE",
-        PAYLOAD: {
-          capetown: data?.capetown?.stage,
-          eskom: data?.eskom?.stage,
-        },
-      });
-    })();
-  }, []);
+  const {
+    data: loadsheddingStageData,
+    error: loadsheddingStageError,
+    isLoading: loadsheddingStageLoading,
+    isFetching: loadsheddingStageFetching,
+    refetch: loadsheddingStageRefetch,
+  } = useFetchLoadsheddingStatus();
 
   useEffect(() => {
     if (planLoading) return;
@@ -162,9 +156,12 @@ export default function PlanMain({ filterState }: any) {
 
       <div className='flex flex-col h-full w-6/6'>
         <h1 className='text-white text-sm font-black'>
-          {JSON.stringify(state.currentLoadSheddingStage)}
+          {loadsheddingStageLoading ? (
+            <h1>LOADING LOADSHEDDING STAGES</h1>
+          ) : (
+            JSON.stringify(loadsheddingStageData)
+          )}
         </h1>
-
         <pre className='text-pink-500 whitespace-pre-wrap'>
           {JSON.stringify(planData)}
         </pre>

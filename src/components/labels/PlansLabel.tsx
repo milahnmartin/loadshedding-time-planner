@@ -68,10 +68,10 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             <span className='flex items-center justify-center flex-col'>
               <BsPeople className='text-[1.25rem] align-center justify-center' />
               <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
-                TYPE:
+                PLAN TYPE:
               </h1>
               <h1 className='text-blue-200 text-center text-lg font-satoshiBold'>
-                INVITED PLAN
+                INVITED
               </h1>
             </span>
           </span>
@@ -79,7 +79,7 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
           <span className='flex flex-col items-center w-full h-fit pt-2'>
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_oo3N9WVAgU.json'
-              className='player w-[115px] h-[115px] pb-3'
+              className='player w-[115px] h-[115px] pb-3 pt-2'
               autoplay
               loop
               speed={0.8}
@@ -87,10 +87,10 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             <span className='flex items-center justify-center flex-col'>
               <BsPerson className='text-[1.25rem] align-center justify-center' />
               <h1 className='text-center font-satoshiBlack text-lg text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
-                TYPE:
+                PLAN TYPE:
               </h1>
-              <h1 className='text-blue-200 text-center text-lg font-satoshiBold'>
-                YOUR PLAN
+              <h1 className='text-blue-200 text-center text-lg font-satoshiBold '>
+                PERSONAL
               </h1>
             </span>
           </span>

@@ -99,20 +99,6 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
               </h1>
             );
           })}
-          {plan_authorizedUsers.map((user: string) => {
-            return (
-              <pre key={uuidv1()} className='text-white text-center'>
-                {user}
-              </pre>
-            );
-          })}
-          {plan_authorizedTeams.map((user: string) => {
-            return (
-              <pre key={uuidv1()} className='text-white text-center'>
-                {user}
-              </pre>
-            );
-          })}
         </div>
         <div className='flex items-center justify-center w-full h-fit pb-4 space-x-4'>
           <Link href={`/dashboard/${plan_id}`}>

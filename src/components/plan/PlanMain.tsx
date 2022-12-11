@@ -3,7 +3,8 @@ import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import supabase from "@utils/supabase-config";
-import { useRouter } from "next/router";
+import Image from "next/image";
+import Router, { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
@@ -71,6 +72,7 @@ export default function PlanMain({ filterState }: any) {
       startTime: "17:00",
       endTime: "02:00",
     },
+    devMode: true,
   });
 
   const handleFilterChange = ({ filterInputs }: FilterData) => {
@@ -104,7 +106,6 @@ export default function PlanMain({ filterState }: any) {
     data: planData,
     error: planError,
     isLoading: planLoading,
-    isFetching: planFetching,
     refetch: planRefetch,
   } = useFetchPlanData(router.query.plan_id as string);
 
@@ -140,6 +141,27 @@ export default function PlanMain({ filterState }: any) {
     })();
   }, [planLoading]);
 
+  if (planError || loadsheddingStageError || state.devMode) {
+    return (
+      <div className='h-[90vh] w-screen flex items-center justify-center flex-col space-y-10'>
+        <Image src='/Logov3.png' width={170} height={170} alt='LSPLANNER LOGO' />
+        <h1 className='text-white font-satoshiBold tracking-tighter text-5xl'>
+          DASHBOARD IS CURRENTLY UNAVAILABLE
+        </h1>
+        <button
+          className='relative flex items-center justify-center  w-[10rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+          onClick={() => Router.push("/")}
+        >
+          <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[9.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
+            <span className='flex items-center justify-around font-satoshiBlack'>
+              GO HOME
+            </span>
+          </span>
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className='w-full h-full relative'>
       {filterState && (
@@ -157,7 +179,7 @@ export default function PlanMain({ filterState }: any) {
       <div className='flex flex-col h-full w-6/6'>
         <h1 className='text-white text-sm font-black'>
           {loadsheddingStageLoading ? (
-            <h1>LOADING LOADSHEDDING STAGES</h1>
+            <>LOADING LOADSHEDDING STAGES</>
           ) : (
             JSON.stringify(loadsheddingStageData)
           )}

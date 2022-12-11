@@ -8,7 +8,7 @@ const IdPage: NextPage = () => {
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Head>
-        <title>LS Planner / Plan</title>
+        <title>LS Planner / Dashboard</title>
       </Head>
       <Navbar dashboard={true} filterState={{ filter, setshowfilter }} />
       {/* <GameidContext.Provider > */}

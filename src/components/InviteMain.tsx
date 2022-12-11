@@ -62,8 +62,23 @@ const InviteMain = () => {
       console.log(user_plan_error);
       return;
     }
+    if (!user_plan_data[0]) {
+      const { error: RemoveInvitePlan } = await supabase
+        .from("user_info")
+        .update({
+          user_plan_Invites: inviteData.filter(
+            (invite: IInviteData) => invite.plan_id !== plan_id
+          ),
+        })
+        .eq("user_id", user?.uid);
+      toast.error("Plan was possibly deleted, we removed it for you...");
+      await refetchInvites();
+      return;
+    }
+
     const { plan_authorizedUsers, plan_authorizeTeams, plan_InvitedData }: any =
       user_plan_data[0];
+
     const oldInvitedUsers = plan_InvitedData.filter(
       (invite: string) => invite !== user?.uid
     );

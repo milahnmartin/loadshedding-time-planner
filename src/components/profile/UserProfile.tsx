@@ -8,7 +8,6 @@ function UserProfile(props: any) {
   };
   useEffect(() => {
     const handleModalClickOutside = (e: any) => {
-      console.log("CLICKED");
       if (!e) return;
       let nodeList = [...e.target!.classList];
       if (e.target?.id !== "profile-img" && !nodeList.includes("modal-data")) {

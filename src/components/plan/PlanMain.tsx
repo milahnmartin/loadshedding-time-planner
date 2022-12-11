@@ -157,7 +157,7 @@ export default function PlanMain({ filterState }: any) {
       <div className='flex flex-col h-full w-6/6'>
         <h1 className='text-white text-sm font-black'>
           {loadsheddingStageLoading ? (
-            <h1>LOADING LOADSHEDDING STAGES</h1>
+            <>LOADING LOADSHEDDING STAGES</>
           ) : (
             JSON.stringify(loadsheddingStageData)
           )}

@@ -1,9 +1,14 @@
 import { Player } from "@lottiefiles/react-lottie-player";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { BsCalendar } from "react-icons/bs";
+import { FiLogOut } from "react-icons/fi";
 import { HiOutlineKey } from "react-icons/hi";
 import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 type planData = {
   plan_id: string;
@@ -15,9 +20,11 @@ type planData = {
 type PlansLabelProps = {
   plan: planData;
   deleteCB: (plan_id: string) => void;
+  refetchPlans: () => void;
 };
 
-const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
+const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
+  const [user, loading] = useAuthState(auth);
   const {
     plan_id,
     plan_lsTimes,
@@ -25,6 +32,25 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
     plan_authorizedUsers,
     plan_createdAt,
   } = plan;
+
+  const handleRevokePlanAccess = async () => {
+    const newAuthorizedMembners = plan_authorizedUsers?.filter(
+      (currentMember: string) => {
+        return currentMember !== user?.uid;
+      }
+    );
+    const { error } = await supabase
+      .from("user_plans")
+      .update({ plan_authorizedUsers: newAuthorizedMembners })
+      .eq("plan_id", plan_id);
+
+    if (error) {
+      toast.error("Error revoking access");
+      return;
+    }
+    toast.success(`Access Revoked For Plan ${plan_id}`);
+    await refetchPlans();
+  };
 
   return (
     // <div className='overflow-y-scroll flex flex-col bg-gradient-to-r from-cblue via-cpurple to-c2purple p-1 w-[25rem] h-[20rem] rounded-xl border-2'>
@@ -38,6 +64,11 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
             loop
             speed={0.8}
           />
+          {plan_authorizedUsers.includes(user?.uid!) ? (
+            <h1 className='text-white font-satoshiBlack'>INVITED</h1>
+          ) : (
+            <h1 className='text-white font-satoshiBlack'>OWNED</h1>
+          )}
         </span>
         <div className='w-full h-full flex items-center justify-center flex-wrap content-center overflow-y-scroll overflow-x-hidden flex-col'>
           <span className='flex items-center justify-center  flex-col'>
@@ -96,20 +127,35 @@ const PlansLabel = ({ plan, deleteCB }: PlansLabelProps) => {
             </button>
           </Link>
 
-          <button
-            onClick={() => deleteCB(plan_id)}
-            className='group relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
-          >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[4.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
-              <span className='flex items-center justify-around'>
-                <MdDeleteForever
-                  title='Delete Plan'
-                  // onClick={() => deleteCB(plan_id)}
-                  className='cursor-pointer text-[1.3rem] align-center justify-center group-hover:text-red-700 transition-all duration-300'
-                />
+          {plan_authorizedUsers.includes(user?.email! || user?.uid!) ? (
+            <button
+              onClick={handleRevokePlanAccess}
+              className='group relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            >
+              <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[4.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
+                <span className='flex items-center justify-around'>
+                  <FiLogOut
+                    title='Revoke Access'
+                    className='cursor-pointer text-[1.3rem] align-center justify-center group-hover:text-red-700 transition-all duration-300'
+                  />
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+          ) : (
+            <button
+              onClick={() => deleteCB(plan_id)}
+              className='group relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            >
+              <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[4.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-full group-hover:bg-opacity-0'>
+                <span className='flex items-center justify-around'>
+                  <MdDeleteForever
+                    title='Delete Plan'
+                    className='cursor-pointer text-[1.3rem] align-center justify-center group-hover:text-red-700 transition-all duration-300'
+                  />
+                </span>
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>

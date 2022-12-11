@@ -34,6 +34,7 @@ const plans: NextPage = () => {
     toast.success(`Plan ${plan_id} Deleted Successfully`);
     await refetchSavedPlans();
   };
+
   return (
     <div className='h-screen w-screen overflow-y-scroll'>
       <Head>
@@ -51,7 +52,14 @@ const plans: NextPage = () => {
           />
         ) : (
           savedPlans?.map((plan: any) => {
-            return <PlansLabel plan={plan} key={uuidv1()} deleteCB={handlePlanDelete} />;
+            return (
+              <PlansLabel
+                plan={plan}
+                key={uuidv1()}
+                deleteCB={handlePlanDelete}
+                refetchPlans={refetchSavedPlans}
+              />
+            );
           })
         )}
         {savedPlans?.length === 0 && (

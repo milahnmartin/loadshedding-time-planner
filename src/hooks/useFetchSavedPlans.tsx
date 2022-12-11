@@ -14,15 +14,22 @@ const fetchSavedPlans = async ({ queryKey }: any) => {
     )
     .eq("user_id", queryKey[1]);
 
-  if (error) {
-    toast.error("Error Occured When trying to fetch plans");
-    return [];
-  }
+  const { data: InvitedPlans, error: InvitedPlansError } = await supabase
+    .from("user_plans")
+    .select(
+      `
+    plan_id,plan_lsTimes,plan_authorizedUsers,plan_authorizedTeams,plan_createdAt
+    `
+    )
+    .contains("plan_authorizedUsers", JSON.stringify([queryKey[1]]));
 
-  if (UserDataInfo?.length == 0) {
-    return [];
+  if (InvitedPlansError || error) {
+    console.log(InvitedPlansError);
+    toast.error("Error fetching plans");
+    return;
   }
-  return UserDataInfo;
+  if (InvitedPlans.length === 0 && UserDataInfo.length === 0) return [];
+  return [...InvitedPlans, ...UserDataInfo];
 };
 
 export default function useFetchSavedPlans() {

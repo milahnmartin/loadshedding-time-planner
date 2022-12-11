@@ -84,7 +84,9 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
 
   useEffect(() => {
     if (!user || loading) return;
-    fetchUserInvites();
+    (async () => {
+      await fetchUserInvites();
+    })();
   }, [loading]);
 
   useEffect(() => {

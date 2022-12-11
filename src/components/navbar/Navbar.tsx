@@ -45,7 +45,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
     }
 
     if (!data[0]) {
-      const { data: newAccData, error: newAccError } = await supabase
+      const {error: newAccError } = await supabase
         .from("user_info")
         .insert({
           user_id: user?.uid,
@@ -53,9 +53,12 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
           account_created: new Date().toISOString(),
         })
         .select("user_id");
-      console.log(`dev log, account`);
+        if(newAccError){
+          console.error("Something went wrong with creating new account")
+        }
       return;
     }
+    
 
     const { user_plan_Invites } = data[0];
 
@@ -66,7 +69,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
 
     setInvites(user_plan_Invites);
 
-    const { data: somedata, error: somerror } = await supabase
+    const { error: somerror } = await supabase
       .from("user_plans")
       .select("plan_authorizedUsers")
       .contains("plan_authorizedUsers", {
@@ -84,7 +87,9 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
 
   useEffect(() => {
     if (!user || loading) return;
-    fetchUserInvites();
+    (async () => {
+      await fetchUserInvites();
+    })();
   }, [loading]);
 
   useEffect(() => {

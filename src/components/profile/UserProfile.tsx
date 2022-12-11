@@ -7,15 +7,16 @@ function UserProfile(props: any) {
     setShowmodal((prev) => !prev);
   };
   useEffect(() => {
-    document.addEventListener("click", (e: any) => {
-      let nodeList = [...e.target.classList];
-      if (e.target.id !== "profile-img" && !nodeList.includes("modal-data")) {
+    const handleModalClickOutside = (e: any) => {
+      if (!e) return;
+      let nodeList = [...e.target!.classList];
+      if (e.target?.id !== "profile-img" && !nodeList.includes("modal-data")) {
         setShowmodal(false);
       }
-    });
-    return () => {
-      document.removeEventListener("click", () => {});
     };
+    document.addEventListener("click", handleModalClickOutside);
+
+    return () => document.removeEventListener("click", handleModalClickOutside);
   }, []);
 
   return (

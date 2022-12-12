@@ -8,7 +8,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiHide, BiShow } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -22,7 +22,7 @@ type NavbarProps = {
 };
 const gradient = new Gradient() as any;
 
-function Navbar({ dashboard, filterState }: NavbarProps) {
+const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
   const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
@@ -134,7 +134,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
       <hr className='mt-0 mx-auto w-[100%] h-[0.2rem] bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 md:mt-2' />
     </header>
   );
-}
+});
 
 export default Navbar;
 

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import Logo from "../pages/assets/Logov3.png";
-function Footer() {
+const Footer = React.memo(() => {
   return (
     <footer className='w-full h-full flex flex-col mb-10'>
       <div className='flex flex-col items-center justify-end w-full h-full text-white'>
@@ -45,6 +46,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+});
 
 export default Footer;

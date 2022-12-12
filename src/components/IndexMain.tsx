@@ -1,4 +1,5 @@
 import Globe from "@helpers/Globe";
+import { useQueryClient } from "@tanstack/react-query";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 const IndexMain = () => {
+  const queryClient = useQueryClient();
   const [user, loading] = useAuthState(auth);
   const handleNewPlan = async () => {
     if (!user) {
@@ -27,6 +29,7 @@ const IndexMain = () => {
       toast.error("Error Creating Plan");
       return;
     }
+    queryClient.invalidateQueries({ queryKey: ["savedplans"] });
     Router.push(`/dashboard/${newPlanUUID}`);
   };
   return (

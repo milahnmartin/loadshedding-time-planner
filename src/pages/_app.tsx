@@ -34,13 +34,6 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     return (
       <div className='w-screen h-screen flex flex-col items-center justify-center bg-slate-800 gap-4'>
         <span className='flex flex-col items-center w-full h-fit '>
-          {/* <Image
-            className='cursor-pointer animate-spin'
-            height={225}
-            width={225}
-            src={Logo}
-            alt='Image of Logo'
-          /> */}
           <Player
             src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
             className='player w-[300px] h-[300px] '
@@ -48,7 +41,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             loop
             speed={0.5}
           />
-          {/* <h1 className='font-satoshiBold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple text-8xl animate-pulse pt-8'> */}
+
           <h1 className='font-satoshiBold text-white text-7xl animate-pulse tracking-wider pt-8'>
             LS PLANNER
           </h1>

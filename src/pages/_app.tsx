@@ -33,20 +33,18 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   if (isLoading) {
     return (
       <div className='w-screen h-screen flex flex-col items-center justify-center bg-slate-800 gap-4'>
-        <div className='rounded-xl w-[25rem] h-[20rem] bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
-          <div className='flex flex-col h-full w-full justify-center bg-slate-800 text-white rounded-lg'>
-            <span className='flex flex-col items-center w-full h-fit '>
-              <Image
-                className='cursor-pointer animate-spin'
-                height={155}
-                width={155}
-                src={Logo}
-                alt='Image of Logo'
-              />
-              <h1 className='text-3xl font-satoshiBlack pt-6'>LS PLANNER</h1>
-            </span>
-          </div>
-        </div>
+        <span className='flex flex-col items-center w-full h-fit '>
+          <Image
+            className='cursor-pointer animate-spin'
+            height={225}
+            width={225}
+            src={Logo}
+            alt='Image of Logo'
+          />
+          <h1 className='font-satoshiBold text-white tracking-widest text-5xl animate-pulse pt-8'>
+            LS PLANNER
+          </h1>
+        </span>
       </div>
     );
   }

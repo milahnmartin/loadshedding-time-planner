@@ -7,7 +7,7 @@ function Footer() {
       <div className='flex flex-col items-center justify-end w-full h-full text-white'>
         <div className='w-[70%] flex flex-col items-center font-Inter space-y-10 md:flex-row md:justify-start md:space-y-0'>
           <div className='flex flex-col items-center w-[75%] space-y-5'>
-            <h1 className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+            <h1 className='font-satoshiBold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               SOCIAL MEDIA
             </h1>
             <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>
@@ -21,7 +21,7 @@ function Footer() {
             </h1>
           </div>
           <div className='flex flex-col items-center w-[75%] space-y-5'>
-            <h1 className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
+            <h1 className='font-satoshiBold text-transparent bg-clip-text bg-gradient-to-r from-c2aqua via-c2blue to-c2purple'>
               NAVIGATE
             </h1>
             <h1 className='font-satoshi hover:font-bold hover:animate-pulse'>

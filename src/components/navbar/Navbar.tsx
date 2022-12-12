@@ -63,7 +63,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
               alt='Image of Logo'
             />
           </Link>
-          <h1 className='hidden font-satoshiBold text-white tracking-tight text-3xl ml-2 md:inline pl-2'>
+          <h1 className='hidden font-satoshiBold text-white tracking-wide text-3xl ml-2 md:inline pl-2'>
             LS PLANNER
           </h1>
         </div>

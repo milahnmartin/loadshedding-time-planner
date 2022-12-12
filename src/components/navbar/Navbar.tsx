@@ -21,15 +21,20 @@ type NavbarProps = {
   };
 };
 const gradient = new Gradient() as any;
+
 function Navbar({ dashboard, filterState }: NavbarProps) {
   const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
 
-  const { isLoading: inviteLoading, data: invites } = useFetchUserInvites();
+  const { isLoading: inviteLoading, data: invites } = useFetchUserInvites(user?.uid!);
 
   useEffect(() => {
-    if (!loading) useCheckUserAccount(user);
+    if (!loading) {
+      (async () => {
+        await useCheckUserAccount(user);
+      })();
+    }
     if (user && !loading) return setLoginState("Sign Out");
     if (!user && !loading) return setLoginState("Sign In");
   }, [user, loading]);
@@ -70,7 +75,7 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
             <Link href='/docs'>Docs</Link>
           </h1>
 
-          {!inviteLoading && invites && (
+          {!inviteLoading && (
             <span
               title='Invites'
               className={

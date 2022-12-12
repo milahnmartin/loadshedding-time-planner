@@ -10,9 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 import "../styles/satoshi.css";
 const gradient = new Gradient() as any;
+const queryClient = new QueryClient();
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [isLoading, setisLoading] = useState<boolean>(true);
-  const queryClient = new QueryClient();
 
   const ref = useRef() as any;
 

@@ -42,7 +42,7 @@ export default function useFetchSavedPlans() {
   }
   return useQuery([`savedplans`, user?.uid], fetchSavedPlans, {
     refetchOnWindowFocus: true,
-    staleTime: 180000,
+    staleTime: 1000 * 60 * 2,
     enabled: !loading && !!user,
   });
 }

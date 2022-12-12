@@ -72,7 +72,7 @@ export default function PlanMain({ filterState }: any) {
       startTime: "17:00",
       endTime: "02:00",
     },
-    devMode: true,
+    devMode: false,
   });
 
   const handleFilterChange = ({ filterInputs }: FilterData) => {

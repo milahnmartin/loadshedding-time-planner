@@ -33,6 +33,6 @@ export default function useFetchUserInvites() {
   return useQuery(["userInvites", user?.uid], fetchUserInvites, {
     refetchOnWindowFocus: true,
     enabled: !loading && !!user,
-    staleTime: 180000,
+    staleTime: 1000 * 60 * 1,
   });
 }

@@ -151,7 +151,7 @@ const PlansLabel = ({ plan, deleteCB, refetchPlans }: PlansLabelProps) => {
             </button>
           </Link>
 
-          {plan_authorizedUsers.includes(user?.email! || user?.uid!) ? (
+          {plan_authorizedUsers.includes(user?.uid!) ? (
             <button
               onClick={handleRevokePlanAccess}
               className='group relative flex items-center justify-center  w-[5rem] h-[3rem] text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '

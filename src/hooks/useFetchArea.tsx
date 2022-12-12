@@ -12,6 +12,6 @@ export default function useFetchArea(pArea: string) {
     refetchOnWindowFocus: false,
     enabled: typeof myDebounce === "string" && myDebounce.length > 0,
     staleTime: Infinity,
-    cacheTime: Infinity,
+    cacheTime: 1000 * 60 * 60,
   });
 }

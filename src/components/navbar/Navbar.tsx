@@ -1,6 +1,7 @@
 import Logo from "@assets/Logov3.png";
 import UserProfile from "@comps/profile/UserProfile";
 import { Gradient } from "@helpers/Gradient.js";
+import useFetchUserInvites from "@hooks/useFetchUserInvites";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";
@@ -11,7 +12,6 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiHide, BiShow } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { toast } from "react-toastify";
 
 type NavbarProps = {
   dashboard?: boolean;
@@ -26,71 +26,13 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
 
-  const [invites, setInvites] = useState<Array<any>>([]);
-
-  const fetchUserInvites = async () => {
-    if (!user) {
-      toast.error("You need to be signed in");
-      Router.push("/auth/login");
-      return;
-    }
-    const { data, error }: any = await supabase
-      .from("user_info")
-      .select(`user_plan_Invites`)
-      .eq(`user_id`, user?.uid);
-
-    if (error) {
-      toast.error("Something went wrong with invites");
-      return;
-    }
-
-    if (!data[0]) {
-      const {error: newAccError } = await supabase
-        .from("user_info")
-        .insert({
-          user_id: user?.uid,
-          user_email: user?.email ? user?.email : user?.displayName,
-          account_created: new Date().toISOString(),
-        })
-        .select("user_id");
-        if(newAccError){
-          console.error("Something went wrong with creating new account")
-        }
-      return;
-    }
-    
-
-    const { user_plan_Invites } = data[0];
-
-    if (!user_plan_Invites || user_plan_Invites.length === 0) {
-      setInvites([]);
-      return;
-    }
-
-    setInvites(user_plan_Invites);
-
-    const { error: somerror } = await supabase
-      .from("user_plans")
-      .select("plan_authorizedUsers")
-      .contains("plan_authorizedUsers", {
-        plan_authorizeUsers: [user?.uid],
-      });
-    if (somerror) {
-      throw new Error("Something went wrong");
-    }
-  };
+  const { isLoading: inviteLoading, data: invites } = useFetchUserInvites();
 
   useEffect(() => {
+    if (!loading) useCheckUserAccount(user);
     if (user && !loading) return setLoginState("Sign Out");
     if (!user && !loading) return setLoginState("Sign In");
   }, [user, loading]);
-
-  useEffect(() => {
-    if (!user || loading) return;
-    (async () => {
-      await fetchUserInvites();
-    })();
-  }, [loading]);
 
   useEffect(() => {
     if (ref.current) {
@@ -128,33 +70,35 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
             <Link href='/docs'>Docs</Link>
           </h1>
 
-          <span
-            title='Invites'
-            className={
-              invites.length === 0
-                ? classNames(
-                    "not-modal h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
-                  )
-                : classNames(
-                    "noti-modal h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
-                  )
-            }
-          >
-            {
-              <IoMdNotificationsOutline
-                id='bell-icon'
-                onClick={() => Router.push("/invites")}
-                className={
-                  invites.length > 0
-                    ? classNames(
-                        "transition-all animate-[wiggle_1.5s_ease-in-out_infinite] duration-500"
-                      )
-                    : classNames("")
-                }
-                size={25}
-              />
-            }
-          </span>
+          {!inviteLoading && invites && (
+            <span
+              title='Invites'
+              className={
+                invites.length === 0
+                  ? classNames(
+                      "not-modal h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
+                    )
+                  : classNames(
+                      "noti-modal h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
+                    )
+              }
+            >
+              {
+                <IoMdNotificationsOutline
+                  id='bell-icon'
+                  onClick={() => Router.push("/invites")}
+                  className={
+                    invites.length > 0
+                      ? classNames(
+                          "transition-all animate-[wiggle_1.5s_ease-in-out_infinite] duration-500"
+                        )
+                      : classNames("")
+                  }
+                  size={25}
+                />
+              }
+            </span>
+          )}
           {dashboard &&
             (!filterState?.filter ? (
               <BiShow
@@ -188,3 +132,35 @@ function Navbar({ dashboard, filterState }: NavbarProps) {
 }
 
 export default Navbar;
+
+const useCheckUserAccount = async (user: any) => {
+  console.log("CHECKING");
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("user_info")
+    .select()
+    .eq("user_id", user?.uid);
+
+  if (error) {
+    console.log("DEV ACC CHECKING IN NAV");
+    return;
+  }
+
+  if (!data[0]) {
+    const { error: newAccError } = await supabase
+      .from("user_info")
+      .insert({
+        user_id: user?.uid,
+        user_email: user?.email ? user?.email : user?.displayName,
+        account_created: new Date().toISOString(),
+      })
+      .select("user_id");
+    if (newAccError) {
+      console.error("Something went wrong with creating new account");
+      return;
+    }
+    console.log("DEV NEW ACC CREATED");
+    return;
+  }
+};

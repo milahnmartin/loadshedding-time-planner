@@ -12,7 +12,7 @@ const InviteMain = () => {
     data: inviteData,
     isLoading: inviteLoading,
     refetch: refetchInvites,
-  } = useFetchUserInvites();
+  } = useFetchUserInvites(user?.uid!);
 
   // todo - plan_InvitedData needs to be updated for both decline and accept
 

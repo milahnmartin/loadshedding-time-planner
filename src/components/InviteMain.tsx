@@ -1,12 +1,14 @@
 import useFetchUserInvites from "@hooks/useFetchUserInvites";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IInviteData } from "@lstypes/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import InviteLabel from "./labels/InviteLabel";
 const InviteMain = () => {
+  const queryClient = useQueryClient();
   const [user, loading] = useAuthState(auth);
   const {
     data: inviteData,
@@ -117,6 +119,7 @@ const InviteMain = () => {
 
     if (removePlanStatus && !updatedUserPlanError) {
       toast.success("Invite Accepted");
+      queryClient.invalidateQueries({ queryKey: ["savedplans"] });
       await refetchInvites();
       return;
     }

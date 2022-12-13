@@ -229,11 +229,11 @@ function PlanFilter({
             <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-slate-800  '>
               {!filterbuttonText ? (
                 <span className='flex items-center gap-1 text-base'>
-                  <AiFillFilter /> Filter
+                  <AiFillFilter /> FILTER
                 </span>
               ) : (
                 <span className='flex items-center gap-1 text-lime-500 text-base'>
-                  <IoCheckmarkDoneCircleOutline fill='green' size={30} /> Applied
+                  <IoCheckmarkDoneCircleOutline fill='green' size={30} /> APPLIED
                 </span>
               )}
             </div>

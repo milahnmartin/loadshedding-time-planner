@@ -8,7 +8,6 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
-import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 enum LabelType {
@@ -32,6 +31,7 @@ function PlanFilter({
   invitedData,
   removeUserCB,
   refetchPlanData,
+  toggleFilter,
 }: PlanFilterType) {
   const [loggedInUser, loading] = useAuthState(auth);
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
@@ -50,7 +50,7 @@ function PlanFilter({
     });
     setfilterbuttonText(true);
     setTimeout(() => {
-      setfilterbuttonText(false);
+      toggleFilter!(false);
     }, 2110);
   };
 

@@ -8,6 +8,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 enum LabelType {
@@ -203,7 +204,7 @@ function PlanFilter({
               }
             />
           </div>
-          <button
+          {/* <button
             title='Filter Plan'
             type='submit'
             className='relative flex items-center justify-center p-0.5 mb-2 mr-2 w-full h-[2.7rem] overflow-hidden text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white'
@@ -219,6 +220,9 @@ function PlanFilter({
                 </span>
               )}
             </div>
+          </button> */}
+          <button className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mb-2 mr-2 w-full h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-lg group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '>
+            New Plan
           </button>
         </form>
 

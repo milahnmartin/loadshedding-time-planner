@@ -16,7 +16,7 @@ enum LabelType {
   invitedPending,
 }
 const filterInputClassNames = classNames(
-  "rounded-xl px-6 py-2 text-center bg-slate-500 text-white font-inter shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
+  " px-6 py-2 text-center bg-slate-500 text-white font-satoshi shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
 );
 
 function PlanFilter({
@@ -155,21 +155,24 @@ function PlanFilter({
   return (
     <div
       id='dashboard-filter'
-      className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm'
+      className='absolute flex p-1 right-0 h-[90vh] w-full bg-slate-700 rounded-sm'
     >
       <div className='flex flex-col h-full w-1/2'>
         <form
           onSubmit={handleFilterSubmit}
           className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'
         >
-          <input
-            value={inputData.startDate}
-            type='date'
-            className={filterInputClassNames}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInputData({ ...inputData, startDate: e.target.value })
-            }
-          />
+          <div className='rounded-xl w-[20rem] h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <input
+              value={inputData.startDate}
+              type='date'
+              className='w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue'
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setInputData({ ...inputData, startDate: e.target.value })
+              }
+            />
+          </div>
+
           <input
             value={inputData.startTime}
             type='time'

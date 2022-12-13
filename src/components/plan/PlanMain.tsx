@@ -53,7 +53,13 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
       };
   }
 };
-export default function PlanMain({ filterState }: any) {
+type PlanMainProps = {
+  filterState: {
+    filter: boolean;
+    setshowfilter: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+};
+export default function PlanMain({ filterState }: PlanMainProps) {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
     member_times: [],
@@ -164,7 +170,7 @@ export default function PlanMain({ filterState }: any) {
 
   return (
     <div className='w-full h-full relative'>
-      {filterState && (
+      {filterState.filter && (
         <PlanFilter
           members={planData?.plan_authorizedUsers}
           teams={planData?.plan_authorizedTeams}
@@ -173,6 +179,7 @@ export default function PlanMain({ filterState }: any) {
           onFilter={handleFilterChange}
           removeUserCB={handleUserRemove}
           refetchPlanData={planRefetch}
+          toggleFilter={filterState.setshowfilter}
         />
       )}
 

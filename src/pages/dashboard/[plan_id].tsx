@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 const IdPage: NextPage = () => {
-  const [filter, setshowfilter] = useState<boolean>(false);
+  const [filter, setshowfilter] = useState<boolean>(true);
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Head>
@@ -12,7 +12,7 @@ const IdPage: NextPage = () => {
       </Head>
       <Navbar dashboard={true} filterState={{ filter, setshowfilter }} />
       {/* <GameidContext.Provider > */}
-      <PlanMain filterState={filter} />
+      <PlanMain filterState={{ filter, setshowfilter }} />
       {/* \ */}
     </div>
   );

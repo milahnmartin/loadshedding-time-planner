@@ -257,10 +257,10 @@ function PlanFilter({
           </div>
 
           <button
-            className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='px-1 relative flex items-center justify-center  w-[100%] h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[98%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[100%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around font-satoshiBlack'>
                 SEND INVITE
               </span>
@@ -275,10 +275,10 @@ function PlanFilter({
           </div>
 
           <button
-            className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='px-1 relative flex items-center justify-center  w-[100%] h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[98%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[100%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around font-satoshiBlack'>
                 INVITE TEAM
               </span>

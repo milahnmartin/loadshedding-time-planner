@@ -162,7 +162,7 @@ function PlanFilter({
       id='dashboard-filter'
       className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm'
     >
-      <div className='flex flex-col h-full w-1/2'>
+      <div className='flex flex-col h-full w-1/2 '>
         <form
           onSubmit={handleFilterSubmit}
           className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'
@@ -204,23 +204,7 @@ function PlanFilter({
               }
             />
           </div>
-          {/* <button
-            title='Filter Plan'
-            type='submit'
-            className='relative flex items-center justify-center p-0.5 mb-2 mr-2 w-full h-[2.7rem] overflow-hidden text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-cpurple to-caqua  hover:text-white dark:text-white'
-          >
-            <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-yellow-500  group-hover:animate-pulse'>
-              {!filterbuttonText ? (
-                <span className='flex items-center gap-2'>
-                  <AiFillFilter /> Filter
-                </span>
-              ) : (
-                <span className='flex items-center gap-2 text-lime-500'>
-                  <IoCheckmarkDoneCircleOutline fill='green' size={30} /> Applied
-                </span>
-              )}
-            </div>
-          </button> */}
+
           <button
             title='Filter Plan'
             type='submit'
@@ -261,8 +245,8 @@ function PlanFilter({
           ))}
         </div>
       </div>
-      <div className='flex flex-col h-full w-1/2'>
-        <div className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'>
+      <div className='flex flex-col h-full w-1/2 '>
+        <div className='flex flex-col space-y-2 w-full h-full justify-evenly px-2 '>
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <input
               type='text'
@@ -271,7 +255,7 @@ function PlanFilter({
               ref={inviteInputRef}
             />
           </div>
-          {/* <button onClick={handleInviteMember}>SEND INVITE</button> */}
+
           <button
             className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
@@ -289,7 +273,7 @@ function PlanFilter({
               placeholder='Invite Team Via ID or Name'
             />
           </div>
-          {/* <button>INVITE TEAM</button> */}
+
           <button
             className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}

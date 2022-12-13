@@ -266,8 +266,8 @@ function PlanFilter({
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <input
               type='text'
-              className='w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none '
-              placeholder='invite Member via ID or Email'
+              className={filterInputTextClassNames}
+              placeholder='Invite Member via ID or Email'
               ref={inviteInputRef}
             />
           </div>
@@ -285,7 +285,7 @@ function PlanFilter({
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <input
               type='text'
-              className={filterInputClassNames}
+              className={filterInputTextClassNames}
               placeholder='Invite Team Via ID or Name'
             />
           </div>

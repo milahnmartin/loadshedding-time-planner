@@ -160,7 +160,7 @@ function PlanFilter({
   return (
     <div
       id='dashboard-filter'
-      className='absolute flex p-1 right-0 h-[90vh] w-full bg-slate-700 rounded-sm'
+      className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm'
     >
       <div className='flex flex-col h-full w-1/2'>
         <form
@@ -171,7 +171,7 @@ function PlanFilter({
             <input
               value={inputData.startDate}
               type='date'
-              className='w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none '
+              className={filterInputClassNames}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setInputData({ ...inputData, startDate: e.target.value })
               }
@@ -273,10 +273,10 @@ function PlanFilter({
           </div>
           {/* <button onClick={handleInviteMember}>SEND INVITE</button> */}
           <button
-            className='relative flex items-center justify-center  w-[23rem] h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[22.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[98%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around font-satoshiBlack'>
                 SEND INVITE
               </span>
@@ -291,10 +291,10 @@ function PlanFilter({
           </div>
           {/* <button>INVITE TEAM</button> */}
           <button
-            className='relative flex items-center justify-center  w-[23rem] h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
+            className='relative flex items-center justify-center  w-100% h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[22.5rem] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
+            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[98%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
               <span className='flex items-center justify-around font-satoshiBlack'>
                 INVITE TEAM
               </span>

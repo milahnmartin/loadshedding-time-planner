@@ -221,8 +221,22 @@ function PlanFilter({
               )}
             </div>
           </button> */}
-          <button className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mb-2 mr-2 w-full h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-lg group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '>
-            New Plan
+          <button
+            title='Filter Plan'
+            type='submit'
+            className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mb-2 mr-2 w-full h-[3rem] overflow-hidden text-sm font-black text-gray-900 rounded-lg group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '
+          >
+            <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-slate-800  '>
+              {!filterbuttonText ? (
+                <span className='flex items-center gap-1 text-base'>
+                  <AiFillFilter /> Filter
+                </span>
+              ) : (
+                <span className='flex items-center gap-1 text-lime-500 text-base'>
+                  <IoCheckmarkDoneCircleOutline fill='green' size={30} /> Applied
+                </span>
+              )}
+            </div>
           </button>
         </form>
 

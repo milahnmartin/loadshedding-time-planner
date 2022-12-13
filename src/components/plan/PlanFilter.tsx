@@ -16,7 +16,11 @@ enum LabelType {
   invitedPending,
 }
 const filterInputClassNames = classNames(
-  " px-6 py-2 text-center bg-slate-500 text-white font-satoshi shadow-xl outline-none border-none focus:ring-2 focus:ring-cblue"
+  " w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
+);
+
+const filterInputTextClassNames = classNames(
+  " w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
 );
 
 function PlanFilter({
@@ -173,28 +177,32 @@ function PlanFilter({
             />
           </div>
 
-          <input
-            value={inputData.startTime}
-            type='time'
-            className={filterInputClassNames}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInputData({
-                ...inputData,
-                startTime: e.target.value,
-              })
-            }
-          />
-          <input
-            value={inputData.endTime}
-            type='time'
-            className={filterInputClassNames}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInputData({
-                ...inputData,
-                endTime: e.target.value,
-              })
-            }
-          />
+          <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <input
+              value={inputData.startTime}
+              type='time'
+              className={filterInputClassNames}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setInputData({
+                  ...inputData,
+                  startTime: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <input
+              value={inputData.endTime}
+              type='time'
+              className={filterInputClassNames}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setInputData({
+                  ...inputData,
+                  endTime: e.target.value,
+                })
+              }
+            />
+          </div>
           <button
             title='Filter Plan'
             type='submit'
@@ -246,11 +254,13 @@ function PlanFilter({
             />
           </div>
           <button onClick={handleInviteMember}>SEND INVITE</button>
-          <input
-            type='text'
-            className={filterInputClassNames}
-            placeholder='Invite Team Via ID or Name'
-          />
+          <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
+            <input
+              type='text'
+              className={filterInputClassNames}
+              placeholder='Invite Team Via ID or Name'
+            />
+          </div>
           <button>INVITE TEAM</button>
         </div>
 

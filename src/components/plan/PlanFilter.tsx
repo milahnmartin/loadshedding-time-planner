@@ -8,6 +8,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillFilter } from "react-icons/ai";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { BsFilterCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 enum LabelType {
@@ -212,8 +213,9 @@ function PlanFilter({
           >
             <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-slate-800  '>
               {!filterbuttonText ? (
-                <span className='flex items-center gap-1 text-base'>
-                  <AiFillFilter /> FILTER
+                <span className='flex items-center gap-2 text-base'>
+                  {/* <AiFillFilter /> FILTER */}
+                  <BsFilterCircle className='text-lg' /> FILTER
                 </span>
               ) : (
                 <span className='flex items-center gap-1 text-lime-500 text-base'>
@@ -278,8 +280,8 @@ function PlanFilter({
             className='px-1 relative flex items-center justify-center  w-[100%] h-[3rem] text-sm font-black text-gray-900 rounded-xl group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white '
             onClick={handleInviteMember}
           >
-            <span className='relative px-5 py-2.5 group-hover:px-0 transition-all ease-in duration-200 w-[100%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
-              <span className='flex items-center justify-around font-satoshiBlack'>
+            <span className='relative px-5 py-2.5  group-hover:px-0 transition-all ease-in duration-200 w-[100%] h-[2.5rem] bg-white dark:bg-slate-800 rounded-lg group-hover:bg-opacity-0'>
+              <span className='flex items-center justify-center font-satoshiBlack '>
                 INVITE TEAM
               </span>
             </span>

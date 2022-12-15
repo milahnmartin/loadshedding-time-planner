@@ -1,15 +1,14 @@
-import Logo from "@assets/Logov3.png";
 import { Gradient } from "@helpers/Gradient.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppType } from "next/dist/shared/lib/utils";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Lottie from "react-lottie-player";
 import { ToastContainer } from "react-toastify";
-import { Player } from "@lottiefiles/react-lottie-player";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 import "../styles/satoshi.css";
+import LottieLoadJson from "./assets/97171-loading-plane.json";
 const gradient = new Gradient() as any;
 const queryClient = new QueryClient();
 const MyApp: AppType = ({ Component, pageProps }) => {
@@ -20,7 +19,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
     const mytimeout = setTimeout(() => {
       setisLoading(false);
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(mytimeout);
   }, []);
 
@@ -34,15 +33,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     return (
       <div className='w-screen h-screen flex flex-col items-center justify-center bg-slate-800 gap-4'>
         <span className='flex flex-col items-center w-full h-fit '>
-          <Player
-            src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
-            className='player w-[300px] h-[300px] '
-            autoplay
+          <Lottie
             loop
-            speed={0.5}
+            animationData={LottieLoadJson}
+            play
+            style={{ width: 200, height: 200 }}
           />
 
-          <h1 className='font-satoshiBold text-white text-7xl animate-pulse tracking-wider pt-8'>
+          <h1 className='font-satoshiBold text-white text-5xl animate-pulse tracking-wider pt-8'>
             LS PLANNER
           </h1>
         </span>

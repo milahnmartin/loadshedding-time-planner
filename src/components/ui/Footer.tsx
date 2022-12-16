@@ -1,7 +1,7 @@
+import Logo from "@assets/Logov3.png";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Logo from "../pages/assets/Logov3.png";
 const Footer = React.memo(() => {
   return (
     <footer className='w-full h-full flex flex-col mb-10'>

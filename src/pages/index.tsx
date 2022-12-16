@@ -1,6 +1,6 @@
-import Footer from "@comps/Footer";
 import IndexMain from "@comps/IndexMain";
-import Navbar from "@comps/navbar/Navbar";
+import Footer from "@comps/ui/Footer";
+import Navbar from "@comps/ui/Navbar";
 import type { NextPage } from "next";
 import Head from "next/head";
 

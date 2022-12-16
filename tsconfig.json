@@ -23,7 +23,8 @@
       "@labels/*": ["./src/components/labels/*"],
       "@utils/*": ["./src/utils/*"],
       "@docs/*": ["./src/components/docs/*"],
-      "@assets/*": ["./src/pages/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@layouts/*": ["./src/layouts/*"]
     }
   },
 

@@ -1,5 +1,5 @@
-import Footer from "@comps/Footer";
-import Navbar from "@comps/navbar/Navbar";
+import Footer from "@comps/ui/Footer";
+import Navbar from "@comps/ui/Navbar";
 import Head from "next/head";
 import Router from "next/router";
 const ErrorPage = () => {

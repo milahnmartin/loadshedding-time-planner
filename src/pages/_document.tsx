@@ -54,6 +54,14 @@ export default class MyDocument extends Document {
             type='font/woff'
             crossOrigin=''
           />
+
+          <link
+            ref='preload'
+            href='@assets/97171-loading-plane.json'
+            as='json'
+            type='application/json'
+            crossOrigin=''
+          />
         </Head>
         <body>
           <Main />

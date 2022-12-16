@@ -1,5 +1,5 @@
-import Navbar from "@comps/navbar/Navbar";
 import PlanMain from "@comps/plan/PlanMain";
+import Navbar from "@comps/ui/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";

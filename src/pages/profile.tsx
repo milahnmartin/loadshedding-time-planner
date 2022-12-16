@@ -1,13 +1,13 @@
-import Footer from "@comps/Footer";
-import Navbar from "@comps/navbar/Navbar";
+import Logo from "@assets/Logov3.png";
 import LoadsheddingProfile from "@comps/profile/LoadsheddingProfile";
 import ProfileIndex from "@comps/profile/ProfileIndex";
 import TeamProfile from "@comps/profile/TeamProfile";
+import Footer from "@comps/ui/Footer";
+import Navbar from "@comps/ui/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Logo from "./assets/Logov3.png";
 
 const plans: NextPage = () => {
   const [currentPage, setCurrentPage] = useState<string>("profile");

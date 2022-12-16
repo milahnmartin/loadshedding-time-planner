@@ -78,7 +78,6 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       startTime: "17:00",
       endTime: "02:00",
     },
-    devMode: false,
   });
 
   const handleFilterChange = ({ filterInputs }: FilterData) => {
@@ -147,7 +146,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     })();
   }, [planLoading]);
 
-  if (planError || loadsheddingStageError || state.devMode) {
+  if (planError || loadsheddingStageError || process.env.NODE_ENV === "production") {
     return (
       <div className='h-[90vh] w-screen flex items-center justify-center flex-col space-y-10'>
         <Image src='/Logov3.png' width={170} height={170} alt='LSPLANNER LOGO' />

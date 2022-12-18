@@ -189,7 +189,7 @@ const LoadsheddingProfile = () => {
           <hr className={gline} />
         </span>
 
-        <div className='overflow-y-scroll w-full h-full flex flex-wrap justify-center content-start items-start gap-2'>
+        <div className='overflow-y-scroll w-full h-full flex flex-wrap justify-center content-start items-start gap-y-3 gap-x-5'>
           {AreaDataLoading && (
             <div className='w-full h-full flex items-center justify-center'>
               <Player

@@ -1,3 +1,4 @@
+import { Analytics, getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // const firebaseConfig = {
@@ -19,7 +20,13 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID,
 };
 
+let analytics: Analytics;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+if (firebaseConfig.projectId) {
+  if (app.name && typeof window !== "undefined") {
+    analytics = getAnalytics(app);
+  }
+}
 
-export { auth };
+export { auth, analytics };

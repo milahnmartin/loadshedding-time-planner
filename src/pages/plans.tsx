@@ -41,7 +41,7 @@ const plans: NextPage = () => {
         <title>LS Planner / Plans</title>
       </Head>
       <Navbar />
-      <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4'>
+      <div className='flex min-h-[90vh] max-h-fit w-full flex-wrap items-center justify-center overflow-y-scroll gap-2 py-4 border-2'>
         {savedPlansLoading ? (
           <Player
             src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'

@@ -2,6 +2,7 @@ import Logo from "@assets/Logov3.png";
 import Footer from "@comps/ui/Footer";
 import Navbar from "@comps/ui/Navbar";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { auth } from "@utils/firebase-config";
 import classNames from "classnames";
 import { GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import Head from "next/head";
@@ -10,7 +11,6 @@ import Router from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { ImTwitter } from "react-icons/im";
 import { toast } from "react-toastify";
-import { auth } from "../../utils/firebase-config";
 function login() {
   const gline = classNames(
     " mx-auto w-[80%] h-[0.3rem] my-4 bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] rounded border-0 "

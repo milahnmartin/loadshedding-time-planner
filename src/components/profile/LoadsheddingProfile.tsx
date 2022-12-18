@@ -3,9 +3,10 @@ import useFetchSavedArea from "@hooks/useFetchSavedArea";
 import AreaLabels from "@labels/AreaLabels";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IAreaData } from "@lstypes/types";
-import { auth } from "@utils/firebase-config";
+import { analytics, auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";
+import { logEvent } from "firebase/analytics";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -67,7 +68,7 @@ const LoadsheddingProfile = () => {
       toast.error("We were unable to set your area");
       return;
     }
-    setAreaRefetch();
+    await setAreaRefetch();
     setUpdateWeekTimes(newArea?.id!);
   };
 
@@ -182,9 +183,12 @@ const LoadsheddingProfile = () => {
             name='loadshedding-area'
             placeholder='Search Your Area: Waterkloof, Durbanville etc...'
             value={areaInput}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setareaInput(e.currentTarget.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setareaInput(e.currentTarget.value);
+              logEvent(analytics, "area_search", {
+                area: e.currentTarget.value,
+              });
+            }}
           />
           <hr className={gline} />
         </span>

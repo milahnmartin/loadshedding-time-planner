@@ -13,7 +13,6 @@ const gradient = new Gradient() as any;
 const queryClient = new QueryClient();
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [isLoading, setisLoading] = useState<boolean>(true);
-
   const ref = useRef() as any;
 
   useEffect(() => {

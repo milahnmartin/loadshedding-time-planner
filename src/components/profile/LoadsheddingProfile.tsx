@@ -1,6 +1,6 @@
+import AreaLabelV2 from "@comps/labels/AreaLabelV2";
 import useFetchArea from "@hooks/useFetchArea";
 import useFetchSavedArea from "@hooks/useFetchSavedArea";
-import AreaLabels from "@labels/AreaLabels";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { IAreaData } from "@lstypes/types";
 import { auth } from "@utils/firebase-config";
@@ -18,7 +18,7 @@ const gline = classNames(
 );
 
 const inputStyles = classNames(
-  "appearance-none bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-satoshiBold focus:outline-none focus:text-white "
+  "bg-transparent border-none w-full pt-4 pb-1 text-gray-400 text-center font-satoshi focus:outline-none tracking-wide focus:text-white "
 );
 const LoadsheddingProfile = () => {
   const [user, loading] = useAuthState(auth);
@@ -84,16 +84,16 @@ const LoadsheddingProfile = () => {
 
   return (
     <div className='flex w-full h-full overflow-y-scroll p-2'>
-      <div className='w-1/4 h-full flex items-center justify-center '>
+      <div className='w-2/6 h-full flex items-center justify-center'>
         <div className='rounded-xl w-full h-full mx-auto bg-gradient-to-r p-[5px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
           <div className='flex flex-col items-center h-full bg-slate-800 text-white rounded-lg p-4'>
-            <h1 className='w-full text-center font-satoshiBlack pb-8 text-2xl '>
+            <h1 className='w-full text-center font-satoshiBold tracking-tight pb-8 text-2xl '>
               CURRENT SET AREA:
             </h1>
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_sj0skmmg.json'
               // className='player w-[200px] h-[200px] '
-              style={{ width: "80%" }}
+              style={{ width: "50%" }}
               autoplay
               loop
               speed={0.5}
@@ -170,7 +170,7 @@ const LoadsheddingProfile = () => {
           </div>
         </div>
       </div>
-      <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-4'>
+      <div className='w-3/4 h-full flex flex-col items-center justify-center space-y-2 px-2'>
         <span className='w-full px-1 py-1  relative'>
           <span className='absolute flex items-center h-full w-fit px-2 -top-[0px]'>
             <AiOutlineSearch size={25} fill='white' />
@@ -189,7 +189,7 @@ const LoadsheddingProfile = () => {
           <hr className={gline} />
         </span>
 
-        <div className='overflow-y-scroll w-full h-full  items-center justify-center'>
+        <div className='overflow-y-scroll w-full h-full flex flex-wrap justify-center content-start items-start gap-2'>
           {AreaDataLoading && (
             <div className='w-full h-full flex items-center justify-center'>
               <Player
@@ -205,7 +205,7 @@ const LoadsheddingProfile = () => {
           {AreaData &&
             AreaData?.map((area: IAreaData) => {
               return (
-                <AreaLabels
+                <AreaLabelV2
                   key={uuidv4()}
                   id={area.id!}
                   name={area.name!}

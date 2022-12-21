@@ -13,7 +13,7 @@ const ProfileIndex = () => {
     <div className='w-full h-full flex items-center flex-row overflow-y-hidden'>
       <div className='w-full h-full flex items-center justify-center'>
         <Player
-          src='https://assets7.lottiefiles.com/packages/lf20_xyadoh9h.json'
+          src='https://assets2.lottiefiles.com/packages/lf20_z5kmjeap.json'
           className='player w-full h-full '
           autoplay
           loop

@@ -28,7 +28,9 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
         ...state,
         member_times: action.PAYLOAD,
         active_member_times: action.PAYLOAD.map((items: any) => {
+          console.log("WE HIT THE FUNC");
           if (items.user_weekLSTimes) {
+            console.log("THIS WAS RERAN");
             return items.user_weekLSTimes.filter((times: any) => {
               return times.date === state.filterInputs?.startDate;
             });
@@ -104,6 +106,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       toast.error("Error removing member");
       return;
     }
+
     await planRefetch();
   };
 
@@ -111,6 +114,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     data: planData,
     error: planError,
     isLoading: planLoading,
+    isFetching: planFetching,
     refetch: planRefetch,
   } = useFetchPlanData(router.query.plan_id as string);
 
@@ -123,7 +127,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
   } = useFetchLoadsheddingStatus();
 
   useEffect(() => {
-    if (planLoading) return;
+    if (planFetching) return;
     (async () => {
       const { data: emailData, error: errorData } = await supabase
         .from("user_info")
@@ -144,7 +148,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         PAYLOAD: [...emailData, ...uidData],
       });
     })();
-  }, [planLoading]);
+  }, [planFetching]);
 
   if (planError || loadsheddingStageError || process.env.NODE_ENV === "production") {
     return (

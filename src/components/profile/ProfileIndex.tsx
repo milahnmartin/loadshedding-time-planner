@@ -23,38 +23,43 @@ const ProfileIndex = () => {
       <div className='h-full w-full'>
         {/* bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] */}
 
-        <div className='flex flex-col items-center justify-center h-full text-white rounded-lg p-4'>
+        <div className='flex flex-col items-center justify-around h-full text-white rounded-lg p-4 border-2'>
           <div className='flex p-1 mb-5 items-center justify-center bg-gradient-to-r from-yellow-500 via-red-500 to-orange-500 rounded-full'>
             {user && (
               <Image
-                className='rounded-full animation-all duration-500 cursor-pointer hover:scale-105'
+                className='rounded-full animation-all duration-500 cursor-pointer hover:scale-110'
                 height={150}
                 width={150}
                 src={user?.photoURL as string}
                 alt='Image of Lightbulb'
+                title='Click to Copy Username'
+                onClick={() => {
+                  navigator.clipboard.writeText(user?.displayName as string);
+                  toast.success("Username Copied to Clipboard");
+                }}
               />
             )}
           </div>
 
-          <div className='h-fit flex flex-col items-center justify-center gap-8 text-center'>
-            <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
-              <span className='flex items-center space-x-1'>
-                <FaUserCircle className='text-2xl align-center justify-center ' />
-                <h3 className='text-2xl font-satoshiBlack text-slate-300 align-center justify-center'>
-                  USERNAME:
-                </h3>
+          <div className='h-fit flex flex-col gap-8 text-center'>
+            <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
+              <span className='flex items-center justify-center space-x-1'>
+                <FaUserCircle className='text-2xl text-slate-400' />
+                <h3 className='text-2xl font-satoshiBlack text-white'>USERNAME:</h3>
               </span>
-              <p className='text-2xl font-satoshiBold text-cblue'>{user?.displayName}</p>
+              <p className='text-2xl font-satoshiBold text-blue-400'>
+                {user?.displayName}
+              </p>
             </div>
             <div className='flex space-y-2 flex-col items-center justify-center text-center w-full'>
               <span className='flex items-center space-x-1'>
-                <HiOutlineKey className='text-2xl align-center justify-center text-yellow-500' />
-                <h3 className='text-2xl font-satoshiBlack text-slate-300 align-center justify-center'>
+                <HiOutlineKey className='text-2xl align-center justify-center text-slate-400' />
+                <h3 className='text-2xl font-satoshiBlack text-white align-center justify-center'>
                   ID:
                 </h3>
               </span>
               <span className='flex items-center space-x-2'>
-                <p className='text-xl font-satoshiBold text-cblue'>{user?.uid}</p>
+                <p className='text-xl font-satoshiBold text-blue-400'>{user?.uid}</p>
                 <MdContentCopy
                   className='cursor-pointer h-full w-[20px] animation-all duration-200 hover:text-white/40'
                   onClick={() => {
@@ -66,12 +71,12 @@ const ProfileIndex = () => {
             </div>
             <div className='flex space-y-2 flex-col items-center justify-start text-center w-full'>
               <span className='flex items-center space-x-1'>
-                <MdOutlineMail className='text-2xl align-center justify-center text-red-600' />
+                <MdOutlineMail className='text-2xl align-center justify-center text-slate-400' />
                 <h3 className='text-2xl font-satoshiBlack text-slate-300'>
                   INVITE NAME:
                 </h3>
               </span>
-              <p className='text-2xl font-satoshiBold text-cblue'>
+              <p className='text-2xl font-satoshiBold text-blue-400'>
                 {user?.email ? user?.email : user?.displayName}
               </p>
             </div>

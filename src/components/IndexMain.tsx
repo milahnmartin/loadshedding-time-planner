@@ -43,7 +43,6 @@ const IndexMain = () => {
       }
     };
     window.addEventListener("resize", handleMobileCheck);
-
     return () => window.removeEventListener("resize", handleMobileCheck);
   }, [window.innerWidth]);
   return (

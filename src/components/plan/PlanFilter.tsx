@@ -84,7 +84,7 @@ function PlanFilter({
       user_weekLSTimes,
     }: any = userData[0];
 
-    const userAlreadyInvited: boolean = user_plan_Invites.find((data: IInviteData) => {
+    const userAlreadyInvited: boolean = user_plan_Invites.some((data: IInviteData) => {
       return data.plan_id === router.query.plan_id;
     });
 
@@ -102,6 +102,7 @@ function PlanFilter({
         }
       );
       inviteInputRef!.current!.focus();
+      inviteInputRef!.current!.value = "";
       return;
     }
 
@@ -229,7 +230,7 @@ function PlanFilter({
           {members?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
-              args={LabelType.authorized}
+              args={LabelType?.authorized}
               data={member}
               cb={() => removeUserCB(member)}
             />
@@ -239,7 +240,7 @@ function PlanFilter({
           {teams?.map((team: string) => (
             <RedLabel
               key={uuidv1()}
-              args={LabelType.authorized}
+              args={LabelType?.authorized}
               data={team}
               cb={() => removeUserCB(team)}
             />

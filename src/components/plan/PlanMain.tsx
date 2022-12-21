@@ -154,7 +154,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     return (
       <div className='h-[90vh] w-screen flex items-center justify-center flex-col space-y-10'>
         <Image src='/Logov3.png' width={170} height={170} alt='LSPLANNER LOGO' />
-        <h1 className='text-white font-satoshiBold tracking-tighter text-5xl'>
+        <h1 className='text-white text-center font-satoshiBold tracking-tighter text-5xl'>
           DASHBOARD IS CURRENTLY UNAVAILABLE
         </h1>
         <button

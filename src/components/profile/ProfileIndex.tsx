@@ -23,7 +23,7 @@ const ProfileIndex = () => {
       <div className='h-full w-full'>
         {/* bg-gradient-to-r p-[6px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] */}
 
-        <div className='flex flex-col items-center justify-around h-full text-white rounded-lg p-4 border-2'>
+        <div className='flex flex-col items-center justify-evenly h-full text-white rounded-lg p-4'>
           <div className='flex p-1 mb-5 items-center justify-center bg-gradient-to-r from-yellow-500 via-red-500 to-orange-500 rounded-full'>
             {user && (
               <Image

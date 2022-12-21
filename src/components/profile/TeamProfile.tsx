@@ -1,6 +1,6 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { auth } from "@utils/firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Player } from "@lottiefiles/react-lottie-player";
 const TeamProfile = () => {
   const [user, loading] = useAuthState(auth);
   return (
@@ -10,7 +10,7 @@ const TeamProfile = () => {
           <div className='flex flex-col h-full w-full bg-slate-800 text-white rounded-lg'>
             <span className='flex flex-col items-center w-full h-fit pt-4 pb-4'>
               <h1 className='text-3xl font-satoshiBlack pt-4 pb-6'>
-                TEAM SETTINGS COMMING SOON
+                TEAM SETTINGS COMING SOON
               </h1>
               <Player
                 src='https://assets4.lottiefiles.com/packages/lf20_oo3N9WVAgU.json'

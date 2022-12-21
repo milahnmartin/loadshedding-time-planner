@@ -93,7 +93,7 @@ const LoadsheddingProfile = () => {
             <Player
               src='https://assets4.lottiefiles.com/packages/lf20_sj0skmmg.json'
               // className='player w-[200px] h-[200px] '
-              style={{ width: "50%" }}
+              style={{ width: "60%" }}
               autoplay
               loop
               speed={0.5}

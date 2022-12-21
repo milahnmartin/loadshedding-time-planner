@@ -4,12 +4,14 @@ import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import Link from "next/link";
 import Router from "next/router";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 const IndexMain = () => {
+  const [mobile, setMobile] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const [user, loading] = useAuthState(auth);
   const handleNewPlan = async () => {
@@ -32,20 +34,32 @@ const IndexMain = () => {
     queryClient.invalidateQueries({ queryKey: ["savedplans"] });
     Router.push(`/dashboard/${newPlanUUID}`);
   };
+  useEffect(() => {
+    const handleMobileCheck = (e: any) => {
+      if (window.innerWidth <= 768) {
+        setMobile(true);
+      } else {
+        setMobile(false);
+      }
+    };
+    window.addEventListener("resize", handleMobileCheck);
+
+    return () => window.removeEventListener("resize", handleMobileCheck);
+  }, [window.innerWidth]);
   return (
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
         id='index-main-trying'
-        className='text-center font-satoshiBold text-5xl tracking-tighter text-white md:text-8xl z-[1]'
+        className='text-center font-satoshiBold text-5xl  text-white md:text-8xl md:tracking-tighter z-[1]'
       >
         TRYING TO PLAN
       </h1>
       <div className='flex flex-col w-full items-center justify-center md:flex-row relative '>
-        <Globe />
+        {mobile || <Globe />}
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'
-            className='text-transparent tracking-wide w-fit bg-clip-text font-satoshi text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl'
+            className='text-transparent  w-fit bg-clip-text font-satoshi text-6xl font-black bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 md:text-8xl md:tracking-wide'
           >
             <Typewriter
               typeSpeed={200}
@@ -58,7 +72,7 @@ const IndexMain = () => {
         <div className='w-full h-full flex items-center justify-center md:w-1/2 md:justify-start'>
           <span
             id='index-around'
-            className='px-2 tracking-widest font-satoshiBold w-fit font-s text-6xl text-yellow-500 md:text-8xl'
+            className='px-2  font-satoshiBold w-fit font-s text-6xl text-yellow-500 md:text-8xl md:tracking-widest'
           >
             AROUND
           </span>
@@ -67,7 +81,7 @@ const IndexMain = () => {
 
       <h1
         id='index-main-loadshedding'
-        className='font-extrabold text-center font-satoshiBlack text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple px-2 md:text-8xl drop-shadow-lg'
+        className='text-center font-satoshiBold text-5xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple px-2 md:text-8xl md:font-satoshiBlack drop-shadow-lg'
       >
         LOADSHEDDING ?
       </h1>

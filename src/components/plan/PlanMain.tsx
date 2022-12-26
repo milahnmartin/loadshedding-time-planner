@@ -28,9 +28,7 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
         ...state,
         member_times: action.PAYLOAD,
         active_member_times: action.PAYLOAD.map((items: any) => {
-          console.log("WE HIT THE FUNC");
           if (items.user_weekLSTimes) {
-            console.log("THIS WAS RERAN");
             return items.user_weekLSTimes.filter((times: any) => {
               return times.date === state.filterInputs?.startDate;
             });

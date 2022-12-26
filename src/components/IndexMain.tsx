@@ -4,7 +4,7 @@ import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import Link from "next/link";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { Typewriter } from "react-simple-typewriter";
@@ -34,8 +34,8 @@ const IndexMain = () => {
     queryClient.invalidateQueries({ queryKey: ["savedplans"] });
     Router.push(`/dashboard/${newPlanUUID}`);
   };
-  useEffect(() => {
-    const handleMobileCheck = (e: any) => {
+  useLayoutEffect(() => {
+    const handleMobileCheck = () => {
       if (window.innerWidth <= 768) {
         setMobile(true);
       } else {
@@ -54,7 +54,7 @@ const IndexMain = () => {
         TRYING TO PLAN
       </h1>
       <div className='flex flex-col w-full items-center justify-center md:flex-row relative '>
-        {mobile || <Globe />}
+        {!mobile && <Globe />}
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'

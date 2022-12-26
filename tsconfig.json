@@ -34,7 +34,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/helpers/Globe.jsxx",
+    "src/helpers/Globe.jsx",
+    "src/helpers/algorithm.ts",
     "src/components/**/*.tsx"
   ],
   "exclude": ["node_modules"]

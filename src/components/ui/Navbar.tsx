@@ -2,6 +2,7 @@ import Logo from "@assets/Logov3.png";
 import UserProfile from "@comps/profile/UserProfile";
 import { Gradient } from "@helpers/Gradient.js";
 import useFetchUserInvites from "@hooks/useFetchUserInvites";
+import { useQueryClient } from "@tanstack/react-query";
 import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import classNames from "classnames";
@@ -12,7 +13,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BiHide, BiShow } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-
 type NavbarProps = {
   dashboard?: boolean;
   filterState?: {
@@ -23,6 +23,7 @@ type NavbarProps = {
 const gradient = new Gradient() as any;
 
 const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
+  const query = useQueryClient();
   const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>("CHECKING");
@@ -91,7 +92,10 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
               {
                 <IoMdNotificationsOutline
                   id='bell-icon'
-                  onClick={() => Router.push("/invites")}
+                  onClick={() => {
+                    query.invalidateQueries(["userInvites"]);
+                    Router.push("/invites");
+                  }}
                   className={
                     invites.length > 0
                       ? classNames(

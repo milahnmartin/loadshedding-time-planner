@@ -3,7 +3,7 @@ import { Gradient } from "@helpers/Gradient.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppType } from "next/dist/shared/lib/utils";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Lottie from "react-lottie-player";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

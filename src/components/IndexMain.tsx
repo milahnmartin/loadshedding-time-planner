@@ -35,6 +35,9 @@ const IndexMain = () => {
     Router.push(`/dashboard/${newPlanUUID}`);
   };
   useLayoutEffect(() => {
+    if (window.innerWidth <= 768) {
+      setMobile(true);
+    }
     const handleMobileCheck = () => {
       if (window.innerWidth <= 768) {
         setMobile(true);

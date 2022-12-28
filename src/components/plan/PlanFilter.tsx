@@ -215,7 +215,6 @@ function PlanFilter({
             <div className='relative left-[6px] top-[.5px] transition-all group-hover:text-slate-800  '>
               {!filterbuttonText ? (
                 <span className='flex items-center gap-2 text-base'>
-                  {/* <AiFillFilter /> FILTER */}
                   <BsFilterCircle className='text-lg' /> FILTER
                 </span>
               ) : (

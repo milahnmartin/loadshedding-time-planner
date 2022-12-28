@@ -1,5 +1,4 @@
 import PlanFilter from "@comps/plan/PlanFilter";
-import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import supabase from "@utils/supabase-config";
@@ -7,6 +6,7 @@ import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
+import EskomStatus from "./EskomStatus";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "SET_FILTER_DATA":
@@ -116,14 +116,6 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     refetch: planRefetch,
   } = useFetchPlanData(router.query.plan_id as string);
 
-  const {
-    data: loadsheddingStageData,
-    error: loadsheddingStageError,
-    isLoading: loadsheddingStageLoading,
-    isFetching: loadsheddingStageFetching,
-    refetch: loadsheddingStageRefetch,
-  } = useFetchLoadsheddingStatus();
-
   useEffect(() => {
     if (planFetching) return;
     (async () => {
@@ -148,7 +140,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     })();
   }, [planFetching]);
 
-  if (planError || loadsheddingStageError || process.env.NODE_ENV === "production") {
+  if (planError || process.env.NODE_ENV === "production") {
     return (
       <div className='h-[90vh] w-screen flex items-center justify-center flex-col space-y-10'>
         <Image src='/Logov3.png' width={170} height={170} alt='LSPLANNER LOGO' />
@@ -184,20 +176,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         />
       )}
 
-      <div className='flex flex-col h-full w-6/6'>
-        <h1 className='text-white text-sm font-black'>
-          {loadsheddingStageLoading ? (
-            <>LOADING LOADSHEDDING STAGES</>
-          ) : (
-            JSON.stringify(loadsheddingStageData)
-          )}
-        </h1>
-        <pre className='text-pink-500 whitespace-pre-wrap'>
-          {JSON.stringify(planData)}
-        </pre>
-        <pre className='text-white whitespace-pre-wrap font-satoshiBold'>
-          {JSON.stringify(state.active_member_times)}
-        </pre>
+      <div className='flex border-2 h-[90vh] w-full'>
+        <EskomStatus />
+        <div className='h-full w-6/12 border-2 border-red-600'>this is middle stuff</div>
+        <div className='h-full w-3/12 border-2 border-cblue'>this is right stuff</div>
       </div>
     </div>
   );

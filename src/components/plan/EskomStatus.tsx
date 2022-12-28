@@ -19,10 +19,16 @@ function EskomStatus() {
         </h1>
       </div>
       <div className='border-2 border-pink-600 h-[40%] flex flex-col justify-center items-center'>
-        <h1>CAPE TOWN UPCOMING EVENTS</h1>
+        <h1 className='text-white font-satoshiItalic'>CAPE TOWN UPCOMING EVENTS</h1>
+        {loadsheddingStageData?.capetown?.next_stages?.map((info: unknown) => {
+          return <pre className='text-white font-satoshi'>{JSON.stringify(info)}</pre>;
+        })}
       </div>
       <div className='border-2 border-pink-600 h-[40%] flex flex-col justify-center items-center'>
-        <h1>ESKOM UPCOMING EVENTS</h1>
+        <h1></h1> <h1 className='text-white font-satoshiItalic'>ESKOM UPCOMING EVENTS</h1>
+        {loadsheddingStageData?.eskom?.next_stages?.map((info: unknown) => {
+          return <pre className='text-white font-satoshi'>{JSON.stringify(info)}</pre>;
+        })}
       </div>
     </div>
   );

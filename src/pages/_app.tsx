@@ -1,3 +1,4 @@
+import MobileErrorJson from "@assets/4386-connection-error.json";
 import LottieLoadJson from "@assets/97171-loading-plane.json";
 import { Gradient } from "@helpers/Gradient.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ const gradient = new Gradient() as any;
 const queryClient = new QueryClient();
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [isLoading, setisLoading] = useState<boolean>(true);
+  const [mobile, setMobile] = useState<boolean>(false);
   const ref = useRef() as any;
 
   useEffect(() => {
@@ -27,6 +29,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       gradient.initGradient("#gradient-canvas");
     }
   }, [ref, isLoading]);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setMobile(true);
+    }
+  }, []);
 
   if (isLoading) {
     return (
@@ -43,6 +51,31 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             LS PLANNER
           </h1>
         </span>
+      </div>
+    );
+  }
+
+  if (mobile) {
+    return (
+      <div ref={ref} className='w-full h-[90vh]'>
+        <canvas
+          className='w-full h-[100%] absolute'
+          id='gradient-canvas'
+          data-transition-in
+        />
+        <div className='w-full h-full flex flex-col items-center justify-center space-y-2'>
+          <Lottie
+            loop
+            animationData={MobileErrorJson}
+            play
+            style={{ width: 300, height: 300 }}
+          />
+
+          <h1 className='font-satoshiBlack text-white text-4xl animate-pulse tracking-wide text-center gap-y-4 flex flex-col'>
+            LS PLANNER IS UNAVAILIBLE ON MOBILE. <br />
+            <span>LS PLANNER APP COMING SOON</span>
+          </h1>
+        </div>
       </div>
     );
   }

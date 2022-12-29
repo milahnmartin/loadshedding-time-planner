@@ -4,14 +4,12 @@ import { auth } from "@utils/firebase-config";
 import supabase from "@utils/supabase-config";
 import Link from "next/link";
 import Router from "next/router";
-import { useLayoutEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { IoIosArrowForward, IoMdArrowRoundForward } from "react-icons/io";
 import { Typewriter } from "react-simple-typewriter";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 const IndexMain = () => {
-  const [mobile, setMobile] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const [user, loading] = useAuthState(auth);
   const handleNewPlan = async () => {
@@ -34,20 +32,7 @@ const IndexMain = () => {
     queryClient.invalidateQueries({ queryKey: ["savedplans"] });
     Router.push(`/dashboard/${newPlanUUID}`);
   };
-  useLayoutEffect(() => {
-    if (window.innerWidth <= 768) {
-      setMobile(true);
-    }
-    const handleMobileCheck = () => {
-      if (window.innerWidth <= 768) {
-        setMobile(true);
-      } else {
-        setMobile(false);
-      }
-    };
-    window.addEventListener("resize", handleMobileCheck);
-    return () => window.removeEventListener("resize", handleMobileCheck);
-  }, [window.innerWidth]);
+
   return (
     <div className='px-5 h-[90%] flex justify-center items-center flex-col space-y-9 overflow-hidden'>
       <h1
@@ -57,7 +42,7 @@ const IndexMain = () => {
         TRYING TO PLAN
       </h1>
       <div className='flex flex-col w-full items-center justify-center md:flex-row relative '>
-        {!mobile && <Globe />}
+        <Globe />
         <div className='w-full h-full flex items-center justify-center ml-4 md:justify-end md:w-1/2 md:ml-0'>
           <span
             id='index-type-writer'

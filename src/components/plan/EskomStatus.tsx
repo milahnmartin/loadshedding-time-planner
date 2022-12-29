@@ -10,18 +10,15 @@ function EskomStatus() {
     isFetching: loadsheddingStageFetching,
     refetch: loadsheddingStageRefetch,
   } = useFetchLoadsheddingStatus();
-  const capetownStages = classNames(
-    "font-satoshiBlack tracking-wide text-white text-xl",
-    {
-      "text-red-700": loadsheddingStageData?.capetown?.stage >= 4,
-      "text-red-500": loadsheddingStageData?.capetown?.stage == 3,
-      "text-amber-600": loadsheddingStageData?.capetown?.stage == 2,
-      "text-yellow-400": loadsheddingStageData?.capetown?.stage == 1,
-      "text-green-400": loadsheddingStageData?.capetown?.stage == 0,
-    }
-  );
+  const capetownStages = classNames("font-satoshiBold tracking-wide text-xl", {
+    "text-red-700": loadsheddingStageData?.capetown?.stage >= 4,
+    "text-red-500": loadsheddingStageData?.capetown?.stage == 3,
+    "text-amber-600": loadsheddingStageData?.capetown?.stage == 2,
+    "text-yellow-400": loadsheddingStageData?.capetown?.stage == 1,
+    "text-green-400": loadsheddingStageData?.capetown?.stage == 0,
+  });
 
-  const eskomStages = classNames("font-satoshiBlack tracking-wide text-white text-xl", {
+  const eskomStages = classNames("font-satoshiBold tracking-wide text-xl", {
     "text-red-700": loadsheddingStageData?.eskom?.stage >= 4,
     "text-red-500": loadsheddingStageData?.eskom?.stage == 3,
     "text-amber-600": loadsheddingStageData?.eskom?.stage == 2,

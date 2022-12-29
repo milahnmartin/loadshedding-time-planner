@@ -74,7 +74,7 @@ const IndexMain = () => {
         <div className='w-full h-full flex items-center justify-center md:w-1/2 md:justify-start'>
           <span
             id='index-around'
-            className='px-2  font-satoshiBold w-fit font-s text-6xl text-yellow-500 md:text-8xl md:tracking-widest'
+            className='px-2  font-satoshiBold w-fit text-6xl text-yellow-500 md:text-8xl md:tracking-widest'
           >
             AROUND
           </span>

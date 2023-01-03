@@ -16,11 +16,11 @@ enum LabelType {
   invitedPending,
 }
 const filterInputClassNames = classNames(
-  " w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
+  "w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
 );
 
 const filterInputTextClassNames = classNames(
-  " w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
+  "w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
 );
 
 function PlanFilter({
@@ -84,9 +84,9 @@ function PlanFilter({
       user_weekLSTimes,
     }: any = userData[0];
 
-    const userAlreadyInvited: boolean = user_plan_Invites.some((data: IInviteData) => {
-      return data.plan_id === router.query.plan_id;
-    });
+    const userAlreadyInvited: boolean = user_plan_Invites.some(
+      (data: IInviteData) => data.plan_id === router.query.plan_id
+    );
 
     if (userAlreadyInvited) {
       toast.warning("User Already Invited");
@@ -115,7 +115,8 @@ function PlanFilter({
             plan_id: router.query.plan_id,
             invitedBy: [
               loggedInUser?.uid,
-              loggedInUser?.email ? loggedInUser?.email : loggedInUser?.displayName,
+              //todo check if works
+              loggedInUser?.email || loggedInUser?.displayName,
             ],
           },
         ],

@@ -46,6 +46,9 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
     }
   }, [ref]);
 
+  const bellClassname = classNames("transition-all duration-500", {
+    "animate-[wiggle_1.5s_ease-in-out_infinite]": invites?.length > 0,
+  });
   return (
     <header ref={ref} className='sticky top-0 z-10 '>
       <canvas
@@ -79,15 +82,13 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
           {!inviteLoading && (
             <span
               title='Invites'
-              className={
-                invites.length === 0
-                  ? classNames(
-                      "not-modal h-fit w-fit cursor-pointer text-white transition-all duration-200 hover:text-cblue relative"
-                    )
-                  : classNames(
-                      "noti-modal h-fit w-fit cursor-pointer text-red-700 transition-transform duration-200 relative"
-                    )
-              }
+              className={classNames(
+                "noti-modal h-fit w-fit cursor-pointer duration-200 relative transition-all",
+                {
+                  "text-white hover:text-cblue": !invites.length,
+                  "text-red-700": invites.length,
+                }
+              )}
             >
               {
                 <IoMdNotificationsOutline
@@ -96,13 +97,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
                     query.invalidateQueries(["userInvites"]);
                     Router.push("/invites");
                   }}
-                  className={
-                    invites.length > 0
-                      ? classNames(
-                          "transition-all animate-[wiggle_1.5s_ease-in-out_infinite] duration-500"
-                        )
-                      : classNames("")
-                  }
+                  className={bellClassname}
                   size={25}
                 />
               }

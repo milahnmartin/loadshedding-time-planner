@@ -7,29 +7,17 @@ type LabelProps = {
 };
 
 const GreenLabel = ({ data, variant }: LabelProps) => {
-  const lsColor = classNames(
-    "text-white text-1xl rounded-full bg-red-700 flex items-center justify-center px-4 py-2 font-Inter font-black"
-  );
-  const avColor = classNames(
-    "text-white text-1xl rounded-full bg-cblue flex items-center justify-center px-4 py-2 font-Inter font-black"
-  );
-  const bufferColor = classNames(
-    "text-white text-1xl rounded-full bg-yellow-500 flex items-center justify-center px-4 py-2 font-Inter font-black"
+  const lscolorClassName = classNames(
+    "text-white text-1xl rounded-full flex items-center justify-center px-4 py-2 font-SatoshiBlack",
+    {
+      "bg-red-700": variant === "ls",
+      "bg-cblue": variant === "availible",
+      "bg-yellow-500": variant === "buffer",
+    }
   );
 
-  const theColor = () => {
-    switch (variant) {
-      case "ls":
-        return lsColor;
-      case "availible":
-        return avColor;
-      case "buffer":
-        return bufferColor;
-    }
-  };
-  console.log(data);
   return (
-    <div className={theColor()}>
+    <div className={lscolorClassName}>
       <pre className='text-white'>{JSON.stringify(data)}</pre>
     </div>
   );

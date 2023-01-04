@@ -41,9 +41,8 @@ function EskomStatus() {
   return (
     <div className='flex flex-col border-2 h-full w-3/12'>
       <div className='h-[20%] text-center flex items-center justify-center flex-col space-y-4 p-2 border-2 border-red-700'>
-        <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'>
-          CURRENT STAGES:
-        </h1>
+        {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
+        <h1 className='font-satoshiBold text-3xl text-white'>CURRENT STAGES:</h1>
         <h1 className={capetownStages}>
           Cape Town: Stage: <span>{loadsheddingStageData?.capetown?.stage}</span>
         </h1>
@@ -52,7 +51,8 @@ function EskomStatus() {
         </h1>
       </div>
       <div className='border-2 border-pink-600 h-[40%] p-2 flex flex-col justify-center items-center'>
-        <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'>
+        {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
+        <h1 className='font-satoshiBold text-center text-2xl text-white'>
           CAPE TOWN UPCOMING EVENTS:
         </h1>
         <div className='flex flex-col h-full justify-center space-y-1'>
@@ -64,7 +64,8 @@ function EskomStatus() {
         </div>
       </div>
       <div className='border-2 border-pink-600 h-[40%] flex p-2 flex-col justify-center items-center'>
-        <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'>
+        {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
+        <h1 className='font-satoshiBold text-center text-2xl text-white'>
           ESKOM UPCOMING EVENTS:
         </h1>
 

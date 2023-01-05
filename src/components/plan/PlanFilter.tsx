@@ -122,7 +122,7 @@ function PlanFilter({
             invitedBy: [
               loggedInUser?.uid,
               //todo check if works
-              loggedInUser?.email || loggedInUser?.displayName,
+              loggedInUser?.email ?? loggedInUser?.displayName,
             ],
           },
         ],

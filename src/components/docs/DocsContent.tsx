@@ -1,5 +1,6 @@
 import Logo from "@assets/Logov3.png";
 import Introduction from "@docs/Introduction";
+import classNames from "classnames";
 import Image from "next/image";
 import { useState } from "react";
 enum DocPages {
@@ -30,39 +31,43 @@ function DocsContent() {
             onClick={() => {
               setdocPage(DocPages.Introduction);
             }}
-            className={
-              docpage === DocPages.Introduction
-                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-            }
+            className={classNames(
+              "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple",
+              {
+                "bg-gradient-to-r from-c2aqua via-c2blue to-c2purple":
+                  docpage === DocPages.Introduction,
+              }
+            )}
           >
-            <h1 className='font-Inter font-black text-white text-center'>INTRODUCTION</h1>
+            <h1 className='font-satoshiBold text-white text-center'>INTRO</h1>
           </div>
           <div
             onClick={() => {
               setdocPage(DocPages.GettingStarted);
             }}
-            className={
-              docpage === DocPages.GettingStarted
-                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-            }
+            className={classNames(
+              "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple",
+              {
+                "bg-gradient-to-r from-c2aqua via-c2blue to-c2purple":
+                  docpage === DocPages.GettingStarted,
+              }
+            )}
           >
-            <h1 className='font-Inter font-black text-white text-center'>
-              GETTING STARTED
-            </h1>
+            <h1 className='font-satoshiBold text-white text-center'>GETTING STARTED</h1>
           </div>
           <div
             onClick={() => {
               setdocPage(DocPages.HowToUse);
             }}
-            className={
-              docpage === DocPages.HowToUse
-                ? "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-                : "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple"
-            }
+            className={classNames(
+              "w-[60%] h-fit px-4 py-2 rounded-lg cursor-pointer transition-all duration-500 hover:bg-gradient-to-r from-c2aqua via-c2blue to-c2purple",
+              {
+                "bg-gradient-to-r from-c2aqua via-c2blue to-c2purple":
+                  docpage === DocPages.HowToUse,
+              }
+            )}
           >
-            <h1 className='font-Inter font-black text-white text-center'>HOW TO USE</h1>
+            <h1 className='font-satoshiBold text-white text-center'>HOW TO USE</h1>
           </div>
         </div>
         {/* Vertical Div */}

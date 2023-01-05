@@ -1,4 +1,3 @@
-import EskomStatus from "@comps/plan/EskomStatus";
 import PlanMain from "@comps/plan/PlanMain";
 import Navbar from "@comps/ui/Navbar";
 import { NextPage } from "next";
@@ -12,11 +11,7 @@ const IdPage: NextPage = () => {
         <title>LS Planner / Dashboard</title>
       </Head>
       <Navbar dashboard={true} filterState={{ filter, setshowfilter }} />
-      {/* <GameidContext.Provider > */}
-
       <PlanMain filterState={{ filter, setshowfilter }} />
-
-      {/* \ */}
     </div>
   );
 };

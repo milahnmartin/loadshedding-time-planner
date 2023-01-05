@@ -1,4 +1,7 @@
+import EskomStatus from "@comps/plan/EskomStatus";
 import PlanFilter from "@comps/plan/PlanFilter";
+import RightSide from "@comps/plan/RightSide";
+import TimeInformation from "@comps/plan/TimeInformation";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import supabase from "@utils/supabase-config";
@@ -6,7 +9,6 @@ import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
-import EskomStatus from "./EskomStatus";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "SET_FILTER_DATA":
@@ -176,10 +178,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         />
       )}
 
-      <div className='flex border-2 h-[90vh] w-full'>
+      <div className='flex border-2 h-[90vh] w-full overflow-y-scroll'>
         <EskomStatus />
-        <div className='h-full w-6/12 border-2 border-red-600'>this is middle stuff</div>
-        <div className='h-full w-3/12 border-2 border-cblue'>this is right stuff</div>
+        <TimeInformation />
+        <RightSide />
       </div>
     </div>
   );

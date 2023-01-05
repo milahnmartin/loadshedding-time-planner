@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 function handleFetchLoadsheddingStatus() {
-  return fetch("/api/sepush/status").then((res) => res.json());
+  return fetch("/api/sepush/status").then((stagesData: any) => stagesData.json());
 }
 
 function useFetchLoadsheddingStatus() {

@@ -66,6 +66,12 @@ function PlanFilter({
       .select(`user_id,user_email,user_sepushID,user_plan_Invites,user_weekLSTimes`)
       .or(`user_id.eq.${invite_id},user_email.eq.${invite_id}`);
 
+    if (loggedInUser?.uid === userData![0]?.user_id) {
+      toast.warning("You Cannot Invite Yourself");
+      inviteInputRef!.current!.focus();
+      inviteInputRef!.current!.value = "";
+      return;
+    }
     if (userError) {
       toast.error("Something Went Wrong While Fetching User Info");
       return;

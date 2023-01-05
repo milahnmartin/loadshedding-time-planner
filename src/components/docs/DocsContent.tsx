@@ -3,6 +3,8 @@ import Introduction from "@docs/Introduction";
 import classNames from "classnames";
 import Image from "next/image";
 import { useState } from "react";
+import GettingStarted from "@docs/GettingStarted";
+import HowToUse from "@docs/HowToUse";
 enum DocPages {
   Introduction,
   GettingStarted,
@@ -16,9 +18,9 @@ function DocsContent() {
       case DocPages.Introduction:
         return <Introduction />;
       case DocPages.GettingStarted:
-        return <p>THIS IS GETTING STARTED</p>;
+        return <GettingStarted />;
       case DocPages.HowToUse:
-        return <p>THIS IS HOW TO USE</p>;
+        return <HowToUse />;
       default:
         return <Introduction />;
     }

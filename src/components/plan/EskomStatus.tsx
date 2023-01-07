@@ -1,7 +1,8 @@
+import LottieLoading from "@assets/90918-charging-electricity.json";
 import EskomUpcomingEventLabel from "@comps/labels/EskomUpcomingEventLabel";
 import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
-import { Player } from "@lottiefiles/react-lottie-player";
 import classNames from "classnames";
+import Lottie from "react-lottie-player";
 function EskomStatus() {
   const {
     data: loadsheddingStageData,
@@ -31,6 +32,19 @@ function EskomStatus() {
         <h1 className='text-center font-satoshiBlack text-red-700 text-2xl'>
           ERROR FETCHING STAGES
         </h1>
+      </div>
+    );
+  }
+
+  if (loadsheddingStageLoading) {
+    return (
+      <div className='flex h-full w-3/12 items-center justify-center'>
+        <Lottie
+          loop
+          animationData={LottieLoading}
+          play
+          style={{ width: "35%", height: "35%" }}
+        />
       </div>
     );
   }

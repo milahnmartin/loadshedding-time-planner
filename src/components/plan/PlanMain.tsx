@@ -1,3 +1,4 @@
+import LoaddingLottie from "@assets/90918-charging-electricity.json";
 import EskomStatus from "@comps/plan/EskomStatus";
 import PlanFilter from "@comps/plan/PlanFilter";
 import RightSide from "@comps/plan/RightSide";
@@ -8,6 +9,7 @@ import supabase from "@utils/supabase-config";
 import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
+import Lottie from "react-lottie-player";
 import { toast } from "react-toastify";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
@@ -141,6 +143,19 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       });
     })();
   }, [planFetching]);
+
+  if (planLoading) {
+    return (
+      <div className='h-[90vh] w-screen flex items-center justify-center flex-col'>
+        <Lottie
+          loop
+          animationData={LoaddingLottie}
+          play
+          style={{ width: "35%", height: "35%" }}
+        />
+      </div>
+    );
+  }
 
   if (planError || process.env.NODE_ENV === "production") {
     return (

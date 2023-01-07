@@ -1,5 +1,5 @@
 import MobileErrorJson from "@assets/4386-connection-error.json";
-import LottieLoadJson from "@assets/97171-loading-plane.json";
+import LottieLoadJson from "@assets/90918-charging-electricity.json";
 import { Gradient } from "@helpers/Gradient.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

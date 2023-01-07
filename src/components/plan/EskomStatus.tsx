@@ -38,12 +38,13 @@ function EskomStatus() {
   if (loadsheddingStageLoading)
     return (
       <div className='flex items-center justify-center border-2 h-full w-3/12'>
+        {/* https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json */}
         <Player
-          src='https://assets2.lottiefiles.com/private_files/lf30_3vhjjbex.json'
+          src='https://assets7.lottiefiles.com/packages/lf20_hbr24n88.json'
           style={{ height: "30%", width: "30%" }}
           autoplay
           loop
-          speed={0.5}
+          speed={1}
         />
       </div>
     );

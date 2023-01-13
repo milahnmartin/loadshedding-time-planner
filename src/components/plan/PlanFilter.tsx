@@ -181,9 +181,15 @@ function PlanFilter({
               value={inputData.startDate}
               type='date'
               className={filterInputClassNames}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setInputData({ ...inputData, startDate: e.target.value })
-              }
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                const limitDate = new Date().getDate() + 7;
+                const setDate = new Date(e.target.value).getDate();
+                if (setDate >= limitDate) {
+                  toast.error("You can only filter for a week ahead");
+                  return;
+                }
+                setInputData({ ...inputData, startDate: e.target.value });
+              }}
             />
           </div>
 

@@ -73,7 +73,7 @@ const LoadsheddingProfile = () => {
 
   const handleUpdateSchedule = async () => {
     if (updateDebounce) {
-      toast.error("Why are you spamming the update button ?");
+      toast.error("Why are you spamming the refresh button ?");
       return;
     }
     const { data, error } = await supabase
@@ -104,7 +104,7 @@ const LoadsheddingProfile = () => {
     setUpdateDebounce(true);
     setTimeout(() => {
       setUpdateDebounce(false);
-    }, 10000);
+    }, 1000 * 60 * 5);
   };
 
   const {

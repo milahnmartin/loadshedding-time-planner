@@ -141,7 +141,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       for (const users of [...emailData, ...uidData]) {
         if (!users) continue;
         if (!users?.user_weekLSTimes) {
-          toast.warning(`USER ${users?.user_email} HAS NO WEEKLY TIMES SET`);
+          toast.warning(`ASK ${users?.user_email} TO REFRESH THEIR TIMES IN LS SETTINGS`);
           continue;
         }
         const latestTime =

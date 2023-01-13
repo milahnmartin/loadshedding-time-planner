@@ -36,7 +36,9 @@ const LoadsheddingProfile = () => {
 
     const { data, error } = await supabase
       .from("user_info")
-      .update({ user_weekLSTimes: areaWeekLSTimes?.lsdata })
+      .update({
+        user_weekLSTimes: areaWeekLSTimes?.lsdata,
+      })
       .eq("user_id", user?.uid);
 
     if (error) {
@@ -92,7 +94,9 @@ const LoadsheddingProfile = () => {
 
     const { error: updateError } = await supabase
       .from("user_info")
-      .update({ user_weekLSTimes: areaWeekLSTimes?.lsdata })
+      .update({
+        user_weekLSTimes: areaWeekLSTimes?.lsdata,
+      })
       .eq("user_id", user?.uid);
 
     if (updateError) {

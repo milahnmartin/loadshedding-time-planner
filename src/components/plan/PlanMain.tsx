@@ -1,7 +1,6 @@
 import LoaddingLottie from "@assets/90918-charging-electricity.json";
 import EskomStatus from "@comps/plan/EskomStatus";
 import PlanFilter from "@comps/plan/PlanFilter";
-import RightSide from "@comps/plan/RightSide";
 import TimeInformation from "@comps/plan/TimeInformation";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
@@ -149,7 +148,6 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           updatedUsers.push(users);
           continue;
         }
-        console.log(new Date(latestTime?.date).getDate());
 
         const updatedTime = await fetch(`/api/sepush/${users?.user_sepushID?.id}`).then(
           (resp) => resp.json()
@@ -236,7 +234,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
             end: state.filterInputs.endTime,
           }}
         />
-        <RightSide />
+        {/* <RightSide /> */}
+        <div className='h-full w-3/12 border-2 border-cblue text-white'>
+          {JSON.stringify(state.active_member_times)}
+        </div>
       </div>
     </div>
   );

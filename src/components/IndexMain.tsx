@@ -19,9 +19,10 @@ const IndexMain = () => {
       return;
     }
     const newPlanUUID = uuidv4();
-    const { data, error } = await supabase.from("user_plans").insert({
+    const { error } = await supabase.from("user_plans").insert({
       plan_id: newPlanUUID,
       user_id: user?.uid,
+      plan_authorizedUsers: [user?.uid],
       plan_createdAt: new Date().toISOString(),
     });
     if (error) {

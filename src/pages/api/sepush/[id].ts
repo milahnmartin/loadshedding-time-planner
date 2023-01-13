@@ -23,9 +23,8 @@ export default async function fetchUserLSTimesById(
   const lsDataJson = await lsData.json();
   if (!lsDataJson.error) {
     const { events, info, schedule } = lsDataJson;
-    const currentStage = +events[0].note.split(" ")[1];
     const { days } = schedule;
-    res.json({ lsdata: [...days], currentStage });
+    res.json({ lsdata: days });
     return;
   }
   res.json({ error: "schedule not found" });

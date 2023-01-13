@@ -144,12 +144,8 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           toast.warning(`ASK ${users?.user_email} TO REFRESH THEIR TIMES IN LS SETTINGS`);
           continue;
         }
-        const latestTime =
-          users?.user_weekLSTimes[users?.user_weekLSTimes.length - 1]?.date;
-        if (
-          new Date(latestTime).getDate() >
-          new Date(state.filterInputs?.startDate).getDate()
-        ) {
+        const latestTime = users?.user_weekLSTimes[0]?.date;
+        if (new Date(latestTime).getDate() === new Date().getDate()) {
           updatedUsers.push(users);
           continue;
         }

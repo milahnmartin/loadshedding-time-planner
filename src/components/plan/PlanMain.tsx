@@ -125,21 +125,59 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     (async () => {
       const { data: emailData, error: errorData } = await supabase
         .from("user_info")
-        .select("user_id,user_email,user_weekLSTimes")
+        .select("user_id,user_sepushID,user_email,user_weekLSTimes")
         .in("user_email", planData?.plan_authorizedUsers);
 
       const { data: uidData, error: uidError } = await supabase
         .from("user_info")
-        .select("user_id,user_email,user_weekLSTimes")
+        .select("user_id,user_sepushID,user_email,user_weekLSTimes")
         .in("user_id", planData?.plan_authorizedUsers);
 
       if (errorData || uidError) {
         toast.error("Error fetching authorized users");
         return;
       }
+      const updatedUsers = [];
+      for (const users of [...emailData, ...uidData]) {
+        if (!users) continue;
+        if (!users?.user_weekLSTimes) {
+          toast.warning(`USER ${users?.user_email} HAS NO WEEKLY TIMES SET`);
+          continue;
+        }
+        const latestTime =
+          users?.user_weekLSTimes[users?.user_weekLSTimes.length - 1]?.date;
+        if (
+          new Date(latestTime).getDate() >
+          new Date(state.filterInputs?.startDate).getDate()
+        ) {
+          updatedUsers.push(users);
+          continue;
+        }
+        console.log(new Date(latestTime?.date).getDate());
+
+        const updatedTime = await fetch(`/api/sepush/${users?.user_sepushID?.id}`).then(
+          (resp) => resp.json()
+        );
+        if (!updatedTime) {
+          console.log(`DEV LOG - COULDNT UPDATE TIME FOR ${users?.user_sepushID?.id}`);
+          continue;
+        }
+
+        const { data, error } = await supabase
+          .from("user_info")
+          .update({ user_weekLSTimes: updatedTime?.lsdata })
+          .eq("user_id", users?.user_id)
+          .select();
+
+        if (error) {
+          console.log(`DEV LOG - COULDNT UPDATE TIME FOR ${users?.user_sepushID?.id}`);
+          continue;
+        }
+        updatedUsers.push(data![0]);
+      }
       dispatch({
         TYPE: "SET_LS_USERS_TIME",
-        PAYLOAD: [...emailData, ...uidData],
+        PAYLOAD: updatedUsers,
       });
     })();
   }, [planFetching]);
@@ -195,7 +233,13 @@ export default function PlanMain({ filterState }: PlanMainProps) {
 
       <div className='flex border-2 h-[90vh] w-full overflow-y-scroll'>
         <EskomStatus />
-        <TimeInformation />
+        <TimeInformation
+          LSTimes={state.active_member_times}
+          timeScope={{
+            start: state.filterInputs.startDate,
+            end: state.filterInputs.endTime,
+          }}
+        />
         <RightSide />
       </div>
     </div>

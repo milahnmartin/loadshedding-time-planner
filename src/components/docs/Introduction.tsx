@@ -2,14 +2,14 @@ function Introduction() {
   return (
     <div className='flex flex-col h-fit w-fit p-6'>
       <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl'>
-        What is LS PLANNER?
+        WHAT IS LS PLANNER?
       </h1>
       <p className='text-white font-satoshi text-lg pb-6'>
         LS PLANNER is a tool that makes it simple and easy to schedule meetings and gaming
         sessions around loadshedding.
       </p>
       <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl'>
-        How does LS PLANNER work?
+        HOW DOES LS PLANNER WORK?
       </h1>
       <p className='text-white font-satoshi text-lg pb-6'>
         Users set their loadshedding location. LS PLANNER then automatically tracks their
@@ -21,7 +21,7 @@ function Introduction() {
         timeframe.
       </p>
       <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl'>
-        Why use LS PLANNER?
+        WHY USE LS PLANNER?
       </h1>
       <p className='text-white font-satoshi text-lg pb-6'>
         There is nothing more frustrating than trying to do something productive or

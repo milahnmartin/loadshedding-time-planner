@@ -92,7 +92,7 @@ function DocsContent() {
         </div>
         {/* Vertical Div end */}
       </div>
-      <div className='w-full flex items-center justify-center flex-col md:3/4 border-2'>
+      <div className='w-full flex items-center justify-center flex-col md:3/4 border-0'>
         {handleDocPage(docpage)}
       </div>
     </div>

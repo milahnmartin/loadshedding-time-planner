@@ -19,6 +19,7 @@ const plans: NextPage = () => {
     refetch: refetchSavedPlans,
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useFetchSavedPlans();
+  console.log(savedPlans);
   const handlePlanDelete = async (plan_id: string) => {
     if (!plan_id) {
       toast.error("No Plan Id Provided");

@@ -22,7 +22,6 @@ const IndexMain = () => {
     const { error } = await supabase.from("user_plans").insert({
       plan_id: newPlanUUID,
       user_id: user?.uid,
-      plan_authorizedUsers: [user?.uid],
       plan_createdAt: new Date().toISOString(),
     });
     if (error) {

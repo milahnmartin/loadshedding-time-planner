@@ -94,6 +94,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
 
   const handleUserRemove = async (rUser: string) => {
     if (!rUser) return;
+    if (rUser === planData?.user_id) {
+      toast.error("You can't remove yourself from the plan");
+      return;
+    }
     const newMembers = planData?.plan_authorizedUsers?.filter(
       (member: string) => member !== rUser
     );
@@ -130,7 +134,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       const { data: uidData, error: uidError } = await supabase
         .from("user_info")
         .select("user_id,user_sepushID,user_email,user_weekLSTimes")
-        .in("user_id", planData?.plan_authorizedUsers);
+        .in("user_id", [planData?.plan_authorizedUsers, planData?.user_id]);
 
       if (errorData || uidError) {
         toast.error("Error fetching authorized users");
@@ -214,7 +218,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     <div className='w-full h-full relative'>
       {filterState.filter && (
         <PlanFilter
-          members={planData?.plan_authorizedUsers}
+          members={[...planData?.plan_authorizedUsers, planData?.user_id]}
           teams={planData?.plan_authorizedTeams}
           invitedData={planData?.plan_InvitedData}
           filterSettings={state.filterInputs}

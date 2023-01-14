@@ -9,7 +9,7 @@ const fetchSavedPlans = async ({ queryKey }: any) => {
     .from("user_plans")
     .select(
       `
-      plan_id,plan_lsTimes,plan_authorizedUsers,plan_authorizedTeams,plan_createdAt
+      plan_id,plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt
       `
     )
     .eq("user_id", queryKey[1]);
@@ -18,7 +18,7 @@ const fetchSavedPlans = async ({ queryKey }: any) => {
     .from("user_plans")
     .select(
       `
-    plan_id,plan_lsTimes,plan_authorizedUsers,plan_authorizedTeams,plan_createdAt
+    plan_id,plan_lsTimes,plan_authorizedUsers,user_id,plan_authorizedTeams,plan_createdAt
     `
     )
     .contains("plan_authorizedUsers", JSON.stringify([queryKey[1]]));

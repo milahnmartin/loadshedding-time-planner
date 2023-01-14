@@ -248,6 +248,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           timeScope={{
             start: state.filterInputs.startDate,
             end: state.filterInputs.endTime,
+            date: state.filterInputs.startDate,
           }}
         />
         {/* <RightSide /> */}

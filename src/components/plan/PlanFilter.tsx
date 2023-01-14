@@ -32,6 +32,7 @@ function PlanFilter({
   removeUserCB,
   refetchPlanData,
   toggleFilter,
+  filterVisible,
 }: PlanFilterType) {
   const [loggedInUser, loading] = useAuthState(auth);
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
@@ -167,11 +168,12 @@ function PlanFilter({
     await configureUserInviteForInfo(inviteInput);
   };
 
+  const filterClassnames = classNames(
+    "absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm"
+  );
+
   return (
-    <div
-      id='dashboard-filter'
-      className='absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm'
-    >
+    <div id='dashboard-filter' className={filterClassnames}>
       <div className='flex flex-col h-full w-1/2 '>
         <form
           onSubmit={handleFilterSubmit}

@@ -32,6 +32,7 @@ export type PlanFilterType = {
   removeUserCB: (userId: string) => void;
   refetchPlanData?: () => void;
   toggleFilter?: React.Dispatch<React.SetStateAction<boolean>>;
+  filterVisible?: boolean;
 };
 
 export type PlanInvitedType = {

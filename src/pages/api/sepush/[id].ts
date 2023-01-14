@@ -24,8 +24,8 @@ export default async function fetchUserLSTimesById(
   if (!lsDataJson.error) {
     const { events, info, schedule } = lsDataJson;
     const { days } = schedule;
-    const stageRegion = pushID!.split("-")[0] === "capetown" ? "capetown" : "eskom";
-    res.json({ lsdata: days, stageRegion });
+
+    res.json({ lsdata: days });
     return;
   }
   res.json({ error: "schedule not found" });

@@ -16,12 +16,18 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
       return {
         ...state,
         filterInputs: action.PAYLOAD.filterInputs,
-        active_member_times: state.member_times
+        active_member_times: state.user_data
           .map((items: any) => {
             if (items.user_weekLSTimes) {
-              return items.user_weekLSTimes.filter((times: any) => {
-                return times.date === action.PAYLOAD.filterInputs?.startDate;
-              });
+              return {
+                timeData: items.user_weekLSTimes.filter(
+                  (times: any) => times.date === action.PAYLOAD.filterInputs?.startDate
+                ),
+                stageRegion:
+                  items?.user_sepushID?.id.split("-")[0] === "capetown"
+                    ? "capetown"
+                    : "eskom",
+              };
             }
           })
           .flat(),
@@ -29,12 +35,18 @@ const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
     case "SET_LS_USERS_TIME":
       return {
         ...state,
-        member_times: action.PAYLOAD,
+        user_data: action.PAYLOAD,
         active_member_times: action.PAYLOAD.map((items: any) => {
           if (items.user_weekLSTimes) {
-            return items.user_weekLSTimes.filter((times: any) => {
-              return times.date === state.filterInputs?.startDate;
-            });
+            return {
+              timeData: items.user_weekLSTimes.filter(
+                (times: any) => times.date === state.filterInputs?.startDate
+              ),
+              stageRegion:
+                items?.user_sepushID?.id.split("-")[0] === "capetown"
+                  ? "capetown"
+                  : "eskom",
+            };
           }
         }).flat(),
       };
@@ -65,7 +77,7 @@ type PlanMainProps = {
 export default function PlanMain({ filterState }: PlanMainProps) {
   const router = useRouter();
   const [state, dispatch] = useReducer(handleReducer, {
-    member_times: [],
+    user_data: [],
     active_member_times: [],
     team_times: [],
     active_team_times: [],
@@ -240,7 +252,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         />
         {/* <RightSide /> */}
         <div className='h-full w-3/12 border-2 border-cblue text-white'>
-          {JSON.stringify(state.active_member_times)}
+          {/* <pre className='text-red-700'>{JSON.stringify(state.user_data, null, 2)}</pre> */}
+          <pre className='text-pink-300 font-satoshiBlack tracking-wide'>
+            {JSON.stringify(state.active_member_times, null, 2)}
+          </pre>
         </div>
       </div>
     </div>

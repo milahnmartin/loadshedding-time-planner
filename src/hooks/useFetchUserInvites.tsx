@@ -23,6 +23,6 @@ export default function useFetchUserInvites(userID: string) {
   return useQuery(["userInvites", userID], fetchUserInvites, {
     refetchOnWindowFocus: true,
     staleTime: 1000 * 60 * 1,
-    enabled: userID ? true : false,
+    enabled: !!userID,
   });
 }

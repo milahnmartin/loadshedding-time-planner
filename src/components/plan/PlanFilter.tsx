@@ -166,6 +166,7 @@ function PlanFilter({
     }
     await configureUserInviteForInfo(inviteInput);
   };
+
   return (
     <div
       id='dashboard-filter'

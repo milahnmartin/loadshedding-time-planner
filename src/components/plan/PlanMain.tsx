@@ -90,7 +90,10 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       )
         .toISOString()
         .split("T")[0] as string,
-      startTime: "17:00",
+      startTime: new Date().toLocaleTimeString("en-ZA", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
       endTime: "02:00",
     },
   });

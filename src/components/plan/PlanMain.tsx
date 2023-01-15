@@ -158,8 +158,14 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       const updatedUsers = [];
       for (const users of [...emailData, ...uidData]) {
         if (!users) continue;
+        if (!users?.user_sepushID?.id) {
+          toast.warning(`${users?.user_email} HAS NOT SET THEIR LOADSHEDDING AREA YET`);
+          continue;
+        }
         if (!users?.user_weekLSTimes) {
-          toast.warning(`ASK ${users?.user_email} TO REFRESH THEIR TIMES IN LS SETTINGS`);
+          toast.error(
+            `WE COULDNT GET ${users?.user_email}'S LOADSHEDDING TIMES, CONTACT THE DEVELOPER`
+          );
           continue;
         }
         const latestTime = users?.user_weekLSTimes[0]?.date;

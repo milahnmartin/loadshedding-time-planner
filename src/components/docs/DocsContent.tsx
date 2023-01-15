@@ -18,13 +18,17 @@ function DocsContent() {
       case DocPages.Introduction:
         return <Introduction />;
       case DocPages.GettingStarted:
-        return <GettingStarted />;
+        return <GettingStarted cb={handlePagecb} />;
       case DocPages.HowToUse:
         return <HowToUse />;
       default:
         return <Introduction />;
     }
   };
+
+  function handlePagecb(pagename: DocPages) {
+    setdocPage(pagename);
+  }
   return (
     <div className='h-[80%] flex mt-[3.5rem] pr-4 '>
       <div className='w-1/3 justify-end px-5 hidden md:flex '>

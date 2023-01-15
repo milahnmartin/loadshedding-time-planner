@@ -17,17 +17,35 @@ function Introduction() {
           speed={0.8}
         />
       </span>
-      <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl'>
-        WHAT IS LS PLANNER?
-      </h1>
+      <span className='flex space-x-1 h-fit items-center'>
+        <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl'>
+          WHAT IS LS PLANNER?
+        </h1>
+        {/* <Player
+          src='https://assets5.lottiefiles.com/packages/lf20_tyi61jpp.json'
+          className='player w-[50px] h-[50px] '
+          autoplay
+          loop
+          speed={0.8}
+        /> */}
+      </span>
       <p className='text-white font-satoshi text-lg pb-4'>
         LS PLANNER is a tool that makes it simple and easy to schedule meetings and gaming
         sessions around loadshedding.
       </p>
       <hr className={gline} />
-      <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl pt-4'>
-        HOW DOES LS PLANNER WORK?
-      </h1>
+      <span className='flex space-x-1 h-fit items-center'>
+        <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl pt-4'>
+          HOW DOES LS PLANNER WORK?
+        </h1>
+        {/* <Player
+          src='https://assets10.lottiefiles.com/datafiles/9qxaAmrB5yzi03f/data.json'
+          className='player w-[50px] h-[50px] '
+          autoplay
+          loop
+          speed={0.5}
+        /> */}
+      </span>
       <p className='text-white font-satoshi text-lg pb-4'>
         Users set their loadshedding location. LS PLANNER then automatically tracks their
         loadshedding schedule through an API. The user then creates a "plan" where they
@@ -38,9 +56,18 @@ function Introduction() {
         timeframe.
       </p>
       <hr className={gline} />
-      <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl pt-4'>
-        WHY USE LS PLANNER?
-      </h1>
+      <span className='flex space-x-1 h-fit items-center'>
+        <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple font-satoshiBold text-2xl pt-4'>
+          WHY USE LS PLANNER?
+        </h1>
+        {/* <Player
+          src='https://assets10.lottiefiles.com/packages/lf20_e7y2w0zq.json'
+          className='player w-[50px] h-[50px] '
+          autoplay
+          loop
+          speed={0.5}
+        /> */}
+      </span>
       <p className='text-white font-satoshi text-lg pb-4'>
         There is nothing more frustrating than trying to do something productive or
         playing some games with friends just for loadshedding to end it. It is predicted

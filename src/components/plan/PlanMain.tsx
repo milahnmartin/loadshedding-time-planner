@@ -246,7 +246,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         <TimeInformation
           LSTimes={state.active_member_times}
           timeScope={{
-            start: state.filterInputs.startDate,
+            start: state.filterInputs.startTime,
             end: state.filterInputs.endTime,
             date: state.filterInputs.startDate,
           }}

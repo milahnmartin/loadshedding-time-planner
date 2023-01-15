@@ -1,79 +1,61 @@
+import { toast } from "react-toastify";
+
 type TimeScope = {
   start: string;
   end: string;
-  date: Date;
+  date: string;
 };
 
-type TLSTimes = {
-  capeTown: {
-    times: string[];
-    events?: string[];
-  };
-  eskom: {
-    times: string[];
-    events?: string[];
-  };
-};
-
-class CapeTown {
-  private _cpTimes: string[] = [];
+class ConstructArea {
+  private _Times: string[] = [];
   private _events: string[] = [];
   private _isEvents: boolean = false;
-  constructor(cpTimes: string[], events: string[]) {
-    this._cpTimes = cpTimes;
-    this._events = events;
-    this._isEvents = events.length > 0;
+  constructor(areaData: any, stageInfo: any) {
+    console.log(areaData);
+    this._Times = areaData.times;
+    this._events = areaData.events || [];
+    this._isEvents = !areaData?.events ? false : areaData.events.length > 0;
   }
 
-  private constructData = (): this => {
+  public constructData = (): string[] => {
     if (this._isEvents) {
-      this.handleEventConstruct();
+      return this.handleEventConstruct();
     } else {
-      this.handleNoEventConstruct();
-    }
-
-    return this;
-  };
-
-  private handleEventConstruct = () => {};
-  private handleNoEventConstruct = () => {};
-}
-class Eskom {
-  private _esTimes: string[] = [];
-  private _events: string[] = [];
-  private _isEvents: boolean = false;
-  constructor(esTimes: string[], events: string[]) {
-    this._esTimes = esTimes;
-    this._events = events;
-    this._isEvents = events.length > 0;
-    this.constructData();
-  }
-
-  private constructData = (): void => {
-    if (this._isEvents) {
-      this.handleEventConstruct();
-    } else {
-      this.handleNoEventConstruct();
+      return this.handleNoEventConstruct();
     }
   };
 
-  private handleEventConstruct = () => {};
-  private handleNoEventConstruct = () => {};
+  private handleEventConstruct = (): string[] => {};
+  private handleNoEventConstruct = (): string[] => {};
 }
 class TimeCalc {
-  private _times: {
-    cpt: Set<string>;
-    eskom: Set<string>;
-  };
+  private _finalData: string[] = [];
   private _filteredTimes: string[] = [];
   private _timeScope: TimeScope;
-  constructor(LSTimes: TLSTimes, timeScope: TimeScope) {
+
+  constructor(LSTimes: any, timeScope: TimeScope, stages: any) {
     this._timeScope = timeScope;
-    this._times = {
-      cpt: new Set(LSTimes.capeTown.times),
-      eskom: new Set(LSTimes.eskom.times),
-    };
+    this._filteredTimes = [
+      ...new ConstructArea(
+        this.handleSortArea("cpt", LSTimes),
+        stages?.capetown
+      ).constructData(),
+      ...new ConstructArea(
+        this.handleSortArea("esk", LSTimes),
+        stages?.eskom
+      ).constructData(),
+    ];
   }
+
+  private handleSortArea = (area: "cpt" | "esk", users: any): any => {
+    if (area === "cpt") {
+      return users.filter((time: any) => time.stageRegion === "capetown");
+    }
+    if (area === "esk") {
+      return users.filter((time: any) => time.stageRegion === "eskom");
+    }
+    toast.error("Something went wrong, please try again later");
+  };
 
   private sortTimes = (times: string[]): this => {
     this._filteredTimes = times.sort((a, b) => {
@@ -84,16 +66,9 @@ class TimeCalc {
     return this;
   };
 
-  public handleCapeTown = (): this => {
-    return this;
+  public constructTimes = (): string[][] => {
+    return [["12:00"], ["12:00"], ["12:00"]];
   };
-  public handleEskom = (): this => {
-    return this;
-  };
-
-  public get times(): string[] {
-    return this._filteredTimes;
-  }
 }
 
 export default TimeCalc;

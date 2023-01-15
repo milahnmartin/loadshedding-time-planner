@@ -13,22 +13,37 @@ import "../styles/satoshi.css";
 const gradient = new Gradient() as any;
 const queryClient = new QueryClient();
 const MyApp: AppType = ({ Component, pageProps }) => {
-  const [isLoading, setisLoading] = useState<boolean>(true);
+  const [isLoading, setisLoading] = useState<{ timeOut: boolean; font: boolean }>({
+    timeOut: true,
+    font: true,
+  });
   const [mobile, setMobile] = useState<boolean>(false);
   const ref = useRef() as any;
 
   useEffect(() => {
+    (async () => {
+      try {
+        await document.fonts.ready;
+        setisLoading((prev) => ({ ...prev, font: false }));
+      } catch (error) {
+        console.log(error);
+        console.log(`DEV-FONT LOAD ERROR`);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     const mytimeout = setTimeout(() => {
-      setisLoading(false);
+      setisLoading((prev) => ({ ...prev, timeOut: false }));
     }, 2000);
     return () => clearTimeout(mytimeout);
   }, []);
 
   useEffect(() => {
-    if (ref.current && !isLoading) {
+    if ((ref.current && !isLoading.timeOut) || !isLoading.font) {
       gradient.initGradient("#gradient-canvas");
     }
-  }, [ref, isLoading]);
+  }, [ref, isLoading.timeOut, isLoading.font]);
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -36,7 +51,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     }
   }, []);
 
-  if (isLoading) {
+  if (isLoading.font || isLoading.timeOut) {
     return (
       <div className='w-screen h-screen flex flex-col items-center justify-center bg-slate-800 gap-4'>
         <span className='flex flex-col items-center w-full h-fit '>

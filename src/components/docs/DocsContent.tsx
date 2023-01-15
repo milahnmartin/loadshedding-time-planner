@@ -41,7 +41,7 @@ function DocsContent() {
               }
             )}
           >
-            <h1 className='font-satoshiBold text-white text-center'>INTRO</h1>
+            <h1 className='font-satoshiBold text-white text-center'>INTRODUCTION</h1>
           </div>
           <div
             onClick={() => {

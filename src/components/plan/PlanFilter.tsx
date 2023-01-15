@@ -172,6 +172,17 @@ function PlanFilter({
     "absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm z-10"
   );
 
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === "00:00") {
+      toast.warning("End Time Needs To be Greater then 00:00");
+      return;
+    }
+    setInputData({
+      ...inputData,
+      endTime: e.target.value,
+    });
+  };
+
   return (
     <div id='dashboard-filter' className={filterClassnames}>
       <div className='flex flex-col h-full w-1/2 '>
@@ -190,7 +201,6 @@ function PlanFilter({
                 const setDate = new Date(e.target.value).getDate();
                 if (setDate >= maxLimitDate || setDate < minLimitDate) {
                   toast.error("You can only filter for a week ahead");
-                  return;
                 }
                 setInputData({ ...inputData, startDate: e.target.value });
               }}
@@ -218,17 +228,7 @@ function PlanFilter({
               className={filterInputClassNames}
               min='00:01'
               max='23:59'
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                console.log(e.currentTarget.value);
-                if (e.currentTarget.value === "00:00") {
-                  toast.warning("End Time Needs To be Greater then 00:00");
-                  return;
-                }
-                setInputData({
-                  ...inputData,
-                  endTime: e.target.value,
-                });
-              }}
+              onChange={handleFilterChange}
             />
           </div>
 

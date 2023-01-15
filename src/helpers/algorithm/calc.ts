@@ -7,14 +7,31 @@ type TimeScope = {
 };
 
 class ConstructArea {
-  private _Times: string[] = [];
+  private _Times: any;
   private _events: string[] = [];
   private _isEvents: boolean = false;
-  constructor(areaData: any, stageInfo: any) {
-    console.log(areaData);
-    this._Times = areaData.times;
-    this._events = areaData.events || [];
-    this._isEvents = !areaData?.events ? false : areaData.events.length > 0;
+  private stageInfo: {
+    name: string;
+    next_stages: string[];
+    stage: string;
+    stage_updated: string;
+  };
+  constructor(
+    areaData: {
+      timeData: { date: string; name: string; stages: string[][] };
+      stageRegion: "eskom" | "capetown";
+    }[],
+    stageInfo: {
+      name: string;
+      next_stages: string[];
+      stage: string;
+      stage_updated: string;
+    }
+  ) {
+    this._Times = areaData;
+    this._events = stageInfo.next_stages;
+    this._isEvents = stageInfo.next_stages.length > 0;
+    this.stageInfo = stageInfo;
   }
 
   public constructData = (): string[] => {
@@ -25,34 +42,79 @@ class ConstructArea {
     }
   };
 
-  private handleEventConstruct = (): string[] => {};
-  private handleNoEventConstruct = (): string[] => {};
+  private handleEventConstruct = (): string[] => {
+    return [];
+  };
+  private handleNoEventConstruct = (): string[] => {
+    const instanceStage = +this.stageInfo?.stage;
+    return this._Times
+      .map((time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
+        return time?.timeData[0]?.stages[instanceStage + 1];
+      })
+      .flat();
+  };
 }
 class TimeCalc {
   private _finalData: string[] = [];
-  private _filteredTimes: string[] = [];
+  public _filteredTimes: string[] = [];
   private _timeScope: TimeScope;
 
-  constructor(LSTimes: any, timeScope: TimeScope, stages: any) {
+  constructor(
+    LSTimes: {
+      timeData: { date: string; name: string; stages: string[][] };
+      stageRegion: "eskom" | "capetown";
+    }[],
+    timeScope: TimeScope,
+    stages: {
+      capetown: {
+        name: string;
+        next_stages: string[];
+        stage: string;
+        stage_updated: string;
+      };
+      eskom: {
+        name: string;
+        next_stages: string[];
+        stage: string;
+        stage_updated: string;
+      };
+    }
+  ) {
     this._timeScope = timeScope;
-    this._filteredTimes = [
-      ...new ConstructArea(
-        this.handleSortArea("cpt", LSTimes),
-        stages?.capetown
-      ).constructData(),
-      ...new ConstructArea(
-        this.handleSortArea("esk", LSTimes),
-        stages?.eskom
-      ).constructData(),
-    ];
+    this._filteredTimes = Array.from(
+      new Set([
+        ...new ConstructArea(
+          this.handleSortArea("cpt", LSTimes),
+          stages?.capetown
+        ).constructData(),
+        ...new ConstructArea(
+          this.handleSortArea("esk", LSTimes),
+          stages?.eskom
+        ).constructData(),
+      ])
+    );
   }
 
   private handleSortArea = (area: "cpt" | "esk", users: any): any => {
     if (area === "cpt") {
-      return users.filter((time: any) => time.stageRegion === "capetown");
+      return users.filter(
+        (data: {
+          timeData: { date: string; name: string; stages: string[][] };
+          stageRegion: "eskom" | "capetown";
+        }) => {
+          return data.stageRegion === "capetown";
+        }
+      );
     }
     if (area === "esk") {
-      return users.filter((time: any) => time.stageRegion === "eskom");
+      return users.filter(
+        (data: {
+          timeData: { date: string; name: string; stages: string[][] };
+          stageRegion: "eskom" | "capetown";
+        }) => {
+          return data.stageRegion === "eskom";
+        }
+      );
     }
     toast.error("Something went wrong, please try again later");
   };

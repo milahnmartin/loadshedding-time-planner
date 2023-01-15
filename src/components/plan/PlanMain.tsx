@@ -110,7 +110,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
   const handleUserRemove = async (rUser: string) => {
     if (!rUser) return;
     if (rUser === planData?.user_id) {
-      toast.error("You can't remove yourself from the plan");
+      toast.error("You can't remove the owner from their plan");
       return;
     }
     const newMembers = planData?.plan_authorizedUsers?.filter(

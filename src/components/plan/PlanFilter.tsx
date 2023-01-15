@@ -212,15 +212,23 @@ function PlanFilter({
           </div>
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <input
+              title='This Time is the day after the start date'
               value={inputData.endTime}
               type='time'
               className={filterInputClassNames}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              min='00:01'
+              max='23:59'
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                console.log(e.currentTarget.value);
+                if (e.currentTarget.value === "00:00") {
+                  toast.warning("End Time Needs To be Greater then 00:00");
+                  return;
+                }
                 setInputData({
                   ...inputData,
                   endTime: e.target.value,
-                })
-              }
+                });
+              }}
             />
           </div>
 

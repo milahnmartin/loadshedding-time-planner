@@ -43,22 +43,30 @@ class ConstructArea {
   };
 
   private handleEventConstruct = (): string[] => {
-    return [];
+    const instanceStage = +this.stageInfo?.stage;
+    return this._Times.flatMap(
+      (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
+        return time?.timeData[0]?.stages[instanceStage + 1];
+      }
+    );
   };
   private handleNoEventConstruct = (): string[] => {
     const instanceStage = +this.stageInfo?.stage;
-    return this._Times
-      .map((time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
+    return this._Times.flatMap(
+      (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
         return time?.timeData[0]?.stages[instanceStage + 1];
-      })
-      .flat();
+      }
+    );
   };
 }
 class TimeCalc {
   private _finalData: string[] = [];
   public _filteredTimes: string[] = [];
   private _timeScope: TimeScope;
-
+  private _timeOptions: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+  };
   constructor(
     LSTimes: {
       timeData: { date: string; name: string; stages: string[][] };
@@ -92,7 +100,7 @@ class TimeCalc {
           stages?.eskom
         ).constructData(),
       ])
-    );
+    ).sort();
   }
 
   private handleSortArea = (area: "cpt" | "esk", users: any): any => {
@@ -119,17 +127,73 @@ class TimeCalc {
     toast.error("Something went wrong, please try again later");
   };
 
-  private sortTimes = (times: string[]): this => {
-    this._filteredTimes = times.sort((a, b) => {
-      if (a < b) return -1;
-      if (a > b) return 1;
-      return 0;
-    });
-    return this;
+  private calcBufferTimes = (planFilterDate: Date, planFilterDateEnd: Date): any => {
+    if (this._filteredTimes) {
+      planFilterDate.setMinutes(planFilterDate.getMinutes() - 30);
+      planFilterDateEnd.setMinutes(planFilterDateEnd.getMinutes() + 30);
+      const calcTime = planFilterDateEnd.getTime() - planFilterDate.getTime();
+      const calcTimeHours = calcTime / (1000 * 60 * 60);
+      const hoursRounded = Math.floor(calcTimeHours);
+      const minutes = (calcTimeHours - hoursRounded) * 60;
+      const minutesRounded = Math.floor(minutes);
+      const seconds = Math.round((minutes - minutesRounded) * 60);
+
+      return [
+        `${planFilterDate.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} - ${planFilterDateEnd.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`,
+      ];
+    }
+  };
+  private calcAvailableTimes = (planFilterDate: Date, planFilterDateEnd: Date): any => {
+    if (this._filteredTimes) {
+      const calcTime = planFilterDateEnd.getTime() - planFilterDate.getTime();
+      const calcTimeHours = calcTime / (1000 * 60 * 60);
+      const hoursRounded = Math.floor(calcTimeHours);
+      const minutes = (calcTimeHours - hoursRounded) * 60;
+      const minutesRounded = Math.floor(minutes);
+      const seconds = Math.round((minutes - minutesRounded) * 60);
+
+      return [
+        `${planFilterDate.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} - ${planFilterDateEnd.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`,
+      ];
+    }
   };
 
   public constructTimes = (): string[][] => {
-    return [["12:00"], ["12:00"], ["12:00"]];
+    const { start, end, date } = this._timeScope;
+    // start and date is used in the planfilterdate
+    const planFilterDate = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date(date).getDate(),
+      +start.split(":")[0]!,
+      +start.split(":")[1]!
+    );
+
+    const planFilterDateEnd = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date(date).getDate() + 1,
+      +end.split(":")[0]!,
+      +end.split(":")[1]!
+    );
+
+    return [
+      this.calcAvailableTimes(planFilterDate, planFilterDateEnd),
+      this.calcBufferTimes(planFilterDate, planFilterDateEnd),
+      this._filteredTimes,
+    ];
   };
 }
 

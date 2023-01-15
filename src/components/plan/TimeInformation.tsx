@@ -51,6 +51,13 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
             {time}
           </p>
         ))}
+
+      <span className='flex gap-2 items-center justify-center'>
+        {data &&
+          data.loadsheddingTimes.map((time: any) => (
+            <h1 className='text-rose-600 font-saoshiBold'>{time}</h1>
+          ))}
+      </span>
     </div>
   );
 }

@@ -208,7 +208,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
     );
   }
 
-  if (planError || process.env.NODE_ENV === "production") {
+  if (planError) {
     return (
       <div className='h-[90vh] w-screen flex items-center justify-center flex-col space-y-10'>
         <Image src='/Logov3.png' width={170} height={170} alt='LSPLANNER LOGO' />

@@ -66,7 +66,7 @@ class TimeCalc {
   private _timeOptions: Intl.DateTimeFormatOptions = {
     hour: "2-digit",
     minute: "2-digit",
-  };
+  } as const;
   constructor(
     LSTimes: {
       timeData: { date: string; name: string; stages: string[][] };

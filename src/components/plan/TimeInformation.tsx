@@ -35,26 +35,40 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
     setData({ availableTimes, bufferTimes, loadsheddingTimes });
   }, [stageData, LSTimes, timeScope]);
   return (
-    <div className='h-full w-6/12 p-2 border-2 text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
-      {JSON.stringify(LSTimes, null, 2)}
-      <pre className='text-white text-2xl'>{JSON.stringify(timeScope, null, 2)}</pre>
-      <pre className='text-white text-2xl'>{JSON.stringify(stageData, null, 2)}</pre>
-
-      {data &&
-        data.availableTimes.map((time: any) => (
-          <TimeDisplayLabel data={time} variant='availible' />
-        ))}
-      {data &&
-        data.bufferTimes.map((time: any) => (
-          <TimeDisplayLabel data={time} variant='buffer' />
-        ))}
-
-      <span className='flex gap-2 items-center justify-center'>
-        {data &&
-          data.loadsheddingTimes.map((time: any) => (
-            <TimeDisplayLabel data={time} variant='ls' />
-          ))}
-      </span>
+    <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
+      <div className='w-full h-1/3 border-2'>
+        <div className='flex w-full items-center justify-center text-center h-[20%]'>
+          <pre>AVAILABLE TIMES</pre>
+        </div>
+        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+          {data &&
+            data.availableTimes.map((time: any) => (
+              <TimeDisplayLabel data={time} variant='availible' />
+            ))}
+        </div>
+      </div>
+      <div className='w-full h-1/3 border-2'>
+        <div className='flex w-full items-center justify-center text-center h-[20%]'>
+          <pre>BUFFER TIMES</pre>
+        </div>
+        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+          {data &&
+            data.bufferTimes.map((time: any) => (
+              <TimeDisplayLabel data={time} variant='buffer' />
+            ))}
+        </div>
+      </div>
+      <div className='w-full h-1/3 border-2'>
+        <div className='flex w-full items-center justify-center text-center h-[20%]'>
+          <pre>LS TIMES</pre>
+        </div>
+        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+          {data &&
+            data.loadsheddingTimes.map((time: any) => (
+              <TimeDisplayLabel data={time} variant='ls' />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

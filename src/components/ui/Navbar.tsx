@@ -137,7 +137,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
 
 export default Navbar;
 
-const useCheckUserAccount = async (user: any) => {
+const useCheckUserAccount = async (user: any): Promise<void> => {
   console.log("CHECKING");
   if (!user) return;
 

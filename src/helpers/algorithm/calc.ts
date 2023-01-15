@@ -127,8 +127,11 @@ class TimeCalc {
     toast.error("Something went wrong, please try again later");
   };
 
-  private calcBufferTimes = (planFilterDate: Date, planFilterDateEnd: Date): any => {
-    if (this._filteredTimes) {
+  private calcBufferTimes = (
+    planFilterDate: Date,
+    planFilterDateEnd: Date
+  ): string[] | null => {
+    if (this._filteredTimes.length === 0) {
       planFilterDate.setMinutes(planFilterDate.getMinutes() - 30);
       planFilterDateEnd.setMinutes(planFilterDateEnd.getMinutes() + 30);
       const calcTime = planFilterDateEnd.getTime() - planFilterDate.getTime();
@@ -148,9 +151,14 @@ class TimeCalc {
         )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`,
       ];
     }
+
+    return null;
   };
-  private calcAvailableTimes = (planFilterDate: Date, planFilterDateEnd: Date): any => {
-    if (this._filteredTimes) {
+  private calcAvailableTimes = (
+    planFilterDate: Date,
+    planFilterDateEnd: Date
+  ): string[] | null => {
+    if (this._filteredTimes.length === 0) {
       const calcTime = planFilterDateEnd.getTime() - planFilterDate.getTime();
       const calcTimeHours = calcTime / (1000 * 60 * 60);
       const hoursRounded = Math.floor(calcTimeHours);
@@ -168,9 +176,11 @@ class TimeCalc {
         )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`,
       ];
     }
+
+    return null;
   };
 
-  public constructTimes = (): string[][] => {
+  public constructTimes = (): any => {
     const { start, end, date } = this._timeScope;
     // start and date is used in the planfilterdate
     const planFilterDate = new Date(

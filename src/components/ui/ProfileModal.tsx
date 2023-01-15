@@ -32,7 +32,7 @@ function ProfileModal() {
       </Link>
 
       <Link href='/plans' legacyBehavior>
-        <div className='group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-b-md outline-none border-none flex items-center justify-center text-center'>
+        <div className='group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 outline-none border-none flex items-center justify-center text-center'>
           <BiBookAlt className='pl-3 h-9 w-9 group-hover:text-white' />
           <h1 className='modal-data w-full tracking-wide font-satoshiBold group-hover:text-white'>
             PLANS

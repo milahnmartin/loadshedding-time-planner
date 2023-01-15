@@ -1,3 +1,4 @@
+import TimeDisplayLabel from "@comps/labels/TimeDisplayLabel";
 import TimeCalc from "@helpers/algorithm";
 import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import { useEffect, useState } from "react";
@@ -41,21 +42,17 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
 
       {data &&
         data.availableTimes.map((time: any) => (
-          <p className='text-red-700 border-2 p-2 font-satoshi rounded-lg border-red-400'>
-            {time}
-          </p>
+          <TimeDisplayLabel data={time} variant='availible' />
         ))}
       {data &&
         data.bufferTimes.map((time: any) => (
-          <p className='text-yellow-300 border-2 p-2 font-satoshi rounded-lg border-red-400'>
-            {time}
-          </p>
+          <TimeDisplayLabel data={time} variant='buffer' />
         ))}
 
       <span className='flex gap-2 items-center justify-center'>
         {data &&
           data.loadsheddingTimes.map((time: any) => (
-            <h1 className='text-rose-600 font-saoshiBold'>{time}</h1>
+            <TimeDisplayLabel data={time} variant='ls' />
           ))}
       </span>
     </div>

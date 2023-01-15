@@ -8,7 +8,7 @@ type LabelProps = {
 
 const GreenLabel = ({ data, variant }: LabelProps) => {
   const lscolorClassName = classNames(
-    "text-white text-1xl rounded-full flex items-center justify-center px-4 py-2 font-SatoshiBlack",
+    "text-white text-1xl rounded-lg flex items-center justify-center px-4 py-2",
     {
       "bg-red-700": variant === "ls",
       "bg-cblue": variant === "availible",
@@ -18,7 +18,7 @@ const GreenLabel = ({ data, variant }: LabelProps) => {
 
   return (
     <div className={lscolorClassName}>
-      <pre className='text-white'>{JSON.stringify(data)}</pre>
+      <h1 className='font-satoshiBold'>{data}</h1>
     </div>
   );
 };

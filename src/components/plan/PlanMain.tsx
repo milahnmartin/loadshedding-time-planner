@@ -159,7 +159,12 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       for (const users of [...emailData, ...uidData]) {
         if (!users) continue;
         if (!users?.user_sepushID?.id) {
-          toast.warning(`${users?.user_email} HAS NOT SET THEIR LOADSHEDDING AREA YET`);
+          toast.warning(`${users?.user_email} HAS NOT SET THEIR LOADSHEDDING AREA YET`, {
+            autoClose: 10000,
+          });
+          toast.warning("AREA CAN BE SET IN PROFILE SETTINGS", {
+            autoClose: 10000,
+          });
           continue;
         }
         if (!users?.user_weekLSTimes) {

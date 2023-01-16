@@ -16,13 +16,13 @@ function HowToUse() {
           speed={0.8}
         />
       </span>
-      <span className='flex space-x-1 h-[50px] items-center'>
+      <span className='flex space-x-0 h-[50px] items-center'>
         <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-c2purple font-satoshiBold text-[1.75rem]'>
-          HOW TO USE
+          HOW TO USE LS PLANNER
         </h1>
         <Player
-          src='https://assets10.lottiefiles.com/packages/lf20_akio2kni.json'
-          className='player w-[45px] h-[45px] '
+          src='https://assets10.lottiefiles.com/packages/lf20_8xw4cfyj.json'
+          className='player w-[50px] h-[50px] '
           autoplay
           loop
           speed={0.8}

@@ -63,10 +63,10 @@ function HowToUse() {
       <hr className={gline} />
 
       <h2 className='flex text-white font-satoshi text-lg pt-4  '>
-        1.&ensp;Navigate to the {"  "}&ensp;
+        1.&ensp;Navigate to the
         <button
           onClick={handleNewPlan}
-          className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5 mr-2 w-[8rem] h-[2rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '
+          className='relative inline-flex font-satoshiBold items-center justify-evenly p-0.5  ml-2 mr-2 w-[8rem] h-[2rem] overflow-hidden text-sm font-black text-gray-900 rounded-full group bg-gradient-to-br from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]  hover:text-white dark:text-white '
         >
           New Plan
           <div className='group h-full flex items-center'>

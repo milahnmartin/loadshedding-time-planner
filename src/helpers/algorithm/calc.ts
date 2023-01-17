@@ -8,11 +8,11 @@ type TimeScope = {
 
 class ConstructArea {
   private _Times: any;
-  private _events: string[] = [];
+  private _events: { stage: string; stage_start_timestamp: string }[] = [] as any;
   private _isEvents: boolean = false;
   private stageInfo: {
     name: string;
-    next_stages: string[];
+    next_stages: { stage: string; stage_start_timestamp: string }[];
     stage: string;
     stage_updated: string;
   };
@@ -23,7 +23,7 @@ class ConstructArea {
     }[],
     stageInfo: {
       name: string;
-      next_stages: string[];
+      next_stages: { stage: string; stage_start_timestamp: string }[];
       stage: string;
       stage_updated: string;
     }
@@ -43,7 +43,17 @@ class ConstructArea {
   };
 
   private handleEventConstruct = (): string[] => {
-    const instanceStage = +this.stageInfo?.stage;
+    console.log(this._events);
+    const stagesStack = this._events.map(
+      (val: { stage: string; stage_start_timestamp: string }) => {
+        return +val.stage;
+      }
+    );
+    const highestStageEvent = stagesStack.reduce((a: number, b: number) => {
+      return Math.max(a, b);
+    });
+
+    const instanceStage = highestStageEvent;
     return this._Times.flatMap(
       (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
         return time?.timeData[0]?.stages[instanceStage + 1];
@@ -76,13 +86,13 @@ class TimeCalc {
     stages: {
       capetown: {
         name: string;
-        next_stages: string[];
+        next_stages: { stage: string; stage_start_timestamp: string }[];
         stage: string;
         stage_updated: string;
       };
       eskom: {
         name: string;
-        next_stages: string[];
+        next_stages: { stage: string; stage_start_timestamp: string }[];
         stage: string;
         stage_updated: string;
       };

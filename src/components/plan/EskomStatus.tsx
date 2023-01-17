@@ -3,6 +3,7 @@ import EskomUpcomingEventLabel from "@comps/labels/EskomUpcomingEventLabel";
 import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import classNames from "classnames";
 import Lottie from "react-lottie-player";
+import { v4 as uuidv4 } from "uuid";
 function EskomStatus() {
   const {
     data: loadsheddingStageData,
@@ -77,7 +78,7 @@ function EskomStatus() {
         <div className='flex flex-col h-full justify-start space-y-1 overflow-y-scroll'>
           {loadsheddingStageData?.capetown?.next_stages?.map(
             (event: { stage: number; stage_start_timestamp: string }) => {
-              return <EskomUpcomingEventLabel {...event} />;
+              return <EskomUpcomingEventLabel key={uuidv4()} {...event} />;
             }
           )}
         </div>
@@ -91,7 +92,7 @@ function EskomStatus() {
         <div className='flex flex-col h-full justify-start space-y-1 overflow-y-scroll'>
           {loadsheddingStageData?.eskom?.next_stages?.map(
             (event: { stage: number; stage_start_timestamp: string }) => {
-              return <EskomUpcomingEventLabel {...event} />;
+              return <EskomUpcomingEventLabel key={uuidv4()} {...event} />;
             }
           )}
         </div>

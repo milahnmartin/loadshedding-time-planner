@@ -5,6 +5,7 @@ import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import { useEffect, useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import Lottie from "react-lottie-player";
+import { v4 as uuidv4 } from "uuid";
 type Times = {
   bufferTimes: any[];
   availableTimes: any[];
@@ -67,7 +68,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
               {data?.availableTimes &&
                 data.availableTimes.map((time: any) => (
-                  <TimeDisplayLabel data={time} variant='availible' />
+                  <TimeDisplayLabel key={uuidv4()} data={time} variant='availible' />
                 ))}
             </div>
           </div>
@@ -85,7 +86,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
               {data?.bufferTimes &&
                 data.bufferTimes.map((time: any) => (
-                  <TimeDisplayLabel data={time} variant='buffer' />
+                  <TimeDisplayLabel key={uuidv4()} data={time} variant='buffer' />
                 ))}
             </div>
           </div>
@@ -103,7 +104,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
               {data?.loadsheddingTimes &&
                 data.loadsheddingTimes.map((time: any) => (
-                  <TimeDisplayLabel data={time} variant='ls' />
+                  <TimeDisplayLabel key={uuidv4()} data={time} variant='ls' />
                 ))}
               {JSON.stringify(data)}
             </div>

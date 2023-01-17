@@ -10,6 +10,7 @@ class ConstructArea {
   private _Times: any;
   private _events: { stage: string; stage_start_timestamp: string }[] = [] as any;
   private _isEvents: boolean = false;
+  private _planFilterDate: string = new Date().toLocaleDateString();
   private stageInfo: {
     name: string;
     next_stages: { stage: string; stage_start_timestamp: string }[];
@@ -26,12 +27,14 @@ class ConstructArea {
       next_stages: { stage: string; stage_start_timestamp: string }[];
       stage: string;
       stage_updated: string;
-    }
+    },
+    planFilterDate: string
   ) {
     this._Times = areaData;
     this._events = stageInfo.next_stages;
     this._isEvents = stageInfo.next_stages.length > 0;
     this.stageInfo = stageInfo;
+    this._planFilterDate = planFilterDate;
   }
 
   public constructData = (): string[] => {
@@ -43,17 +46,25 @@ class ConstructArea {
   };
 
   private handleEventConstruct = (): string[] => {
-    console.log(this._events);
-    const stagesStack = this._events.map(
-      (val: { stage: string; stage_start_timestamp: string }) => {
+    const stagesStack = this._events
+      .filter((val: { stage: string; stage_start_timestamp: string }) => {
+        return (
+          (val.stage_start_timestamp.split("T")[0] as string) === this._planFilterDate
+        );
+      })
+      .map((val: { stage: string; stage_start_timestamp: string }) => {
         return +val.stage;
-      }
-    );
-    const highestStageEvent = stagesStack.reduce((a: number, b: number) => {
-      return Math.max(a, b);
-    });
+      });
 
-    const instanceStage = highestStageEvent;
+    let instanceStage: number;
+    if (stagesStack.length === 0 || !stagesStack) {
+      instanceStage = +this.stageInfo?.stage;
+    } else {
+      instanceStage = stagesStack.reduce((a: number, b: number) => {
+        return Math.max(a, b);
+      });
+    }
+
     return this._Times.flatMap(
       (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
         return time?.timeData[0]?.stages[instanceStage + 1];
@@ -103,11 +114,13 @@ class TimeCalc {
       new Set([
         ...new ConstructArea(
           this.handleSortArea("cpt", LSTimes),
-          stages?.capetown
+          stages?.capetown,
+          this._timeScope.date
         ).constructData(),
         ...new ConstructArea(
           this.handleSortArea("esk", LSTimes),
-          stages?.eskom
+          stages?.eskom,
+          this._timeScope.date
         ).constructData(),
       ])
     ).sort();
@@ -168,6 +181,7 @@ class TimeCalc {
     planFilterDate: Date,
     planFilterDateEnd: Date
   ): string[] | null => {
+    const { start, end, date } = this._timeScope;
     if (this._filteredTimes.length === 0) {
       const calcTime = planFilterDateEnd.getTime() - planFilterDate.getTime();
       const calcTimeHours = calcTime / (1000 * 60 * 60);
@@ -186,6 +200,66 @@ class TimeCalc {
         )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`,
       ];
     }
+    // if (this._filteredTimes.length === 1 && this._filteredTimes[0]) {
+    const availableTimes = [] as any;
+    console.log(`DEV LOG - ${this._filteredTimes[0]}`);
+    const [LSStart, LSEnd] = this._filteredTimes[0]!.split("-");
+    const [LSStartHour, LSStartMin] = LSStart?.split(":")!;
+    const [LSEndHour, LSEndMin] = LSEnd?.split(":")!;
+    const onlyLSStart = new Date(
+      new Date(date).getFullYear(),
+      new Date(date).getMonth(),
+      new Date(date).getDate(),
+      +LSStartHour!,
+      +LSStartMin!
+    );
+    const onlyLSEnd = new Date(
+      new Date(date).getFullYear(),
+      new Date(date).getMonth(),
+      new Date(date).getDate(),
+      +LSEndHour!,
+      +LSEndMin!
+    );
+
+    const initialDifTime = onlyLSStart.getTime() - planFilterDate.getTime();
+    if (initialDifTime > 0) {
+      const initialDifTimeHours = initialDifTime / (1000 * 60 * 60);
+      const initialDifTimeRounded = Math.floor(initialDifTimeHours);
+      const initialDifTimeMin = (initialDifTimeHours - initialDifTimeRounded) * 60;
+      const initialDifTimeMinRounded = Math.floor(initialDifTimeMin);
+      const initialDifTimeSeconds = Math.round(
+        (initialDifTimeMin - initialDifTimeMinRounded) * 60
+      );
+      availableTimes.push(
+        `${planFilterDate.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} - ${onlyLSStart.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
+      );
+    }
+
+    const finalDifTime = planFilterDateEnd.getTime() - onlyLSEnd.getTime();
+    if (finalDifTime > 0) {
+      const calcTimeHours = finalDifTime / (1000 * 60 * 60);
+      const hoursRounded = Math.floor(calcTimeHours);
+      const minutes = (calcTimeHours - hoursRounded) * 60;
+      const minutesRounded = Math.floor(minutes);
+      const seconds = Math.round((minutes - minutesRounded) * 60);
+      availableTimes.push(
+        `${planFilterDate.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} - ${planFilterDateEnd.toLocaleTimeString(
+          "en-ZA",
+          this._timeOptions
+        )} @ ${hoursRounded} hours, ${minutesRounded} minutes, ${seconds} seconds`
+      );
+    }
+
+    return availableTimes;
 
     return null;
   };
@@ -202,8 +276,8 @@ class TimeCalc {
     );
 
     const planFilterDateEnd = new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
+      new Date(date).getFullYear(),
+      new Date(date).getMonth(),
       new Date(date).getDate() + 1,
       +end.split(":")[0]!,
       +end.split(":")[1]!

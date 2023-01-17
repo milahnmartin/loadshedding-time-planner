@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 const IdPage: NextPage = () => {
-  const [filter, setshowfilter] = useState<boolean>(true);
+  const [filter, setshowfilter] = useState<boolean>(false);
   return (
     <div className='h-screen w-screen overflow-hidden'>
       <Head>

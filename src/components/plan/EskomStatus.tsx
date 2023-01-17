@@ -36,7 +36,7 @@ function EskomStatus() {
 
   if (loadsheddingStageError) {
     return (
-      <div className='flex items-center justify-center border-2 h-full w-3/12'>
+      <div className='flex items-center justify-center h-full w-3/12'>
         <h1 className='text-center font-satoshiBlack text-red-700 text-2xl'>
           ERROR FETCHING STAGES
         </h1>
@@ -58,7 +58,7 @@ function EskomStatus() {
   }
 
   return (
-    <div className='flex flex-col border-2 h-full w-3/12'>
+    <div className='flex flex-col h-full w-3/12'>
       <div className='h-[20%] text-center flex items-center justify-center flex-col space-y-4 p-2'>
         {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
         <h1 className='font-satoshiBold text-3xl text-white'>CURRENT STAGES:</h1>
@@ -74,7 +74,7 @@ function EskomStatus() {
         <h1 className='font-satoshiBold text-center text-2xl text-white'>
           CAPE TOWN UPCOMING EVENTS:
         </h1>
-        <div className='flex flex-col h-full justify-start items-center overflow-y-scroll border-2 w-full'>
+        <div className='flex flex-col h-full justify-start items-center overflow-y-scroll w-full'>
           {loadsheddingStageData?.capetown?.next_stages?.map(
             (event: { stage: number; stage_start_timestamp: string }) => {
               return <EskomUpcomingEventLabel {...event} />;

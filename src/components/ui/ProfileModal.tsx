@@ -20,7 +20,7 @@ function ProfileModal() {
   return (
     <div
       id='profile-modal'
-      className='h-[10rem] w-[9rem]  text-black text-Inter absolute bg-white -left-[5rem] top-16 rounded-md flex items-center justify-start flex-col text-center z-50'
+      className='h-[10rem] w-[9rem] text-black font-satoshi absolute bg-white -left-[5rem] top-16 rounded-md flex items-center justify-start flex-col text-center z-50'
     >
       <Link href='/profile' legacyBehavior>
         <div className='profile-modal group h-[50%] w-full transition-all duration-300 hover:bg-cblue cursor-pointer py-2 px-1 rounded-t-md outline-none border-none flex items-center justify-center'>

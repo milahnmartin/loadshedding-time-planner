@@ -87,27 +87,32 @@ function HowToUse() {
 
       <h2 className='text-white font-satoshi text-lg'>
         <span className='font-satoshiBold'>2.</span> When clicking the button, you will be
-        redirected to a dashboard and a "LS plan" will be created.
+        redirected to a <span className='font-satoshiBold'>dashboard</span> and a "LS
+        plan" will be created.
       </h2>
       <h2 className='text-white font-satoshi text-lg'>
-        <span className='font-satoshiBold'>3.</span> You will see a filter slide in from
-        the right, where you can customize or invite other users to your "LS plan"
-        settings
+        <span className='font-satoshiBold'>3.</span> You will see a{" "}
+        <span className='font-satoshiBold'>filter slide</span> in from the right, where
+        you can customize or invite other users to your "LS plan" settings
       </h2>
       <h2 className='text-white font-satoshi text-lg'>
         <span className='font-satoshiBold'>4.</span> After applying your filters, your
-        dashboard will update and show you a variety of information. <br /> The left
-        column will display current and upcoming stages for Cape Town and Eskom regions.
-        The <br />
-        middle column will display your available times{" "}
-        {
-          "(This is all the timeframes where nobody on your plan has any loadshedding)"
-        }, <br />
-        buffer times{" "}
+        dashboard will update and show you a{" "}
+        <span className='font-satoshiBold'>variety of information.</span> <br /> The left
+        column will display current and upcoming stages for{" "}
+        <span className='font-satoshiBold'>Cape Town and Eskom regions.</span>
+        The middle <br />
+        column will display your <span className='font-satoshiBold'>
+          available times
+        </span>{" "}
+        {"(This is all the timeframes where nobody on your plan has any loadshedding)"},{" "}
+        <br />
+        <span className='font-satoshiBold'>buffer times</span>{" "}
         {
           "(These are timeframes where 30 min are added before and after your available times)"
-        }{" "}
-        and ls times <br />
+        }
+        {" and "}
+        <span className='font-satoshiBold'>LS times</span> <br />
         {"(These are all the times that everyone on your plan has loadshedding)"}
       </h2>
       <h2 className='text-white font-satoshi text-lg'>

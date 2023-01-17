@@ -69,12 +69,12 @@ function EskomStatus() {
           Eskom: Stage: <span>{loadsheddingStageData?.eskom?.stage}</span>
         </h1>
       </div>
-      <div className='h-[40%] p-2 flex flex-col justify-center items-center pt-4'>
+      <div className='h-[40%] flex flex-col justify-center items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
         <h1 className='font-satoshiBold text-center text-2xl text-white'>
           CAPE TOWN UPCOMING EVENTS:
         </h1>
-        <div className='flex flex-col h-full justify-center space-y-1 overflow-y-scroll'>
+        <div className='flex flex-col h-full justify-start items-center overflow-y-scroll border-2 w-full'>
           {loadsheddingStageData?.capetown?.next_stages?.map(
             (event: { stage: number; stage_start_timestamp: string }) => {
               return <EskomUpcomingEventLabel {...event} />;
@@ -82,7 +82,7 @@ function EskomStatus() {
           )}
         </div>
       </div>
-      <div className='h-[40%] flex p-2 flex-col justify-center items-center pt-4'>
+      <div className='h-[40%] flex flex-col justify-start items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
         <h1 className='font-satoshiBold text-center text-2xl text-white'>
           ESKOM UPCOMING EVENTS:

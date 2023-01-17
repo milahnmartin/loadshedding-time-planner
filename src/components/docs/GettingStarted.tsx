@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import classNames from "classnames";
-import Link from "next/link";
+
 enum DocPages {
   Introduction,
   GettingStarted,
@@ -38,20 +38,22 @@ function GettingStarted(props: any) {
       </p>
       <hr className={gline} />
       <h2 className='text-white font-satoshi text-lg pt-2'>
-        1.&ensp;Navigate to the{" "}
+        <span className='font-satoshiBold'>1.</span>&ensp;Navigate to the{" "}
         <a className='underline font-satoshiBold' href='/auth/login'>
           SIGN IN
         </a>{" "}
         button on the top right of the screen
       </h2>
       <h2 className='text-white font-satoshi text-lg '>
-        2. Choose to sign in either with GOOGLE or TWITTER
+        <span className='font-satoshiBold'>2.</span> Choose to sign in either with GOOGLE
+        or TWITTER
       </h2>
       <h2 className='text-white font-satoshi text-lg '>
-        3. After signing in, you will be redirected back to the main page
+        <span className='font-satoshiBold'>3.</span> After signing in, you will be
+        redirected back to the main page
       </h2>
       <h2 className='text-white font-satoshi text-lg '>
-        4. Head over to{" "}
+        <span className='font-satoshiBold'>4.</span> Head over to{" "}
         <a
           className='underline cursor-pointer font-satoshiBold'
           onClick={() => props.cb(DocPages.HowToUse)}

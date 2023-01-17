@@ -96,27 +96,32 @@ function HowToUse() {
         you can customize or invite other users to your "LS plan" settings
       </h2>
       <h2 className='text-white font-satoshi text-lg'>
-        <span className='font-satoshiBold'>4.</span> After applying your filters, your
-        dashboard will update and show you a{" "}
+        <span className='font-satoshiBold'>4.</span> After applying your{" "}
+        <span className='font-satoshiBold text-green-600'>filters</span>, your dashboard
+        will update and show you a{" "}
         <span className='font-satoshiBold'>variety of information.</span> <br /> The left
         column will display current and upcoming stages for{" "}
-        <span className='font-satoshiBold'>Cape Town and Eskom regions.</span>
+        <span className='font-satoshiBold text-orange-700'>Cape Town</span>
+        {" and "}
+        <span className='font-satoshiBold text-red-500'>Eskom regions.</span>
         The middle <br />
-        column will display your <span className='font-satoshiBold'>
-          available times
-        </span>{" "}
+        column will display your{" "}
+        <span className='font-satoshiBold text-blue-500'>available times</span>{" "}
         {"(This is all the timeframes where nobody on your plan has any loadshedding)"},{" "}
         <br />
-        <span className='font-satoshiBold'>buffer times</span>{" "}
+        <span className='font-satoshiBold text-yellow-500'>buffer times</span>{" "}
         {
           "(These are timeframes where 30 min are added before and after your available times)"
         }
         {" and "}
-        <span className='font-satoshiBold'>LS times</span> <br />
+        <span className='font-satoshiBold text-red-600'>LS times</span> <br />
         {"(These are all the times that everyone on your plan has loadshedding)"}
       </h2>
-      <h2 className='text-white font-satoshi text-lg'>
-        <span className='font-satoshiBold'>5.</span>
+      <h2 className='flex text-white font-satoshi text-lg'>
+        <span className='font-satoshiBold'>5. </span> &nbsp;You can view all your
+        different plans by clicking on the{" "}
+        <span className='font-satoshiBold text-white'> &nbsp;saved plans&nbsp;</span>{" "}
+        button on the home page.
       </h2>
     </div>
   );

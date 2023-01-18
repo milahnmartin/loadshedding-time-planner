@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { auth } from "@utils/firebase-config";
+import supabase from "@utils/supabase-config";
 import Router from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { auth } from "../utils/firebase-config";
-import supabase from "../utils/supabase-config";
 const fetchSavedPlans = async ({ queryKey }: any) => {
   const { data: UserDataInfo, error } = await supabase
     .from("user_plans")

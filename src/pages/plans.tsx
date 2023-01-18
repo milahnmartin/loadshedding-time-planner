@@ -11,15 +11,12 @@ import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 
 const plans: NextPage = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
     data: savedPlans,
     isLoading: savedPlansLoading,
-    isFetching: savedPlansIsFetching,
     refetch: refetchSavedPlans,
-    // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useFetchSavedPlans();
-  console.log(savedPlans);
+
   const handlePlanDelete = async (plan_id: string) => {
     if (!plan_id) {
       toast.error("No Plan Id Provided");

@@ -39,7 +39,10 @@ function GettingStarted(props: any) {
       <hr className={gline} />
       <h2 className='text-white font-satoshi text-lg pt-2'>
         <span className='font-satoshiBold'>1.</span>&ensp;Navigate to the{" "}
-        <a className='underline font-satoshiBold' href='/auth/login'>
+        <a
+          className='justify-center text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-c2purple font-satoshiBold text-lg cursor-pointer'
+          href='/auth/login'
+        >
           SIGN IN
         </a>{" "}
         button on the top right of the screen
@@ -72,7 +75,7 @@ function GettingStarted(props: any) {
       <h2 className='text-white font-satoshi text-lg '>
         <span className='font-satoshiBold'>4.</span> Head over to{" "}
         <a
-          className='underline cursor-pointer font-satoshiBold'
+          className='justify-center text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-c2purple font-satoshiBold text-lg cursor-pointer'
           onClick={() => props.cb(DocPages.HowToUse)}
         >
           HOW TO USE

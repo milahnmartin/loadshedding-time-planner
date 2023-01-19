@@ -44,9 +44,26 @@ function GettingStarted(props: any) {
         </a>{" "}
         button on the top right of the screen
       </h2>
-      <h2 className='text-white font-satoshi text-lg '>
-        <span className='font-satoshiBold'>2.</span> Choose to sign in either with GOOGLE
-        or TWITTER
+      <h2 className='flex text-white font-satoshi text-lg '>
+        <span className='font-satoshiBold'>2.</span>{" "}
+        <span className='flex justify-center'>
+          &nbsp;Choose to sign in either with Google&nbsp;
+          <Player
+            src='https://assets6.lottiefiles.com/packages/lf20_ijeoao1k.json'
+            className='player w-[29px] h-[29px]'
+            autoplay
+            loop
+            speed={0.8}
+          />
+          <span className='ml-1 mr-1'> or Twitter</span>
+          <Player
+            src='https://assets3.lottiefiles.com/packages/lf20_hdy0htc2.json'
+            className='player w-[30px] h-[30px] '
+            autoplay
+            loop
+            speed={0.8}
+          />
+        </span>
       </h2>
       <h2 className='text-white font-satoshi text-lg '>
         <span className='font-satoshiBold'>3.</span> After signing in, you will be

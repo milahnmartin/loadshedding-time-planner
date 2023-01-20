@@ -1,16 +1,19 @@
 import LottieLoading from "@assets/90918-charging-electricity.json";
 import EskomUpcomingEventLabel from "@comps/labels/EskomUpcomingEventLabel";
-import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import classNames from "classnames";
 import Lottie from "react-lottie-player";
 import { v4 as uuidv4 } from "uuid";
-function EskomStatus() {
-  const {
-    data: loadsheddingStageData,
-    error: loadsheddingStageError,
-    isLoading: loadsheddingStageLoading,
-    refetch: loadsheddingStageRefetch,
-  } = useFetchLoadsheddingStatus();
+
+type Props = {
+  loadsheddingStageData: any;
+  loadsheddingStageError: any;
+  loadsheddingStageLoading: boolean;
+};
+function EskomStatus({
+  loadsheddingStageData,
+  loadsheddingStageError,
+  loadsheddingStageLoading,
+}: Props) {
   const capetownStages = classNames("font-satoshiBlack text-2xl", {
     "text-red-200": loadsheddingStageData?.capetown?.stage == 8,
     "text-red-300": loadsheddingStageData?.capetown?.stage == 7,

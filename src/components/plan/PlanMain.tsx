@@ -2,6 +2,7 @@ import LoaddingLottie from "@assets/90918-charging-electricity.json";
 import EskomStatus from "@comps/plan/EskomStatus";
 import PlanFilter from "@comps/plan/PlanFilter";
 import TimeInformation from "@comps/plan/TimeInformation";
+import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import useFetchPlanData from "@hooks/useFetchPlanData";
 import type { FilterData } from "@lstypes/types";
 import supabase from "@utils/supabase-config";
@@ -76,6 +77,11 @@ type PlanMainProps = {
 };
 export default function PlanMain({ filterState }: PlanMainProps) {
   const router = useRouter();
+  const {
+    data: loadsheddingStageData,
+    error: loadsheddingStageError,
+    isLoading: loadsheddingStageLoading,
+  } = useFetchLoadsheddingStatus();
   const [state, dispatch] = useReducer(handleReducer, {
     user_data: [],
     active_member_times: [],
@@ -256,13 +262,19 @@ export default function PlanMain({ filterState }: PlanMainProps) {
       )}
 
       <div className='flex border-2 h-[90vh] w-full overflow-y-scroll'>
-        <EskomStatus />
+        <EskomStatus
+          {...{ loadsheddingStageData, loadsheddingStageError, loadsheddingStageLoading }}
+        />
         <TimeInformation
           LSTimes={state.active_member_times}
           timeScope={{
             start: state.filterInputs.startTime,
             end: state.filterInputs.endTime,
             date: state.filterInputs.startDate,
+          }}
+          stageData={{
+            data: loadsheddingStageData,
+            stageDataLoading: loadsheddingStageLoading,
           }}
         />
         {/* <RightSide /> */}

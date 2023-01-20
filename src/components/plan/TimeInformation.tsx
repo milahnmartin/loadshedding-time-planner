@@ -1,5 +1,5 @@
 import LottieLoadJson from "@assets/90918-charging-electricity.json";
-import TimeCalculations from "@helpers/TimeCalculations.module";
+import TimeCalc from "@helpers/algorithm";
 import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import { useEffect, useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
@@ -104,12 +104,13 @@ function useCalcTimes(times: any[], timescope: any, stageData: any) {
   const [data, setData] = useState<any>([]);
   useEffect(() => {
     if (!stageData) return;
-    (async () => {})();
-    const [time1, time2, time3] = TimeCalculations.calcAllTimes(
-      times,
-      timescope,
-      stageData
-    );
+    (async () => {
+      const calcInstance = new TimeCalc(times, timescope, stageData);
+      const [bufferTimes, availableTimes, loadsheddingTimes] =
+        await calcInstance.constructTimes();
+      console.log("CALC", bufferTimes, availableTimes, loadsheddingTimes);
+    })();
+
     return () => {};
   }, [times, timescope, stageData]);
   return data;

@@ -1,7 +1,9 @@
 import TimeDisplayLabel from "@comps/labels/TimeDisplayLabel";
 import TimeCalc from "@helpers/algorithm";
 import { useEffect, useState } from "react";
+
 import { CiCircleInfo } from "react-icons/ci";
+
 type Times = {
   bufferTimes: string[];
   availableTimes: string[];
@@ -26,16 +28,9 @@ type Props = {
   };
 };
 
-const controller = new AbortController();
-
 function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   console.log("RENDER", stageData);
-  const [calcData, calcLoading] = useCalcTimes(
-    LSTimes,
-    timeScope,
-    stageData.data,
-    controller
-  );
+  const [calcData, calcLoading] = useCalcTimes(LSTimes, timeScope, stageData.data);
   if (calcLoading || stageData.stageDataLoading || !calcData) {
     return (
       <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
@@ -98,38 +93,32 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
         </div>
         <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
           {/* THIS IS LS TIMES */}
-          {calcData.filteredTimes?.map((time: string) => (
-            <TimeDisplayLabel variant='ls' data={time} />
-          ))}
+          {calcData.filteredTimes?.map((time: string) => {
+            if (!time) return null;
+            return <TimeDisplayLabel variant='ls' data={time} />;
+          })}
         </div>
       </div>
     </div>
   );
 }
-
 export default TimeInformation;
 
-function useCalcTimes(
-  times: any[],
-  timescope: any,
-  stageData: any,
-  controller: AbortController
-) {
+function useCalcTimes(times: any[], timescope: any, stageData: any) {
   const [data, setData] = useState<any>({});
   const [calcLoading, setcalcLoading] = useState<boolean>(true);
-  console.log("USECALC HIT");
-  5;
+
   useEffect(() => {
     if (!stageData || !timescope || !times) return;
     (async () => {
       const calcInstance = new TimeCalc(times, timescope, stageData);
       const { availableTimes, bufferTimes, filteredTimes }: Times =
-        await calcInstance.constructTimes(controller.signal);
+        calcInstance.constructTimes();
       setData({ availableTimes, bufferTimes, filteredTimes });
       setcalcLoading(false);
     })();
 
-    return () => controller.abort();
+    return () => console.log("WE DONE");
   }, [times, timescope, stageData]);
   return [data, calcLoading];
 }

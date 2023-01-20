@@ -187,13 +187,11 @@ class TimeCalc {
     return [];
   };
 
-  public constructTimes = (
-    signal: AbortSignal
-  ): Promise<{
+  public constructTimes = (): {
     availableTimes: string[];
     bufferTimes: string[];
     filteredTimes: string[];
-  }> => {
+  } => {
     const { start, end, date } = this._timeScope;
     // start and date is used in the planfilterdate
     const planFilterDate = new Date(
@@ -212,17 +210,11 @@ class TimeCalc {
       +end.split(":")[1]!
     );
 
-    return new Promise((resolve, reject) => {
-      if (signal.aborted) {
-        reject("Request aborted");
-      }
-
-      resolve({
-        availableTimes: this.calcAvailableTimes(planFilterDate, planFilterDateEnd),
-        bufferTimes: this.calcBufferTimes(planFilterDate, planFilterDateEnd),
-        filteredTimes: [...this._filteredTimes],
-      });
-    });
+    return {
+      availableTimes: this.calcAvailableTimes(planFilterDate, planFilterDateEnd),
+      bufferTimes: this.calcBufferTimes(planFilterDate, planFilterDateEnd),
+      filteredTimes: [...this._filteredTimes],
+    };
   };
 }
 

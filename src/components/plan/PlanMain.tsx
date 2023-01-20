@@ -11,6 +11,7 @@ import Router, { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import Lottie from "react-lottie-player";
 import { toast } from "react-toastify";
+import PlanInfo from "./RightSide";
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case "SET_FILTER_DATA":
@@ -278,12 +279,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           }}
         />
         {/* <RightSide /> */}
-        <div className='h-full w-3/12 border-2 border-cblue text-white'>
-          {/* <pre className='text-red-700'>{JSON.stringify(state.user_data, null, 2)}</pre> */}
-          <pre className='text-pink-300 font-satoshiBlack tracking-wide'>
-            {JSON.stringify(state.active_member_times, null, 2)}
-          </pre>
-        </div>
+        <PlanInfo planInfo={planData} />
       </div>
     </div>
   );

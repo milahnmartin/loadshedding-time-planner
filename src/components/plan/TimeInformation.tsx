@@ -55,7 +55,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
           {/* THIS IS AVAILABLE TIMES */}
           {calcData.availableTimes?.map((time: string) => (
             <TimeDisplayLabel variant='availible' data={time} />
@@ -73,7 +73,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
           {/* THS IS BUFFER TIMES */}
           {calcData.bufferTimes?.map((time: string) => (
             <TimeDisplayLabel variant='buffer' data={time} />
@@ -91,7 +91,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
+        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
           {/* THIS IS LS TIMES */}
           {calcData.filteredTimes?.map((time: string) => {
             if (!time) return null;

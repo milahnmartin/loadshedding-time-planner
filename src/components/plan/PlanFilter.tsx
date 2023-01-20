@@ -185,10 +185,10 @@ function PlanFilter({
 
   return (
     <div id='dashboard-filter' className={filterClassnames}>
-      <div className='flex flex-col h-full w-1/2 '>
+      <div className='flex flex-col h-full w-1/2'>
         <form
           onSubmit={handleFilterSubmit}
-          className='flex flex-col space-y-2 w-full h-full justify-evenly px-2'
+          className='flex flex-col space-y-2 w-full h-2/5 justify-evenly px-2'
         >
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <input
@@ -251,7 +251,7 @@ function PlanFilter({
           </button>
         </form>
 
-        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+        <div className='w-full h-3/5 overflow-y-scroll justify-start flex flex-col p-2'>
           {members?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
@@ -261,19 +261,9 @@ function PlanFilter({
             />
           ))}
         </div>
-        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-          {teams?.map((team: string) => (
-            <RedLabel
-              key={uuidv1()}
-              args={LabelType?.authorized}
-              data={team}
-              cb={() => removeUserCB(team)}
-            />
-          ))}
-        </div>
       </div>
       <div className='flex flex-col h-full w-1/2 '>
-        <div className='flex flex-col space-y-2 w-full h-full justify-evenly px-2 '>
+        <div className='flex flex-col space-y-2 w-full h-2/5 justify-evenly px-2 '>
           <div className='text-base rounded-xl w-full h-fit bg-gradient-to-r p-[4px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]'>
             <form onSubmit={handleInviteMember}>
               <input
@@ -311,18 +301,15 @@ function PlanFilter({
           </button>
         </div>
 
-        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
+        <div className='w-full h-3/5 overflow-y-scroll justify-start flex flex-col p-2'>
           {invitedData?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
               args={LabelType.invited}
               data={member}
-              cb={() => console.log("YES")}
+              cb={() => console.log("INVITE REMOVE")}
             />
           ))}
-        </div>
-        <div className='border-2 w-full h-full overflow-y-scroll justify-start flex flex-col p-2'>
-          {JSON.stringify(invitedData)}
         </div>
       </div>
     </div>

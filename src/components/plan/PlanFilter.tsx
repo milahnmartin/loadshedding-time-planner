@@ -11,9 +11,8 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { v1 as uuidv1 } from "uuid";
 enum LabelType {
-  authorized,
-  invited,
-  invitedPending,
+  authorized = "authorized",
+  invited = "invited",
 }
 const filterInputClassNames = classNames(
   "w-full rounded-lg px-6 py-2 text-center bg-slate-800 text-white  font-satoshi shadow-xl outline-none border-none "
@@ -255,7 +254,7 @@ function PlanFilter({
           {members?.map((member: string) => (
             <RedLabel
               key={uuidv1()}
-              args={LabelType?.authorized}
+              args={LabelType.authorized}
               data={member}
               cb={() => removeUserCB(member)}
             />

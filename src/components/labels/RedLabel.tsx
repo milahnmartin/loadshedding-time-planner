@@ -3,9 +3,8 @@ import supabase from "@utils/supabase-config";
 import classNames from "classnames";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 enum LabelType {
-  authorized,
-  invited,
-  invitedPending,
+  authorized = "authorized",
+  invited = "invited",
 }
 
 type LabelData = {
@@ -18,9 +17,8 @@ function RedLabel(props: LabelData) {
   const newlabelcolor = classNames(
     "text-white text-1xl rounded-full flex items-center justify-start p-2 mb-2",
     {
-      "bg-orange-500": LabelType.authorized,
-      "bg-purple": LabelType.invited,
-      "bg-cblue": LabelType.invitedPending,
+      "bg-cblue": props.args == LabelType.authorized,
+      "bg-cpurple": props.args == LabelType.invited,
     }
   );
 

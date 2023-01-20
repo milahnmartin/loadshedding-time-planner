@@ -264,7 +264,7 @@ class TimeCalc {
     return null;
   };
 
-  public constructTimes = (): any => {
+  public constructTimes = (): Promise<any> => {
     const { start, end, date } = this._timeScope;
     // start and date is used in the planfilterdate
     const planFilterDate = new Date(
@@ -283,11 +283,11 @@ class TimeCalc {
       +end.split(":")[1]!
     );
 
-    return [
-      this.calcAvailableTimes(planFilterDate, planFilterDateEnd),
-      this.calcBufferTimes(planFilterDate, planFilterDateEnd),
-      this._filteredTimes,
-    ];
+    return new Promise((resolve, reject) => {
+      if (this._filteredTimes) {
+        resolve(this.calcAvailableTimes(planFilterDate, planFilterDateEnd));
+      }
+    });
   };
 }
 

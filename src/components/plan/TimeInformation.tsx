@@ -1,11 +1,9 @@
 import LottieLoadJson from "@assets/90918-charging-electricity.json";
-import TimeDisplayLabel from "@comps/labels/TimeDisplayLabel";
-import TimeCalc from "@helpers/algorithm";
+import TimeCalculations from "@helpers/TimeCalculations.module";
 import useFetchLoadsheddingStatus from "@hooks/useFetchLoadsheddingStatus";
 import { useEffect, useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import Lottie from "react-lottie-player";
-import { v4 as uuidv4 } from "uuid";
 type Times = {
   bufferTimes: any[];
   availableTimes: any[];
@@ -27,24 +25,19 @@ type Props = {
 };
 
 function TimeInformation({ LSTimes, timeScope }: Props) {
-  const { data: stageData, isLoading: eskomStageLoading } = useFetchLoadsheddingStatus();
-  const [data, setData] = useState<any | null>(null);
-  useEffect(() => {
-    if (!stageData || !LSTimes || !timeScope) return;
-    const [availableTimes, bufferTimes, loadsheddingTimes] = new TimeCalc(
-      LSTimes,
-      timeScope,
-      stageData
-    ).constructTimes();
-    setData({
-      availableTimes: availableTimes,
-      bufferTimes: bufferTimes,
-      loadsheddingTimes: loadsheddingTimes,
-    });
-  }, [stageData, LSTimes, timeScope]);
+  const { data: stageData, isFetched: eskomStageFetched } = useFetchLoadsheddingStatus();
+  console.log("RENDER", eskomStageFetched);
+  const data = useCalcTimes(LSTimes, timeScope, stageData);
   return (
     <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
-      {eskomStageLoading && (
+      <pre className='text-white text-sm font-satoshiBold'>
+        STAGEDATA: {JSON.stringify(stageData, null, 2)}
+      </pre>
+    </div>
+  );
+  return (
+    <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
+      {!eskomStageFetched && (
         <Lottie
           loop
           className='z-0 w-full h-full border-2'
@@ -52,7 +45,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
           play
         />
       )}
-      {!eskomStageLoading && (
+      {eskomStageFetched && (
         <>
           <div className='w-full h-1/3 border-2'>
             <div className='flex w-full items-center justify-center text-center h-[20%] group'>
@@ -66,10 +59,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
               </span>
             </div>
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
-              {data?.availableTimes &&
-                data.availableTimes.map((time: any) => (
-                  <TimeDisplayLabel key={uuidv4()} data={time} variant='availible' />
-                ))}
+              {/* THIS IS AVAILABLE TIMES */}
             </div>
           </div>
           <div className='w-full h-1/3 border-2'>
@@ -84,10 +74,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
               </span>
             </div>
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
-              {data?.bufferTimes &&
-                data.bufferTimes.map((time: any) => (
-                  <TimeDisplayLabel key={uuidv4()} data={time} variant='buffer' />
-                ))}
+              {/* THS IS BUFFER TIMES */}
             </div>
           </div>
           <div className='w-full h-1/3 border-2'>
@@ -102,11 +89,7 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
               </span>
             </div>
             <div className='flex h-[80%] w-full border-2 items-center justify-center gap-2 flex-wrap content-center'>
-              {data?.loadsheddingTimes &&
-                data.loadsheddingTimes.map((time: any) => (
-                  <TimeDisplayLabel key={uuidv4()} data={time} variant='ls' />
-                ))}
-              {JSON.stringify(data)}
+              {/* THIS IS LS TIMES */}
             </div>
           </div>
         </>
@@ -116,3 +99,18 @@ function TimeInformation({ LSTimes, timeScope }: Props) {
 }
 
 export default TimeInformation;
+
+function useCalcTimes(times: any[], timescope: any, stageData: any) {
+  const [data, setData] = useState<any>([]);
+  useEffect(() => {
+    if (!stageData) return;
+    (async () => {})();
+    const [time1, time2, time3] = TimeCalculations.calcAllTimes(
+      times,
+      timescope,
+      stageData
+    );
+    return () => {};
+  }, [times, timescope, stageData]);
+  return data;
+}

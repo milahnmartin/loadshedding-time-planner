@@ -29,11 +29,11 @@ export default class MyDocument extends Document {
           <meta property='og:type' content='website' />
           <meta
             property='og:description'
-            content='Struggling to schedule game time with the boys due to loadshedding ? Look no Further, simply make an account, add your corresponding loadshedding area and add your friends ! Then sit back and let the LS Calculator due the stressful work for you !'
+            content='Struggling to schedule game time with the boys due to loadshedding ? Look no Further, simply make an account, add your corresponding loadshedding area and add your friends ! Then sit back and let the LS Calculator do the stressful work for you !'
           />
           <meta
             name='description'
-            content='Struggling to schedule game time with the boys due to loadshedding ? Look no Further, simply make an account, add your corresponding loadshedding area and add your friends ! Then sit back and let the LS Calculator due the stressful work for you !'
+            content='Struggling to schedule game time with the boys due to loadshedding ? Look no Further, simply make an account, add your corresponding loadshedding area and add your friends ! Then sit back and let the LS Calculator do the stressful work for you !'
           />
           <meta property='og:image' content='/Logov3.png' />
           <link rel='icon' href='/Logov3.png' />

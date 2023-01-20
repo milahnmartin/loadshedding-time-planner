@@ -262,7 +262,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         />
       )}
 
-      <div className='flex border-2 h-[90vh] w-full overflow-y-scroll'>
+      <div className='flex h-[90vh] w-full overflow-y-scroll'>
         <EskomStatus
           {...{ loadsheddingStageData, loadsheddingStageError, loadsheddingStageLoading }}
         />

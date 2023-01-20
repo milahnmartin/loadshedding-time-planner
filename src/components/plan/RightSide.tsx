@@ -7,7 +7,7 @@ function PlanInfo({ planInfo, ...props }: Props) {
   const plan_owner = planInfo?.user_id;
   const plan_time = planInfo?.plan_createdAt.split("T")[1].split(".")[0];
   return (
-    <div className='h-full w-3/12 border-2 border-cblue flex flex-col'>
+    <div className='h-full w-3/12 flex flex-col'>
       <div className='flex flex-wrap text-white content-center'>
         <h1>Plan Owner</h1>
         <h1>{plan_owner}</h1>

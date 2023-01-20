@@ -33,7 +33,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   const [calcData, calcLoading] = useCalcTimes(LSTimes, timeScope, stageData.data);
   if (calcLoading || stageData.stageDataLoading || !calcData) {
     return (
-      <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
+      <div className='h-full w-6/12 flex-col text-white font-satoshi flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
         <pre className='text-white text-sm font-satoshiBold'>
           {JSON.stringify(stageData, null, 2)}
         </pre>
@@ -43,8 +43,8 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
     );
   }
   return (
-    <div className='h-full w-6/12 border-2 flex-col text-white font-satoshi border-red-600 flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
-      <div className='w-full h-1/3 border-2'>
+    <div className='h-full w-6/12  flex-col text-white font-satoshi  flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
+      <div className='w-full h-1/3 '>
         <div className='flex w-full items-center justify-center text-center h-[20%] group'>
           <span className='flex items-center justify-center gap-2'>
             <pre>AVAILABLE TIMES</pre>
@@ -62,7 +62,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
           ))}
         </div>
       </div>
-      <div className='w-full h-1/3 border-2'>
+      <div className='w-full h-1/3 '>
         <div className='flex w-full items-center justify-center text-center h-[20%] group'>
           <span className='flex items-center justify-center gap-2'>
             <pre>BUFFER TIMES</pre>
@@ -80,7 +80,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
           ))}
         </div>
       </div>
-      <div className='w-full h-1/3 border-2'>
+      <div className='w-full h-1/3 '>
         <div className='flex w-full items-center justify-center text-center h-[20%] group'>
           <span className='flex items-center justify-center gap-2'>
             <pre>LS TIMES</pre>

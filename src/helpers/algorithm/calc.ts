@@ -250,7 +250,7 @@ class TimeCalc {
         const calcminPlanTime =
           initialDifTimeRounded * 60 + initialDifTimeMinRounded >
           this.minPlanTime;
-
+        console.log(`THIS IS CALCMINPLANTIME  ${this.minPlanTime}`);
         if (calcminPlanTime) {
           availableTimes.push(
             `${planFilterDate.toLocaleTimeString(

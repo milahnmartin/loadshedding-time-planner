@@ -35,12 +35,13 @@ function PlanFilter({
 }: PlanFilterType) {
   const [loggedInUser, loading] = useAuthState(auth);
   const [filterbuttonText, setfilterbuttonText] = useState<boolean>(false);
-  const [minPlanTime, setminPlanTime] = useState<number>(40);
+  const [minPlanTime, setminPlanTime] = useState<number>(
+    filterSettings?.minPlanTime || 40
+  );
   const [inputData, setInputData] = useState<FilterTime>({
     startDate: filterSettings?.startDate,
     startTime: filterSettings?.startTime,
     endTime: filterSettings?.endTime,
-    minPlanTime: filterSettings?.minPlanTime || 40,
   } as FilterTime);
   const router = useRouter();
   const handleFilterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +49,10 @@ function PlanFilter({
     onFilter({
       members,
       teams,
-      filterInputs: inputData,
+      filterInputs: {
+        ...inputData,
+        minPlanTime: minPlanTime,
+      },
     });
     setfilterbuttonText(true);
     setTimeout(() => {

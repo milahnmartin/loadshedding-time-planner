@@ -104,7 +104,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         minute: '2-digit',
       }),
       endTime: '02:00',
-      minPlanTime: 10,
+      minPlanTime: 40,
     },
   });
 

@@ -198,7 +198,6 @@ class TimeCalc {
     if (this._filteredTimes.length === 1 && this._filteredTimes[0]) {
       const availableTimes = [] as string[];
       const [LSStart, LSEnd] = this._filteredTimes[0]!.split('-');
-      console.log(`DEV LOG - ${LSStart} - ${LSEnd}`);
       const [LSStartHour, LSStartMin] = LSStart?.split(':')!;
       const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
       const onlyLSStart = new Date(
@@ -262,7 +261,19 @@ class TimeCalc {
       return availableTimes;
     }
 
-    return [];
+    // now this will run below when there are more than 1 filtered times
+    const availableTimes = [] as string[];
+
+    for (
+      let timeCount = 0;
+      timeCount < this._filteredTimes.length;
+      timeCount++
+    ) {
+      if (!this._filteredTimes[timeCount + 1]) break;
+      const [LSStart, LSEnd] = this._filteredTimes[timeCount]!.split('-');
+    }
+
+    return availableTimes;
   };
 
   public constructTimes = (): {

@@ -1,8 +1,8 @@
-import TimeDisplayLabel from "@comps/labels/TimeDisplayLabel";
-import TimeCalc from "@helpers/algorithm";
-import { useEffect, useState } from "react";
+import TimeDisplayLabel from '@comps/labels/TimeDisplayLabel';
+import TimeCalc from '@helpers/algorithm';
+import { useEffect, useState } from 'react';
 
-import { CiCircleInfo } from "react-icons/ci";
+import { CiCircleInfo } from 'react-icons/ci';
 
 type Times = {
   bufferTimes: string[];
@@ -12,7 +12,7 @@ type Times = {
 
 type MyTimes = {
   timeData: { date: string; name: string; stages: string[][] };
-  stageRegion: "eskom" | "capetown";
+  stageRegion: 'eskom' | 'capetown';
 };
 
 type Props = {
@@ -29,12 +29,16 @@ type Props = {
 };
 
 function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
-  console.log("RENDER", stageData);
-  const [calcData, calcLoading] = useCalcTimes(LSTimes, timeScope, stageData.data);
+  console.log('RENDER', stageData);
+  const [calcData, calcLoading] = useCalcTimes(
+    LSTimes,
+    timeScope,
+    stageData.data
+  );
   if (calcLoading || stageData.stageDataLoading || !calcData) {
     return (
-      <div className='h-full w-6/12 flex-col text-white font-satoshi flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
-        <pre className='text-white text-sm font-satoshiBold'>
+      <div className="h-full w-6/12 flex-col text-white font-satoshi flex items-center justify-center flex-wrap content-start overflow-y-scroll">
+        <pre className="text-white text-sm font-satoshiBold">
           {JSON.stringify(stageData, null, 2)}
         </pre>
         <pre>{JSON.stringify(calcLoading)}</pre>
@@ -43,59 +47,59 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
     );
   }
   return (
-    <div className='h-full w-6/12  flex-col text-white font-satoshi  flex items-center justify-center flex-wrap content-start overflow-y-scroll'>
-      <div className='w-full h-1/3 '>
-        <div className='flex w-full items-center justify-center text-center h-[20%] group'>
-          <span className='flex items-center justify-center gap-2'>
+    <div className="h-full w-6/12  flex-col text-white font-satoshi  flex items-center justify-center flex-wrap content-start overflow-y-scroll">
+      <div className="w-full h-1/3 ">
+        <div className="flex w-full items-center justify-center text-center h-[20%] group">
+          <span className="flex items-center justify-center gap-2">
             <pre>AVAILABLE TIMES</pre>
             <CiCircleInfo
-              title='Available Times Show times where all users are not experiencing on loadshedding'
-              className='hover:text-cblue transition-colors duration-500  cursor-pointer group-hover:animate-wiggle'
+              title="Available Times Show times where all users are not experiencing on loadshedding"
+              className="hover:text-cblue transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"
               size={25}
             />
           </span>
         </div>
-        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
           {/* THIS IS AVAILABLE TIMES */}
           {calcData.availableTimes?.map((time: string) => (
-            <TimeDisplayLabel variant='availible' data={time} />
+            <TimeDisplayLabel variant="availible" data={time} />
           ))}
         </div>
       </div>
-      <div className='w-full h-1/3 '>
-        <div className='flex w-full items-center justify-center text-center h-[20%] group'>
-          <span className='flex items-center justify-center gap-2'>
+      <div className="w-full h-1/3 ">
+        <div className="flex w-full items-center justify-center text-center h-[20%] group">
+          <span className="flex items-center justify-center gap-2">
             <pre>BUFFER TIMES</pre>
             <CiCircleInfo
-              title='Buffer Times add 30 min before and after each available time'
-              className='hover:text-yellow-500 transition-colors duration-500  cursor-pointer group-hover:animate-wiggle'
+              title="Buffer Times add 30 min before and after each available time"
+              className="hover:text-yellow-500 transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"
               size={25}
             />
           </span>
         </div>
-        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
           {/* THS IS BUFFER TIMES */}
           {calcData.bufferTimes?.map((time: string) => (
-            <TimeDisplayLabel variant='buffer' data={time} />
+            <TimeDisplayLabel variant="buffer" data={time} />
           ))}
         </div>
       </div>
-      <div className='w-full h-1/3 '>
-        <div className='flex w-full items-center justify-center text-center h-[20%] group'>
-          <span className='flex items-center justify-center gap-2'>
+      <div className="w-full h-1/3 ">
+        <div className="flex w-full items-center justify-center text-center h-[20%] group">
+          <span className="flex items-center justify-center gap-2">
             <pre>LS TIMES</pre>
             <CiCircleInfo
-              title='All Users Active Loadshedding Times'
-              className='hover:text-red-700 transition-colors duration-500  cursor-pointer group-hover:animate-wiggle'
+              title="All Users Active Loadshedding Times"
+              className="hover:text-red-700 transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"
               size={25}
             />
           </span>
         </div>
-        <div className='h-[80%] w-full flex justify-center items-start flex-wrap content-evenly gap-1 p-1 overflow-y-scroll'>
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
           {/* THIS IS LS TIMES */}
           {calcData.filteredTimes?.map((time: string) => {
             if (!time) return null;
-            return <TimeDisplayLabel variant='ls' data={time} />;
+            return <TimeDisplayLabel variant="ls" data={time} />;
           })}
         </div>
       </div>
@@ -118,7 +122,7 @@ function useCalcTimes(times: any[], timescope: any, stageData: any) {
       setcalcLoading(false);
     })();
 
-    return () => console.log("WE DONE");
+    return () => console.log('WE DONE');
   }, [times, timescope, stageData]);
   return [data, calcLoading];
 }

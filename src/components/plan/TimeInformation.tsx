@@ -21,6 +21,7 @@ type Props = {
     start: string;
     end: string;
     date: string;
+    minPlanTime: number;
   };
   stageData: {
     data: any;
@@ -33,7 +34,8 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   const [calcData, calcLoading] = useCalcTimes(
     LSTimes,
     timeScope,
-    stageData.data
+    stageData.data,
+    timeScope.minPlanTime
   );
   if (calcLoading || stageData.stageDataLoading || !calcData) {
     return (
@@ -59,7 +61,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-start gap-1 p-1 overflow-y-scroll">
           {/* THIS IS AVAILABLE TIMES */}
           {calcData.availableTimes?.map((time: string) => (
             <TimeDisplayLabel variant="availible" data={time} />
@@ -77,7 +79,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-start gap-1 p-1 overflow-y-scroll">
           {/* THS IS BUFFER TIMES */}
           {calcData.bufferTimes?.map((time: string) => (
             <TimeDisplayLabel variant="buffer" data={time} />
@@ -95,7 +97,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
             />
           </span>
         </div>
-        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-center gap-1 p-1 overflow-y-scroll">
+        <div className="h-[80%] w-full flex justify-center items-start flex-wrap content-start gap-1 p-1 overflow-y-scroll">
           {/* THIS IS LS TIMES */}
           {calcData.filteredTimes?.map((time: string) => {
             if (!time) return null;
@@ -108,14 +110,24 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
 }
 export default TimeInformation;
 
-function useCalcTimes(times: any[], timescope: any, stageData: any) {
+function useCalcTimes(
+  times: any[],
+  timescope: any,
+  stageData: any,
+  minPlanTime: number
+) {
   const [data, setData] = useState<any>({});
   const [calcLoading, setcalcLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!stageData || !timescope || !times) return;
     (async () => {
-      const calcInstance = new TimeCalc(times, timescope, stageData);
+      const calcInstance = new TimeCalc(
+        times,
+        timescope,
+        stageData,
+        minPlanTime
+      );
       const { availableTimes, bufferTimes, filteredTimes }: Times =
         calcInstance.constructTimes();
       setData({ availableTimes, bufferTimes, filteredTimes });

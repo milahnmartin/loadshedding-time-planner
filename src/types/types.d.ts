@@ -9,12 +9,13 @@ export interface IAreaData {
   region: string | null;
 }
 
-export type Variants = "ls" | "availible" | "buffer";
+export type Variants = 'ls' | 'availible' | 'buffer';
 
 export type FilterTime = {
   startDate: string;
   endTime: string;
   startTime: string;
+  minPlanTime: number;
 };
 
 export type FilterData = {

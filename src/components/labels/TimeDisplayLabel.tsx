@@ -8,10 +8,10 @@ type LabelProps = {
 
 const GreenLabel = ({ data, variant }: LabelProps) => {
   const lscolorClassName = classNames(
-    'text-white text-1xl rounded-lg p-2 w-32 text-center',
+    'text-white text-1xl rounded-lg p-2 text-center',
     {
-      'bg-red-700': variant === 'ls',
-      'bg-cblue': variant === 'availible',
+      'bg-red-700 w-32': variant === 'ls',
+      'bg-cblue w-96': variant === 'availible',
       'bg-yellow-500': variant === 'buffer',
     }
   );

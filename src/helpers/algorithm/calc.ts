@@ -143,7 +143,7 @@ class TimeCalc {
         );
 
         const calcminPlanTime =
-          initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+          initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
           this.minPlanTime;
         if (calcminPlanTime) {
           availableTimes.push(
@@ -169,7 +169,7 @@ class TimeCalc {
           (initialDifTimeMin - initialDifTimeMinRounded) * 60
         );
         const calcminPlanTime =
-          initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+          initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
           this.minPlanTime;
         if (calcminPlanTime) {
           availableTimes.push(
@@ -202,7 +202,7 @@ class TimeCalc {
       const seconds = Math.round((minutes - minutesRounded) * 60);
 
       const calcminPlanTime =
-        hoursRounded * 60 + minutesRounded > this.minPlanTime;
+        hoursRounded * 60 + minutesRounded >= this.minPlanTime;
 
       if (calcminPlanTime) {
         return [
@@ -248,9 +248,9 @@ class TimeCalc {
         );
 
         const calcminPlanTime =
-          initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+          initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
           this.minPlanTime;
-        console.log(`THIS IS CALCMINPLANTIME  ${this.minPlanTime}`);
+
         if (calcminPlanTime) {
           availableTimes.push(
             `${planFilterDate.toLocaleTimeString(
@@ -278,7 +278,7 @@ class TimeCalc {
         );
 
         const minIterationCalcTime =
-          initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+          initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
           this.minPlanTime;
 
         if (minIterationCalcTime) {
@@ -318,7 +318,7 @@ class TimeCalc {
 
         const initialDifTime =
           planFilterDate.getTime() - initialLsStart.getTime();
-        console.log(planFilterDate, initialLsStart);
+
         if (initialDifTime > 0) {
           const initialDifTimeHours = initialDifTime / (1000 * 60 * 60);
           const initialDifTimeRounded = Math.floor(initialDifTimeHours);
@@ -330,7 +330,7 @@ class TimeCalc {
           );
 
           const calcminPlanTime =
-            initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+            initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
             this.minPlanTime;
 
           if (calcminPlanTime) {
@@ -376,7 +376,7 @@ class TimeCalc {
       );
 
       const minIterationCalcTime =
-        lsTimediffRounded * 60 + lsTimediffMinRounded > this.minPlanTime;
+        lsTimediffRounded * 60 + lsTimediffMinRounded >= this.minPlanTime;
 
       if (!minIterationCalcTime) continue;
       if (lsTimediff > 0) {
@@ -425,7 +425,7 @@ class TimeCalc {
       );
 
       const calcEndMinTime =
-        initialDifTimeRounded * 60 + initialDifTimeMinRounded >
+        initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
         this.minPlanTime;
       if (calcEndMinTime) {
         availableTimes.push(

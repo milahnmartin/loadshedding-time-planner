@@ -98,7 +98,7 @@ function EskomStatus({
       </div>
       <div className='h-[41%] flex flex-col justify-start items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-center text-2xl text-white pb-2 pt-1'>
+        <h1 className='font-satoshiBold text-center text-2xl text-white pb-2 '>
           ESKOM UPCOMING EVENTS:
         </h1>
 

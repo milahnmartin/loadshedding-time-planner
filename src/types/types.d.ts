@@ -40,3 +40,12 @@ export type PlanInvitedType = {
   invitedTeams: string[];
   invitedUsers: string[];
 };
+
+export type Info = {
+  plan_createdAt: string;
+  user_id: string;
+  plan_lsTimes: string[];
+  plan_authorizedTeams: string[];
+  plan_authorizedUsers: string[];
+  plan_InvitedData: string[];
+};

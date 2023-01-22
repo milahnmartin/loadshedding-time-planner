@@ -4,7 +4,7 @@ import PlanFilter from '@comps/plan/PlanFilter';
 import TimeInformation from '@comps/plan/TimeInformation';
 import useFetchLoadsheddingStatus from '@hooks/useFetchLoadsheddingStatus';
 import useFetchPlanData from '@hooks/useFetchPlanData';
-import type { FilterData } from '@lstypes/types';
+import type { FilterData, Info } from '@lstypes/types';
 import supabase from '@utils/supabase-config';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/router';
@@ -298,7 +298,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           }}
         />
         {/* <RightSide /> */}
-        <PlanInfo planInfo={planData} />
+        <PlanInfo planInfo={planData as Info} />
       </div>
     </div>
   );

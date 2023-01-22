@@ -52,6 +52,7 @@ class TimeCalc {
       ])
     ).sort();
     this.minPlanTime = minPlanTime;
+    this._filteredTimes = this._filteredTimes.filter(time => time);
   }
 
   private handleSortArea = (area: 'cpt' | 'esk', users: any): any => {
@@ -544,6 +545,7 @@ class TimeCalc {
     }
     // the bottom is the last checks
 
+    console.log(this._filteredTimes);
     let lastLsTime = this._filteredTimes[this._filteredTimes.length - 1]!;
     if (!lastLsTime) {
       for (let i = this._filteredTimes.length - 2; i >= 0; i--) {
@@ -554,7 +556,7 @@ class TimeCalc {
         return availableTimes;
       }
     }
-    const [LSStart, LSEnd] = lastLsTime.split('-');
+    const [LSStart, LSEnd] = lastLsTime?.split('-');
     const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
     const onlyLSEnd = new Date(
       new Date(date).getFullYear(),

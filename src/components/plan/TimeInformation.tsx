@@ -55,7 +55,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
       <div className="w-full h-1/3 ">
         <div className="flex w-full items-center justify-center text-center h-[20%] group">
           <span className="flex items-center justify-center gap-2">
-            <pre>AVAILABLE TIMES</pre>
+            <pre className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-c2purple font-satoshiBold text-xl'>AVAILABLE TIMES</pre>
             <CiCircleInfo
               title="Available Times Show times where all users are not experiencing on loadshedding"
               className="hover:text-cblue transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"

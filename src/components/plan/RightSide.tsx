@@ -14,6 +14,7 @@ function PlanInfo({ planInfo }: Props) {
   return (
     <div className="h-full w-3/12 flex flex-col p-4 items-center justify-start font-satoshi gap-4">
       <h1 className="text-white text-3xl font-satoshiBold">PLAN INFORMATION</h1>
+     
       <div className="flex flex-col items-center justify-center w-full h-fit">
         <h1 className="text-red-700 text-3xl font-satoshiItalic">
           Plan Created By:

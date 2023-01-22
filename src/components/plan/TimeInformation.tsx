@@ -52,10 +52,12 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   }
   return (
     <div className="h-full w-6/12  flex-col text-white font-satoshi  flex items-center justify-center flex-wrap content-start overflow-y-scroll">
+      
       <div className="w-full h-1/3 ">
+      <h1 className="text-white text-3xl font-satoshiBold text-center pt-4">PLAN INFORMATION</h1>
         <div className="flex w-full items-center justify-center text-center h-[20%] group">
           <span className="flex items-center justify-center gap-2">
-            <pre className='text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-c2purple font-satoshiBold text-xl'>AVAILABLE TIMES</pre>
+            <pre >AVAILABLE TIMES</pre>
             <CiCircleInfo
               title="Available Times Show times where all users are not experiencing on loadshedding"
               className="hover:text-cblue transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"
@@ -73,7 +75,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
       <div className="w-full h-1/3 ">
         <div className="flex w-full items-center justify-center text-center h-[20%] group">
           <span className="flex items-center justify-center gap-2">
-            <pre>BUFFER TIMES</pre>
+            <pre >BUFFER TIMES</pre>
             <CiCircleInfo
               title="Buffer Times add 30 min before and after each available time"
               className="hover:text-yellow-500 transition-colors duration-500  cursor-pointer group-hover:animate-wiggle"

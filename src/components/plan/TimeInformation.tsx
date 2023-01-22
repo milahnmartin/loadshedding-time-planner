@@ -1,8 +1,9 @@
 import TimeDisplayLabel from '@comps/labels/TimeDisplayLabel';
 import TimeCalc from '@helpers/algorithm';
 import { useEffect, useState } from 'react';
-
+import LottieLoadJson from '@assets/90918-charging-electricity.json';
 import { CiCircleInfo } from 'react-icons/ci';
+import Lottie from 'react-lottie-player';
 
 type Times = {
   bufferTimes: string[];
@@ -39,12 +40,13 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   );
   if (calcLoading || stageData.stageDataLoading || !calcData) {
     return (
-      <div className="h-full w-6/12 flex-col text-white font-satoshi flex items-center justify-center flex-wrap content-start overflow-y-scroll">
-        <pre className="text-white text-sm font-satoshiBold">
-          {JSON.stringify(stageData, null, 2)}
-        </pre>
-        <pre>{JSON.stringify(calcLoading)}</pre>
-        <pre>{JSON.stringify(calcData)}</pre>
+      <div className="h-full w-6/12  flex items-center justify-center">
+        <Lottie
+          loop
+          animationData={LottieLoadJson}
+          play
+          style={{ width: 400, height: 400 }}
+        />
       </div>
     );
   }

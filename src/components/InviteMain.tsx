@@ -149,8 +149,8 @@ const InviteMain = () => {
   return (
     <div className="flex min-h-[90vh] max-h-fit w-full flex-wrap content-center items-center justify-center overflow-y-scroll gap-2 py-4">
       {inviteData &&
-        inviteData.length > 0 &&
-        inviteData.map((invite: IInviteData) => (
+        inviteData?.length > 0 &&
+        inviteData?.map((invite: IInviteData) => (
           <InviteLabel
             key={invite.plan_id}
             data={invite}
@@ -158,7 +158,7 @@ const InviteMain = () => {
             cbDecline={handleDeclinceInvite}
           />
         ))}
-      {!inviteFetching && inviteData.length === 0 && (
+      {!inviteFetching && inviteData?.length === 0 && (
         <div className="rounded-xl w-[20rem] h-fit bg-gradient-to-r p-[3px] from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
           <div className="flex flex-col h-full w-full bg-slate-800 text-white rounded-lg">
             <span className="flex flex-col items-center w-full h-fit pt-2">

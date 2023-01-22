@@ -111,7 +111,6 @@ class TimeCalc {
     if (this._filteredTimes.length === 1 && this._filteredTimes[0]) {
       const availableTimes = [] as string[];
       const [LSStart, LSEnd] = this._filteredTimes[0]!.split('-');
-      console.log(`DEV LOG - ${LSStart} - ${LSEnd}`);
       const [LSStartHour, LSStartMin] = LSStart?.split(':')!;
       const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
       const onlyLSStart = new Date(
@@ -544,8 +543,6 @@ class TimeCalc {
       }
     }
     // the bottom is the last checks
-
-    console.log(this._filteredTimes);
     let lastLsTime = this._filteredTimes[this._filteredTimes.length - 1]!;
     if (!lastLsTime) {
       for (let i = this._filteredTimes.length - 2; i >= 0; i--) {

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import LottieLoadJson from '@assets/90918-charging-electricity.json';
 import { CiCircleInfo } from 'react-icons/ci';
 import Lottie from 'react-lottie-player';
+import { Player } from "@lottiefiles/react-lottie-player";
 
 type Times = {
   bufferTimes: string[];
@@ -53,9 +54,17 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
   return (
     <div className="h-full w-6/12  flex-col text-white font-satoshi  flex items-center justify-center flex-wrap content-start overflow-y-scroll">
       
-      <div className="w-full h-1/3 ">
-      <h1 className="text-white text-3xl font-satoshiBold text-center pt-4">PLAN INFORMATION</h1>
-      
+      <div className=" w-full h-1/3 ">
+      <span className='flex space-x-1 h-[50px] text-center items-center justify-center pt-4'>
+        <h1 className='font-satoshiBold text-3xl text-white'>PLAN INFORMATION</h1>
+        <Player
+          src='https://assets2.lottiefiles.com/packages/lf20_qv9hdeyy.json'
+          className='player w-[50px] h-[50px] '
+          autoplay
+          loop
+          speed={0.8}
+        />
+        </span>
         <div className="flex w-full items-center justify-center text-center h-[20%] group">
           <span className="flex items-center justify-center gap-2">
             <pre className='font-satoshiItalic'>AVAILABLE TIMES</pre>

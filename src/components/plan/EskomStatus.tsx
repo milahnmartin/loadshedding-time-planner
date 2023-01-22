@@ -3,6 +3,7 @@ import EskomUpcomingEventLabel from "@comps/labels/EskomUpcomingEventLabel";
 import classNames from "classnames";
 import Lottie from "react-lottie-player";
 import { v4 as uuidv4 } from "uuid";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 type Props = {
   loadsheddingStageData: any;
@@ -65,8 +66,16 @@ function EskomStatus({
     <div className='flex flex-col h-full w-3/12'>
       <div className='h-[18%] text-center flex items-center justify-center flex-col space-y-4'>
         {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-3xl text-white pt-1'>CURRENT STAGES</h1>
-       
+        <span className='flex space-x-1 h-[50px] items-center pt-2'>
+        <h1 className='font-satoshiBold text-3xl text-white'>CURRENT STAGES</h1>
+        <Player
+          src='https://assets2.lottiefiles.com/packages/lf20_cjy4zhdi.json'
+          className='player w-[50px] h-[50px] '
+          autoplay
+          loop
+          speed={0.8}
+        />
+        </span>
         <h1 className={capetownStages}>
           Cape Town: Stage: <span>{loadsheddingStageData?.capetown?.stage}</span>
         </h1>

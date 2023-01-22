@@ -65,7 +65,8 @@ function EskomStatus({
     <div className='flex flex-col h-full w-3/12'>
       <div className='h-[18%] text-center flex items-center justify-center flex-col space-y-4'>
         {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-3xl text-white pt-1'>CURRENT STAGES:</h1>
+        <h1 className='font-satoshiBold text-3xl text-white pt-1'>CURRENT STAGES</h1>
+       
         <h1 className={capetownStages}>
           Cape Town: Stage: <span>{loadsheddingStageData?.capetown?.stage}</span>
         </h1>

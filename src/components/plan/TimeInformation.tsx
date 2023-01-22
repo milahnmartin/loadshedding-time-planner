@@ -55,6 +55,7 @@ function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
       
       <div className="w-full h-1/3 ">
       <h1 className="text-white text-3xl font-satoshiBold text-center pt-4">PLAN INFORMATION</h1>
+      
         <div className="flex w-full items-center justify-center text-center h-[20%] group">
           <span className="flex items-center justify-center gap-2">
             <pre className='font-satoshiItalic'>AVAILABLE TIMES</pre>

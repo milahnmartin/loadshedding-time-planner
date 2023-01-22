@@ -63,9 +63,9 @@ function EskomStatus({
 
   return (
     <div className='flex flex-col h-full w-3/12'>
-      <div className='h-[20%] text-center flex items-center justify-center flex-col space-y-4 pb-2'>
+      <div className='h-[18%] text-center flex items-center justify-center flex-col space-y-4'>
         {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-3xl text-white'>CURRENT STAGES:</h1>
+        <h1 className='font-satoshiBold text-3xl text-white pt-1'>CURRENT STAGES:</h1>
         <h1 className={capetownStages}>
           Cape Town: Stage: <span>{loadsheddingStageData?.capetown?.stage}</span>
         </h1>
@@ -73,12 +73,12 @@ function EskomStatus({
           Eskom: Stage: <span>{loadsheddingStageData?.eskom?.stage}</span>
         </h1>
       </div>
-      <div className='h-[40%] flex flex-col justify-center items-center'>
+      <div className='h-[41%] flex flex-col justify-center items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-center text-2xl text-white'>
+        <h1 className='font-satoshiBold text-center text-2xl text-white pb-2'>
           CAPE TOWN UPCOMING EVENTS:
         </h1>
-        <div className='flex flex-col h-full justify-start space-y-1 overflow-y-scroll'>
+        <div className='flex flex-col h-full justify-start space-y-1 overflow-y-scroll '>
           {loadsheddingStageData?.capetown?.next_stages?.map(
             (event: { stage: number; stage_start_timestamp: string }) => {
               return <EskomUpcomingEventLabel key={uuidv4()} {...event} />;
@@ -86,9 +86,9 @@ function EskomStatus({
           )}
         </div>
       </div>
-      <div className='h-[40%] flex flex-col justify-start items-center'>
+      <div className='h-[41%] flex flex-col justify-start items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-center text-2xl text-white'>
+        <h1 className='font-satoshiBold text-center text-2xl text-white pb-2 pt-1'>
           ESKOM UPCOMING EVENTS:
         </h1>
 

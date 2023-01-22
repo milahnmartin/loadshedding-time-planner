@@ -7,7 +7,6 @@ type TimeScope = {
 };
 
 class TimeCalc {
-  private _finalData: string[] = [];
   public _filteredTimes: string[] = [];
   private _timeScope: TimeScope;
   public minPlanTime: number = 40;
@@ -186,7 +185,159 @@ class TimeCalc {
       return availableTimes;
     }
 
-    return [];
+    // if filteredTimes is above 1
+
+    const availableTimes = [] as string[];
+
+    for (
+      let timeCount = 0;
+      timeCount < this._filteredTimes.length;
+      timeCount++
+    ) {
+      if (!this._filteredTimes[timeCount + 1]) break;
+      const [LSStart, LSEnd] = this._filteredTimes[timeCount]!.split('-');
+      if (timeCount === 0) {
+        const [LSStartHour, LSStartMin] = LSStart?.split(':')!;
+        const initialLsStart = new Date(
+          new Date(date).getFullYear(),
+          new Date(date).getMonth(),
+          new Date(date).getDate(),
+          +LSStartHour!,
+          +LSStartMin!
+        );
+        initialLsStart.setMinutes(initialLsStart.getMinutes() + 30);
+        const initialDifTime =
+          planFilterDate.getTime() - initialLsStart.getTime();
+
+        if (initialDifTime > 0) {
+          const initialDifTimeHours = initialDifTime / (1000 * 60 * 60);
+          const initialDifTimeRounded = Math.floor(initialDifTimeHours);
+          const initialDifTimeMin =
+            (initialDifTimeHours - initialDifTimeRounded) * 60;
+          const initialDifTimeMinRounded = Math.floor(initialDifTimeMin);
+          const initialDifTimeSeconds = Math.round(
+            (initialDifTimeMin - initialDifTimeMinRounded) * 60
+          );
+
+          const calcminPlanTime =
+            initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
+            this.minPlanTime;
+
+          if (calcminPlanTime) {
+            availableTimes.push(
+              `${planFilterDate.toLocaleTimeString(
+                'en-ZA',
+                this._timeOptions
+              )} - ${initialLsStart.toLocaleTimeString(
+                'en-ZA',
+                this._timeOptions
+              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
+            );
+          }
+        }
+        continue;
+      }
+
+      const [nextLSStart, nextLSEnd] =
+        this._filteredTimes[timeCount + 1]!.split('-');
+      const [LSStartHour, LSStartMin] = nextLSStart?.split(':')!;
+      const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
+      const nextLsStart = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate(),
+        +LSStartHour!,
+        +LSStartMin!
+      );
+      const onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate(),
+        +LSEndHour!,
+        +LSEndMin!
+      );
+
+      nextLsStart.setMinutes(nextLsStart.getMinutes() - 30);
+      onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() + 30);
+
+      const lsTimediff = nextLsStart.getTime() - onlyLSEnd.getTime();
+      const lsTimediffHours = lsTimediff / (1000 * 60 * 60);
+      const lsTimediffRounded = Math.floor(lsTimediffHours);
+      const lsTimediffMin = (lsTimediffHours - lsTimediffRounded) * 60;
+      const lsTimediffMinRounded = Math.floor(lsTimediffMin);
+      const lsTimediffSeconds = Math.round(
+        (lsTimediffMin - lsTimediffMinRounded) * 60
+      );
+
+      const minIterationCalcTime =
+        lsTimediffRounded * 60 + lsTimediffMinRounded >= this.minPlanTime;
+
+      if (!minIterationCalcTime) continue;
+
+      if (lsTimediff > 0) {
+        availableTimes.push(
+          `${onlyLSEnd.toLocaleTimeString(
+            'en-ZA',
+            this._timeOptions
+          )} - ${nextLsStart.toLocaleTimeString(
+            'en-ZA',
+            this._timeOptions
+          )} @ ${lsTimediffRounded} hours, ${lsTimediffMinRounded} minutes, ${lsTimediffSeconds} secs`
+        );
+      }
+    }
+    // the bottom is the last checks
+
+    let lastLsTime = this._filteredTimes[this._filteredTimes.length - 1]!;
+    if (!lastLsTime) {
+      for (let i = this._filteredTimes.length - 2; i >= 0; i--) {
+        if (this._filteredTimes[i]) {
+          lastLsTime = this._filteredTimes[i]!;
+          break;
+        }
+        return availableTimes;
+      }
+    }
+    const [LSStart, LSEnd] = lastLsTime.split('-');
+    const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
+    const onlyLSEnd = new Date(
+      new Date(date).getFullYear(),
+      new Date(date).getMonth(),
+      new Date(date).getDate(),
+      +LSEndHour!,
+      +LSEndMin!
+    );
+
+    onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() - 30);
+    // this checks the planfilters end time vs the last ls time
+    const finalDifTime = planFilterDateEnd.getTime() - onlyLSEnd.getTime();
+    if (finalDifTime > 0) {
+      const initialDifTimeHours = finalDifTime / (1000 * 60 * 60);
+      const initialDifTimeRounded = Math.floor(initialDifTimeHours);
+      const initialDifTimeMin =
+        (initialDifTimeHours - initialDifTimeRounded) * 60;
+      const initialDifTimeMinRounded = Math.floor(initialDifTimeMin);
+      const initialDifTimeSeconds = Math.round(
+        (initialDifTimeMin - initialDifTimeMinRounded) * 60
+      );
+
+      const calcEndMinTime =
+        initialDifTimeRounded * 60 + initialDifTimeMinRounded >=
+        this.minPlanTime;
+      if (calcEndMinTime) {
+        availableTimes.push(
+          `${onlyLSEnd.toLocaleTimeString(
+            'en-ZA',
+            this._timeOptions
+          )} - ${planFilterDateEnd.toLocaleTimeString(
+            'en-ZA',
+            this._timeOptions
+          )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutess, ${initialDifTimeSeconds} yep`
+        );
+      }
+    }
+
+    return availableTimes;
   };
   private calcAvailableTimes = (
     planFilterDate: Date,

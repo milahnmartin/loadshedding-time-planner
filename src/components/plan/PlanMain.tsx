@@ -15,7 +15,6 @@ import PlanInfo from './RightSide';
 const handleReducer = (state: any, action: { TYPE: string; PAYLOAD?: any }) => {
   switch (action.TYPE) {
     case 'SET_FILTER_DATA':
-      console.log(action.PAYLOAD.filterInputs);
       return {
         ...state,
         filterInputs: action.PAYLOAD.filterInputs,

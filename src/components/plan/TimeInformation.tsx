@@ -32,7 +32,6 @@ type Props = {
 };
 
 function TimeInformation({ LSTimes, timeScope, stageData }: Props) {
-  console.log('RENDER', stageData);
   const [calcData, calcLoading] = useCalcTimes(
     LSTimes,
     timeScope,

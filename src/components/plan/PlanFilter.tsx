@@ -176,7 +176,7 @@ function PlanFilter({
   };
 
   const filterClassnames = classNames(
-    'absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm z-4'
+    'absolute flex p-1 right-0 h-[90vh] w-1/2 bg-slate-700 rounded-sm z-[4]'
   );
 
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {

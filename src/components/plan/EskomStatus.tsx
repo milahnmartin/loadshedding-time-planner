@@ -64,7 +64,7 @@ function EskomStatus({
 
   return (
     <div className='flex flex-col h-full w-3/12'>
-      <div className='h-[18%] text-center flex items-center justify-center flex-col space-y-4'>
+      <div className='h-[18%] text-center flex items-center justify-center flex-col space-y-3 pb-3'>
         {/* <h1 className='font-satoshiBold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
         <span className='flex space-x-1 h-[50px] items-center pt-2'>
         <h1 className='font-satoshiBold text-3xl text-white'>CURRENT STAGES</h1>
@@ -85,7 +85,7 @@ function EskomStatus({
       </div>
       <div className='h-[41%] flex flex-col justify-center items-center'>
         {/* <h1 className='font-satoshiBold text-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-caqua via-cblue to-cpurple'> */}
-        <h1 className='font-satoshiBold text-center text-2xl text-white pb-2'>
+        <h1 className='font-satoshiBold text-center text-2xl text-white pt-6 pb-2'>
           CAPE TOWN UPCOMING EVENTS:
         </h1>
         <div className='flex flex-col h-full justify-start space-y-1 overflow-y-scroll '>

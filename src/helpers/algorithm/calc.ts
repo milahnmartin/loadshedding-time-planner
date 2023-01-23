@@ -268,8 +268,8 @@ class TimeCalc {
         +LSEndMin!
       );
 
-      nextLsStart.setMinutes(nextLsStart.getMinutes() - 30);
-      onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() + 30);
+      nextLsStart.setMinutes(nextLsStart.getMinutes() + 30);
+      onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() - 30);
 
       const lsTimediff = nextLsStart.getTime() - onlyLSEnd.getTime();
       const lsTimediffHours = lsTimediff / (1000 * 60 * 60);

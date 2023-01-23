@@ -55,9 +55,6 @@ function PlanFilter({
       },
     });
     setfilterbuttonText(true);
-    setTimeout(() => {
-      toggleFilter!(false);
-    }, 2110);
   };
 
   const inviteInputRef = useRef<HTMLInputElement>(null);
@@ -184,6 +181,14 @@ function PlanFilter({
       toast.warning('End Time Needs To be Greater then 00:00');
       return;
     }
+    if (e.currentTarget.value > '08:00') {
+      toast.warning('End Time Needs To be Less then 08:00');
+      setInputData({
+        ...inputData,
+        endTime: '08:00',
+      });
+      return;
+    }
     setInputData({
       ...inputData,
       endTime: e.target.value,
@@ -249,7 +254,7 @@ function PlanFilter({
                 </span>
               ) : (
                 <span className="flex items-center gap-1 text-lime-500 text-base">
-                  <IoCheckmarkDoneCircleOutline fill="green" size={30} />{' '}
+                  <IoCheckmarkDoneCircleOutline fill="green" size={30} />
                   APPLIED
                 </span>
               )}

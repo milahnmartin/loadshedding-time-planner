@@ -198,17 +198,28 @@ class TimeCalc {
       const [LSStart, LSEnd] = this._filteredTimes[timeCount]!.split('-');
       if (timeCount === 0) {
         const [LSStartHour, LSStartMin] = LSStart?.split(':')!;
-        const initialLsStart = new Date(
-          new Date(date).getFullYear(),
-          new Date(date).getMonth(),
-          new Date(date).getDate(),
-          +LSStartHour!,
-          +LSStartMin!
-        );
+        let initialLsStart;
+        if (LSStart === '00:00') {
+          initialLsStart = new Date(
+            new Date(date).getFullYear(),
+            new Date(date).getMonth(),
+            new Date(date).getDate() - 1,
+            +LSStartHour!,
+            +LSStartMin!
+          );
+        } else {
+          initialLsStart = new Date(
+            new Date(date).getFullYear(),
+            new Date(date).getMonth(),
+            new Date(date).getDate(),
+            +LSStartHour!,
+            +LSStartMin!
+          );
+        }
+
         initialLsStart.setMinutes(initialLsStart.getMinutes() + 30);
         const initialDifTime =
-          planFilterDate.getTime() - initialLsStart.getTime();
-
+          initialLsStart.getTime() - planFilterDate.getTime();
         if (initialDifTime > 0) {
           const initialDifTimeHours = initialDifTime / (1000 * 60 * 60);
           const initialDifTimeRounded = Math.floor(initialDifTimeHours);
@@ -231,7 +242,7 @@ class TimeCalc {
               )} - ${initialLsStart.toLocaleTimeString(
                 'en-ZA',
                 this._timeOptions
-              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
+              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} avyes`
             );
           }
         }
@@ -300,7 +311,7 @@ class TimeCalc {
     }
     const [LSStart, LSEnd] = lastLsTime.split('-');
     const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
-    const onlyLSEnd = new Date(
+    let onlyLSEnd = new Date(
       new Date(date).getFullYear(),
       new Date(date).getMonth(),
       new Date(date).getDate(),
@@ -310,6 +321,16 @@ class TimeCalc {
 
     onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() - 30);
     // this checks the planfilters end time vs the last ls time
+    if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
+      console.log('we hit it');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    }
     const finalDifTime = planFilterDateEnd.getTime() - onlyLSEnd.getTime();
     if (finalDifTime > 0) {
       const initialDifTimeHours = finalDifTime / (1000 * 60 * 60);
@@ -416,8 +437,7 @@ class TimeCalc {
       }
 
       const finalDifTime = planFilterDateEnd.getTime() - onlyLSEnd.getTime();
-      console.log(planFilterDateEnd);
-      console.log(onlyLSEnd);
+
       if (finalDifTime > 0) {
         const initialDifTimeHours = finalDifTime / (1000 * 60 * 60);
         const initialDifTimeRounded = Math.floor(initialDifTimeHours);
@@ -459,17 +479,27 @@ class TimeCalc {
       const [LSStart, LSEnd] = this._filteredTimes[timeCount]!.split('-');
       if (timeCount === 0) {
         const [LSStartHour, LSStartMin] = LSStart?.split(':')!;
-        const initialLsStart = new Date(
-          new Date(date).getFullYear(),
-          new Date(date).getMonth(),
-          new Date(date).getDate(),
-          +LSStartHour!,
-          +LSStartMin!
-        );
+        let initialLsStart;
+        if (LSStart === '00:00') {
+          initialLsStart = new Date(
+            new Date(date).getFullYear(),
+            new Date(date).getMonth(),
+            new Date(date).getDate() - 1,
+            +LSStartHour!,
+            +LSStartMin!
+          );
+        } else {
+          initialLsStart = new Date(
+            new Date(date).getFullYear(),
+            new Date(date).getMonth(),
+            new Date(date).getDate(),
+            +LSStartHour!,
+            +LSStartMin!
+          );
+        }
 
         const initialDifTime =
-          planFilterDate.getTime() - initialLsStart.getTime();
-
+          initialLsStart.getTime() - planFilterDate.getTime();
         if (initialDifTime > 0) {
           const initialDifTimeHours = initialDifTime / (1000 * 60 * 60);
           const initialDifTimeRounded = Math.floor(initialDifTimeHours);
@@ -492,7 +522,7 @@ class TimeCalc {
               )} - ${initialLsStart.toLocaleTimeString(
                 'en-ZA',
                 this._timeOptions
-              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
+              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} avyes`
             );
           }
         }
@@ -553,9 +583,9 @@ class TimeCalc {
         return availableTimes;
       }
     }
-    const [LSStart, LSEnd] = lastLsTime?.split('-');
+    const [LSStart, LSEnd] = lastLsTime?.split('-')!;
     const [LSEndHour, LSEndMin] = LSEnd?.split(':')!;
-    const onlyLSEnd = new Date(
+    let onlyLSEnd = new Date(
       new Date(date).getFullYear(),
       new Date(date).getMonth(),
       new Date(date).getDate(),
@@ -563,6 +593,16 @@ class TimeCalc {
       +LSEndMin!
     );
     // this checks the planfilters end time vs the last ls time
+    if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
+      console.log('we hit it');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    }
     const finalDifTime = planFilterDateEnd.getTime() - onlyLSEnd.getTime();
     if (finalDifTime > 0) {
       const initialDifTimeHours = finalDifTime / (1000 * 60 * 60);

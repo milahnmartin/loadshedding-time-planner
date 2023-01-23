@@ -1,6 +1,7 @@
 class ConstructArea {
   private _Times: any;
-  private _events: { stage: string; stage_start_timestamp: string }[] = [] as any;
+  private _events: { stage: string; stage_start_timestamp: string }[] =
+    [] as any;
   private _isEvents: boolean = false;
   private _planFilterDate: string = new Date().toLocaleDateString();
   private stageInfo: {
@@ -9,10 +10,11 @@ class ConstructArea {
     stage: string;
     stage_updated: string;
   };
+
   constructor(
     areaData: {
       timeData: { date: string; name: string; stages: string[][] };
-      stageRegion: "eskom" | "capetown";
+      stageRegion: 'eskom' | 'capetown';
     }[],
     stageInfo: {
       name: string;
@@ -41,7 +43,8 @@ class ConstructArea {
     const stagesStack = this._events
       .filter((val: { stage: string; stage_start_timestamp: string }) => {
         return (
-          (val.stage_start_timestamp.split("T")[0] as string) === this._planFilterDate
+          (val.stage_start_timestamp.split('T')[0] as string) ===
+          this._planFilterDate
         );
       })
       .map((val: { stage: string; stage_start_timestamp: string }) => {
@@ -58,7 +61,9 @@ class ConstructArea {
     }
 
     return this._Times.flatMap(
-      (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
+      (time: {
+        timeData: { date: string; name: string; stages: string[][] }[];
+      }) => {
         return time?.timeData[0]?.stages[instanceStage + 1];
       }
     );
@@ -66,7 +71,9 @@ class ConstructArea {
   private handleNoEventConstruct = (): string[] => {
     const instanceStage = +this.stageInfo?.stage;
     return this._Times.flatMap(
-      (time: { timeData: { date: string; name: string; stages: string[][] }[] }) => {
+      (time: {
+        timeData: { date: string; name: string; stages: string[][] }[];
+      }) => {
         return time?.timeData[0]?.stages[instanceStage + 1];
       }
     );

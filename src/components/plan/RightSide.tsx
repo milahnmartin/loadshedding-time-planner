@@ -25,7 +25,7 @@ function PlanInfo({ planInfo }: Props) {
         />
         </span>
       <div className="flex flex-col items-center justify-center w-full h-fit">
-        <h1 className="text-red-700 text-xl font-satoshiBold">
+        <h1 className="text-aqua-500 text-xl font-satoshiBold">
           PLAN CREATED BY:
         </h1>
         <h1 className="text-white text-lg font-satoshiItalic">
@@ -34,7 +34,7 @@ function PlanInfo({ planInfo }: Props) {
       </div>
 
       <div className="flex flex-col items-center justify-center w-full h-fit">
-        <h1 className="text-red-700 text-xl font-satoshiBold">
+        <h1 className="text-aqua-500 text-xl font-satoshiBold">
           PLAN CREATION DATE:
         </h1>
         <h1 className="text-white text-lg font-satoshiItalic">

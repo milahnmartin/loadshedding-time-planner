@@ -20,11 +20,11 @@ function EskomStatus({
     "text-red-300": loadsheddingStageData?.capetown?.stage == 7,
     "text-red-400": loadsheddingStageData?.capetown?.stage == 6,
     "text-red-500": loadsheddingStageData?.capetown?.stage == 5,
-    "text-orange-700": loadsheddingStageData?.capetown?.stage == 4,
+    "text-purple-700": loadsheddingStageData?.capetown?.stage == 4,
     "text-orange-600": loadsheddingStageData?.capetown?.stage == 3,
-    "text-amber-600": loadsheddingStageData?.capetown?.stage == 2,
+    "text-aqua-400": loadsheddingStageData?.capetown?.stage == 2,
     "text-amber-400": loadsheddingStageData?.capetown?.stage == 1,
-    "text-green-500": loadsheddingStageData?.capetown?.stage == 0,
+    "text-aqua-500": loadsheddingStageData?.capetown?.stage == 0,
   });
 
   const eskomStages = classNames("font-satoshiBlack text-2xl", {
@@ -33,8 +33,8 @@ function EskomStatus({
     "text-red-400": loadsheddingStageData?.eskom?.stage == 6,
     "text-red-500": loadsheddingStageData?.eskom?.stage == 5,
     "text-orange-700": loadsheddingStageData?.eskom?.stage == 4,
-    "text-orange-600": loadsheddingStageData?.eskom?.stage == 3,
-    "text-amber-600": loadsheddingStageData?.eskom?.stage == 2,
+    "text-red-800": loadsheddingStageData?.eskom?.stage == 3,
+    "text-aqua-600": loadsheddingStageData?.eskom?.stage == 2,
     "text-amber-400": loadsheddingStageData?.eskom?.stage == 1,
     "text-green-500": loadsheddingStageData?.eskom?.stage == 0,
   });

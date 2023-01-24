@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsFilterCircle } from 'react-icons/bs';
-import { IoCheckmarkDoneCircleOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import { v1 as uuidv1 } from 'uuid';
+import Lottie from 'react-lottie-player';
+import SuccessLottie from '@assets/98639-successfull.json';
 enum LabelType {
   authorized = 'authorized',
   invited = 'invited',
@@ -55,6 +56,9 @@ function PlanFilter({
       },
     });
     setfilterbuttonText(true);
+    setTimeout(() => {
+      setfilterbuttonText(false);
+    }, 2000);
   };
 
   const inviteInputRef = useRef<HTMLInputElement>(null);
@@ -253,10 +257,13 @@ function PlanFilter({
                   <BsFilterCircle className="text-lg" /> FILTER
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-lime-500 text-base">
-                  <IoCheckmarkDoneCircleOutline fill="green" size={30} />
-                  APPLIED
-                </span>
+                <Lottie
+                  loop
+                  animationData={SuccessLottie}
+                  play
+                  speed={0.5}
+                  style={{ width: 40, height: 40 }}
+                />
               )}
             </div>
           </button>

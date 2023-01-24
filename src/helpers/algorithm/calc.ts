@@ -57,22 +57,6 @@ class TimeCalc {
 
   private configureFilterTimes = (): string[] => {
     const removeUndefinedTimes = this._filteredTimes.filter(time => time);
-
-    const thesplit = removeUndefinedTimes.flatMap(time => time.split('-'));
-    const newTimes = Array.from(new Set(thesplit));
-    const firstTime = removeUndefinedTimes[0];
-    const lastTime = removeUndefinedTimes[removeUndefinedTimes.length - 1];
-    newTimes.splice(0, 1);
-    newTimes.splice(newTimes.length - 1, 1);
-    newTimes.sort();
-    const lsTimes = [] as string[];
-    for (let i = 0; i < Math.floor(newTimes.length / 2); i += 2) {
-      lsTimes.push(`${newTimes[i]}-${newTimes[i + 1]}`);
-    }
-
-    lsTimes.push(lastTime as string);
-    lsTimes.unshift(firstTime as string);
-    console.log(lsTimes);
     return removeUndefinedTimes;
   };
 

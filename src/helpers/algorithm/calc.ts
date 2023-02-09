@@ -247,7 +247,7 @@ class TimeCalc {
               )} - ${initialLsStart.toLocaleTimeString(
                 'en-ZA',
                 this._timeOptions
-              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} avyes`
+              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
             );
           }
         }
@@ -298,7 +298,7 @@ class TimeCalc {
           )} - ${nextLsStart.toLocaleTimeString(
             'en-ZA',
             this._timeOptions
-          )} @ ${lsTimediffRounded} hours, ${lsTimediffMinRounded} minutes, ${lsTimediffSeconds} secs`
+          )} @ ${lsTimediffRounded} hours, ${lsTimediffMinRounded} minutes, ${lsTimediffSeconds} seconds`
         );
       }
     }
@@ -358,7 +358,7 @@ class TimeCalc {
           )} - ${planFilterDateEnd.toLocaleTimeString(
             'en-ZA',
             this._timeOptions
-          )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutess, ${initialDifTimeSeconds} yep`
+          )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutess, ${initialDifTimeSeconds} seconds`
         );
       }
     }
@@ -527,7 +527,7 @@ class TimeCalc {
               )} - ${initialLsStart.toLocaleTimeString(
                 'en-ZA',
                 this._timeOptions
-              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} avyes`
+              )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
             );
           }
         }
@@ -573,7 +573,7 @@ class TimeCalc {
           )} - ${nextLsStart.toLocaleTimeString(
             'en-ZA',
             this._timeOptions
-          )} @ ${lsTimediffRounded} hours, ${lsTimediffMinRounded} minutes, ${lsTimediffSeconds} secs`
+          )} @ ${lsTimediffRounded} hours, ${lsTimediffMinRounded} minutes, ${lsTimediffSeconds} seconds`
         );
       }
     }
@@ -630,7 +630,7 @@ class TimeCalc {
           )} - ${planFilterDateEnd.toLocaleTimeString(
             'en-ZA',
             this._timeOptions
-          )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutess, ${initialDifTimeSeconds} yep`
+          )} @ ${initialDifTimeRounded} hours, ${initialDifTimeMinRounded} minutes, ${initialDifTimeSeconds} seconds`
         );
       }
     }

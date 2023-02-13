@@ -11,8 +11,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { BiHide, BiShow } from 'react-icons/bi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
+import { BsToggle2Off, BsToggle2On } from 'react-icons/bs';
 type NavbarProps = {
   dashboard?: boolean;
   filterState?: {
@@ -27,7 +27,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
   const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>('CHECKING');
-
+  const [bounceToggle, setbounceToggle] = useState<boolean>(true);
   const { isLoading: inviteLoading, data: invites } = useFetchUserInvites(
     user?.uid!
   );
@@ -48,9 +48,21 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
     }
   }, [ref]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setbounceToggle(!bounceToggle);
+    }, 5000);
+  }, []);
+
   const bellClassname = classNames('transition-all duration-500', {
     'animate-[wiggle_1.5s_ease-in-out_infinite]': invites?.length > 0,
   });
+  const toggleClassNames = classNames(
+    'text-white cursor-pointer hover:text-cblue transition-all duration-150',
+    {
+      'text-red-700 animate-move scale-105': bounceToggle,
+    }
+  );
   return (
     <header ref={ref} className="sticky top-0 z-10 ">
       <canvas
@@ -106,25 +118,31 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
           )}
           {dashboard &&
             (!filterState?.filter ? (
-              <BiShow
+              <BsToggle2Off
                 title="Filter Data"
-                className="text-white cursor-pointer hover:text-cblue transition-all duration-150"
+                className={toggleClassNames}
                 size={20}
-                onClick={() => filterState?.setshowfilter(!filterState?.filter)}
+                onClick={() => {
+                  filterState?.setshowfilter(!filterState?.filter);
+                  setbounceToggle(false);
+                }}
               />
             ) : (
-              <BiHide
+              <BsToggle2On
                 title="Filter Data"
-                className="text-white cursor-pointer hover:text-cblue transition-all duration-150"
+                className={toggleClassNames}
                 size={20}
-                onClick={() => filterState?.setshowfilter(!filterState?.filter)}
+                onClick={() => {
+                  filterState?.setshowfilter(!filterState?.filter);
+                  setbounceToggle(false);
+                }}
               />
             ))}
           {user && !loading && user?.photoURL ? (
             <UserProfile src={user?.photoURL} />
           ) : (
             <Link href="/auth/login">
-              <button className="px-5 py-[5px] ring-2 outline-none ring-cblue text-white font-satoshiBold rounded-full text-center hover:bg-cblue animation-all duration-500">
+              <button className="px-5 py-[5px] ring-2 outline-none ring-cblue text-white font-satoshiBold rounded-full text-center hover:bg-cblue duration-500">
                 {loginState}
               </button>
             </Link>

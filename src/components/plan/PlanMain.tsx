@@ -185,11 +185,20 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           );
           continue;
         }
-        const latestTime = users?.user_weekLSTimes[0]?.date;
-        if (new Date(latestTime).getDate() === new Date().getDate()) {
+
+        const hasDateSchedule = users?.user_weekLSTimes.some(
+          (time: { date: string; name: string; stages: string[][] }) =>
+            time.date === state.filterInputs?.startDate
+        );
+        if (hasDateSchedule) {
           updatedUsers.push(users);
           continue;
         }
+        // const latestTime = users?.user_weekLSTimes[0]?.date;
+        // if (new Date(latestTime).getDate() === new Date().getDate()) {
+        //   updatedUsers.push(users);
+        //   continue;
+        // }
 
         const updatedTime = await fetch(
           `/api/sepush/${users?.user_sepushID?.id}`
@@ -220,7 +229,7 @@ export default function PlanMain({ filterState }: PlanMainProps) {
         PAYLOAD: updatedUsers,
       });
     })();
-  }, [planFetching]);
+  }, [planFetching, state.filterInputs]);
 
   if (planLoading) {
     return (

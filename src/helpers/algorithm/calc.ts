@@ -327,7 +327,6 @@ class TimeCalc {
     onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() - 30);
     // this checks the planfilters end time vs the last ls time
     if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
-      console.log('we hit it');
       onlyLSEnd = new Date(
         new Date(date).getFullYear(),
         new Date(date).getMonth(),

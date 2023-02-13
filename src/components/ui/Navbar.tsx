@@ -13,6 +13,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { BsToggle2Off, BsToggle2On } from 'react-icons/bs';
+
 type NavbarProps = {
   dashboard?: boolean;
   filterState?: {
@@ -27,7 +28,9 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
   const ref = useRef() as any;
   const [user, loading] = useAuthState(auth);
   const [loginState, setLoginState] = useState<string>('CHECKING');
-  const [bounceToggle, setbounceToggle] = useState<boolean>(true);
+  const [bounceToggle, setbounceToggle] = useState<boolean>(
+    !localStorage.getItem('seen')
+  );
   const { isLoading: inviteLoading, data: invites } = useFetchUserInvites(
     user?.uid!
   );
@@ -49,6 +52,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
   }, [ref]);
 
   useEffect(() => {
+    if (!bounceToggle) return;
     setTimeout(() => {
       setbounceToggle(!bounceToggle);
     }, 5000);
@@ -125,6 +129,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
                 onClick={() => {
                   filterState?.setshowfilter(!filterState?.filter);
                   setbounceToggle(false);
+                  localStorage.setItem('seen', 'true');
                 }}
               />
             ) : (
@@ -135,6 +140,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
                 onClick={() => {
                   filterState?.setshowfilter(!filterState?.filter);
                   setbounceToggle(false);
+                  localStorage.setItem('seen', 'true');
                 }}
               />
             ))}
@@ -186,3 +192,11 @@ const useCheckUserAccount = async (user: any): Promise<void> => {
     return;
   }
 };
+function checkToggleAlreadySeen() {
+  const seen = localStorage.getItem('seen');
+  if (seen === 'true') {
+    return true;
+  } else {
+    return false;
+  }
+}

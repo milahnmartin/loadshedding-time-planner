@@ -94,7 +94,7 @@ const Navbar = React.memo(({ dashboard, filterState }: NavbarProps) => {
             <Link href="/">Home</Link>
           </h1>
           <h1 className="font-bold font-satoshiBold text-white transition-all duration-150 hover:text-cblue">
-            <Link href="/docs">Docs</Link>
+            <Link href="/instructions">Instructions</Link>
           </h1>
 
           {!inviteLoading && (

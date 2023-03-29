@@ -56,8 +56,7 @@ class TimeCalc {
   }
 
   private configureFilterTimes = (): string[] => {
-    const removeUndefinedTimes = this._filteredTimes.filter(time => time);
-    return removeUndefinedTimes;
+    return this._filteredTimes.filter(time => time);
   };
 
   private handleSortArea = (area: 'cpt' | 'esk', users: any): any => {
@@ -67,7 +66,7 @@ class TimeCalc {
           timeData: { date: string; name: string; stages: string[][] };
           stageRegion: 'eskom' | 'capetown';
         }) => {
-          return data.stageRegion === 'capetown';
+          data.stageRegion === 'capetown';
         }
       );
     }

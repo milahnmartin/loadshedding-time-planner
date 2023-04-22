@@ -194,11 +194,6 @@ export default function PlanMain({ filterState }: PlanMainProps) {
           updatedUsers.push(users);
           continue;
         }
-        // const latestTime = users?.user_weekLSTimes[0]?.date;
-        // if (new Date(latestTime).getDate() === new Date().getDate()) {
-        //   updatedUsers.push(users);
-        //   continue;
-        // }
 
         const updatedTime = await fetch(
           `/api/sepush/${users?.user_sepushID?.id}`

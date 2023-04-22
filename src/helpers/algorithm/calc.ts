@@ -325,11 +325,39 @@ class TimeCalc {
 
     onlyLSEnd.setMinutes(onlyLSEnd.getMinutes() - 30);
     // this checks the planfilters end time vs the last ls time
-    if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
+    // if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
+    //   onlyLSEnd = new Date(
+    //     new Date(date).getFullYear(),
+    //     new Date(date).getMonth(),
+    //     new Date(date).getDate() + 1,
+    //     +LSEndHour!,
+    //     +LSEndMin!
+    //   );
+    // }
+    if (LSEndHour! < LSStart!) {
+      console.log('LSEnd is after midnight');
       onlyLSEnd = new Date(
         new Date(date).getFullYear(),
         new Date(date).getMonth(),
         new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    } else if (LSEndHour! === LSStart! && LSEndMin! <= LSStart!) {
+      console.log('LSEnd is after midnight');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    } else {
+      console.log('LSEnd is on the same day');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate(),
         +LSEndHour!,
         +LSEndMin!
       );
@@ -596,12 +624,40 @@ class TimeCalc {
       +LSEndMin!
     );
     // this checks the planfilters end time vs the last ls time
-    if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
-      console.log('we hit it');
+    // if (LSEnd! >= '00:01' && LSEnd! <= '08:00') {
+    //   console.log('we hit it');
+    //   onlyLSEnd = new Date(
+    //     new Date(date).getFullYear(),
+    //     new Date(date).getMonth(),
+    //     new Date(date).getDate() + 1,
+    //     +LSEndHour!,
+    //     +LSEndMin!
+    //   );
+    // }
+    if (LSEndHour! < LSStart!) {
+      console.log('LSEnd is after midnight');
       onlyLSEnd = new Date(
         new Date(date).getFullYear(),
         new Date(date).getMonth(),
         new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    } else if (LSEndHour! === LSStart! && LSEndMin! <= LSStart!) {
+      console.log('LSEnd is after midnight');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate() + 1,
+        +LSEndHour!,
+        +LSEndMin!
+      );
+    } else {
+      console.log('LSEnd is on the same day');
+      onlyLSEnd = new Date(
+        new Date(date).getFullYear(),
+        new Date(date).getMonth(),
+        new Date(date).getDate(),
         +LSEndHour!,
         +LSEndMin!
       );
